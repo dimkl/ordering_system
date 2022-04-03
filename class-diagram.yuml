@@ -1,0 +1,24 @@
+// https://yuml.me/diagram/scruffy/class/draw
+
+// Chain elements like this
+[Customer]<>-orders*>[Order]++-0..*>[LineItem]<>-product>[Product]
+
+// Add notes
+// [Order]-[note: Aggregate Root ala DDD]
+
+// Add more detail
+[Customer|+state: string;]
+
+[Employee|+firstname: string; +lastname: string; -password: string; +ssn: string|login(user,pass)]
+[Employee]<>-sections*>Section]
+
+[Section|code: string]
+[Section]<>-tables*>Table]
+
+[Table|+seats: integer]
+[Table]<>-customers>Customer]
+
+[LineItem]
+[Product|+stock_quantity: integer]
+[ServiceGroup|+name: string]
+[ServiceGroup]<>-line_items*>LineItem]

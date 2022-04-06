@@ -1,0 +1,37 @@
+{
+  "name": "ordering-system",
+  "version": "0.0.1",
+  "description": "Ordering System",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "npm test",
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dimkl/ordering_system.git"
+  },
+  "keywords": [
+    "order",
+    "book",
+    "waiter"
+  ],
+  "author": "dimitris.klouvas@workable.com",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/dimkl/ordering_system/issues"
+  },
+  "homepage": "https://github.com/dimkl/ordering_system#readme",
+  "dependencies": {
+    "knex": "^1.0.5",
+    "koa": "^2.13.4",
+    "koa-bodyparser": "^4.3.0",
+    "koa-json": "^2.0.2",
+    "koa-logger": "^3.2.1",
+    "koa-router": "^10.1.1",
+    "objection": "^3.0.1"
+  },
+  "devDependencies": {
+    "jest": "^27.5.1"
+  }
+}

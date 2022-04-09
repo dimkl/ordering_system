@@ -1,5 +1,7 @@
 const Router = require('koa-router');
 
+const setupDiscovery = require('../shared/setupDiscovery');
+
 const router = new Router();
 
 // setup params
@@ -12,8 +14,7 @@ router
     return next();
   });
 
-// append schemas to /discovery, be used by SDK
-router.get('/discovery', require('./controllers/discovery'));
+setupDiscovery(router, [{ schema: '1' }]);
 
 router.get('/customers', require('./controllers/list'));
 router.get('/customers/:customer', require('./controllers/list'));

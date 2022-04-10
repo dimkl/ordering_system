@@ -1,11 +1,11 @@
-const { Model } = require('objection')
+const BaseModel = require('../../shared/baseModel');
 
 const schema = require('../schemas/customer.json');
 
 const SENSITIVE_COLUMNS = ['password'];
 const PUBLIC_COLUMNS = Object.keys(schema.properties).filter(k => !SENSITIVE_COLUMNS.includes(k));
 
-class Customer extends Model {
+class Customer extends BaseModel {
   // Table name is the only required property.
   static get tableName() {
     return 'customers';

@@ -2,6 +2,9 @@ const { Model } = require('objection')
 
 const schema = require('../schemas/customer.json');
 
+const SENSITIVE_COLUMNS = ['password'];
+const PUBLIC_COLUMNS = Object.keys(schema.properties).filter(k => !SENSITIVE_COLUMNS.includes(k));
+
 class Customer extends Model {
   // Table name is the only required property.
   static get tableName() {
@@ -11,6 +14,14 @@ class Customer extends Model {
   static get jsonSchema() {
     return schema;
   }
+
+  static get modifiers() {
+    return {
+      publicColumns(query) {
+        query.select(PUBLIC_COLUMNS);
+      }
+    }
+  };
 }
 
 module.exports = Customer;

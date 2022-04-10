@@ -1,3 +1,7 @@
+require('dotenv').config();
+
+const setupModels = require('./shared/setupModels');
+
 const Koa = require('koa');
 const logger = require('koa-logger');
 const json = require('koa-json');
@@ -19,5 +23,6 @@ app.use(router.allowedMethods());
 // initiliase app
 const PORT = parseInt(process.env.PORT || 3000);
 app.listen(PORT, () => {
+  setupModels();
   console.log(`initialize application to port ${PORT}`);
 });

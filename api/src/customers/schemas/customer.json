@@ -1,13 +1,10 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.com/customer.schema.json",
+  "$async": true,
   "title": "Customer",
   "description": "Customer schema",
   "type": "object",
   "properties": {
-    "id": {
-      "type": "integer"
-    },
     "first_name": {
       "type": "string",
       "minLength": 1,
@@ -35,5 +32,6 @@
     "last_name",
     "email",
     "password"
-  ]
+  ],
+  "additionalProperties": false
 }

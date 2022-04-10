@@ -5,7 +5,11 @@
   "main": "src/index.js",
   "scripts": {
     "test": "npm test",
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "db:migration:create": "knex migrate:make --knexfile ./config/knexfile.js",
+    "db:migrate": "knex --knexfile ./config/knexfile.js migrate:latest",
+    "db:seed:create": "knex --knexfile ./config/knexfile.js seed:make",
+    "db:seed": "knex --knexfile ./config/knexfile.js seed:run"
   },
   "repository": {
     "type": "git",
@@ -29,9 +33,11 @@
     "koa-json": "^2.0.2",
     "koa-logger": "^3.2.1",
     "koa-router": "^10.1.1",
-    "objection": "^3.0.1"
+    "objection": "^3.0.1",
+    "pg": "^8.7.3"
   },
   "devDependencies": {
-    "jest": "^27.5.1"
+    "dotenv": "^16.0.0",
+    "jest": "^27.5.1",
   }
 }

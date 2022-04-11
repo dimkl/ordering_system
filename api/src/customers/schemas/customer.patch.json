@@ -1,0 +1,37 @@
+{
+  "$id": "https://example.com/customer.patch.json",
+  "$async": true,
+  "http_method": "PATCH",
+  "http_path": "/customer/:id",
+  "title": "Customer",
+  "description": "Customer schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "readOnly": true,
+      "type": "number"
+    },
+    "first_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "last_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "password": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    }
+  },
+  "additionalProperties": false
+}

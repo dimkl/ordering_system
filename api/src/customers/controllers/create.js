@@ -8,7 +8,7 @@ const Customer = require('../models/customer');
 ajv.validateSchema(schema);
 const validate = ajv.compile(schema);
 
-module.exports = async (ctx, next) => {
+const handler = async (ctx, next) => {
   try {
     const data = await validate(ctx.request.body);
 
@@ -24,4 +24,6 @@ module.exports = async (ctx, next) => {
       ctx.body = { message: `${err.columns.join(',')} already exists!` };
     }
   }
-}
+};
+
+module.exports = { handler, schema };

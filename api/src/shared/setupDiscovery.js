@@ -2,7 +2,7 @@ const DISCOVERY_ENDPOINT = '/discovery';
 
 // append schemas to DISCOVERY_ENDPOINT (will be used by SDK)
 const discoverHandler = (schemas) => async (ctx, next) => {
-  ctx.body = [...ctx.body, ...schemas];
+  ctx.body = [...(ctx.body || []), ...schemas];
   return next();
 };
 

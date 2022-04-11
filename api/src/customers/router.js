@@ -2,6 +2,13 @@ const Router = require('koa-router');
 
 const setupDiscovery = require('../shared/setupDiscovery');
 
+const ListController = require('./controllers/list');
+const CreateController = require('./controllers/create');
+const UpdateController = require('./controllers/update');
+const DeleteController = require('./controllers/delete');
+const LoginController = require('./controllers/login');
+const SignupController = require('./controllers/signup');
+
 const router = new Router();
 
 // setup params
@@ -14,16 +21,23 @@ router
     return next();
   });
 
-setupDiscovery(router, [{ schema: '1' }]);
+setupDiscovery(router, [
+  ListController.schema,
+  CreateController.schema,
+  UpdateController.schema,
+  DeleteController.schema,
+  LoginController.schema,
+  SignupController.schema
+].filter(s => !!s));
 
-router.get('/customers', require('./controllers/list'));
-router.get('/customers/:customer', require('./controllers/list'));
-router.post('/customers', require('./controllers/create'));
-router.patch('/customers/:customer', require('./controllers/update'));
-router.delete('/customers/:customer', require('./controllers/delete'));
+router.get('/customers', ListController.handler);
+router.get('/customers/:customer', ListController.handler);
+router.post('/customers', CreateController.handler);
+router.patch('/customers/:customer', UpdateController.handler);
+router.delete('/customers/:customer', DeleteController.handler);
 
 // actions
-router.post('/customers/login', require('./controllers/login'));
-router.post('/customers/signup', require('./controllers/signup'));
+router.post('/customers/login', LoginController.handler);
+router.post('/customers/signup', SignupController.handler);
 
 module.exports = router;

@@ -9,12 +9,14 @@ const DeleteController = require('./controllers/delete');
 const LoginController = require('./controllers/login');
 const SignupController = require('./controllers/signup');
 
+const Customer = require('./models/customer');
+
 const router = new Router();
 
 // setup params
 router
-  .param('customer', (customerId, ctx, next) => {
-    ctx.customer = {};
+  .param('customer', async (customerId, ctx, next) => {
+    ctx.customer = await Customer.query().modify('publicColumns').findById(customerId);
 
     if (!ctx.customer) return ctx.status = 404;
 

@@ -1,3 +1,5 @@
-module.exports = async (ctx, next) => {
-  ctx.body = { };
+const handler = async (ctx, next) => {
+  ctx.body = {};
 }
+
+module.exports = { handler };

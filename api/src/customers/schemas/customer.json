@@ -1,10 +1,14 @@
 {
-  "$id": "https://example.com/customer.schema.json",
+  "$id": "https://example.com/customer.json",
   "$async": true,
   "title": "Customer",
   "description": "Customer schema",
   "type": "object",
   "properties": {
+    "id": {
+      "readOnly": true,
+      "type": "number"
+    },
     "first_name": {
       "type": "string",
       "minLength": 1,

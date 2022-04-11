@@ -6,7 +6,8 @@
   "scripts": {
     "test": "DOTENV_CONFIG_PATH=.env.test jest",
     "start": "node src/index.js",
-    "start:dev": "NODE_ENV=development nodemon src/index.js",
+    "start:dev": "nodemon src/index.js",
+    "debug": "node inspect src/index.js",
     "db:migration:create": "knex migrate:make --knexfile ./config/knexfile.js",
     "db:migrate": "knex --knexfile ./config/knexfile.js migrate:latest",
     "db:seed:create": "knex --knexfile ./config/knexfile.js seed:make",

@@ -5,10 +5,12 @@ const { UniqueViolationError } = require('objection-db-errors');
 const schema = require('../schemas/customer.json');
 const Customer = require('../models/customer');
 
+ajv.addSchema(schema);
 ajv.validateSchema(schema);
-const validate = ajv.compile(schema);
 
 const handler = async (ctx, next) => {
+  const validate = ajv.compile(schema);
+
   try {
     const data = await validate(ctx.request.body);
 

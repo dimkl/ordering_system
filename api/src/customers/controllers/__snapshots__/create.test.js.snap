@@ -49,4 +49,8 @@ Array [
 ]
 `;
 
-exports[`POST /customers throws validation error for unique email 1`] = `Object {}`;
+exports[`POST /customers throws validation error for unique email 1`] = `
+Object {
+  "message": "email already exists!",
+}
+`;

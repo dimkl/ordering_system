@@ -1,11 +1,11 @@
-require('dotenv').config();
+require('dotenv').config({ path: process.env.DOTENV_CONFIG_PATH, override: true });
 
 const setupModels = require('./shared/setupModels');
 
 const Koa = require('koa');
 const logger = require('koa-logger');
 const json = require('koa-json');
-const boadyParser = require('koa-bodyparser');
+const bodyParser = require('koa-bodyparser');
 
 const router = require('./router');
 
@@ -14,15 +14,16 @@ const app = new Koa();
 // middlewares
 app.use(json());
 app.use(logger());
-app.use(boadyParser());
+app.use(bodyParser());
 
 // routes
 app.use(router.routes());
 app.use(router.allowedMethods());
 
+setupModels();
+
 // initiliase app
 const PORT = parseInt(process.env.PORT || 3000);
-app.listen(PORT, () => {
-  setupModels();
+module.exports = app.listen(PORT, () => {
   console.log(`initialize application to port ${PORT}`);
 });

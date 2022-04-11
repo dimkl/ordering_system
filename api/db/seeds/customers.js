@@ -17,7 +17,7 @@ async function createPassword(passwordLength = 10) {
  */
 exports.seed = async function (knex) {
   // Deletes ALL existing entries
-  await knex('customers').truncate()
+  await knex('customers').truncate();
   await knex('customers').insert([
     { first_name: 'First', last_name: 'Customer', email: 'customer1@example.com', password: await createPassword() },
     { first_name: 'Second', last_name: 'Customer', email: 'customer2@example.com', password: await createPassword() },

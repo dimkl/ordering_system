@@ -30,7 +30,7 @@ setupDiscovery(router, [
   DeleteController.schema,
   LoginController.schema,
   SignupController.schema
-].filter(s => !!s));
+]);
 
 router.get('/customers', ListController.handler);
 router.get('/customers/:customer', ListController.handler);

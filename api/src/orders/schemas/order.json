@@ -1,0 +1,42 @@
+{
+  "$id": "/schemas/order",
+  "$async": true,
+  "http_method": "POST",
+  "http_path": "/orders",
+  "title": "Order",
+  "description": "Order schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "exclusiveMinimum": 0
+    },
+    "customer_id": {
+      "type": "integer",
+      "exclusiveMinimum": 0
+    },
+    "state": {
+      "readOnly": true,
+      "$ref": "#/definitions/state"
+    },
+    "created_at": {
+      "readOnly": true,
+      "type": "string"
+    }
+  },
+  "required": [
+    "customer_id"
+  ],
+  "definitions": {
+    "state": {
+      "enum": [
+        "draft",
+        "placed",
+        "processing",
+        "invoiced"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

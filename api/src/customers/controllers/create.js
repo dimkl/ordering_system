@@ -15,8 +15,8 @@ module.exports = async (ctx, next) => {
     ctx.body = await Customer.query().modify('publicColumns').findById(customer.id);
   } catch (err) {
     console.error(err);
-    ctx.body = err.message;
+
+    ctx.body = err.errors;
     ctx.status = 422;
-    return;
   }
 }

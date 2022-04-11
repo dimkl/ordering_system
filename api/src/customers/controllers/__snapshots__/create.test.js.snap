@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`POST /customers creates and returns a customer 1`] = `
+Object {
+  "email": "dimitris.klouvas@gmail.com",
+  "first_name": "Dimitris",
+  "last_name": "Klouvas",
+}
+`;
+
+exports[`POST /customers throws validation error for required properties 1`] = `
+Array [
+  Object {
+    "instancePath": "",
+    "keyword": "required",
+    "message": "must have required property 'first_name'",
+    "params": Object {
+      "missingProperty": "first_name",
+    },
+    "schemaPath": "#/required",
+  },
+  Object {
+    "instancePath": "",
+    "keyword": "required",
+    "message": "must have required property 'last_name'",
+    "params": Object {
+      "missingProperty": "last_name",
+    },
+    "schemaPath": "#/required",
+  },
+  Object {
+    "instancePath": "",
+    "keyword": "required",
+    "message": "must have required property 'email'",
+    "params": Object {
+      "missingProperty": "email",
+    },
+    "schemaPath": "#/required",
+  },
+  Object {
+    "instancePath": "",
+    "keyword": "required",
+    "message": "must have required property 'password'",
+    "params": Object {
+      "missingProperty": "password",
+    },
+    "schemaPath": "#/required",
+  },
+]
+`;
+
+exports[`POST /customers throws validation error for unique email 1`] = `Object {}`;

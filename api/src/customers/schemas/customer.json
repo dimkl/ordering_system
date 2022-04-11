@@ -1,8 +1,8 @@
 {
-  "$id": "https://example.com/customer.json",
+  "$id": "/schemas/customer",
   "$async": true,
   "http_method": "POST",
-  "http_path": "/customer",
+  "http_path": "/customers",
   "title": "Customer",
   "description": "Customer schema",
   "type": "object",

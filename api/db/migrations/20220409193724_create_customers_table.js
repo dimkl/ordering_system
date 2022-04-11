@@ -10,6 +10,7 @@ exports.up = function (knex) {
       table.string('last_name', 255).notNullable();
       table.string('email', 255).unique();
       table.string('password', 255).notNullable();
+      table.timestamps(true, true);
     });
 };
 

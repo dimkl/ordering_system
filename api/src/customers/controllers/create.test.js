@@ -33,7 +33,7 @@ describe("POST /customers", () => {
       .send({})
       .set("Accept", "application/json");
 
-    expect(response.status).toBe(422);
+    expect(response.status).toBe(400);
     expect(response.body).toMatchSnapshot();
   });
 

@@ -4,7 +4,7 @@ exports[`POST /customers creates and returns a customer 1`] = `
 Object {
   "email": "dimitris.klouvas@gmail.com",
   "first_name": "Dimitris",
-  "id": 1,
+  "id": Anything,
   "last_name": "Klouvas",
 }
 `;

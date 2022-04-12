@@ -7,7 +7,7 @@ async function createPassword(passwordLength = 10) {
     // 33 - 126 is the alphanumeric range for latin chars with symbols
     const randomCharCode = ((Math.random() * 100 + 33) % 126) >> 0;
     return String.fromCharCode(randomCharCode);
-  }).join()
+  }).join('')
 
   return bcrypt.hash(password, SALT_ROUNDS);
 }

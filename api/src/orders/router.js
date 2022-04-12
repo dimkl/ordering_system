@@ -17,7 +17,7 @@ const router = new Router();
 
 // setup params
 router
-  .param('order', async (orderId, ctx, next) => {
+  .param('order_id', async (orderId, ctx, next) => {
     ctx.order = await Order.query().modify('publicColumns').findById(orderId);
 
     if (!ctx.order) return ctx.status = 404;
@@ -37,15 +37,15 @@ setupDiscovery(router, [
 ]);
 
 router.get('/orders', ListController.handler);
-router.get('/orders/:order', ListController.handler);
+router.get('/orders/:order_id', ListController.handler);
 router.post('/orders', CreateController.handler);
-router.patch('/orders/:order', UpdateController.handler);
-router.delete('/orders/:order', DeleteController.handler);
+router.patch('/orders/:order_id', UpdateController.handler);
+router.delete('/orders/:order_id', DeleteController.handler);
 
 // actions
 router.post('/orders/:state', TransitionController.handler);
-router.post('/orders/:order/order_items/', AddOrderItemController.handler);
-router.delete('/orders/:order/order_items/:order_item', RemoveOrderItemController.handler);
-router.patch('/orders/:order/order_items/:order_item', UpdateOrderItemController.handler);
+router.post('/orders/:order_id/order_items', AddOrderItemController.handler);
+router.delete('/orders/:order_id/order_items/:order_item_id', RemoveOrderItemController.handler);
+router.patch('/orders/:order_id/order_items/:order_item_id', UpdateOrderItemController.handler);
 
 module.exports = router;

@@ -70,6 +70,13 @@ curl --location --request POST 'http://localhost:3000/orders/' \
 }'
 ```
 
+## Delete
+
+```bash
+curl --location --request DELETE 'http://localhost:3000/orders/2' \
+--header 'Content-Type: application/json'
+```
+
 ## Add order item
 
 ```bash

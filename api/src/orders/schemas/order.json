@@ -26,6 +26,12 @@
     "updated_at": {
       "readOnly": true,
       "type": "string"
+    },
+    "uuid": {
+      "readOnly": true,
+      "type": "string",
+      "minLength": 36,
+      "maxLength": 36
     }
   },
   "required": [

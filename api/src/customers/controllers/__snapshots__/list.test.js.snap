@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`GET /customers/:customer? returns all customers 1`] = `
+exports[`GET /customers/:customer_id? returns all customers 1`] = `
 Object {
   "created_at": Any<String>,
   "email": "dimitris.klouvas@gmail.com",
@@ -12,7 +12,7 @@ Object {
 }
 `;
 
-exports[`GET /customers/:customer? returns specified customer 1`] = `
+exports[`GET /customers/:customer_id? returns specified customer 1`] = `
 Object {
   "created_at": Any<String>,
   "email": "dimitris.klouvas@gmail.com",

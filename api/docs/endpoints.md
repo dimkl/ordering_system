@@ -46,6 +46,13 @@ curl --location --request PATCH 'http://localhost:3000/customers/13' \
 }'
 ```
 
+## Delete
+
+```bash
+curl --location --request DELETE 'http://localhost:3000/customers/2' \
+--header 'Content-Type: application/json'
+```
+
 ## Orders
 
 ## List

@@ -1,3 +1,4 @@
+const uuid = require('uuid');
 const { Model, AjvValidator } = require('objection')
 const { DBErrors } = require('objection-db-errors');
 const addFormats = require("ajv-formats");
@@ -16,6 +17,15 @@ class BaseModel extends DBErrors(Model) {
         ownProperties: true
       },
     });
+  }
+
+  async $beforeInsert(...args) {
+    await super.$beforeInsert(...args)
+    this.generateUuid();
+  }
+
+  generateUuid() {
+    this.uuid = uuid.v4();
   }
 }
 

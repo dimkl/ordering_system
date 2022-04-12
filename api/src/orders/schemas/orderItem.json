@@ -35,6 +35,12 @@
       "readOnly": true,
       "$ref": "#/definitions/state",
       "default": "draft"
+    },
+    "uuid": {
+      "readOnly": true,
+      "type": "string",
+      "minLength": 36,
+      "maxLength": 36
     }
   },
   "required": [

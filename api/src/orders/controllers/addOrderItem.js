@@ -27,7 +27,6 @@ const handler = async (ctx, next) => {
       ctx.status = 422;
       ctx.body = { message: `${err.columns.join(',')} already exists!` };
     }
-    debugger;
   }
 };
 

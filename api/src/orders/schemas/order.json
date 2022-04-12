@@ -16,7 +16,8 @@
     },
     "state": {
       "readOnly": true,
-      "$ref": "#/definitions/state"
+      "$ref": "#/definitions/state",
+      "default": "draft"
     },
     "created_at": {
       "readOnly": true,

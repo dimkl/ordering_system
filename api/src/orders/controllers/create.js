@@ -2,7 +2,7 @@ const ajv = require('../../shared/ajv');
 const { ValidationError } = require("ajv");
 const { UniqueViolationError } = require('objection-db-errors');
 
-const schema = require('../schemas/order.json');
+const schema = require('../schemas/order.create.json');
 const Order = require('../models/order');
 
 ajv.addSchema(schema);

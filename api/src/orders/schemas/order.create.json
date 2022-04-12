@@ -1,15 +1,12 @@
 {
-  "$id": "/schemas/order",
+  "$id": "/schemas/order.create",
   "$async": true,
+  "http_method": "POST",
+  "http_path": "/orders",
   "title": "Order",
-  "description": "Order schema",
+  "description": "Order create schema",
   "type": "object",
   "properties": {
-    "id": {
-      "readOnly": true,
-      "type": "integer",
-      "exclusiveMinimum": 0
-    },
     "customer_id": {
       "type": "integer",
       "exclusiveMinimum": 0
@@ -17,14 +14,6 @@
     "state": {
       "readOnly": true,
       "$ref": "#/definitions/state"
-    },
-    "created_at": {
-      "readOnly": true,
-      "type": "string"
-    },
-    "updated_at": {
-      "readOnly": true,
-      "type": "string"
     }
   },
   "required": [

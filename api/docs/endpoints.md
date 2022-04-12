@@ -46,7 +46,7 @@ curl --location --request PATCH 'http://localhost:3000/customers/13' \
 }'
 ```
 
-## Delete
+### Delete
 
 ```bash
 curl --location --request DELETE 'http://localhost:3000/customers/2' \
@@ -55,19 +55,19 @@ curl --location --request DELETE 'http://localhost:3000/customers/2' \
 
 ## Orders
 
-## List
+### List
 
 ```bash
 curl --location --request GET 'http://localhost:3000/orders'
 ```
 
-## Show
+### Show
 
 ```bash
 curl --location --request GET 'http://localhost:3000/orders/1'
 ```
 
-## Create
+### Create
 
 ```bash
 curl --location --request POST 'http://localhost:3000/orders/' \
@@ -77,14 +77,14 @@ curl --location --request POST 'http://localhost:3000/orders/' \
 }'
 ```
 
-## Delete
+### Delete
 
 ```bash
 curl --location --request DELETE 'http://localhost:3000/orders/2' \
 --header 'Content-Type: application/json'
 ```
 
-## Add order item
+### Add order item
 
 ```bash
 curl --location --request POST 'http://localhost:3000/orders/2/order_items' \
@@ -95,7 +95,7 @@ curl --location --request POST 'http://localhost:3000/orders/2/order_items' \
 }'
 ```
 
-## Remove order item
+### Remove order item
 
 ```bash
 curl --location --request DELETE 'http://localhost:3000/orders/2/order_items/2' \

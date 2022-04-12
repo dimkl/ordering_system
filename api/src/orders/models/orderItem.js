@@ -19,7 +19,20 @@ class OrderItem extends BaseModel {
         query.select(PUBLIC_COLUMNS);
       }
     }
-  };
+  }
+
+  static get relationMappings() {
+    return {
+      product: {
+        relation: BaseModel.BelongsToOneRelation,
+        modelClass: __dirname + '/../../products/models/product',
+        join: {
+          from: 'order_items.product_id',
+          to: 'products.id'
+        }
+      }
+    }
+  }
 }
 
 module.exports = OrderItem;

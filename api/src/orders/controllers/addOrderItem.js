@@ -13,7 +13,7 @@ const handler = async (ctx, next) => {
   const validate = ajv.compile(schema);
 
   try {
-    const orderId = parseInt(ctx.params.order_id);
+    const orderId = ctx.order.id;
     const data = await validate({ ...ctx.request.body, order_id: orderId });
 
     const orderItem = await OrderItem.query().insert(data);

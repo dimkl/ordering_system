@@ -1,21 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`GET /customers/:customer? returns all customers 1`] = `
-Array [
-  Object {
-    "email": "dimitris.klouvas@gmail.com",
-    "first_name": "Dimitris",
-    "id": 1,
-    "last_name": "Klouvas",
-  },
-]
+Object {
+  "email": "dimitris.klouvas@gmail.com",
+  "first_name": "Dimitris",
+  "id": Any<Number>,
+  "last_name": "Klouvas",
+}
 `;
 
 exports[`GET /customers/:customer? returns specified customer 1`] = `
 Object {
   "email": "dimitris.klouvas@gmail.com",
   "first_name": "Dimitris",
-  "id": 1,
+  "id": Anything,
   "last_name": "Klouvas",
 }
 `;

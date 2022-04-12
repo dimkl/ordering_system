@@ -16,7 +16,7 @@ async function createPassword(passwordLength = 10) {
  * @returns { Promise<void> } 
  */
 exports.seed = async function (knex) {
-  await knex.raw('truncate customers, orders cascade');
+  await knex.raw('truncate customers, orders, order_items cascade');
   await knex('customers').insert([
     { first_name: 'First', last_name: 'Customer', email: 'customer1@example.com', password: await createPassword() },
     { first_name: 'Second', last_name: 'Customer', email: 'customer2@example.com', password: await createPassword() },

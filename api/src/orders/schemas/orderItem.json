@@ -32,7 +32,6 @@
       "exclusiveMinimum": 0
     },
     "state": {
-      "readOnly": true,
       "$ref": "#/definitions/state",
       "default": "draft"
     },

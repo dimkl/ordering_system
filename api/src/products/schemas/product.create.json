@@ -1,0 +1,36 @@
+{
+  "$id": "/schemas/product.create",
+  "$async": true,
+  "http_method": "POST",
+  "http_path": "/products",
+  "title": "Product",
+  "description": "Product schema",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "qr": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "sku": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    }
+  },
+  "required": [
+    "title",
+    "sku"
+  ],
+  "additionalProperties": false
+}

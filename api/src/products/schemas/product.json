@@ -1,0 +1,47 @@
+{
+  "$id": "/schemas/product",
+  "$async": true,
+  "title": "Product",
+  "description": "Product schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "exclusiveMinimum": 0
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "qr": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "sku": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "created_at": {
+      "readOnly": true,
+      "type": "string"
+    },
+    "updated_at": {
+      "readOnly": true,
+      "type": "string"
+    }
+  },
+  "required": [
+    "title",
+    "sku"
+  ],
+  "additionalProperties": false
+}

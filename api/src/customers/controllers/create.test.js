@@ -3,7 +3,6 @@
  */
 const Customer = require("../models/customer");
 
-
 describe("POST /customers", () => {
   beforeAll(() => require('../../shared/setupModels')());
   beforeEach(() => Customer.knex().raw('truncate customers, orders cascade;'));

@@ -23,5 +23,5 @@ module.exports = {
   globalTeardown: "<rootDir>/config/jest/teardown.js",
   rootDir: "../..",
   roots: ["src/"],
-  // testEnvironment: "<rootDir>/config/jest/testEnvironment.js",
+  testEnvironment: "<rootDir>/config/jest/testEnvironment.js",
 };

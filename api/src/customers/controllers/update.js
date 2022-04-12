@@ -16,7 +16,6 @@ const handler = async (ctx, next) => {
     await ctx.customer.$query().patch(data);
     ctx.body = ctx.customer;
   } catch (err) {
-    debugger;
     if (err instanceof ValidationError) {
       ctx.status = 400;
       ctx.body = err.errors;

@@ -4,11 +4,11 @@ const base = {
   client: 'pg',
   connection: process.env.DATABASE_URL,
   migrations: {
-    directory: '../db/migrations',
+    directory: __dirname + '/../db/migrations',
     tableName: 'migrations'
   },
   seeds: {
-    directory: '../db/seeds'
+    directory: __dirname + '/../db/seeds'
   },
   searchPath: ['public'],
   asyncStackTraces: true

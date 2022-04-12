@@ -4,13 +4,9 @@
   "http_method": "PATCH",
   "http_path": "/customer/:id",
   "title": "Customer",
-  "description": "Customer schema",
+  "description": "Customer patch schema",
   "type": "object",
   "properties": {
-    "id": {
-      "readOnly": true,
-      "type": "number"
-    },
     "first_name": {
       "type": "string",
       "minLength": 1,

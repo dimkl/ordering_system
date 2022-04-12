@@ -1,18 +1,13 @@
-
-const supertest = require("supertest");
-
-const app = require("../../index");
+/**
+ * @integration-test true
+ */
 const Customer = require("../models/customer");
 
-describe("POST /customers", () => {
-  let request = {};
 
-  beforeAll(() => { request = supertest(app) });
+describe("POST /customers", () => {
+  beforeAll(() => require('../../shared/setupModels')());
   beforeEach(() => Customer.knex().raw('truncate customers, orders cascade;'));
-  afterAll(() => {
-    app.close();
-    Customer.knex().destroy();
-  });
+  afterAll(() => Customer.knex().destroy());
 
   it("creates and returns a customer", async () => {
     const response = await request.post("/customers")
@@ -26,7 +21,9 @@ describe("POST /customers", () => {
 
     expect(response.status).toBe(200);
     expect(response.body).toMatchSnapshot({
-      id: expect.anything()
+      id: expect.any(Number),
+      created_at: expect.any(String),
+      updated_at: expect.any(String),
     });
   });
 
@@ -58,6 +55,22 @@ describe("POST /customers", () => {
       .set("Accept", "application/json");
 
     expect(response.status).toBe(422);
+    expect(response.body).toMatchSnapshot();
+  });
+
+  it("throws validation error with additional properties", async () => {
+    const response = await request.post("/customers")
+      .send({
+        "first_name": "Dimitris",
+        "last_name": "Klouvas",
+        "email": "dimitris.klouvas@gmail.com",
+        "password": "1234",
+        "id": 2,
+        "created_at": Date.now()
+      })
+      .set("Accept", "application/json");
+
+    expect(response.status).toBe(400);
     expect(response.body).toMatchSnapshot();
   });
 });

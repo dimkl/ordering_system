@@ -1,16 +1,10 @@
 {
-  "$id": "/schemas/customer.create",
+  "$id": "/schemas/customer",
   "$async": true,
-  "http_method": "POST",
-  "http_path": "/customers",
   "title": "Customer",
-  "description": "Customer schema",
+  "description": "Customer create schema",
   "type": "object",
   "properties": {
-    "id": {
-      "readOnly": true,
-      "type": "number"
-    },
     "first_name": {
       "type": "string",
       "minLength": 1,
@@ -31,14 +25,6 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 255
-    },
-    "created_at": {
-      "readOnly": true,
-      "type": "string"
-    },
-    "updated_at": {
-      "readOnly": true,
-      "type": "string"
     }
   },
   "required": [

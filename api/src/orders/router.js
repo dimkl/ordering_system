@@ -19,7 +19,7 @@ const router = new Router();
 // setup params
 router
   .param('order_id', async (orderId, ctx, next) => {
-    ctx.order = await Order.query().modify('publicColumns').findById(orderId);
+    ctx.order = await Order.findByIdOrUid(orderId).modify('publicColumns');
 
     if (!ctx.order) return ctx.status = 404;
 
@@ -27,7 +27,7 @@ router
   });
 router
   .param('order_item_id', async (orderItemId, ctx, next) => {
-    ctx.orderItem = await OrderItem.query().modify('publicColumns').findById(orderItemId);
+    ctx.orderItem = await OrderItem.findByIdOrUid(orderItemId).modify('publicColumns');
 
     if (!ctx.orderItem) return ctx.status = 404;
 

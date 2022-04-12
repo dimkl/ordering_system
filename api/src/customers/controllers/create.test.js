@@ -21,6 +21,7 @@ describe("POST /customers", () => {
     expect(response.status).toBe(200);
     expect(response.body).toMatchSnapshot({
       id: expect.any(Number),
+      uuid: expect.any(String),
       created_at: expect.any(String),
       updated_at: expect.any(String),
     });

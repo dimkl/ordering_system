@@ -8,6 +8,7 @@ Object {
   "id": Any<Number>,
   "last_name": "Klouvas",
   "updated_at": Any<String>,
+  "uuid": Any<String>,
 }
 `;
 

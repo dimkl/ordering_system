@@ -19,7 +19,28 @@ class Order extends BaseModel {
         query.select(PUBLIC_COLUMNS);
       }
     }
-  };
+  }
+
+  static get relationMappings() {
+    return {
+      order_items: {
+        relation: BaseModel.HasManyRelation,
+        modelClass: __dirname + '/orderItem',
+        join: {
+          from: 'orders.id',
+          to: 'order_items.order_id'
+        }
+      },
+      customer: {
+        relation: BaseModel.BelongsToOneRelation,
+        modelClass: __dirname + '/../../customers/models/customer',
+        join: {
+          from: 'orders.customer_id',
+          to: 'customers.id'
+        }
+      }
+    }
+  }
 }
 
 module.exports = Order;

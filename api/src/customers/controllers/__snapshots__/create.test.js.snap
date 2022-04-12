@@ -2,10 +2,12 @@
 
 exports[`POST /customers creates and returns a customer 1`] = `
 Object {
+  "created_at": Any<String>,
   "email": "dimitris.klouvas@gmail.com",
   "first_name": "Dimitris",
-  "id": Anything,
+  "id": Any<Number>,
   "last_name": "Klouvas",
+  "updated_at": Any<String>,
 }
 `;
 
@@ -54,4 +56,27 @@ exports[`POST /customers throws validation error for unique email 1`] = `
 Object {
   "message": "email already exists!",
 }
+`;
+
+exports[`POST /customers throws validation error with additional properties 1`] = `
+Array [
+  Object {
+    "instancePath": "",
+    "keyword": "additionalProperties",
+    "message": "must NOT have additional properties",
+    "params": Object {
+      "additionalProperty": "id",
+    },
+    "schemaPath": "#/additionalProperties",
+  },
+  Object {
+    "instancePath": "",
+    "keyword": "additionalProperties",
+    "message": "must NOT have additional properties",
+    "params": Object {
+      "additionalProperty": "created_at",
+    },
+    "schemaPath": "#/additionalProperties",
+  },
+]
 `;

@@ -1,18 +1,12 @@
-
-const supertest = require("supertest");
-
-const app = require("../../index");
+/**
+ * @integration-test true
+ */
 const Customer = require("../models/customer");
 
 describe("GET /customers/:customer?", () => {
-  let request = {};
-
-  beforeAll(() => { request = supertest(app) });
+  beforeAll(() => require('../../shared/setupModels')());
   beforeEach(() => Customer.knex().raw('truncate customers, orders cascade;'));
-  afterAll(() => {
-    app.close();
-    Customer.knex().destroy();
-  });
+  afterAll(() => Customer.knex().destroy());
 
   it("returns all customers", async () => {
     await Customer.query().insert({
@@ -20,14 +14,17 @@ describe("GET /customers/:customer?", () => {
       "last_name": "Klouvas",
       "email": "dimitris.klouvas@gmail.com",
       "password": "1234"
-    })
+    });
+
     const response = await request.get("/customers")
       .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
     expect(response.body.length).toBe(1)
     expect(response.body[0]).toMatchSnapshot({
-      id: expect.any(Number)
+      id: expect.any(Number),
+      created_at: expect.any(String),
+      updated_at: expect.any(String),
     });
   });
 
@@ -37,13 +34,16 @@ describe("GET /customers/:customer?", () => {
       "last_name": "Klouvas",
       "email": "dimitris.klouvas@gmail.com",
       "password": "1234"
-    })
+    });
+
     const response = await request.get("/customers/" + customer.id)
       .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
     expect(response.body).toMatchSnapshot({
-      id: expect.anything()
+      id: expect.any(Number),
+      created_at: expect.any(String),
+      updated_at: expect.any(String),
     });
   });
 

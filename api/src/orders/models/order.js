@@ -50,10 +50,10 @@ class Order extends BaseModel {
       )
       .modifiers({
         selectOrderItem(builder) {
-          builder.select('id', 'state', 'quantity', 'created_at', 'updated_at');
+          builder.select('uuid', 'state', 'quantity', 'created_at', 'updated_at');
         },
         selectProduct(builder) {
-          builder.select('title', 'description', 'qr', 'sku');
+          builder.select('title', 'description', 'qr', 'uuid');
         },
       })
       .findById(orderId)

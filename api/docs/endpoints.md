@@ -59,3 +59,31 @@ curl --location --request GET 'http://localhost:3000/orders'
 ```bash
 curl --location --request GET 'http://localhost:3000/orders/1'
 ```
+
+## Create
+
+```bash
+curl --location --request POST 'http://localhost:3000/orders/' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "customer_id": 1
+}'
+```
+
+## Add order item
+
+```bash
+curl --location --request POST 'http://localhost:3000/orders/2/order_items' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "product_id": 1,
+    "quantity": 10
+}'
+```
+
+## Remove order item
+
+```bash
+curl --location --request DELETE 'http://localhost:3000/orders/2/order_items/2' \
+--header 'Content-Type: application/json'
+```

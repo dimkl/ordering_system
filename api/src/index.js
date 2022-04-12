@@ -1,6 +1,7 @@
 require('dotenv').config({ path: process.env.DOTENV_CONFIG_PATH, override: true });
 
 const setupModels = require('./shared/setupModels');
+const { isTestingEnv } = require('./shared/helpers');
 
 const Koa = require('koa');
 const logger = require('koa-logger');
@@ -13,7 +14,11 @@ const app = new Koa();
 
 // middlewares
 app.use(json());
-app.use(logger());
+
+if (!isTestingEnv()) {
+  app.use(logger());
+}
+
 app.use(bodyParser());
 
 // routes

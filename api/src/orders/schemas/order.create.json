@@ -10,24 +10,10 @@
     "customer_id": {
       "type": "integer",
       "exclusiveMinimum": 0
-    },
-    "state": {
-      "readOnly": true,
-      "$ref": "#/definitions/state"
     }
   },
   "required": [
     "customer_id"
   ],
-  "definitions": {
-    "state": {
-      "enum": [
-        "draft",
-        "placed",
-        "processing",
-        "invoiced"
-      ]
-    }
-  },
   "additionalProperties": false
 }

@@ -1,0 +1,73 @@
+{
+  "$id": "/schemas/user",
+  "$async": true,
+  "http_method": "POST",
+  "http_path": "/users",
+  "title": "User",
+  "description": "User schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "readOnly": true,
+      "type": "number"
+    },
+    "first_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "last_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "password": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "created_at": {
+      "readOnly": true,
+      "type": "string"
+    },
+    "updated_at": {
+      "readOnly": true,
+      "type": "string"
+    },
+    "uuid": {
+      "readOnly": true,
+      "type": "string",
+      "minLength": 36,
+      "maxLength": 36
+    },
+    "role": {
+      "$ref": "#/definitions/state",
+      "default": "guest"
+    }
+  },
+  "required": [
+    "first_name",
+    "last_name",
+    "email",
+    "password",
+    "role"
+  ],
+  "definitions": {
+    "role": {
+      "enum": [
+        "guest",
+        "waiter",
+        "chef",
+        "other",
+        "admin"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

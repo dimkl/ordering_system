@@ -1,0 +1,29 @@
+{
+  "$id": "/schemas/orderItem.create",
+  "$async": true,
+  "http_method": "POST",
+  "http_path": "/orders/:order/order_items/",
+  "title": "OrderItem",
+  "description": "OrderItem create schema",
+  "type": "object",
+  "properties": {
+    "order_id": {
+      "type": "integer",
+      "exclusiveMinimum": 0
+    },
+    "quantity": {
+      "type": "integer",
+      "exclusiveMinimum": 0,
+      "default": 1
+    },
+    "product_id": {
+      "type": "integer",
+      "exclusiveMinimum": 0
+    }
+  },
+  "required": [
+    "order_id",
+    "product_id"
+  ],
+  "additionalProperties": false
+}

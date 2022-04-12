@@ -41,6 +41,23 @@ class Order extends BaseModel {
       }
     }
   }
+
+  static findWithOrderItemsAndProducts(orderId) {
+    return this.query()
+      .modify('publicColumns')
+      .withGraphFetched(
+        'order_items(selectOrderItem).product(selectProduct)'
+      )
+      .modifiers({
+        selectOrderItem(builder) {
+          builder.select('id', 'state', 'quantity', 'created_at', 'updated_at');
+        },
+        selectProduct(builder) {
+          builder.select('title', 'description', 'qr', 'sku');
+        },
+      })
+      .findById(orderId)
+  }
 }
 
 module.exports = Order;

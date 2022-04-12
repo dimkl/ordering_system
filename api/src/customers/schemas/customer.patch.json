@@ -2,7 +2,7 @@
   "$id": "/schemas/customer.patch",
   "$async": true,
   "http_method": "PATCH",
-  "http_path": "/customer/:id",
+  "http_path": "/customers/:id",
   "title": "Customer",
   "description": "Customer patch schema",
   "type": "object",

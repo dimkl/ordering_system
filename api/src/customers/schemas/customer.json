@@ -1,8 +1,6 @@
 {
-  "$id": "/schemas/customer.create",
+  "$id": "/schemas/customer",
   "$async": true,
-  "http_method": "POST",
-  "http_path": "/customers",
   "title": "Customer",
   "description": "Customer schema",
   "type": "object",

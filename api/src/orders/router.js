@@ -12,6 +12,7 @@ const RemoveOrderItemController = require('./controllers/removeOrderItem');
 const UpdateOrderItemController = require('./controllers/updateOrderItem');
 
 const Order = require('./models/order');
+const OrderItem = require('./models/orderItem');
 
 const router = new Router();
 
@@ -21,6 +22,20 @@ router
     ctx.order = await Order.query().modify('publicColumns').findById(orderId);
 
     if (!ctx.order) return ctx.status = 404;
+
+    return next();
+  });
+router
+  .param('order_item_id', async (orderItemId, ctx, next) => {
+    ctx.orderItem = await OrderItem.query().modify('publicColumns').findById(orderItemId);
+
+    if (!ctx.orderItem) return ctx.status = 404;
+
+    if (ctx.orderItem.order_id != ctx.order.id) {
+      ctx.status = 400;
+      ctx.body = { message: `Order item ${ctx.orderItem.id} does not belong to order ${ctx.order.id}` };
+      return;
+    }
 
     return next();
   });

@@ -23,6 +23,7 @@ describe("GET /customers/:customer?", () => {
     expect(response.body.length).toBe(1)
     expect(response.body[0]).toMatchSnapshot({
       id: expect.any(Number),
+      uuid: expect.any(String),
       created_at: expect.any(String),
       updated_at: expect.any(String),
     });
@@ -42,6 +43,7 @@ describe("GET /customers/:customer?", () => {
     expect(response.status).toBe(200);
     expect(response.body).toMatchSnapshot({
       id: expect.any(Number),
+      uuid: expect.any(String),
       created_at: expect.any(String),
       updated_at: expect.any(String),
     });

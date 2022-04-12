@@ -27,6 +27,11 @@ class BaseModel extends DBErrors(Model) {
   generateUuid() {
     this.uuid = uuid.v4();
   }
+
+  static findByIdOrUid(idOrUid) {
+    let whereOptions = Number(idOrUid) ? { id: idOrUid } : { uuid: idOrUid };
+    return this.query().where(whereOptions).first();
+  }
 }
 
 module.exports = BaseModel;

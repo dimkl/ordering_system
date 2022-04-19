@@ -24,6 +24,10 @@ class BaseModel extends DBErrors(Model) {
     this.generateUuid();
   }
 
+  async $beforeUpdate() {
+    this.updated_at = new Date().toISOString();
+  }
+
   generateUuid() {
     this.uuid = uuid.v4();
   }

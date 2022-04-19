@@ -9,19 +9,12 @@ const DeleteController = require('./controllers/delete');
 const LoginController = require('./controllers/login');
 const SignupController = require('./controllers/signup');
 
-const Customer = require('./models/customer');
+const loadCustomer = require('./helpers/loadCustomer');
 
 const router = new Router();
 
 // setup params
-router
-  .param('customer_id', async (customerId, ctx, next) => {
-    ctx.customer = await Customer.findByIdOrUid(customerId).modify('publicColumns');
-
-    if (!ctx.customer) return ctx.status = 404;
-
-    return next();
-  });
+router.param('customer_id', loadCustomer);
 
 setupDiscovery(router, [
   ListController.schema,

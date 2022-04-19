@@ -2,6 +2,9 @@ const Router = require('koa-router');
 
 const setupDiscovery = require('../shared/setupDiscovery');
 
+const loadOrderItem = require('./helpers/loadOrderItem');
+const loadOrder = require('./helpers/loadOrder');
+
 const ListController = require('./controllers/list');
 const CreateController = require('./controllers/create');
 const UpdateController = require('./controllers/update');
@@ -11,34 +14,11 @@ const AddOrderItemController = require('./controllers/addOrderItem');
 const RemoveOrderItemController = require('./controllers/removeOrderItem');
 const UpdateOrderItemController = require('./controllers/updateOrderItem');
 
-const Order = require('./models/order');
-const OrderItem = require('./models/orderItem');
-
 const router = new Router();
 
 // setup params
-router
-  .param('order_id', async (orderId, ctx, next) => {
-    ctx.order = await Order.findByIdOrUid(orderId).modify('publicColumns');
-
-    if (!ctx.order) return ctx.status = 404;
-
-    return next();
-  });
-router
-  .param('order_item_id', async (orderItemId, ctx, next) => {
-    ctx.orderItem = await OrderItem.findByIdOrUid(orderItemId).modify('publicColumns');
-
-    if (!ctx.orderItem) return ctx.status = 404;
-
-    if (ctx.orderItem.order_id != ctx.order.id) {
-      ctx.status = 400;
-      ctx.body = { message: `Order item ${ctx.orderItem.id} does not belong to order ${ctx.order.id}` };
-      return;
-    }
-
-    return next();
-  });
+router.param('order_id', loadOrder)
+      .param('order_item_id', loadOrderItem);
 
 setupDiscovery(router, [
   ListController.schema,

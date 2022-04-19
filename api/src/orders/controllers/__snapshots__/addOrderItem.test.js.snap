@@ -1,7 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`POST /orders/:order_id/order_items throws validation error for required properties 1`] = `
+exports[`POST /order_items throws validation error for required properties 1`] = `
 Array [
+  Object {
+    "instancePath": "",
+    "keyword": "required",
+    "message": "must have required property 'order_id'",
+    "params": Object {
+      "missingProperty": "order_id",
+    },
+    "schemaPath": "#/required",
+  },
   Object {
     "instancePath": "",
     "keyword": "required",
@@ -14,7 +23,7 @@ Array [
 ]
 `;
 
-exports[`POST /orders/:order_id/order_items throws validation error with additional properties 1`] = `
+exports[`POST /order_items throws validation error with additional properties 1`] = `
 Array [
   Object {
     "instancePath": "",
@@ -27,4 +36,3 @@ Array [
   },
 ]
 `;
-

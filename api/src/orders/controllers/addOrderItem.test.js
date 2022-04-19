@@ -7,7 +7,7 @@ const OrderItem = require("../models/orderItem");
 const Customer = require("../../customers/models/customer");
 const Product = require("../../products/models/product");
 
-describe("POST /orders/:order_id/order_items", () => {
+describe("POST /order_items", () => {
   let customer, order, product;
   beforeAll(async () => {
     require('../../shared/setupModels')();
@@ -24,8 +24,8 @@ describe("POST /orders/:order_id/order_items", () => {
   afterAll(() => Customer.knex().destroy());
 
   it("creates and returns an order item", async () => {
-    const response = await request.post(`/orders/${order.uuid}/order_items`)
-      .send({ product_id: product.uuid })
+    const response = await request.post(`/order_items`)
+      .send({ product_id: product.uuid, order_id: order.uuid })
       .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
@@ -55,8 +55,8 @@ describe("POST /orders/:order_id/order_items", () => {
   });
 
   it("creates and returns an order using internal order_id", async () => {
-    const response = await request.post(`/orders/${order.id}/order_items`)
-      .send({ product_id: product.uuid })
+    const response = await request.post(`/order_items`)
+      .send({ product_id: product.uuid, order_id: order.id })
       .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
@@ -86,8 +86,8 @@ describe("POST /orders/:order_id/order_items", () => {
   });
 
   it("creates and returns an order using internal product_id", async () => {
-    const response = await request.post(`/orders/${order.uuid}/order_items`)
-      .send({ product_id: product.id })
+    const response = await request.post(`/order_items`)
+      .send({ product_id: product.id, order_id: order.uuid })
       .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
@@ -117,7 +117,7 @@ describe("POST /orders/:order_id/order_items", () => {
   });
 
   it("throws validation error for required properties", async () => {
-    const response = await request.post(`/orders/${order.uuid}/order_items`)
+    const response = await request.post(`/order_items`)
       .send({})
       .set("Accept", "application/json");
 
@@ -126,8 +126,8 @@ describe("POST /orders/:order_id/order_items", () => {
   });
 
   it("throws validation error with additional properties", async () => {
-    const response = await request.post(`/orders/${order.uuid}/order_items`)
-      .send({ product_id: product.uuid, created_at: Date.now() })
+    const response = await request.post(`/order_items`)
+      .send({ order_id: order.uuid, product_id: product.uuid, created_at: Date.now() })
       .set("Accept", "application/json");
 
     expect(response.status).toBe(400);
@@ -135,16 +135,16 @@ describe("POST /orders/:order_id/order_items", () => {
   });
 
   it("throws 404 for not existing order_id", async () => {
-    const response = await request.post(`/orders/${uuid.v4()}/order_items`)
-      .send({})
+    const response = await request.post(`/order_items`)
+      .send({ order_id: uuid.v4() })
       .set("Accept", "application/json");
 
     expect(response.status).toBe(404);
   });
 
   it("throws 404 for not existing product_id", async () => {
-    const response = await request.post(`/orders/${order.id}/order_items`)
-      .send({ product_id: product.uuid + '1' })
+    const response = await request.post(`/order_items`)
+      .send({ order_id: order.uuid, product_id: product.uuid + '1' })
       .set("Accept", "application/json");
 
     expect(response.status).toBe(404);
@@ -154,8 +154,8 @@ describe("POST /orders/:order_id/order_items", () => {
     it('updates quantity of existing order_item based on product_id', async () => {
       await OrderItem.query().insert({ order_id: order.id, product_id: product.id });
 
-      const response = await request.post(`/orders/${order.uuid}/order_items`)
-        .send({ product_id: product.uuid, quantity: 2 })
+      const response = await request.post(`/order_items`)
+        .send({ order_id: order.uuid, product_id: product.uuid, quantity: 2 })
         .set("Accept", "application/json");
 
       expect(response.status).toBe(200);

@@ -30,5 +30,5 @@ setupModels();
 // initiliase app
 const PORT = parseInt(process.env.PORT || 3000);
 module.exports = app.listen(PORT, () => {
-  console.log(`initialize application to port ${PORT}`);
+  if (!isTestingEnv()) console.log(`initialize application to port ${PORT}`);
 });

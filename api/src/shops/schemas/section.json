@@ -1,0 +1,53 @@
+{
+  "$id": "/schemas/section",
+  "$async": true,
+  "title": "Section",
+  "description": "Section schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "readOnly": true,
+      "type": "number"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "created_at": {
+      "readOnly": true,
+      "type": "string"
+    },
+    "updated_at": {
+      "readOnly": true,
+      "type": "string"
+    },
+    "uuid": {
+      "readOnly": true,
+      "type": "string",
+      "minLength": 36,
+      "maxLength": 36,
+      "format": "uuid"
+    },
+    "sku": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "shop_id": {
+      "type": "integer",
+      "exclusiveMinimum": 0
+    },
+    "user_id": {
+      "type": "integer",
+      "exclusiveMinimum": 0
+    }
+  },
+  "required": [
+    "name",
+    "sku",
+    "shop_id",
+    "user_id"
+  ],
+  "additionalProperties": false
+}

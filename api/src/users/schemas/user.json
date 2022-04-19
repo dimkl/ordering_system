@@ -1,8 +1,6 @@
 {
   "$id": "/schemas/user",
   "$async": true,
-  "http_method": "POST",
-  "http_path": "/users",
   "title": "User",
   "description": "User schema",
   "type": "object",

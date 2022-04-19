@@ -8,8 +8,16 @@
   "type": "object",
   "properties": {
     "order_id": {
-      "type": "integer",
-      "exclusiveMinimum": 0
+      "anyOf": [
+        {
+          "type": "integer",
+          "exclusiveMinimum": 0
+        },
+        {
+          "type": "string",
+          "format": "uuid"
+        }
+      ]
     },
     "quantity": {
       "type": "integer",
@@ -17,8 +25,16 @@
       "default": 1
     },
     "product_id": {
-      "type": "integer",
-      "exclusiveMinimum": 0
+      "anyOf": [
+        {
+          "type": "integer",
+          "exclusiveMinimum": 0
+        },
+        {
+          "type": "string",
+          "format": "uuid"
+        }
+      ]
     }
   },
   "required": [

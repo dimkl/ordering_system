@@ -2,7 +2,7 @@
   "$id": "/schemas/orderItem.create",
   "$async": true,
   "http_method": "POST",
-  "http_path": "/orders/:id/order_items",
+  "http_path": "/order_items",
   "title": "OrderItem",
   "description": "OrderItem create schema",
   "type": "object",

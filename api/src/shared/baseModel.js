@@ -38,6 +38,15 @@ class BaseModel extends DBErrors(Model) {
       : { [`${this.tableName}.uuid`]: idOrUid };
     return this.query().where(whereOptions).first();
   }
+
+  static async getId(idOrUid) {
+    if (!idOrUid) return idOrUid;
+    if (Number(idOrUid)) return idOrUid;
+
+    const { id } = await this.query().where({ [`${this.tableName}.uuid`]: idOrUid }).first();
+
+    return id;
+  }
 }
 
 module.exports = BaseModel;

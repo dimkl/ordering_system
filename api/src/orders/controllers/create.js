@@ -15,11 +15,9 @@ const handler = async (ctx, next) => {
 
   try {
     const data = await validate(requestBody);
-    const { id: customer_id } = Number(requestBody.customer_id)
-      ? { id: requestBody.customer_id }
-      : await Customer.findByIdOrUid(requestBody.customer_id);
+    const customerId = await Customer.getId(requestBody.customer_id);
 
-    const order = await Order.query().insert({ ...data, customer_id });
+    const order = await Order.query().insert({ ...data, customer_id: customerId });
     ctx.body = await Order.query().modify('publicColumns').findById(order.id);
   } catch (err) {
     if (err instanceof ValidationError) {

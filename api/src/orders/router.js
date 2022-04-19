@@ -59,8 +59,9 @@ router.delete('/orders/:order_id', DeleteController.handler);
 
 // actions
 router.post('/orders/:state', TransitionController.handler);
-router.post('/orders/:order_id/order_items', AddOrderItemController.handler);
-router.delete('/orders/:order_id/order_items/:order_item_id', RemoveOrderItemController.handler);
-router.patch('/orders/:order_id/order_items/:order_item_id', UpdateOrderItemController.handler);
+router.post('/order_items', AddOrderItemController.handler);
+router.post('/order_items/:state', TransitionController.handler);
+router.delete('/order_items/:order_item_id', RemoveOrderItemController.handler);
+router.patch('/order_items/:order_item_id', UpdateOrderItemController.handler);
 
 module.exports = router;

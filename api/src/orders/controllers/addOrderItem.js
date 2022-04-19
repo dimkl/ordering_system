@@ -15,7 +15,7 @@ const handler = async (ctx, next) => {
   const requestBody = ctx.request.body;
 
   try {
-    const orderId = ctx.order.id;
+    const orderId = await Order.getId(requestBody.order_id);
     const productId = await Product.getId(requestBody.product_id);
     const data = await validate({ ...requestBody, order_id: orderId, product_id: productId });
 

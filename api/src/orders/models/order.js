@@ -2,8 +2,6 @@ const BaseModel = require('../../shared/baseModel');
 
 const schema = require('../schemas/order.json');
 
-const PUBLIC_COLUMNS = Object.keys(schema.properties);
-
 class Order extends BaseModel {
   static get tableName() {
     return 'orders';
@@ -16,7 +14,10 @@ class Order extends BaseModel {
   static get modifiers() {
     return {
       publicColumns(query) {
-        query.select(PUBLIC_COLUMNS);
+        query
+          .select('orders.*')
+          .joinRelated('customer')
+          .select('customer.uuid as customer_id');
       }
     }
   }

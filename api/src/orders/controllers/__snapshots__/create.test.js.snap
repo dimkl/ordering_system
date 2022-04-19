@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`POST /orders creates and returns a order 1`] = `
+Object {
+  "created_at": Any<String>,
+  "customer_id": Any<String>,
+  "id": Any<Number>,
+  "state": "draft",
+  "updated_at": Any<String>,
+  "uuid": Any<String>,
+}
+`;
+
+exports[`POST /orders creates and returns a order using internal customer_id 1`] = `
+Object {
+  "created_at": Any<String>,
+  "customer_id": Any<String>,
+  "id": Any<Number>,
+  "state": "draft",
+  "updated_at": Any<String>,
+  "uuid": Any<String>,
+}
+`;
+
+exports[`POST /orders throws validation error for not existing customer_id 1`] = `
+Array [
+  Object {
+    "instancePath": "/customer_id",
+    "keyword": "type",
+    "message": "must be integer",
+    "params": Object {
+      "type": "integer",
+    },
+    "schemaPath": "#/properties/customer_id/anyOf/0/type",
+  },
+  Object {
+    "instancePath": "/customer_id",
+    "keyword": "format",
+    "message": "must match format \\"uuid\\"",
+    "params": Object {
+      "format": "uuid",
+    },
+    "schemaPath": "#/properties/customer_id/anyOf/1/format",
+  },
+  Object {
+    "instancePath": "/customer_id",
+    "keyword": "anyOf",
+    "message": "must match a schema in anyOf",
+    "params": Object {},
+    "schemaPath": "#/properties/customer_id/anyOf",
+  },
+]
+`;
+
+exports[`POST /orders throws validation error for required properties 1`] = `
+Array [
+  Object {
+    "instancePath": "",
+    "keyword": "required",
+    "message": "must have required property 'customer_id'",
+    "params": Object {
+      "missingProperty": "customer_id",
+    },
+    "schemaPath": "#/required",
+  },
+]
+`;
+
+exports[`POST /orders throws validation error with additional properties 1`] = `
+Array [
+  Object {
+    "instancePath": "",
+    "keyword": "additionalProperties",
+    "message": "must NOT have additional properties",
+    "params": Object {
+      "additionalProperty": "created_at",
+    },
+    "schemaPath": "#/additionalProperties",
+  },
+]
+`;

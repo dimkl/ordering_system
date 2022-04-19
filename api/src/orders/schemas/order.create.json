@@ -8,8 +8,16 @@
   "type": "object",
   "properties": {
     "customer_id": {
-      "type": "integer",
-      "exclusiveMinimum": 0
+      "anyOf": [
+        {
+          "type": "integer",
+          "exclusiveMinimum": 0
+        },
+        {
+          "type": "string",
+          "format": "uuid"
+        }
+      ]
     }
   },
   "required": [

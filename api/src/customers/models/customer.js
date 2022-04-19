@@ -20,7 +20,7 @@ class Customer extends Password(BaseModel) {
         query.select(PUBLIC_COLUMNS);
       }
     }
-  };
+  }
 }
 
 module.exports = Customer;

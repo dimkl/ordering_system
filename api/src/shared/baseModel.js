@@ -33,7 +33,9 @@ class BaseModel extends DBErrors(Model) {
   }
 
   static findByIdOrUid(idOrUid) {
-    let whereOptions = Number(idOrUid) ? { id: idOrUid } : { uuid: idOrUid };
+    let whereOptions = Number(idOrUid)
+      ? { [`${this.tableName}.id`]: idOrUid }
+      : { [`${this.tableName}.uuid`]: idOrUid };
     return this.query().where(whereOptions).first();
   }
 }

@@ -12,7 +12,7 @@ describe("DELETE /orders/:order_id", () => {
     customer = await Customer.query().insert({
       "first_name": "Dimitris",
       "last_name": "Klouvas",
-      "email": "dimitris.klouvas@gmail.com",
+      "email": "dimitris.klouvas+orders.delete@gmail.com",
       "password": "1234"
     });
   });

@@ -2,34 +2,34 @@
 
 ## Customers
 
-- [] CRUD customers
+- [x] CRUD customers
 - [] authentication (login & signup)
 - [] authorization
 
 ## Products
 
-- [] CRUD products
+- [~] CRUD products
 - [] authorization
 
 ## Orders
 
-- [] CRUD orders & order_items
-- [] addOrderItem & removeOrderItem
+- [x] CRUD orders & order_items
+- [x] addOrderItem & removeOrderItem & updateOrderItem
 - [] transition
 - [] authorization
 
 ## Users
 
-- [] CRUD users
+- [~] CRUD users
 - [] authentication (login & signup)
 - [] authorization
 
 ## Slots
 
-- [] CRUD slots & time_slots & group_slots
+- [~] CRUD slots & time_slots & group_slots
 - [] authorization
 
 ## Shops
 
-- [] CRUD shops & sections
+- [~] CRUD shops & sections
 - [] authorization

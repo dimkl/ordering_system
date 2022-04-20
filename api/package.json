@@ -4,8 +4,8 @@
   "description": "Ordering System",
   "main": "src/index.js",
   "scripts": {
-    "test": "DOTENV_CONFIG_PATH=.env.test jest --runInBand --config='./config/jest/config.js'",
-    "test:debug": "DOTENV_CONFIG_PATH=.env.test node inspect node_modules/jest/bin/jest.js --runInBand --config='./config/jest/config.js'",
+    "test": "DOTENV_CONFIG_PATH=.env.test.local jest --runInBand --config='./config/jest/config.js'",
+    "test:debug": "DOTENV_CONFIG_PATH=.env.test.local node inspect node_modules/jest/bin/jest.js --runInBand --config='./config/jest/config.js'",
     "start": "node src/index.js",
     "start:dev": "nodemon src/index.js",
     "debug": "node inspect src/index.js",

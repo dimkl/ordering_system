@@ -1,0 +1,54 @@
+{
+  "$id": "/schemas/timeSlot",
+  "$async": true,
+  "title": "TimeSlot",
+  "description": "TimeSlot schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "readOnly": true,
+      "type": "number"
+    },
+    "started_at": {
+      "readOnly": true,
+      "type": "string",
+      "format": "iso-date-time"
+    },
+    "ended_at": {
+      "readOnly": true,
+      "type": "string",
+      "format": "iso-date-time"
+    },
+    "created_at": {
+      "readOnly": true,
+      "type": "string",
+      "format": "iso-date-time"
+    },
+    "updated_at": {
+      "readOnly": true,
+      "type": "string",
+      "format": "iso-date-time"
+    },
+    "uuid": {
+      "readOnly": true,
+      "type": "string",
+      "minLength": 36,
+      "maxLength": 36,
+      "format": "uuid"
+    },
+    "customer_id": {
+      "type": "integer",
+      "exclusiveMinimum": 0
+    },
+    "slot_id": {
+      "type": "integer",
+      "exclusiveMinimum": 0
+    }
+  },
+  "required": [
+    "name",
+    "customer_id",
+    "slot_id"
+  ],
+  "additionalProperties": false
+}

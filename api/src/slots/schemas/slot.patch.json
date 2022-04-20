@@ -1,0 +1,40 @@
+{
+  "$id": "/schemas/slot",
+  "$async": true,
+  "http_method": "PATCH",
+  "http_path": "/slots/:id",
+  "title": "Slot",
+  "description": "Slot schema",
+  "type": "object",
+  "properties": {
+    "section_id": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "exclusiveMinimum": 0
+        },
+        {
+          "type": "string",
+          "format": "uuid"
+        }
+      ]
+    },
+    "user_id": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "exclusiveMinimum": 0
+        },
+        {
+          "type": "string",
+          "format": "uuid"
+        }
+      ]
+    },
+    "active": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "additionalProperties": false
+}

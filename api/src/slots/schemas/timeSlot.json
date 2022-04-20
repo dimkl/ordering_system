@@ -12,22 +12,22 @@
     "started_at": {
       "readOnly": true,
       "type": "string",
-      "format": "iso-date-time"
+      "format": "date-time"
     },
     "ended_at": {
       "readOnly": true,
       "type": "string",
-      "format": "iso-date-time"
+      "format": "date-time"
     },
     "created_at": {
       "readOnly": true,
       "type": "string",
-      "format": "iso-date-time"
+      "format": "date-time"
     },
     "updated_at": {
       "readOnly": true,
       "type": "string",
-      "format": "iso-date-time"
+      "format": "date-time"
     },
     "uuid": {
       "readOnly": true,

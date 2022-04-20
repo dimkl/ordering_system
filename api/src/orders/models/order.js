@@ -11,8 +11,13 @@ class Order extends BaseModel {
     return schema;
   }
 
+  static get public_columns() {
+    return Object.keys(schema.properties);
+  }
+
   static get modifiers() {
     return {
+      ...super.modifiers,
       publicColumns(query) {
         query
           .select('orders.*')

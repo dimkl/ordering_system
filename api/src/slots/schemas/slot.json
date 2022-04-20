@@ -1,0 +1,52 @@
+{
+  "$id": "/schemas/slot",
+  "$async": true,
+  "title": "Slot",
+  "description": "Slot schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "readOnly": true,
+      "type": "number"
+    },
+    "created_at": {
+      "readOnly": true,
+      "type": "string",
+      "format": "iso-date-time"
+    },
+    "updated_at": {
+      "readOnly": true,
+      "type": "string",
+      "format": "iso-date-time"
+    },
+    "uuid": {
+      "readOnly": true,
+      "type": "string",
+      "minLength": 36,
+      "maxLength": 36,
+      "format": "uuid"
+    },
+    "section_id": {
+      "type": "integer",
+      "exclusiveMinimum": 0
+    },
+    "user_id": {
+      "type": "integer",
+      "exclusiveMinimum": 0
+    },
+    "sku": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "active": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "section_id",
+    "sku"
+  ],
+  "additionalProperties": false
+}

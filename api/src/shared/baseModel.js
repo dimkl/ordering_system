@@ -43,7 +43,7 @@ class BaseModel extends DBErrors(Model) {
     if (!idOrUid) return idOrUid;
     if (Number(idOrUid)) return idOrUid;
 
-    const { id } = await this.query().where({ [`${this.tableName}.uuid`]: idOrUid }).first();
+    const { id } = await this.query().select('id').where({ [`${this.tableName}.uuid`]: idOrUid }).first();
 
     return id;
   }

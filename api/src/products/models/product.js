@@ -2,8 +2,6 @@ const BaseModel = require('../../shared/baseModel');
 
 const schema = require('../schemas/product.json');
 
-const PUBLIC_COLUMNS = Object.keys(schema.properties);
-
 class Product extends BaseModel {
   static get tableName() {
     return 'products';
@@ -13,13 +11,9 @@ class Product extends BaseModel {
     return schema;
   }
 
-  static get modifiers() {
-    return {
-      publicColumns(query) {
-        query.select(PUBLIC_COLUMNS);
-      }
-    }
-  };
+  static get public_columns() {
+    return Object.keys(schema.properties);
+  }
 }
 
 module.exports = Product;

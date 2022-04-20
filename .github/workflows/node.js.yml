@@ -19,6 +19,8 @@ jobs:
     services:
       postgres:
         image: postgres
+        env:
+          POSTGRES_PASSWORD: 123456
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -42,7 +44,7 @@ jobs:
     - name: Run tests
       run: npm test
       env:
-        DATABASE_URL: postgresql://postgres:5432/ordering_system_test
+        DATABASE_URL: postgresql://postgres:123456@postgres:5432/ordering_system_test
         NODE_ENV: test
         PORT: 3001
 

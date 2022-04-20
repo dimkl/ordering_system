@@ -1,0 +1,51 @@
+{
+  "$id": "/schemas/timeSlot",
+  "$async": true,
+  "http_method": "POST",
+  "http_path": "/time_slots",
+  "title": "TimeSlot",
+  "description": "TimeSlot schema",
+  "type": "object",
+  "properties": {
+    "started_at": {
+      "readOnly": true,
+      "type": "string",
+      "format": "date-time"
+    },
+    "ended_at": {
+      "readOnly": true,
+      "type": "string",
+      "format": "date-time"
+    },
+    "customer_id": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "exclusiveMinimum": 0
+        },
+        {
+          "type": "string",
+          "format": "uuid"
+        }
+      ]
+    },
+    "slot_id": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "exclusiveMinimum": 0
+        },
+        {
+          "type": "string",
+          "format": "uuid"
+        }
+      ]
+    }
+  },
+  "required": [
+    "started_at",
+    "customer_id",
+    "slot_id"
+  ],
+  "additionalProperties": false
+}

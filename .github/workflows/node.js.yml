@@ -19,8 +19,6 @@ jobs:
     services:
       postgres:
         image: postgres
-        ports:
-          - "5432:5432"
         env:
           POSTGRES_PASSWORD: 123456
         options: >-
@@ -46,7 +44,7 @@ jobs:
     - name: Run tests
       run: npm test
       env:
-        DATABASE_URL: postgresql://postgres:123456@postgres:5432/ordering_system_test
+        DATABASE_URL: postgresql://postgres:123456@localhost:5432/ordering_system_test
         NODE_ENV: test
         PORT: 3001
 

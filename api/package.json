@@ -11,6 +11,7 @@
     "debug": "node inspect src/index.js",
     "db:migration:create": "knex migrate:make --client pg --knexfile ./config/knexfile.js",
     "db:migrate": "knex migrate:latest --knexfile ./config/knexfile.js",
+    "db:rollback": "knex migrate:rollback --knexfile ./config/knexfile.js",
     "db:seed:create": "knex seed:make --client pg --knexfile ./config/knexfile.js",
     "db:seed": "knex seed:run --knexfile ./config/knexfile.js",
     "setup": "npm run db:migrate && npm run db:seed"

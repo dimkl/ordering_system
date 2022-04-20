@@ -18,6 +18,18 @@
           "format": "uuid"
         }
       ]
+    },
+    "time_slot_id": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "exclusiveMinimum": 0
+        },
+        {
+          "type": "string",
+          "format": "uuid"
+        }
+      ]
     }
   },
   "required": [

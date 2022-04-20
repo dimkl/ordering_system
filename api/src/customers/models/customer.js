@@ -3,7 +3,6 @@ const Password = require('objection-password')();
 const schema = require('../schemas/customer.json');
 
 const SENSITIVE_COLUMNS = ['password'];
-const PUBLIC_COLUMNS = Object.keys(schema.properties).filter(k => !SENSITIVE_COLUMNS.includes(k));
 
 class Customer extends Password(BaseModel) {
   static get tableName() {
@@ -14,12 +13,8 @@ class Customer extends Password(BaseModel) {
     return schema;
   }
 
-  static get modifiers() {
-    return {
-      publicColumns(query) {
-        query.select(PUBLIC_COLUMNS);
-      }
-    }
+  static get public_columns() {
+    return Object.keys(schema.properties).filter(k => !SENSITIVE_COLUMNS.includes(k));
   }
 }
 

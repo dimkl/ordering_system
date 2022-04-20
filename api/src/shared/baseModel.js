@@ -5,6 +5,18 @@ const addFormats = require("ajv-formats");
 const addKeywords = require('./addKeywords');
 
 class BaseModel extends DBErrors(Model) {
+  static get modifiers() {
+    return {
+      publicColumns(query) {
+        query.select(this.modelClass().public_columns);
+      },
+      publicInsertColumns(query) {
+        debugger;
+        query.returning(this.modelClass().public_columns);
+      }
+    }
+  }
+  
   static createValidator() {
     return new AjvValidator({
       onCreateAjv: (ajv) => {

@@ -46,7 +46,7 @@
     }
   },
   "required": [
-    "name",
+    "started_at",
     "customer_id",
     "slot_id"
   ],

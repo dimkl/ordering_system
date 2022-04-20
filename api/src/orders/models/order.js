@@ -17,7 +17,9 @@ class Order extends BaseModel {
         query
           .select('orders.*')
           .joinRelated('customer')
-          .select('customer.uuid as customer_id');
+          .select('customer.uuid as customer_id')
+          .joinRelated('timeSlot')
+          .select('timeSlot.uuid as time_slot_id');
       }
     }
   }
@@ -38,6 +40,26 @@ class Order extends BaseModel {
         join: {
           from: 'orders.customer_id',
           to: 'customers.id'
+        }
+      },
+      timeSlot: {
+        relation: BaseModel.BelongsToOneRelation,
+        modelClass: __dirname + '/../../slots/models/timeSlot',
+        join: {
+          from: 'orders.time_slot_id',
+          to: 'time_slots.id'
+        }
+      },
+      slot: {
+        relation: BaseModel.BelongsToOneRelation,
+        modelClass: __dirname + '/../../slots/models/slot',
+        join: {
+          from: 'orders.time_slot_id',
+          to: 'slots.id',
+          through: {
+            from: 'time_slots.id',
+            to: 'time_slots.slot_id'
+          }
         }
       }
     }

@@ -31,10 +31,15 @@
       "type": "string",
       "minLength": 36,
       "maxLength": 36
+    },
+    "time_slot_id": {
+      "type": "integer",
+      "exclusiveMinimum": 0
     }
   },
   "required": [
-    "customer_id"
+    "customer_id",
+    "time_slot_id"
   ],
   "definitions": {
     "state": {
@@ -42,6 +47,8 @@
         "draft",
         "placed",
         "processing",
+        "delivered",
+        "payment_requested",
         "invoiced"
       ]
     }

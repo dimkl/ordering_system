@@ -18,6 +18,13 @@ class TestEnvironment extends NodeEnvironment {
 
       Object.assign(this.global, { app, request });
     }
+
+    // Will trigger if docblock contains @data-factory true
+    if (this.docblockPragmas['data-factory'] === 'true') {
+      const DataFactory = require("./dataFactory");
+
+      Object.assign(this.global, { DataFactory });
+    }
   }
 
   async teardown() {
@@ -25,6 +32,11 @@ class TestEnvironment extends NodeEnvironment {
       this.global.app.close();
       this.global.app = null;
       this.global.request = null;
+    }
+
+    if (this.docblockPragmas['data-factory'] === 'true' && this.global.DataFactory) {
+      await this.global.DataFactory.knex.destroy();
+      this.global.DataFactory = null;
     }
 
     await super.teardown();

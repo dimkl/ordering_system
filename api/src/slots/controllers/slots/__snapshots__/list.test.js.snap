@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GET /slots returns all slots 1`] = `
+Object {
+  "active": true,
+  "created_at": Any<String>,
+  "id": Any<Number>,
+  "section_id": Any<String>,
+  "sku": "table-1",
+  "updated_at": Any<String>,
+  "user_id": Any<String>,
+  "uuid": Any<String>,
+}
+`;
+
+exports[`GET /slots returns specified slot 1`] = `
+Object {
+  "active": true,
+  "created_at": Any<String>,
+  "id": Any<Number>,
+  "section_id": Any<String>,
+  "sku": "table-1",
+  "updated_at": Any<String>,
+  "user_id": Any<String>,
+  "uuid": Any<String>,
+}
+`;
+
+exports[`GET /slots returns specified slot using uuid 1`] = `
+Object {
+  "active": true,
+  "created_at": Any<String>,
+  "id": Any<Number>,
+  "section_id": Any<String>,
+  "sku": "table-1",
+  "updated_at": Any<String>,
+  "user_id": Any<String>,
+  "uuid": Any<String>,
+}
+`;

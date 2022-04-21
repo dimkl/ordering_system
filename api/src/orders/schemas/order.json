@@ -49,7 +49,8 @@
         "processing",
         "delivered",
         "payment_requested",
-        "invoiced"
+        "invoiced",
+        "paid"
       ]
     }
   },

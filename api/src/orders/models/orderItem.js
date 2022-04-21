@@ -24,6 +24,14 @@ class OrderItem extends BaseModel {
           from: 'order_items.product_id',
           to: 'products.id'
         }
+      },
+      order: {
+        relation: BaseModel.BelongsToOneRelation,
+        modelClass: __dirname + '/order',
+        join: {
+          from: 'order_items.order_id',
+          to: 'orders.id'
+        }
       }
     }
   }

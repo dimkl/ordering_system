@@ -3,6 +3,7 @@ const { Model, AjvValidator } = require('objection')
 const { DBErrors } = require('objection-db-errors');
 const addFormats = require("ajv-formats");
 const addKeywords = require('./addKeywords');
+const ajv = require('./ajv');
 
 class BaseModel extends DBErrors(Model) {
   static get modifiers() {
@@ -15,8 +16,11 @@ class BaseModel extends DBErrors(Model) {
       }
     }
   }
-  
+
   static createValidator() {
+    ajv.addSchema(this.jsonSchema);
+    ajv.validateSchema(this.jsonSchema);
+
     return new AjvValidator({
       onCreateAjv: (ajv) => {
         addFormats(ajv);

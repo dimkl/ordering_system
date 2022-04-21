@@ -8,12 +8,10 @@
   "type": "object",
   "properties": {
     "started_at": {
-      "readOnly": true,
       "type": "string",
       "format": "date-time"
     },
     "ended_at": {
-      "readOnly": true,
       "type": "string",
       "format": "date-time"
     },

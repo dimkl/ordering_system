@@ -5,13 +5,11 @@
 const uuid = require('uuid');
 const Order = require("../models/order");
 const OrderItem = require("../models/orderItem");
-const Customer = require("../../customers/models/customer");
-const Product = require("../../products/models/product");
 
 describe("POST /order_items", () => {
   beforeAll(() => require('../../shared/setupModels')());
   beforeEach(() => Order.knex().raw('truncate orders, order_items, customers, users, products cascade;'));
-  afterAll(() => Customer.knex().destroy());
+  afterAll(() => Order.knex().destroy());
 
   it("creates and returns an order item", async () => {
     const order = await DataFactory.createOrder();
@@ -125,11 +123,8 @@ describe("POST /order_items", () => {
   });
 
   it("throws validation error with additional properties", async () => {
-    await DataFactory.createOrder();
-    await DataFactory.createProduct();
-
-    const order = await Order.query().first();
-    const product = await Product.query().first();
+    const order = await DataFactory.createOrder();
+    const product = await DataFactory.createProduct();
 
     const response = await request.post(`/order_items`)
       .send({ order_id: order.uuid, product_id: product.uuid, created_at: Date.now() })
@@ -148,11 +143,8 @@ describe("POST /order_items", () => {
   });
 
   it("throws 404 for not existing product_id", async () => {
-    await DataFactory.createOrder();
-    await DataFactory.createProduct();
-
-    const order = await Order.query().first();
-    const product = await Product.query().first();
+    const order = await DataFactory.createOrder();
+    const product = await DataFactory.createProduct();
 
     const response = await request.post(`/order_items`)
       .send({ order_id: order.uuid, product_id: product.uuid + '1' })
@@ -163,10 +155,9 @@ describe("POST /order_items", () => {
 
   describe('when existing order_item exists', () => {
     it('updates quantity of existing order_item based on product_id', async () => {
-      const order =  await DataFactory.createOrder();
+      const order = await DataFactory.createOrder();
       const product = await DataFactory.createProduct();
-
-      await OrderItem.query().insert({ order_id: order.id, product_id: product.id });
+      await DataFactory.createOrderItem({ quantity: 1 }, { id: order.id }, { id: product.id });
 
       const response = await request.post(`/order_items`)
         .send({ order_id: order.uuid, product_id: product.uuid, quantity: 2 })

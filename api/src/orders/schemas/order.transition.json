@@ -1,0 +1,18 @@
+{
+  "$id": "/schemas/order.transition",
+  "$async": true,
+  "http_method": "POST",
+  "http_path": "/orders/:id/:state",
+  "title": "Order",
+  "description": "Order transition schema",
+  "type": "object",
+  "properties": {
+    "state": {
+      "$ref": "order#/definitions/state"
+    }
+  },
+  "required": [
+    "state"
+  ],
+  "additionalProperties": false
+}

@@ -13,6 +13,7 @@ const TransitionController = require('./controllers/transition');
 const AddOrderItemController = require('./controllers/addOrderItem');
 const RemoveOrderItemController = require('./controllers/removeOrderItem');
 const UpdateOrderItemController = require('./controllers/updateOrderItem');
+const TransitionOrderItemController = require('./controllers/transitionOrderItem');
 
 const router = new Router();
 
@@ -28,7 +29,8 @@ setupDiscovery(router, [
   TransitionController.schema,
   AddOrderItemController.schema,
   RemoveOrderItemController.schema,
-  UpdateOrderItemController.schema
+  UpdateOrderItemController.schema,
+  TransitionOrderItemController.schema
 ]);
 
 router.get('/orders', ListController.handler);
@@ -36,11 +38,10 @@ router.get('/orders/:order_id', ListController.handler);
 router.post('/orders', CreateController.handler);
 router.patch('/orders/:order_id', UpdateController.handler);
 router.delete('/orders/:order_id', DeleteController.handler);
+router.post('/orders/:order_id/:state', TransitionController.handler);
 
-// actions
-router.post('/orders/:state', TransitionController.handler);
 router.post('/order_items', AddOrderItemController.handler);
-router.post('/order_items/:state', TransitionController.handler);
+router.post('/order_items/:order_item_id/:state', TransitionOrderItemController.handler);
 router.delete('/order_items/:order_item_id', RemoveOrderItemController.handler);
 router.patch('/order_items/:order_item_id', UpdateOrderItemController.handler);
 

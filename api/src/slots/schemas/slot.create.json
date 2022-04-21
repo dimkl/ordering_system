@@ -1,5 +1,5 @@
 {
-  "$id": "/schemas/slot",
+  "$id": "/schemas/slot.create",
   "$async": true,
   "http_method": "POST",
   "http_path": "/slots",

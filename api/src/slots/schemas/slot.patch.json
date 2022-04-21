@@ -1,5 +1,5 @@
 {
-  "$id": "/schemas/slot",
+  "$id": "/schemas/slot.patch",
   "$async": true,
   "http_method": "PATCH",
   "http_path": "/slots/:id",

@@ -1,4 +1,4 @@
-const ajv = require('../../shared/ajv');
+const ajv = require('../../../shared/ajv');
 const { ValidationError } = require("ajv");
 const { UniqueViolationError } = require('objection-db-errors');
 

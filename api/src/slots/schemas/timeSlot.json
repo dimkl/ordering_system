@@ -9,16 +9,6 @@
       "readOnly": true,
       "type": "number"
     },
-    "started_at": {
-      "readOnly": true,
-      "type": "string",
-      "format": "date-time"
-    },
-    "ended_at": {
-      "readOnly": true,
-      "type": "string",
-      "format": "date-time"
-    },
     "created_at": {
       "readOnly": true,
       "type": "string",
@@ -35,6 +25,14 @@
       "minLength": 36,
       "maxLength": 36,
       "format": "uuid"
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "ended_at": {
+      "type": "string",
+      "format": "date-time"
     },
     "customer_id": {
       "type": "integer",

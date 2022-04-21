@@ -1,0 +1,36 @@
+{
+  "$id": "/schemas/order.patch",
+  "$async": true,
+  "http_method": "POST",
+  "http_path": "/orders/:id",
+  "title": "Order",
+  "description": "Order patch schema",
+  "type": "object",
+  "properties": {
+    "customer_id": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "exclusiveMinimum": 0
+        },
+        {
+          "type": "string",
+          "format": "uuid"
+        }
+      ]
+    },
+    "time_slot_id": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "exclusiveMinimum": 0
+        },
+        {
+          "type": "string",
+          "format": "uuid"
+        }
+      ]
+    }
+  },
+  "additionalProperties": false
+}

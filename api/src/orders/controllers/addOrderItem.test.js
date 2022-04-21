@@ -1,5 +1,6 @@
 /**
  * @integration-test true
+ * @data-factory true
  */
 const uuid = require('uuid');
 const Order = require("../models/order");
@@ -8,22 +9,14 @@ const Customer = require("../../customers/models/customer");
 const Product = require("../../products/models/product");
 
 describe("POST /order_items", () => {
-  let customer, order, product;
-  beforeAll(async () => {
-    require('../../shared/setupModels')();
-    customer = await Customer.query().insert({
-      "first_name": "Dimitris",
-      "last_name": "Klouvas",
-      "email": "dimitris.klouvas+order_items.create@gmail.com",
-      "password": "1234"
-    });
-    order = await Order.query().insert({ customer_id: customer.id });
-    product = await Product.query().insert({ title: 'Product', sku: 'product-sku' });
-  });
-  beforeEach(() => Order.knex().raw('truncate order_items cascade;'));
+  beforeAll(() => require('../../shared/setupModels')());
+  beforeEach(() => Order.knex().raw('truncate orders, order_items, customers, users, products cascade;'));
   afterAll(() => Customer.knex().destroy());
 
   it("creates and returns an order item", async () => {
+    const order = await DataFactory.createOrder();
+    const product = await DataFactory.createProduct();
+
     const response = await request.post(`/order_items`)
       .send({ product_id: product.uuid, order_id: order.uuid })
       .set("Accept", "application/json");
@@ -34,7 +27,7 @@ describe("POST /order_items", () => {
       created_at: expect.any(String),
       updated_at: expect.any(String),
       uuid: order.uuid,
-      customer_id: customer.uuid,
+      customer_id: order.customer.uuid,
       order_items: expect.arrayContaining([
         expect.objectContaining({
           uuid: expect.any(String),
@@ -43,7 +36,7 @@ describe("POST /order_items", () => {
           product: {
             title: 'Product',
             uuid: product.uuid,
-            description: null,
+            description: "Product description",
             qr: null
           },
           quantity: 1,
@@ -55,6 +48,9 @@ describe("POST /order_items", () => {
   });
 
   it("creates and returns an order using internal order_id", async () => {
+    const order = await DataFactory.createOrder();
+    const product = await DataFactory.createProduct();
+
     const response = await request.post(`/order_items`)
       .send({ product_id: product.uuid, order_id: order.id })
       .set("Accept", "application/json");
@@ -65,7 +61,7 @@ describe("POST /order_items", () => {
       created_at: expect.any(String),
       updated_at: expect.any(String),
       uuid: order.uuid,
-      customer_id: customer.uuid,
+      customer_id: order.customer.uuid,
       order_items: expect.arrayContaining([
         expect.objectContaining({
           uuid: expect.any(String),
@@ -74,7 +70,7 @@ describe("POST /order_items", () => {
           product: {
             title: 'Product',
             uuid: product.uuid,
-            description: null,
+            description: "Product description",
             qr: null
           },
           quantity: 1,
@@ -86,6 +82,9 @@ describe("POST /order_items", () => {
   });
 
   it("creates and returns an order using internal product_id", async () => {
+    const order = await DataFactory.createOrder();
+    const product = await DataFactory.createProduct();
+
     const response = await request.post(`/order_items`)
       .send({ product_id: product.id, order_id: order.uuid })
       .set("Accept", "application/json");
@@ -96,7 +95,7 @@ describe("POST /order_items", () => {
       created_at: expect.any(String),
       updated_at: expect.any(String),
       uuid: order.uuid,
-      customer_id: customer.uuid,
+      customer_id: order.customer.uuid,
       order_items: expect.arrayContaining([
         expect.objectContaining({
           uuid: expect.any(String),
@@ -105,7 +104,7 @@ describe("POST /order_items", () => {
           product: {
             title: 'Product',
             uuid: product.uuid,
-            description: null,
+            description: "Product description",
             qr: null
           },
           quantity: 1,
@@ -126,6 +125,12 @@ describe("POST /order_items", () => {
   });
 
   it("throws validation error with additional properties", async () => {
+    await DataFactory.createOrder();
+    await DataFactory.createProduct();
+
+    const order = await Order.query().first();
+    const product = await Product.query().first();
+
     const response = await request.post(`/order_items`)
       .send({ order_id: order.uuid, product_id: product.uuid, created_at: Date.now() })
       .set("Accept", "application/json");
@@ -143,6 +148,12 @@ describe("POST /order_items", () => {
   });
 
   it("throws 404 for not existing product_id", async () => {
+    await DataFactory.createOrder();
+    await DataFactory.createProduct();
+
+    const order = await Order.query().first();
+    const product = await Product.query().first();
+
     const response = await request.post(`/order_items`)
       .send({ order_id: order.uuid, product_id: product.uuid + '1' })
       .set("Accept", "application/json");
@@ -152,6 +163,9 @@ describe("POST /order_items", () => {
 
   describe('when existing order_item exists', () => {
     it('updates quantity of existing order_item based on product_id', async () => {
+      const order =  await DataFactory.createOrder();
+      const product = await DataFactory.createProduct();
+
       await OrderItem.query().insert({ order_id: order.id, product_id: product.id });
 
       const response = await request.post(`/order_items`)
@@ -164,7 +178,7 @@ describe("POST /order_items", () => {
         created_at: expect.any(String),
         updated_at: expect.any(String),
         uuid: order.uuid,
-        customer_id: customer.uuid,
+        customer_id: order.customer.uuid,
         order_items: expect.arrayContaining([
           expect.objectContaining({
             uuid: expect.any(String),
@@ -173,7 +187,7 @@ describe("POST /order_items", () => {
             product: {
               title: 'Product',
               uuid: product.uuid,
-              description: null,
+              description: "Product description",
               qr: null
             },
             quantity: 3,

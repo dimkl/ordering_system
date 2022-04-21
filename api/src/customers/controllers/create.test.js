@@ -1,5 +1,6 @@
 /**
  * @integration-test true
+ * @data-factory true
  */
 const Customer = require("../models/customer");
 
@@ -38,12 +39,12 @@ describe("POST /customers", () => {
 
   it("throws validation error for unique email", async () => {
     const email = "customer@example.com";
-    await Customer.query().insert({
+    await DataFactory.createCustomer({
       first_name: "First",
       last_name: "Customer",
-      email: "customer@example.com",
+      email,
       password: "1234"
-    })
+    });
 
     const response = await request.post("/customers")
       .send({

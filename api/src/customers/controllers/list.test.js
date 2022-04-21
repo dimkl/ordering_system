@@ -26,8 +26,7 @@ describe("GET /customers/:customer_id?", () => {
   });
 
   it("returns specified customer", async () => {
-    await DataFactory.createCustomer();
-    const customer = await Customer.query().first();
+    const customer = await DataFactory.createCustomer();
 
     const response = await request.get("/customers/" + customer.id)
       .set("Accept", "application/json");

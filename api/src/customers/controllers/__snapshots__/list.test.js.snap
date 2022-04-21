@@ -23,3 +23,15 @@ Object {
   "uuid": Any<String>,
 }
 `;
+
+exports[`GET /customers/:customer_id? returns specified customer using uuid 1`] = `
+Object {
+  "created_at": Any<String>,
+  "email": "dimitris.klouvas@gmail.com",
+  "first_name": "Dimitris",
+  "id": Any<Number>,
+  "last_name": "Klouvas",
+  "updated_at": Any<String>,
+  "uuid": Any<String>,
+}
+`;

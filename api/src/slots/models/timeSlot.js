@@ -12,8 +12,6 @@ class TimeSlot extends BaseModel {
   static get jsonSchema() {
     return schema;
   }
-
-  
 }
 
 module.exports = TimeSlot;

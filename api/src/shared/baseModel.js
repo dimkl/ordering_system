@@ -11,7 +11,6 @@ class BaseModel extends DBErrors(Model) {
         query.select(this.modelClass().public_columns);
       },
       publicInsertColumns(query) {
-        debugger;
         query.returning(this.modelClass().public_columns);
       }
     }

@@ -10,8 +10,11 @@ async function handler(ctx, next) {
 
   const data = await validate(ctx.request.body);
 
-  await ctx.customer.$query().patch(data);
-  ctx.body = ctx.customer;
+  if (Object.keys(data).length > 0) {
+    await ctx.customer.$query().patch(data);
+  }
+
+  ctx.body = await ctx.customer.$query().modify('publicColumns');;
 }
 
 module.exports = { handler, schema };

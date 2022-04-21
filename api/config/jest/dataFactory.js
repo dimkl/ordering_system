@@ -3,12 +3,8 @@ const uuid = require('uuid');
 const knex = require("../../src/shared/knex");
 
 class DataFactory {
-  static get knex() {
-    return knex;
-  }
-
   static async createCustomer(options = {}) {
-    return knex('customers').returning('id').insert({
+    const customers = await knex('customers').returning('*').insert({
       first_name: "Dimitris",
       last_name: "Klouvas",
       email: "dimitris.klouvas@gmail.com",
@@ -16,52 +12,56 @@ class DataFactory {
       uuid: uuid.v4(),
       ...options
     });
+
+    return customers[0];
   }
 
   static async createProduct(options) {
-    return knex('products').returning('id').insert({
+    const products = await knex('products').returning('*').insert({
       title: "Product",
       sku: "product-code-1",
       description: "Product description",
       uuid: uuid.v4(),
       ...options
     });
+
+    return products[0];
   }
 
   static async createOrder(options = {}, customer = {}, timeSlot = {}) {
-    let customerId = customer.id;
-    if (!customerId) {
-      customerId = (await this.createCustomer(customer))[0].id
+    if (!customer.id) {
+      customer = await this.createCustomer(customer)
     }
 
-    let timeSlotId = timeSlot.id;
-    if (!timeSlotId) {
-      timeSlotId = (await this.createTimeSlot(timeSlot, { ...customer, id: customerId }))[0].id
+    if (!timeSlot.id) {
+      timeSlot = await this.createTimeSlot(timeSlot, customer);
     }
 
-    return knex('orders').returning('id').insert([
-      { customer_id: customerId, time_slot_id: timeSlotId, state: 'draft', uuid: uuid.v4(), ...options },
+    const orders = await knex('orders').returning('*').insert([
+      { customer_id: customer.id, time_slot_id: timeSlot.id, state: 'draft', uuid: uuid.v4(), ...options },
     ]);
+
+    return { ...orders[0], customer, timeSlot }
   }
 
   static async createOrderItem(options = {}, order = {}, product = {}, customer = {}) {
-    let orderId = order.id;
-    if (!orderId) {
-      orderId = (await this.createOrder(order, customer))[0].id
+    if (!order.id) {
+      order = await this.createOrder(order, customer);
     }
 
-    let productId = product.id;
-    if (!productId) {
-      productId = (await this.createProduct(product))[0].id
+    if (!product.id) {
+      product = await this.createProduct(product);
     }
 
-    return knex('order_items').returning('id').insert([
-      { order_id: orderId, product_id: productId, state: 'draft', uuid: uuid.v4(), ...options }
+    const order_items = await knex('order_items').returning('*').insert([
+      { order_id: order.id, product_id: product.id, state: 'draft', uuid: uuid.v4(), ...options }
     ]);
+
+    return { ...order_items[0], product, order };
   }
 
   static async createUser(options = {}) {
-    return knex('users').returning('id').insert({
+    const users = await knex('users').returning('*').insert({
       first_name: "Dimitris",
       last_name: "Klouvas",
       email: "dimitris.klouvas@gmail.com",
@@ -69,82 +69,85 @@ class DataFactory {
       uuid: uuid.v4(),
       ...options
     });
+
+    return users[0];
   }
 
   static async createShop(options = {}, user = {}) {
-    let managerId = user.id;
-    if (!managerId) {
-      managerId = (await this.createUser(user))[0].id
+    if (!user.id) {
+      user = await this.createUser(user);
     }
 
-    return knex('shops').returning('id').insert({
-      manager_id: managerId,
+    const shops = await knex('shops').returning('*').insert({
+      manager_id: user.id,
       name: 'Shop',
       uuid: uuid.v4(),
       ...options
     });
+
+    return { ...shops[0], user };
   }
 
   static async createSection(options = {}, shop = {}, user = {}) {
-    let userId = user.id;
-    if (!userId) {
-      userId = (await this.createUser(user))[0].id
+    if (!user.id) {
+      user = await this.createUser(user);
     }
 
-    let shopId = shop.id;
-    if (!shopId) {
-      shopId = (await this.createShop(shop, { ...user, id: userId }))[0].id
+    if (!shop.id) {
+      shop = await this.createShop(shop, user);
     }
 
-    return knex('sections').returning('id').insert({
-      shop_id: shopId,
-      user_id: userId,
+    const sections = await knex('sections').returning('*').insert({
+      shop_id: shop.id,
+      user_id: user.id,
       name: 'Section',
       sku: 'section-1',
       uuid: uuid.v4(),
       ...options
     });
+
+    return { ...sections[0], shop, user };
   }
 
   static async createSlot(options = {}, section = {}, user = {}, shop = {}) {
-    let userId = user.id;
-    if (!userId) {
-      userId = (await this.createUser(user))[0].id
+    if (!user.id) {
+      user = await this.createUser(user);
     }
 
-    let sectionId = section.id;
-    if (!sectionId) {
-      sectionId = (await this.createSection(section, shop, { ...user, id: userId }))[0].id
+    if (!section.id) {
+      section = await this.createSection(section, shop, user);
     }
 
-    return knex('slots').returning('id').insert({
-      section_id: sectionId,
-      user_id: userId,
+    const slots = await knex('slots').returning('*').insert({
+      section_id: section.id,
+      user_id: user.id,
       sku: 'table-1',
       uuid: uuid.v4(),
       active: true,
       ...options
     });
+
+    return { ...slots[0], section, user };
   }
 
   static async createTimeSlot(options = {}, customer = {}, slot = {}, section = {}, user = {}, shop = {}) {
-    let customerId = customer.id;
-    if (!customerId) {
-      customerId = (await this.createCustomer(customer))[0].id
+    if (!customer.id) {
+      customer = await this.createCustomer(customer);
     }
 
-    let slotId = slot.id;
-    if (!slotId) {
-      slotId = (await this.createSlot(slot, section, user, shop))[0].id
+    if (!slot.id) {
+      slot = await this.createSlot(slot, section, user, shop);
     }
 
-    return knex('time_slots').returning('id').insert({
-      slot_id: slotId,
-      customer_id: customerId,
+    const time_slots = await knex('time_slots').returning('*').insert({
+      slot_id: slot.id,
+      customer_id: customer.id,
       started_at: (new Date()).toISOString(),
       uuid: uuid.v4(),
       ...options
     });
+
+    return { ...time_slots[0], slot, customer };
   }
 }
 

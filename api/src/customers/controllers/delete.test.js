@@ -1,5 +1,6 @@
 /**
  * @integration-test true
+ * @data-factory true
  */
 const Customer = require("../models/customer");
 const uuid = require('uuid');
@@ -10,12 +11,7 @@ describe("DELETE /customers/:customer_id", () => {
   afterAll(() => Customer.knex().destroy());
 
   it("deletes customer and returns 204", async () => {
-    const customer = await Customer.query().insert({
-      "first_name": "Dimitris",
-      "last_name": "Klouvas",
-      "email": "dimitris.klouvas@gmail.com",
-      "password": "1234"
-    });
+    const customer = await DataFactory.createCustomer();
 
     const response = await request.delete(`/customers/${customer.uuid}`)
       .set("Accept", "application/json");

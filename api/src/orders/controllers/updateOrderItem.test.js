@@ -1,30 +1,18 @@
 /**
  * @integration-test true
+ * @data-factory true
  */
 const uuid = require('uuid');
 const Order = require("../models/order");
-const OrderItem = require("../models/orderItem");
-const Customer = require("../../customers/models/customer");
-const Product = require("../../products/models/product");
 
 describe("PATCH /order_items/:order_item_id", () => {
-  let customer, order, product;
-  beforeAll(async () => {
-    require('../../shared/setupModels')();
-    customer = await Customer.query().insert({
-      "first_name": "Dimitris",
-      "last_name": "Klouvas",
-      "email": "dimitris.klouvas+order_items.patch@gmail.com",
-      "password": "1234"
-    });
-    order = await Order.query().insert({ customer_id: customer.id });
-    product = await Product.query().insert({ title: 'Product', sku: 'product-sku' });
-  });
-  beforeEach(() => Order.knex().raw('truncate order_items cascade;'));
-  afterAll(() => Customer.knex().destroy());
+  beforeAll(() => require('../../shared/setupModels')());
+  beforeEach(() => Order.knex().raw('truncate orders, order_items, customers, users, products cascade;'));
+  afterAll(() => Order.knex().destroy());
 
-  it("patch order item", async () => {
-    const orderItem = await OrderItem.query().insert({ order_id: order.id, product_id: product.id });
+  it("patch an order item", async () => {
+    const orderItem = await DataFactory.createOrderItem();
+
     const response = await request.patch(`/order_items/${orderItem.uuid}`)
       .send({ quantity: 10 })
       .set("Accept", "application/json");
@@ -34,8 +22,8 @@ describe("PATCH /order_items/:order_item_id", () => {
       id: expect.any(Number),
       created_at: expect.any(String),
       updated_at: expect.any(String),
-      uuid: order.uuid,
-      customer_id: customer.uuid,
+      uuid: orderItem.order.uuid,
+      customer_id: orderItem.order.customer.uuid,
       order_items: expect.arrayContaining([
         expect.objectContaining({
           uuid: expect.any(String),
@@ -43,8 +31,8 @@ describe("PATCH /order_items/:order_item_id", () => {
           updated_at: expect.any(String),
           product: {
             title: 'Product',
-            uuid: product.uuid,
-            description: null,
+            uuid: orderItem.product.uuid,
+            description: "Product description",
             qr: null
           },
           quantity: 10,
@@ -64,9 +52,10 @@ describe("PATCH /order_items/:order_item_id", () => {
   });
 
   it("throws validation error with additional properties", async () => {
-    const orderItem = await OrderItem.query().insert({ order_id: order.id, product_id: product.id });
+    const orderItem = await DataFactory.createOrderItem();
+
     const response = await request.patch(`/order_items/${orderItem.uuid}`)
-      .send({ quantity: 10, order_id: order.id })
+      .send({ quantity: 10, order_id: orderItem.order.id })
       .set("Accept", "application/json");
 
     expect(response.status).toBe(400);

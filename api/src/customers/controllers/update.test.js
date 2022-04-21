@@ -1,5 +1,6 @@
 /**
  * @integration-test true
+ * @data-factory true
  */
 const Customer = require("../models/customer");
 
@@ -9,13 +10,8 @@ describe("PATCH /customers/:customer_id", () => {
   afterAll(() => Customer.knex().destroy());
 
   it("updates and returns updated customer", async () => {
-    let customer = await Customer.query().insert({
-      "first_name": "Dimitris",
-      "last_name": "Klouvas",
-      "email": "dimitris.klouvas@gmail.com",
-      "password": "1234"
-    });
-    customer = await customer.$query();
+    const customer = await DataFactory.createCustomer();
+
     const response = await request.patch(`/customers/${customer.uuid}`)
       .send({
         "first_name": "Dimitris+2",
@@ -40,12 +36,7 @@ describe("PATCH /customers/:customer_id", () => {
   });
 
   it("does not have required properties", async () => {
-    const customer = await Customer.query().insert({
-      "first_name": "Dimitris",
-      "last_name": "Klouvas",
-      "email": "dimitris.klouvas@gmail.com",
-      "password": "1234"
-    });
+    const customer = await DataFactory.createCustomer();
 
     const response = await request.patch(`/customers/${customer.uuid}`)
       .send({})
@@ -61,25 +52,14 @@ describe("PATCH /customers/:customer_id", () => {
   });
 
   it("throws validation error for unique email", async () => {
-    const existingEmail = "customer@example.com";
-    await Customer.query().insert({
-      first_name: "First",
-      last_name: "Customer",
-      email: existingEmail,
-      password: "1234"
-    });
-    const customer = await Customer.query().insert({
-      "first_name": "Dimitris",
-      "last_name": "Klouvas",
-      "email": "dimitris.klouvas@gmail.com",
-      "password": "1234"
-    });
+    const existingCustomer = await DataFactory.createCustomer();
+    const newCustomer = await DataFactory.createCustomer({email: 'customer-update@example.com'});
 
-    const response = await request.patch(`/customers/${customer.uuid}`)
+    const response = await request.patch(`/customers/${newCustomer.uuid}`)
       .send({
         "first_name": "Dimitris",
         "last_name": "Klouvas",
-        "email": existingEmail,
+        "email": existingCustomer.email,
         "password": "1234"
       })
       .set("Accept", "application/json");
@@ -89,12 +69,7 @@ describe("PATCH /customers/:customer_id", () => {
   });
 
   it("throws validation error with additional properties", async () => {
-    const customer = await Customer.query().insert({
-      "first_name": "Dimitris",
-      "last_name": "Klouvas",
-      "email": "dimitris.klouvas@gmail.com",
-      "password": "1234"
-    });
+    const customer = await DataFactory.createCustomer();
 
     const response = await request.patch(`/customers/${customer.uuid}`)
       .send({ created_at: Date.now() })

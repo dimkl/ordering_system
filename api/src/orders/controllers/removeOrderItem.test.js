@@ -1,30 +1,19 @@
 /**
  * @integration-test true
+ * @data-factory true
  */
 const uuid = require('uuid');
+
 const Order = require("../models/order");
-const OrderItem = require("../models/orderItem");
-const Customer = require("../../customers/models/customer");
-const Product = require("../../products/models/product");
 
 describe("DELETE /order_items/:order_item_id", () => {
-  let customer, order, product;
-  beforeAll(async () => {
-    require('../../shared/setupModels')();
-    customer = await Customer.query().insert({
-      "first_name": "Dimitris",
-      "last_name": "Klouvas",
-      "email": "dimitris.klouvas+order_items.delete@gmail.com",
-      "password": "1234"
-    });
-    order = await Order.query().insert({ customer_id: customer.id });
-    product = await Product.query().insert({ title: 'Product', sku: 'product-sku' });
-  });
-  beforeEach(() => Order.knex().raw('truncate order_items cascade;'));
-  afterAll(() => Customer.knex().destroy());
+  beforeAll(() => require('../../shared/setupModels')());
+  beforeEach(() => Order.knex().raw('truncate order_items, customers, users, products cascade;'));
+  afterAll(() => Order.knex().destroy());
 
   it("removes an order item", async () => {
-    const orderItem = await OrderItem.query().insert({ order_id: order.id, product_id: product.id });
+    const orderItem = await DataFactory.createOrderItem();
+
     const response = await request.delete(`/order_items/${orderItem.uuid}`)
       .set("Accept", "application/json");
 
@@ -33,8 +22,8 @@ describe("DELETE /order_items/:order_item_id", () => {
       id: expect.any(Number),
       created_at: expect.any(String),
       updated_at: expect.any(String),
-      uuid: order.uuid,
-      customer_id: customer.uuid,
+      uuid: orderItem.order.uuid,
+      customer_id: orderItem.order.customer.uuid,
       order_items: []
     });
   });

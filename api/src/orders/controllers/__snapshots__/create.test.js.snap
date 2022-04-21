@@ -6,6 +6,7 @@ Object {
   "customer_id": Any<String>,
   "id": Any<Number>,
   "state": "draft",
+  "time_slot_id": Any<String>,
   "updated_at": Any<String>,
   "uuid": Any<String>,
 }
@@ -17,6 +18,7 @@ Object {
   "customer_id": Any<String>,
   "id": Any<Number>,
   "state": "draft",
+  "time_slot_id": Any<String>,
   "updated_at": Any<String>,
   "uuid": Any<String>,
 }
@@ -48,6 +50,36 @@ Array [
     "message": "must match a schema in anyOf",
     "params": Object {},
     "schemaPath": "#/properties/customer_id/anyOf",
+  },
+]
+`;
+
+exports[`POST /orders throws validation error for not existing time_slot_id 1`] = `
+Array [
+  Object {
+    "instancePath": "/time_slot_id",
+    "keyword": "type",
+    "message": "must be integer",
+    "params": Object {
+      "type": "integer",
+    },
+    "schemaPath": "#/properties/time_slot_id/anyOf/0/type",
+  },
+  Object {
+    "instancePath": "/time_slot_id",
+    "keyword": "format",
+    "message": "must match format \\"uuid\\"",
+    "params": Object {
+      "format": "uuid",
+    },
+    "schemaPath": "#/properties/time_slot_id/anyOf/1/format",
+  },
+  Object {
+    "instancePath": "/time_slot_id",
+    "keyword": "anyOf",
+    "message": "must match a schema in anyOf",
+    "params": Object {},
+    "schemaPath": "#/properties/time_slot_id/anyOf",
   },
 ]
 `;

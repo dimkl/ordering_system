@@ -35,7 +35,6 @@ class TestEnvironment extends NodeEnvironment {
     }
 
     if (this.docblockPragmas['data-factory'] === 'true' && this.global.DataFactory) {
-      await this.global.DataFactory.knex.destroy();
       this.global.DataFactory = null;
     }
 

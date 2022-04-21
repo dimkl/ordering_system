@@ -1,26 +1,17 @@
 /**
  * @integration-test true
+ * @data-factory true
  */
 const Order = require("../models/order");
-const Customer = require("../../customers/models/customer");
 const uuid = require('uuid');
 
 describe("DELETE /orders/:order_id", () => {
-  let customer;
-  beforeAll(async () => {
-    require('../../shared/setupModels')();
-    customer = await Customer.query().insert({
-      "first_name": "Dimitris",
-      "last_name": "Klouvas",
-      "email": "dimitris.klouvas+orders.delete@gmail.com",
-      "password": "1234"
-    });
-  });
-  beforeEach(() => Order.knex().raw('truncate orders cascade;'));
-  afterAll(() => Customer.knex().destroy());
+  beforeAll(() => require('../../shared/setupModels')());
+  beforeEach(() => Order.knex().raw('truncate orders, order_items, customers, users, products cascade;'));
+  afterAll(() => Order.knex().destroy());
 
   it("deletes customer and returns 204", async () => {
-    let order = await Order.query().insert({ customer_id: customer.id });
+    const order = await DataFactory.createOrder();
 
     const response = await request.delete(`/orders/${order.uuid}`)
       .set("Accept", "application/json");

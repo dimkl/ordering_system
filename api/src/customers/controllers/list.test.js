@@ -1,5 +1,6 @@
 /**
  * @integration-test true
+ * @data-factory true
  */
 const Customer = require("../models/customer");
 
@@ -9,12 +10,7 @@ describe("GET /customers/:customer_id?", () => {
   afterAll(() => Customer.knex().destroy());
 
   it("returns all customers", async () => {
-    await Customer.query().insert({
-      "first_name": "Dimitris",
-      "last_name": "Klouvas",
-      "email": "dimitris.klouvas@gmail.com",
-      "password": "1234"
-    });
+    await DataFactory.createCustomer();
 
     const response = await request.get("/customers")
       .set("Accept", "application/json");
@@ -30,12 +26,8 @@ describe("GET /customers/:customer_id?", () => {
   });
 
   it("returns specified customer", async () => {
-    const customer = await Customer.query().insert({
-      "first_name": "Dimitris",
-      "last_name": "Klouvas",
-      "email": "dimitris.klouvas@gmail.com",
-      "password": "1234"
-    });
+    await DataFactory.createCustomer();
+    const customer = await Customer.query().first();
 
     const response = await request.get("/customers/" + customer.id)
       .set("Accept", "application/json");

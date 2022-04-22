@@ -33,3 +33,17 @@
 
 - [~] CRUD shops & sections
 - [] authorization
+
+## Flow
+
+### New customer in restaurant
+
+- [] customer reserves timeslot
+- [] customer creates order
+- [] customer places order
+- [] user-chef creates order_item
+- [] user-waiter serves order_item
+- [] order is being completed
+- [] customer requests order payment
+- [] user-waiter invoices orders (add discount or extra charges)
+- [] customer pays order

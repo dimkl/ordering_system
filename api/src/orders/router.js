@@ -38,10 +38,10 @@ router.get('/orders/:order_id', ListController.handler);
 router.post('/orders', CreateController.handler);
 router.patch('/orders/:order_id', UpdateController.handler);
 router.delete('/orders/:order_id', DeleteController.handler);
-router.post('/orders/:order_id/:state', TransitionController.handler);
+router.post('/orders/:order_id/:action', TransitionController.handler);
 
 router.post('/order_items', AddOrderItemController.handler);
-router.post('/order_items/:order_item_id/:state', TransitionOrderItemController.handler);
+router.post('/order_items/:order_item_id/:action', TransitionOrderItemController.handler);
 router.delete('/order_items/:order_item_id', RemoveOrderItemController.handler);
 router.patch('/order_items/:order_item_id', UpdateOrderItemController.handler);
 

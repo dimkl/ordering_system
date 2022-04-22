@@ -8,7 +8,8 @@ module.exports = {
   collectCoverage: true,
   coverageDirectory: "coverage",
   coveragePathIgnorePatterns: [
-    "/node_modules/"
+    "/node_modules/",
+    "<rootDir>/integrationTest/"
   ],
   coverageProvider: "v8",
   coverageThreshold: {

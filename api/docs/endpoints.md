@@ -70,10 +70,11 @@ curl --location --request GET 'http://localhost:3000/orders/1'
 ### Create
 
 ```bash
-curl --location --request POST 'http://localhost:3000/orders/' \
+curl --location --request POST 'http://localhost:3000/orders' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-    "customer_id": 1
+    "time_slot_id": "7102452d-a9c1-462d-b6a6-b543fecbb59f",
+    "customer_id": "7e78ce7a-b3d9-4c82-b088-77f291cc45e8"
 }'
 ```
 
@@ -101,3 +102,5 @@ curl --location --request POST 'http://localhost:3000/orders/2/order_items' \
 curl --location --request DELETE 'http://localhost:3000/orders/2/order_items/2' \
 --header 'Content-Type: application/json'
 ```
+
+## TimeSlots

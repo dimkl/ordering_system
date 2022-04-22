@@ -2,12 +2,11 @@
  * @integration-test true
  * @data-factory true
  */
-const Customer = require("../models/customer");
-
 describe("POST /customers", () => {
-  beforeAll(() => require('../../shared/setupModels')());
-  beforeEach(() => Customer.knex().raw('truncate customers, orders cascade;'));
-  afterAll(() => Customer.knex().destroy());
+  let knex;
+  beforeAll(() => knex = require('../../shared/setupModels')());
+  beforeEach(() => knex.raw('truncate customers, orders cascade;'));
+  afterAll(() => knex.destroy());
 
   it("creates and returns a customer", async () => {
     const response = await request.post("/customers")

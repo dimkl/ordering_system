@@ -2,12 +2,11 @@
  * @integration-test true
  * @data-factory true
  */
-const Customer = require("../models/customer");
-
 describe("PATCH /customers/:customer_id", () => {
-  beforeAll(() => require('../../shared/setupModels')());
-  beforeEach(() => Customer.knex().raw('truncate customers, orders cascade;'));
-  afterAll(() => Customer.knex().destroy());
+  let knex;
+  beforeAll(() => knex = require('../../shared/setupModels')());
+  beforeEach(() => knex.raw('truncate customers, orders cascade;'));
+  afterAll(() => knex.destroy());
 
   it("updates and returns updated customer", async () => {
     const customer = await DataFactory.createCustomer();

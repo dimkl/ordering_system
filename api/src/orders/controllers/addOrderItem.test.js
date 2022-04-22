@@ -3,13 +3,12 @@
  * @data-factory true
  */
 const uuid = require('uuid');
-const Order = require("../models/order");
-const OrderItem = require("../models/orderItem");
 
 describe("POST /order_items", () => {
-  beforeAll(() => require('../../shared/setupModels')());
-  beforeEach(() => Order.knex().raw('truncate orders, order_items, customers, users, products cascade;'));
-  afterAll(() => Order.knex().destroy());
+  let knex;
+  beforeAll(() => knex = require('../../shared/setupModels')());
+  beforeEach(() => knex.raw('truncate orders, order_items, customers, users, products cascade;'));
+  afterAll(() => knex.destroy());
 
   it("creates and returns an order item", async () => {
     const order = await DataFactory.createOrder();

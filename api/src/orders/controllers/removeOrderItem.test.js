@@ -4,12 +4,11 @@
  */
 const uuid = require('uuid');
 
-const Order = require("../models/order");
-
 describe("DELETE /order_items/:order_item_id", () => {
-  beforeAll(() => require('../../shared/setupModels')());
-  beforeEach(() => Order.knex().raw('truncate order_items, customers, users, products cascade;'));
-  afterAll(() => Order.knex().destroy());
+  let knex;
+  beforeAll(() => knex = require('../../shared/setupModels')());
+  beforeEach(() => knex.raw('truncate order_items, customers, users, products cascade;'));
+  afterAll(() => knex.destroy());
 
   it("removes an order item", async () => {
     const orderItem = await DataFactory.createOrderItem();

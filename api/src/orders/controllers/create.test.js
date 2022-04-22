@@ -2,12 +2,11 @@
  * @integration-test true
  * @data-factory true
  */
-const Order = require("../models/order");
-
 describe("POST /orders", () => {
-  beforeAll(() => require('../../shared/setupModels')());
-  beforeEach(() => Order.knex().raw('truncate orders, order_items, customers, users, products, time_slots, slots cascade;'));
-  afterAll(() => Order.knex().destroy());
+  let knex;
+  beforeAll(() => knex = require('../../shared/setupModels')());
+  beforeEach(() => knex.raw('truncate orders, order_items, customers, users, products, time_slots, slots cascade;'));
+  afterAll(() => knex.destroy());
 
   it("creates and returns a order", async () => {
     const timeSlot = await DataFactory.createTimeSlot();
@@ -71,7 +70,7 @@ describe("POST /orders", () => {
     const timeSlot = await DataFactory.createTimeSlot();
 
     const response = await request.post("/orders")
-      .send({ customer_id: timeSlot.customer.uuid, time_slot_id: timeSlot.uuid  + '1' })
+      .send({ customer_id: timeSlot.customer.uuid, time_slot_id: timeSlot.uuid + '1' })
       .set("Accept", "application/json");
 
     expect(response.status).toBe(400);

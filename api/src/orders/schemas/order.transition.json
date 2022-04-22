@@ -2,17 +2,30 @@
   "$id": "/schemas/order.transition",
   "$async": true,
   "http_method": "POST",
-  "http_path": "/orders/:id/:state",
+  "http_path": "/orders/:id/:action",
   "title": "Order",
   "description": "Order transition schema",
   "type": "object",
   "properties": {
-    "state": {
-      "$ref": "order#/definitions/state"
+    "action": {
+      "$ref": "#/definitions/action"
     }
   },
   "required": [
-    "state"
+    "action"
   ],
+  "definitions": {
+    "action": {
+      "enum": [
+        "place",
+        "process",
+        "deliver",
+        "requestPayment",
+        "invoice",
+        "pay",
+        "cancel"
+      ]
+    }
+  },
   "additionalProperties": false
 }

@@ -1,0 +1,29 @@
+{
+  "name": "ordering-system-sdk",
+  "version": "1.0.0",
+  "description": "Ordering System SDK",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dimkl/ordering_system.git"
+  },
+  "keywords": [
+    "order",
+    "book",
+    "waiter",
+    "sdk",
+    "discovery"
+  ],
+  "author": "dimitris.klouvas@gmail.com",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/dimkl/ordering_system/issues"
+  },
+  "homepage": "https://github.com/dimkl/ordering_system#readme",
+  "dependencies": {
+    "isomorphic-fetch": "^3.0.0"
+  }
+}

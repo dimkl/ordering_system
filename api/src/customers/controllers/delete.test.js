@@ -2,13 +2,13 @@
  * @integration-test true
  * @data-factory true
  */
-const Customer = require("../models/customer");
 const uuid = require('uuid');
 
 describe("DELETE /customers/:customer_id", () => {
-  beforeAll(() => require('../../shared/setupModels')());
-  beforeEach(() => Customer.knex().raw('truncate customers, orders cascade;'));
-  afterAll(() => Customer.knex().destroy());
+  let knex;
+  beforeAll(() => knex = require('../../shared/setupModels')());
+  beforeEach(() => knex.raw('truncate customers, orders cascade;'));
+  afterAll(() => knex.destroy());
 
   it("deletes customer and returns 204", async () => {
     const customer = await DataFactory.createCustomer();

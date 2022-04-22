@@ -2,12 +2,11 @@
  * @integration-test true
  * @data-factory true
  */
-const Slot = require("../../models/slot");
-
 describe("PATCH /slots/:slot_id", () => {
-  beforeAll(() => require('../../../shared/setupModels')());
-  beforeEach(() => Slot.knex().raw('truncate users, time_slots, slots, sections, shops cascade;'));
-  afterAll(() => Slot.knex().destroy());
+  let knex;
+  beforeAll(() => knex = require('../../../shared/setupModels')());
+  beforeEach(() => knex.raw('truncate users, time_slots, slots, sections, shops cascade;'));
+  afterAll(() => knex.destroy());
 
   it("updates and returns updated slot", async () => {
     const slot = await DataFactory.createSlot();

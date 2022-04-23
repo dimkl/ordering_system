@@ -82,6 +82,9 @@ class DataFactory {
       manager_id: user.id,
       name: 'Shop',
       uuid: uuid.v4(),
+      opening_time: '15:00',
+      closing_time: '23:00',
+      opening_days: [0, 1, 2, 3, 4, 5, 6],
       ...options
     });
 
@@ -124,6 +127,7 @@ class DataFactory {
       sku: 'table-1',
       uuid: uuid.v4(),
       active: true,
+      capacity: 1,
       ...options
     });
 

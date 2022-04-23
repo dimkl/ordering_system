@@ -30,7 +30,7 @@ describe("Customer purchase flow", () => {
 
     // 2. reserve time_slot
     response = await request.post(`/time_slots`)
-      .send({ customer_id: customerId, slot_id: slot.uuid, started_at: (new Date()).toISOString() })
+      .send({ customer_id: customerId, slot_id: slot.uuid, started_at: '2022-04-23T22:00:00.000Z' })
       .set("Accept", "application/json");
     expect(response.status).toBe(200);
     const timeSlotId = response.body.uuid;

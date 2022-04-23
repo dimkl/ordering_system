@@ -33,8 +33,8 @@ class TimeSlotCreate {
 
     return TimeSlot.query().modify('publicInsertColumns').insert({
       ...snakeCaseKeys(data),
-      customer_id: customerId,
-      slot_id: slotId
+      customer_id: customer.id,
+      slot_id: slot.id
     });
   }
 

@@ -1,0 +1,40 @@
+{
+  "$id": "/schemas/holiday",
+  "$async": true,
+  "title": "Holiday",
+  "description": "Holiday schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "readOnly": true,
+      "type": "number"
+    },
+    "created_at": {
+      "readOnly": true,
+      "type": "string"
+    },
+    "updated_at": {
+      "readOnly": true,
+      "type": "string"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "shop_id": {
+      "type": "integer",
+      "exclusiveMinimum": 0
+    }
+  },
+  "required": [
+    "name",
+    "date",
+    "shop_id"
+  ],
+  "additionalProperties": false
+}

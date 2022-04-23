@@ -1,7 +1,7 @@
 const ajv = require('../../../shared/ajv');
 
-const schema = require('../../schemas/timeSlot.create.json');
-const TimeSlotCreate = require('../../services/timeSlotCreate');
+const schema = require('../../schemas/timeSlot.reserve.json');
+const TimeSlotReserve = require('../../services/timeSlotReserve');
 
 const { cameCaseKeys } = require('../../../shared/transformKeys');
 
@@ -14,7 +14,7 @@ async function handler(ctx, next) {
 
   const data = await validate(requestBody);
 
-  ctx.body = await TimeSlotCreate.process(requestBody.customer_id, requestBody.slot_id, cameCaseKeys(data));
+  ctx.body = await TimeSlotReserve.process(requestBody.customer_id, requestBody.slot_id, cameCaseKeys(data));
 }
 
 module.exports = { handler, schema };

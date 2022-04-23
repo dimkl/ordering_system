@@ -6,9 +6,9 @@ const loadTimeSlot = require('./helpers/loadTimeSlot');
 const loadSlot = require('./helpers/loadSlot');
 
 const TimeSlotListController = require('./controllers/time_slots/list');
-const TimeSlotCreateController = require('./controllers/time_slots/create');
+const TimeSloReserveController = require('./controllers/time_slots/reserve');
 const TimeSlotUpdateController = require('./controllers/time_slots/update');
-const TimeSlotDeleteController = require('./controllers/time_slots/delete');
+const TimeSlotReleaseController = require('./controllers/time_slots/release');
 
 const SlotListController = require('./controllers/slots/list');
 const SlotCreateController = require('./controllers/slots/create');
@@ -23,9 +23,9 @@ router.param('time_slot_id', loadTimeSlot)
 
 setupDiscovery(router, [
   TimeSlotListController.schema,
-  TimeSlotCreateController.schema,
+  TimeSloReserveController.schema,
   TimeSlotUpdateController.schema,
-  TimeSlotDeleteController.schema,
+  TimeSlotReleaseController.schema,
   SlotListController.schema,
   SlotCreateController.schema,
   SlotUpdateController.schema,
@@ -34,9 +34,9 @@ setupDiscovery(router, [
 
 router.get('/time_slots', TimeSlotListController.handler);
 router.get('/time_slots/:time_slot_id', TimeSlotListController.handler);
-router.post('/time_slots', TimeSlotCreateController.handler);
+router.post('/time_slots/reserve', TimeSloReserveController.handler);
 router.patch('/time_slots/:time_slot_id', TimeSlotUpdateController.handler);
-router.delete('/time_slots/:time_slot_id', TimeSlotDeleteController.handler);
+router.delete('/time_slots/release/:time_slot_id', TimeSlotReleaseController.handler);
 
 router.get('/slots', SlotListController.handler);
 router.get('/slots/:slot_id', SlotListController.handler);

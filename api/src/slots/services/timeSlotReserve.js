@@ -6,7 +6,7 @@ const Customer = require('../../customers/models/customer');
 const { BusinessError } = require('../../shared/errors');
 const { snakeCaseKeys } = require('../../shared/transformKeys');
 
-class TimeSlotCreate {
+class TimeSlotReserve {
   static async process(customerId, slotId, data = {}) {
     const customer = await Customer.findByIdOrUid(customerId);
     if (!customer) {
@@ -53,4 +53,4 @@ class TimeSlotCreate {
   }
 }
 
-module.exports = TimeSlotCreate;
+module.exports = TimeSlotReserve;

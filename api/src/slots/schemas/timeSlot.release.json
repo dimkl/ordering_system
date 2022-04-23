@@ -1,0 +1,12 @@
+{
+  "$id": "/schemas/timeSlot.release",
+  "$async": true,
+  "http_method": "DELETE",
+  "http_path": "/time_slots/release/:id",
+  "title": "TimeSlot",
+  "description": "TimeSlot release schema",
+  "type": "object",
+  "properties": {},
+  "required": [],
+  "additionalProperties": false
+}

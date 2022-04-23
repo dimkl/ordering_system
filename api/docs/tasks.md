@@ -36,6 +36,8 @@
 
 ## Flow
 
-- [] available time_slots
-- [] available slots
-- [] available products
+- [] available time_slots (filters: capacity, shop_id, section_id, *startDate, *endDate)
+- [] available slots (filters: capacity, shop_id, section_id, *startDate, *endDate)
+- [] products#available
+- [] populate holidays and use them in shop#isOpen()
+- [] use productAvailability in products#available

@@ -33,6 +33,10 @@
     },
     "active": {
       "type": "boolean"
+    },
+    "capacity": {
+      "type": "integer",
+      "exclusiveMinimum": 0
     }
   },
   "additionalProperties": false

@@ -39,6 +39,10 @@
     "active": {
       "type": "boolean",
       "default": false
+    },
+    "capacity": {
+      "type": "integer",
+      "exclusiveMinimum": 0
     }
   },
   "required": [

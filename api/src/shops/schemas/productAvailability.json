@@ -1,0 +1,40 @@
+{
+  "$id": "/schemas/productAvailability",
+  "$async": true,
+  "title": "ProductAvailability",
+  "description": "ProductAvailability schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "exclusiveMinimum": 0
+    },
+    "created_at": {
+      "readOnly": true,
+      "type": "string"
+    },
+    "updated_at": {
+      "readOnly": true,
+      "type": "string"
+    },
+    "quantity": {
+      "type": "integer",
+      "inclusiveMinimum": 0,
+      "default": 0
+    },
+    "product_id": {
+      "type": "integer",
+      "exclusiveMinimum": 0
+    },
+    "shop_id": {
+      "type": "integer",
+      "exclusiveMinimum": 0
+    }
+  },
+  "required": [
+    "product_id",
+    "shop_id"
+  ],
+  "additionalProperties": false
+}

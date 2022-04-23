@@ -9,19 +9,6 @@
       "readOnly": true,
       "type": "number"
     },
-    "name": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 100
-    },
-    "lat": {
-      "type": "number",
-      "format": "float"
-    },
-    "lng": {
-      "type": "number",
-      "format": "float"
-    },
     "created_at": {
       "readOnly": true,
       "type": "string"
@@ -36,6 +23,33 @@
       "minLength": 36,
       "maxLength": 36,
       "format": "uuid"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "lat": {
+      "type": "number",
+      "format": "float"
+    },
+    "lng": {
+      "type": "number",
+      "format": "float"
+    },
+    "opening_time": {
+      "type": "string",
+      "format": "time"
+    },
+    "closing_time": {
+      "type": "string",
+      "format": "time"
+    },
+    "opening_days": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
     },
     "manager_id": {
       "type": "integer",

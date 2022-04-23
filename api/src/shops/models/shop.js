@@ -10,6 +10,10 @@ class Shop extends BaseModel {
     return schema;
   }
 
+  static get jsonAttributes() {
+    return ['opening_days'];
+  }
+
   static get public_columns() {
     return Object.keys(schema.properties);
   }

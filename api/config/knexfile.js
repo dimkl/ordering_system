@@ -11,7 +11,8 @@ const base = {
     directory: __dirname + '/../db/seeds'
   },
   searchPath: ['public'],
-  asyncStackTraces: true
+  asyncStackTraces: true,
+  useNullAsDefault: true
 };
 
 /**

@@ -21,6 +21,9 @@ class Slot extends BaseModel {
           .select('user.uuid as user_id')
           .joinRelated('section')
           .select('section.uuid as section_id');
+      },
+      active(query) {
+        query.where({ active: true });
       }
     }
   }
@@ -42,7 +45,7 @@ class Slot extends BaseModel {
           from: 'slots.section_id',
           to: 'sections.id'
         }
-      },
+      }
     }
   }
 }

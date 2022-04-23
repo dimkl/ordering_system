@@ -13,6 +13,19 @@ class Section extends BaseModel {
   static get public_columns() {
     return Object.keys(schema.properties);
   }
+
+  static get relationMappings() {
+    return {
+      shop: {
+        relation: BaseModel.BelongsToOneRelation,
+        modelClass: __dirname + '/shop',
+        join: {
+          from: 'sections.shop_id',
+          to: 'shops.id'
+        }
+      }
+    }
+  }
 }
 
 module.exports = Section;

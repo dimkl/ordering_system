@@ -20,6 +20,7 @@ jobs:
         image: postgres
         env:
           POSTGRES_PASSWORD: 123456
+          POSTGRES_DB: ordering_system_test
         options: >-
           --health-cmd pg_isready
           --health-interval 10s

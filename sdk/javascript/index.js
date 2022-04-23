@@ -24,17 +24,6 @@ async function request(endpoint, jwt, body, options = {}) {
   });
 }
 
-function createApi(schemas) {
-  return schemas.reduce((api, schema) => {
-    let apiMethod = schema["$id"].replace('/schemas/', '');
-    // convert method to camel case
-    apiMethod = apiMethod.replace(/(\.(\w))/, (_1, _2, a) => a.toUpperCase());
-    api[apiMethod] = { path: schema["http_path"], method: schema["http_method"] };
-
-    return api;
-  }, {});
-}
-
 class SDK {
   constructor(api, apiUrl, jwt) {
     this.apiUrl = apiUrl;
@@ -53,7 +42,20 @@ class SDK {
   }
 }
 
-module.exports = async ({ apiUrl, path = '/discovery', jwt }) => {
+function createApi(schemas) {
+  return schemas.reduce((api, schema) => {
+    let apiMethod = schema["$id"].replace('/schemas/', '');
+    // convert method to camel case
+    apiMethod = apiMethod.replace(/(\.(\w))/, (_1, _2, a) => a.toUpperCase());
+    api[apiMethod] = { path: schema["http_path"], method: schema["http_method"] };
+
+    return api;
+  }, {});
+}
+
+async function SDKFactory({ apiUrl, path = '/discovery', jwt }) {
   const schemas = await request(new URL(path, apiUrl).href);
   return new SDK(createApi(schemas), apiUrl, jwt);
-};
+}
+
+module.exports = SDKFactory;

@@ -18,6 +18,35 @@ class Shop extends BaseModel {
     return Object.keys(schema.properties);
   }
 
+  static get modifiers() {
+    return {
+      ...super.modifiers,
+      availableProducts(query) {
+        query
+          .join('product_availability', 'product_availability.shop_id', '=', 'shops.id')
+          .withGraphJoined('products')
+          .where('product_availability.quantity', '>', 0);
+      }
+    }
+  }
+
+  static get relationMappings() {
+    return {
+      products: {
+        relation: BaseModel.HasManyRelation,
+        modelClass: __dirname + '/../../products/models/product',
+        join: {
+          from: 'shops.id',
+          to: 'products.id',
+          though: {
+            from: 'product_availability.shop_id',
+            to: 'product_availability.product_id'
+          }
+        }
+      }
+    }
+  }
+
   openingDate(date) {
     if (!this.opening_time || !this.opening_days) return;
     if (!this.opening_days.includes(date.getUTCDay())) return;

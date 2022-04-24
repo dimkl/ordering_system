@@ -20,4 +20,4 @@ async function handler(ctx, next) {
   ctx.body = order;
 }
 
-module.exports = { handler, schema };
+module.exports = handler;

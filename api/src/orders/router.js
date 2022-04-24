@@ -1,7 +1,5 @@
 const Router = require('koa-router');
 
-const setupDiscovery = require('../shared/setupDiscovery');
-
 const loadOrderItem = require('./helpers/loadOrderItem');
 const loadOrder = require('./helpers/loadOrder');
 
@@ -21,28 +19,16 @@ const router = new Router();
 router.param('order_id', loadOrder)
       .param('order_item_id', loadOrderItem);
 
-setupDiscovery(router, [
-  ListController.schema,
-  CreateController.schema,
-  UpdateController.schema,
-  DeleteController.schema,
-  TransitionController.schema,
-  AddOrderItemController.schema,
-  RemoveOrderItemController.schema,
-  UpdateOrderItemController.schema,
-  TransitionOrderItemController.schema
-]);
+router.get('/orders', ListController);
+router.get('/orders/:order_id', ListController);
+router.post('/orders', CreateController);
+router.patch('/orders/:order_id', UpdateController);
+router.delete('/orders/:order_id', DeleteController);
+router.post('/orders/:order_id/:action', TransitionController);
 
-router.get('/orders', ListController.handler);
-router.get('/orders/:order_id', ListController.handler);
-router.post('/orders', CreateController.handler);
-router.patch('/orders/:order_id', UpdateController.handler);
-router.delete('/orders/:order_id', DeleteController.handler);
-router.post('/orders/:order_id/:action', TransitionController.handler);
-
-router.post('/order_items', AddOrderItemController.handler);
-router.post('/order_items/:order_item_id/:action', TransitionOrderItemController.handler);
-router.delete('/order_items/:order_item_id', RemoveOrderItemController.handler);
-router.patch('/order_items/:order_item_id', UpdateOrderItemController.handler);
+router.post('/order_items', AddOrderItemController);
+router.post('/order_items/:order_item_id/:action', TransitionOrderItemController);
+router.delete('/order_items/:order_item_id', RemoveOrderItemController);
+router.patch('/order_items/:order_item_id', UpdateOrderItemController);
 
 module.exports = router;

@@ -10,4 +10,4 @@ const handler = async (ctx, next) => {
   }
 };
 
-module.exports = { handler, schema };
+module.exports = handler;

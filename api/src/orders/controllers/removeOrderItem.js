@@ -12,4 +12,4 @@ const handler = async (ctx, next) => {
   }
 };
 
-module.exports = { handler };
+module.exports = handler ;

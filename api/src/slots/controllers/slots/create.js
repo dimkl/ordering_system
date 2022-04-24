@@ -23,4 +23,4 @@ async function handler(ctx, next) {
   });
 }
 
-module.exports = { handler, schema };
+module.exports = handler;

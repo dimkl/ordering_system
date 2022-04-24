@@ -20,4 +20,4 @@ async function handler(ctx, next) {
   ctx.body = await Order.query().modify('publicColumns').findById(order.id);
 }
 
-module.exports = { handler, schema };
+module.exports = handler;

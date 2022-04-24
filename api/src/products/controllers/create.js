@@ -14,4 +14,4 @@ async function handler(ctx, next) {
   ctx.body = await Product.query().modify('publicInsertColumns').insert(data);
 };
 
-module.exports = { handler, schema };
+module.exports = handler;

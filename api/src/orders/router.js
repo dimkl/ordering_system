@@ -1,5 +1,7 @@
 const Router = require('koa-router');
 
+const verifyToken = require('../shared/middlewares/verifyToken');
+
 const loadOrderItem = require('./helpers/loadOrderItem');
 const loadOrder = require('./helpers/loadOrder');
 
@@ -15,9 +17,9 @@ const TransitionOrderItemController = require('./controllers/transitionOrderItem
 
 const router = new Router();
 
-// setup params
 router.param('order_id', loadOrder)
       .param('order_item_id', loadOrderItem);
+router.use(verifyToken());
 
 router.get('/orders', ListController);
 router.get('/orders/:order_id', ListController);

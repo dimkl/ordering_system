@@ -8,13 +8,7 @@ const handler = async (ctx, next) => {
   const startedAt = ctx.query.started_at || ctx.shop.openingDate(new Date()).toISOString();
   const defaultEndedAt = ctx.shop.closingDate(new Date(startedAt)).toISOString();
   const endedAt = ctx.query.ended_at || defaultEndedAt;
-  debugger;
-  console.log('sql: ', Slot.query()
-    .modify(['publicColumns', 'active'])
-    .modify('available', ctx.shop.id, startedAt, endedAt)
-    .toKnexQuery()
-    .toString()
-  );
+
   ctx.body = await Slot.query()
     .modify(['publicColumns', 'active'])
     .modify('available', ctx.shop.id, startedAt, endedAt);

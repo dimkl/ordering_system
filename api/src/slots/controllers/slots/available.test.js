@@ -2,16 +2,16 @@
  * @integration-test true
  * @data-factory true
  */
-describe("GET /slots", () => {
+describe("GET /slots/:shop_id/available/:slot_id?", () => {
   let knex;
   beforeAll(() => knex = require('../../../shared/setupModels')());
   beforeEach(() => knex.raw('truncate orders, order_items, customers, users, products, time_slots, slots cascade;'));
   afterAll(() => knex.destroy());
 
   it("returns all slots", async () => {
-    await DataFactory.createSlot();
+    const { section } = await DataFactory.createSlot();
 
-    const response = await request.get("/slots")
+    const response = await request.get(`/slots/${section.shop_id}/available`)
       .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
@@ -29,7 +29,7 @@ describe("GET /slots", () => {
   it("returns specified slot", async () => {
     const slot = await DataFactory.createSlot();
 
-    const response = await request.get("/slots/" + slot.id)
+    const response = await request.get(`/slots/${slot.section.shop_id}/available/${slot.id}`)
       .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
@@ -46,7 +46,7 @@ describe("GET /slots", () => {
   it("returns specified slot using uuid", async () => {
     const slot = await DataFactory.createSlot();
 
-    const response = await request.get("/slots/" + slot.uuid)
+    const response = await request.get(`/slots/${slot.section.shop_id}/available/${slot.id}`)
       .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
@@ -61,7 +61,9 @@ describe("GET /slots", () => {
   });
 
   it("returns empty list of slots when there are no slots", async () => {
-    const response = await request.get("/slots")
+    const slot = await DataFactory.createSlot({ active: false });
+
+    const response = await request.get(`/slots/${slot.section.shop_id}/available`)
       .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
@@ -69,7 +71,10 @@ describe("GET /slots", () => {
   });
 
   it("throws 404 when specified slot does not exist", async () => {
-    const response = await request.get("/slots/" + Math.floor((Math.random() * 100)))
+    const slot = await DataFactory.createSlot();
+
+    const randomSlotId = Math.floor((Math.random() * 100));
+    const response = await request.get(`/slots/${slot.section.shop_id}/available/${randomSlotId}`)
       .set("Accept", "application/json");
 
     expect(response.status).toBe(404);

@@ -24,7 +24,16 @@ class Slot extends BaseModel {
       },
       active(query) {
         query.where({ active: true });
-      }
+      },
+      available(query, shopId, startDate, endDate) {
+        query
+          // .leftJoinRelated('time_slots(reservedTimeSlots)')
+          // .modifiers({
+          //   reservedTimeSlots: query => query.modify('reserved', startDate, endDate)
+          // })
+          .joinRelated('section.shop')
+          .where('section.shop_id', '=', shopId);
+      },
     }
   }
 
@@ -44,6 +53,14 @@ class Slot extends BaseModel {
         join: {
           from: 'slots.section_id',
           to: 'sections.id'
+        }
+      },
+      time_slots: {
+        relation: BaseModel.HasManyRelation,
+        modelClass: __dirname + '/timeSlot',
+        join: {
+          from: 'slots.id',
+          to: 'time_slots.slot_id'
         }
       }
     }

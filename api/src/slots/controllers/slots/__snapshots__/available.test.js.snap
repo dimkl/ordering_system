@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`GET /slots returns all slots 1`] = `
+exports[`GET /slots/:shop_id/available/:slot_id? returns all slots 1`] = `
 Object {
   "active": true,
   "capacity": 1,
@@ -14,7 +14,7 @@ Object {
 }
 `;
 
-exports[`GET /slots returns specified slot 1`] = `
+exports[`GET /slots/:shop_id/available/:slot_id? returns specified slot 1`] = `
 Object {
   "active": true,
   "capacity": 1,
@@ -28,7 +28,7 @@ Object {
 }
 `;
 
-exports[`GET /slots returns specified slot using uuid 1`] = `
+exports[`GET /slots/:shop_id/available/:slot_id? returns specified slot using uuid 1`] = `
 Object {
   "active": true,
   "capacity": 1,

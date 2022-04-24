@@ -1,6 +1,7 @@
 const ajv = require('../../shared/ajv');
 
 const schema = require('../schemas/order.create.json');
+
 const Order = require('../models/order');
 const Customer = require('../../customers/models/customer');
 const TimeSlot = require('../../slots/models/timeSlot');

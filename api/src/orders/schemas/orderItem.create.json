@@ -8,16 +8,7 @@
   "type": "object",
   "properties": {
     "order_id": {
-      "anyOf": [
-        {
-          "type": "integer",
-          "exclusiveMinimum": 0
-        },
-        {
-          "type": "string",
-          "format": "uuid"
-        }
-      ]
+      "$ref": "defs#/definitions/id_or_uuid"
     },
     "quantity": {
       "type": "integer",
@@ -25,16 +16,7 @@
       "default": 1
     },
     "product_id": {
-      "anyOf": [
-        {
-          "type": "integer",
-          "exclusiveMinimum": 0
-        },
-        {
-          "type": "string",
-          "format": "uuid"
-        }
-      ]
+      "$ref": "defs#/definitions/id_or_uuid"
     }
   },
   "required": [

@@ -24,4 +24,4 @@ async function handler(ctx, next) {
   ctx.body = await ctx.slot.$query().modify('publicColumns');
 }
 
-module.exports = { handler, schema };
+module.exports = handler;

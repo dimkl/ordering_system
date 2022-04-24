@@ -14,4 +14,4 @@ async function handler(ctx, next) {
   ctx.body = await Customer.query().modify('publicColumns').findById(customer.id);
 }
 
-module.exports = { handler, schema };
+module.exports = handler;

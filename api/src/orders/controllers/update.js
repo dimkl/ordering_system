@@ -23,4 +23,4 @@ async function handler(ctx, next) {
   ctx.body = await ctx.order.$query().modify('publicColumns');;
 }
 
-module.exports = { handler, schema };
+module.exports = handler;

@@ -8,4 +8,4 @@ const handler = async (ctx, next) => {
   ctx.body = await Product.query().modify('publicColumns');
 };
 
-module.exports = { handler };
+module.exports = handler ;

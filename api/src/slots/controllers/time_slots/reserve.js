@@ -17,4 +17,4 @@ async function handler(ctx, next) {
   ctx.body = await TimeSlotReserve.process(requestBody.customer_id, requestBody.slot_id, cameCaseKeys(data));
 }
 
-module.exports = { handler, schema };
+module.exports = handler;

@@ -26,4 +26,4 @@ async function handler(ctx, next) {
   ctx.body = await Order.findWithOrderItemsAndProducts(orderItem.order_id);
 }
 
-module.exports = { handler, schema };
+module.exports = handler;

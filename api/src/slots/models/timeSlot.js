@@ -23,6 +23,13 @@ class TimeSlot extends BaseModel {
           .select('customer.uuid as customer_id')
           .joinRelated('slot')
           .select('slot.uuid as slot_id');
+      },
+      reserved(query, startedAt, endedAt) {
+        query
+          .where('started_at', '<=', endedAt)
+          .where(function () {
+            this.where('ended_at', '>=', startedAt).orWhere('ended_at', 'is', null);
+          });
       }
     }
   }

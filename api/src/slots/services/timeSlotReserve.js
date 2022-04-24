@@ -44,10 +44,8 @@ class TimeSlotReserve {
 
     const timeSlotsCount = await TimeSlot.query()
       .where({ slot_id: slot.id })
-      .where('started_at', '<=', endedAt || defaultEndedAt)
-      .where(function () {
-        this.where('ended_at', '>=', startedAt).orWhere('ended_at', 'is', null);
-      }).resultSize();
+      .modify('reserved', startedAt, endedAt || defaultEndedAt)
+      .resultSize();
 
     return timeSlotsCount > 0;
   }

@@ -53,6 +53,11 @@ async function request(endpoint, jwt, body, options = {}) {
     return jsonResponse;
   });
 }
+
+function methodWithoutBody(method) {
+  return ['GET', 'DELETE'].includes(method.toUpperCase());
+}
+
 class SDK {
   constructor(schemas, apiUrl, jwt) {
     this.apiUrl = apiUrl;
@@ -68,12 +73,17 @@ class SDK {
     });
   }
 
-  async handler(schemaId, body, params = {}) {
+  async handler(schemaId, bodyOrParams, params = {}) {
     const schema = this.ajv.getSchema(schemaId).schema;
     const { http_path: path, http_method: method } = schema;
 
     const validate = this.ajv.compile(schema);
-    const data = await validate(body);
+    let data = await validate(bodyOrParams);
+
+    if (methodWithoutBody(method)) {
+      params = bodyOrParams;
+      data = null;
+    }
 
     const requestPath = path.replace(/:([\w]+)/, (_, a) => params[a]);
     const requestUrl = (new URL(requestPath, this.apiUrl)).href;

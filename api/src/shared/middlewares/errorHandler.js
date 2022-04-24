@@ -1,6 +1,6 @@
 const { ValidationError } = require("ajv");
 const { UniqueViolationError } = require('objection-db-errors');
-const { BusinessError } = require('../shared/errors');
+const { BusinessError } = require('../errors');
 
 function errorHandler() {
   return async function errorHandlerMiddleware(ctx, next) {

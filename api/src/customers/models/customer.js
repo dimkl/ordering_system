@@ -16,6 +16,15 @@ class Customer extends Password(BaseModel) {
   static get public_columns() {
     return Object.keys(schema.properties).filter(k => !SENSITIVE_COLUMNS.includes(k));
   }
+
+  static get modifiers() {
+    return {
+      ...super.modifiers,
+      tokenColumns(query) {
+        query.select('first_name', 'last_name', 'email', 'created_at', 'updated_at');
+      }
+    }
+  }
 }
 
 module.exports = Customer;

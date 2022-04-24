@@ -8,28 +8,10 @@
   "type": "object",
   "properties": {
     "section_id": {
-      "anyOf": [
-        {
-          "type": "integer",
-          "exclusiveMinimum": 0
-        },
-        {
-          "type": "string",
-          "format": "uuid"
-        }
-      ]
+      "$ref": "defs#/definitions/id_or_uuid"
     },
     "user_id": {
-      "anyOf": [
-        {
-          "type": "integer",
-          "exclusiveMinimum": 0
-        },
-        {
-          "type": "string",
-          "format": "uuid"
-        }
-      ]
+      "$ref": "defs#/definitions/id_or_uuid"
     },
     "sku": {
       "type": "string",

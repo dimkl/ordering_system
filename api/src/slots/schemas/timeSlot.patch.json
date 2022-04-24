@@ -16,28 +16,10 @@
       "format": "date-time"
     },
     "customer_id": {
-      "anyOf": [
-        {
-          "type": "integer",
-          "exclusiveMinimum": 0
-        },
-        {
-          "type": "string",
-          "format": "uuid"
-        }
-      ]
+      "$ref": "defs#/definitions/id_or_uuid"
     },
     "slot_id": {
-      "anyOf": [
-        {
-          "type": "integer",
-          "exclusiveMinimum": 0
-        },
-        {
-          "type": "string",
-          "format": "uuid"
-        }
-      ]
+      "$ref": "defs#/definitions/id_or_uuid"
     }
   },
   "additionalProperties": false

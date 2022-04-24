@@ -8,28 +8,10 @@
   "type": "object",
   "properties": {
     "customer_id": {
-      "anyOf": [
-        {
-          "type": "integer",
-          "exclusiveMinimum": 0
-        },
-        {
-          "type": "string",
-          "format": "uuid"
-        }
-      ]
+      "$ref": "defs#/definitions/id_or_uuid"
     },
     "time_slot_id": {
-      "anyOf": [
-        {
-          "type": "integer",
-          "exclusiveMinimum": 0
-        },
-        {
-          "type": "string",
-          "format": "uuid"
-        }
-      ]
+      "$ref": "defs#/definitions/id_or_uuid"
     }
   },
   "additionalProperties": false

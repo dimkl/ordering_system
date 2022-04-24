@@ -33,15 +33,15 @@ class Shop extends BaseModel {
   static get relationMappings() {
     return {
       products: {
-        relation: BaseModel.HasManyRelation,
+        relation: BaseModel.ManyToManyRelation,
         modelClass: __dirname + '/../../products/models/product',
         join: {
           from: 'shops.id',
-          to: 'products.id',
-          though: {
+          through: {
             from: 'product_availability.shop_id',
             to: 'product_availability.product_id'
-          }
+          },
+          to: 'products.id'
         }
       }
     }

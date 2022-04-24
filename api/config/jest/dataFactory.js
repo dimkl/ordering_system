@@ -153,6 +153,37 @@ class DataFactory {
 
     return { ...time_slots[0], slot, customer };
   }
+
+  static async createHoliday(options = {}, shop = {}, user = {}) {
+    if (!shop.id) {
+      shop = await this.createShop(shop, user);
+    }
+
+    const newYear = `${new Date().getUTCFullYear()}/12/31`;
+    const holidays = await knex('holidays').insert({
+      shop_id: shop.id, date: newYear, name: 'New Year',
+      ...options
+    });
+
+    return { ...holidays[0], shop };
+  }
+
+  static async createProductAvailability(options = {}, product = {}, shop = {}, user = {}) {
+    if (!shop.id) {
+      shop = await this.createShop(shop, user);
+    }
+
+    if (!product.id) {
+      product = await this.createProduct(product, user);
+    }
+
+    const productAvailability = await knex('product_availability').insert({
+      shop_id: shop.id, product_id: product.id, quantity: 2,
+      ...options
+    });
+
+    return { ...productAvailability[0], shop, product };
+  }
 }
 
 module.exports = DataFactory;

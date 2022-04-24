@@ -19,7 +19,7 @@ class ProductAvailability extends BaseModel {
     return {
       shop: {
         relation: BaseModel.BelongsToOneRelation,
-        modelClass: __dirname + '/../../shops/models/shop',
+        modelClass: __dirname + '/shop',
         join: {
           from: 'product_availability.shop_id',
           to: 'shops.id'

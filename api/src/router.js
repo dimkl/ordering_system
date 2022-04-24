@@ -8,6 +8,7 @@ router.use(require('./customers/router').routes());
 router.use(require('./orders/router').routes());
 router.use(require('./products/router').routes());
 router.use(require('./slots/router').routes());
+router.use(require('./shops/router').routes());
 
 const JWT_PUBLIC_KEY = process.env.JWT_PUBLIC_KEY || fs.readFileSync(__dirname + '/../config/public.pem');
 router.get('/discovery', (ctx) => {

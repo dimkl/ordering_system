@@ -54,7 +54,8 @@ function createApi(schemas) {
 }
 
 async function SDKFactory({ apiUrl, path = '/discovery', jwt }) {
-  const schemas = await request(new URL(path, apiUrl).href);
+  const { schemas } = await request(new URL(path, apiUrl).href);
+
   return new SDK(createApi(schemas), apiUrl, jwt);
 }
 

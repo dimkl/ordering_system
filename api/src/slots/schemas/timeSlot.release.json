@@ -6,7 +6,14 @@
   "title": "TimeSlot",
   "description": "TimeSlot release schema",
   "type": "object",
-  "properties": {},
-  "required": [],
+  "properties": {
+    "id": {
+      "readOnly": true,
+      "type": "number"
+    }
+  },
+  "required": [
+    "id"
+  ],
   "additionalProperties": false
 }

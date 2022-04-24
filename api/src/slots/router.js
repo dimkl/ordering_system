@@ -1,5 +1,7 @@
 const Router = require('koa-router');
 
+const verifyToken = require('../shared/middlewares/verifyToken');
+
 const loadTimeSlot = require('./helpers/loadTimeSlot');
 const loadSlot = require('./helpers/loadSlot');
 const loadShop = require('./helpers/loadShop');
@@ -20,6 +22,7 @@ const router = new Router();
 router.param('time_slot_id', loadTimeSlot)
       .param('slot_id', loadSlot)
       .param('shop_id', loadShop);
+router.use(verifyToken());
 
 router.get('/time_slots', TimeSlotListController);
 router.get('/time_slots/:time_slot_id', TimeSlotListController);

@@ -1,5 +1,5 @@
-class BusinessError extends Error {
+class BusinessError extends Error { };
 
-};
+class AuthorizationError extends Error { };
 
-module.exports = { BusinessError }
+module.exports = { BusinessError, AuthorizationError };

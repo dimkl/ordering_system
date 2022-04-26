@@ -1,11 +1,10 @@
-const fs = require('fs');
 const jsonwebtoken = require('jsonwebtoken');
 
 const Customer = require('../models/customer');
 
 const JWT_ALGORITHM = process.env.JWT_ALGORITHM || 'RS256';
 const JWT_EXPIRATION = process.env.JWT_EXPIRATION || '1h';
-const JWT_PRIVATE_KEY = process.env.JWT_PRIVATE_KEY || fs.readFileSync(__dirname + '/../../../config/private.key');
+const JWT_PRIVATE_KEY = process.env.JWT_PRIVATE_KEY;
 
 const ROLE = 'customer';
 

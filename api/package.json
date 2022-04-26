@@ -36,6 +36,7 @@
     "ajv-formats": "^2.1.1",
     "bcrypt": "^5.0.1",
     "javascript-state-machine": "^3.1.0",
+    "jsonwebtoken": "^8.5.1",
     "knex": "^1.0.5",
     "koa": "^2.13.4",
     "koa-bodyparser": "^4.3.0",

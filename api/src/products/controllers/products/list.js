@@ -1,4 +1,4 @@
-const Product = require('../models/product');
+const Product = require('../../models/product');
 
 const handler = async (ctx, next) => {
   if (ctx.product){

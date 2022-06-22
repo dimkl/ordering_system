@@ -1,0 +1,50 @@
+{
+  "$id": "/schemas/ingredient.create",
+  "$async": true,
+  "http_method": "POST",
+  "http_path": "/ingredients",
+  "title": "Ingredient",
+  "description": "Ingredient schema",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "allergen": {
+      "type": "boolean",
+      "default": false
+    },
+    "suitable_for_diet": {
+      "$ref": "#/definitions/suitable_for_diet"
+    }
+  },
+  "required": [
+    "title"
+  ],
+  "definitions": {
+    "suitable_for_diet": {
+      "enum": [
+        "all",
+        "diabetic",
+        "gluten_free",
+        "halal",
+        "hindu",
+        "kosher",
+        "low_calorie",
+        "low_fat",
+        "low_lactose",
+        "low_salt",
+        "vegan",
+        "vegetarian"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

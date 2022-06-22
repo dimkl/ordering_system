@@ -1,7 +1,7 @@
-const ajv = require('../../shared/ajv');
+const ajv = require('../../../shared/ajv');
 
-const schema = require('../schemas/product.create.json');
-const Product = require('../models/product');
+const schema = require('../../schemas/product.create.json');
+const Product = require('../../models/product');
 
 ajv.addSchema(schema);
 ajv.validateSchema(schema);

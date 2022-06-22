@@ -8,8 +8,13 @@ const JWT_PRIVATE_KEY = process.env.JWT_PRIVATE_KEY;
 
 const ROLE = 'customer';
 
-async function createJwt(customerId, customerUuid) {
-  const customer = await Customer.query().modify('tokenColumns').findById(customerId);;
+async function createJwt(customerUuid) {
+  const customer = await Customer.query()
+    .modify('tokenColumns')
+    .throwIfNotFound()
+    .where({ uuid: customerUuid })
+    .first();
+
   const payload = { role: ROLE, sub: customerUuid, ...customer };
 
   const access_token = await jsonwebtoken.sign(payload, JWT_PRIVATE_KEY, {

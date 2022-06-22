@@ -16,15 +16,15 @@ const router = new Router();
 
 // setup params
 router.param('product_id', loadProduct)
-      .param('ingredient_id', loadIngredient);
+  .param('ingredient_id', loadIngredient);
 router.use(verifyToken());
 
-router.get('/products', authorize('urn:products:r'), ProductListController);
-router.get('/products/:product_id', authorize('urn:products:r'), ProductListController);
-router.post('/products', authorize('urn:products:c'), ProductCreateController);
+router.get('/products', authorize(['urn:products:r']), ProductListController);
+router.get('/products/:product_id', authorize(['urn:products:r']), ProductListController);
+router.post('/products', authorize(['urn:products:c']), ProductCreateController);
 
-router.get('/ingredients', authorize('urn:ingredients:r'), IngredientListController);
-router.get('/ingredients/:ingredient_id', authorize('urn:ingredients:r'), IngredientListController);
-router.post('/ingredients', authorize('urn:ingredients:c'), IngredientCreateController);
+router.get('/ingredients', authorize(['urn:ingredients:r']), IngredientListController);
+router.get('/ingredients/:ingredient_id', authorize(['urn:ingredients:r']), IngredientListController);
+router.post('/ingredients', authorize(['urn:ingredients:c']), IngredientCreateController);
 
 module.exports = router;

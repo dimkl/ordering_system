@@ -12,9 +12,9 @@ async function handler(ctx, next) {
   const validate = ajv.compile(schema);
   const { repeat_password, ...data } = await validate(ctx.request.body);
 
-  const { id, uuid } = await Customer.query().modify('publicInsertColumns').insert(data);
+  const { uuid } = await Customer.query().modify('publicInsertColumns').insert(data);
 
-  ctx.body = await createJwt(id, uuid);
+  ctx.body = await createJwt(uuid);
 }
 
 module.exports = handler;

@@ -20,7 +20,7 @@ async function handler(ctx, next) {
     throw new BusinessError('Password or email is not valid. Please try again!');
   }
 
-  ctx.body = await createJwt(customer.id, customer.uuid);
+  ctx.body = await createJwt(customer.uuid);
 }
 
 module.exports = handler;

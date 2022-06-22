@@ -17,7 +17,7 @@ module.exports = {
       branches: 80,
       functions: 50,
       lines: 80,
-      statements: -40
+      statements: -50
     }
   },
   globalSetup: "<rootDir>/config/jest/setup.js",

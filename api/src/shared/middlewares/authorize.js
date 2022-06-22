@@ -2,7 +2,7 @@ const { AuthorizationError } = require('../errors');
 
 const groupByResource = (scopes) => {
   return scopes.reduce((group, scope) => {
-    const [_, resource, actions] = scope.match(/urn:(\w+):(\w+)/);
+    const [_, resource, actions] = scope.match(/urn:(\w+):(\w+|\*)/);
     group[resource] = actions;
 
     return group;

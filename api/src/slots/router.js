@@ -25,17 +25,17 @@ router.param('time_slot_id', loadTimeSlot)
       .param('shop_id', loadShop);
 router.use(verifyToken());
 
-router.get('/time_slots', authorize('urn:time_slots:r'), TimeSlotListController);
-router.get('/time_slots/:time_slot_id', authorize('urn:time_slots:r'), TimeSlotListController);
-router.post('/time_slots/reserve', authorize('urn:time_slots:c'), TimeSloReserveController);
-router.patch('/time_slots/:time_slot_id', authorize('urn:time_slots:u'), TimeSlotUpdateController);
-router.delete('/time_slots/release/:time_slot_id', authorize('urn:time_slots:d'), TimeSlotReleaseController);
+router.get('/time_slots', authorize(['urn:time_slots:r']), TimeSlotListController);
+router.get('/time_slots/:time_slot_id', authorize(['urn:time_slots:r']), TimeSlotListController);
+router.post('/time_slots/reserve', authorize(['urn:time_slots:c']), TimeSloReserveController);
+router.patch('/time_slots/:time_slot_id', authorize(['urn:time_slots:u']), TimeSlotUpdateController);
+router.delete('/time_slots/release/:time_slot_id', authorize(['urn:time_slots:d']), TimeSlotReleaseController);
 
-router.post('/slots', authorize('urn:slots:c'), SlotCreateController);
-router.patch('/slots/:slot_id', authorize('urn:slots:u'), SlotUpdateController);
-router.delete('/slots/:slot_id', authorize('urn:slots:d'), SlotDeleteController);
+router.post('/slots', authorize(['urn:slots:c']), SlotCreateController);
+router.patch('/slots/:slot_id', authorize(['urn:slots:u']), SlotUpdateController);
+router.delete('/slots/:slot_id', authorize(['urn:slots:d']), SlotDeleteController);
 
-router.get('/slots/:shop_id/available', authorize('urn:slots:a'), SlotAvailableController);
-router.get('/slots/:shop_id/available/:slot_id', authorize('urn:slots:a'), SlotAvailableController);
+router.get('/slots/:shop_id/available', authorize(['urn:slots:a']), SlotAvailableController);
+router.get('/slots/:shop_id/available/:slot_id', authorize(['urn:slots:a']), SlotAvailableController);
 
 module.exports = router;

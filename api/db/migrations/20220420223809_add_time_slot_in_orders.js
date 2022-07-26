@@ -7,6 +7,7 @@ exports.up = function (knex) {
     .alterTable('orders', function (table) {
       table.integer('time_slot_id').unsigned().notNullable();
 
+      table.foreign('time_slot_id').references('time_slots.id');
       table.unique('time_slot_id');
     });
 };

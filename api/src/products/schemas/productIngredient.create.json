@@ -1,0 +1,22 @@
+{
+  "$id": "/schemas/productIngredient.create",
+  "$async": true,
+  "http_method": "POST",
+  "http_path": "/products/ingredients",
+  "title": "ProductIngredient",
+  "description": "ProductIngredient schema",
+  "type": "object",
+  "properties": {
+    "ingredient_id": {
+      "$ref": "defs#/definitions/id_or_uuid"
+    },
+    "product_id": {
+      "$ref": "defs#/definitions/id_or_uuid"
+    }
+  },
+  "required": [
+    "ingredient_id",
+    "product_id"
+  ],
+  "additionalProperties": false
+}

@@ -16,7 +16,18 @@ class DataFactory {
     return customers[0];
   }
 
-  static async createProduct(options) {
+  static async createIngredient(options = {}) {
+    const ingredients = await knex('ingredients').returning('*').insert({
+      title: "Ingredient",
+      description: "Ingredient description",
+      uuid: uuid.v4(),
+      ...options
+    });
+
+    return ingredients[0];
+  }
+
+  static async createProduct(options = {}) {
     const products = await knex('products').returning('*').insert({
       title: "Product",
       sku: "product-code-1",

@@ -28,6 +28,25 @@ class Product extends BaseModel {
             to: 'product_ingredients.ingredient_id'
           }
         }
+      },
+      variations: {
+        relation: BaseModel.HasManyRelation,
+        modelClass: __dirname + '/product',
+        join: {
+          from: 'products.id',
+          to: 'products.variant_id',
+        }
+      }
+    }
+  }
+
+  static get modifiers() {
+    return {
+      ...super.modifiers,
+      joinVariations(query) {
+        query
+          .withGraphJoined('variations')
+          .where('products.variant_id', 'is', null);
       }
     }
   }
@@ -36,7 +55,14 @@ class Product extends BaseModel {
     return this.query()
       .modify('publicColumns')
       .withGraphFetched('ingredients(publicColumns)')
-      .findById(productId)
+      .findById(productId);
+  }
+
+  static findVariationsWithIngredients(productId) {
+    return this.query()
+      .modify(['publicColumns', 'joinVariations'])
+      .withGraphFetched('[ingredients(publicColumns), variations.ingredients(publicColumns)]')
+      .findById(productId);
   }
 }
 

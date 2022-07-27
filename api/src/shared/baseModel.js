@@ -52,18 +52,22 @@ class BaseModel extends DBErrors(Model) {
     this.uuid = uuid.v4();
   }
 
-  static findByIdOrUid(idOrUid) {
-    let whereOptions = Number(idOrUid)
-      ? { [`${this.tableName}.id`]: idOrUid }
-      : { [`${this.tableName}.uuid`]: idOrUid };
-    return this.query().where(whereOptions).first();
+  static findByIdOrUid(idsOrUids) {
+    return this.whereByIdOrUid(idsOrUids).first().throwIfNotFound();
+  }
+
+  static whereByIdOrUid(idsOrUids) {
+    const column = Number(idsOrUids) ? `${this.tableName}.id` : `${this.tableName}.uuid`
+    idsOrUids = Array.isArray(idsOrUids) ? idsOrUids : [idsOrUids];
+
+    return this.query().whereIn(column, idsOrUids);
   }
 
   static async getId(idOrUid) {
     if (!idOrUid) return idOrUid;
     if (Number(idOrUid)) return idOrUid;
 
-    const { id } = await this.query().select('id').where({ [`${this.tableName}.uuid`]: idOrUid }).first();
+    const { id } = await this.findByIdOrUid(idOrUid).select('id');
 
     return id;
   }

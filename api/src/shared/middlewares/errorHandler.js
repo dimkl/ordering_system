@@ -1,4 +1,5 @@
 const { ValidationError } = require("ajv");
+const { NotFoundError } = require('objection');
 const { UniqueViolationError } = require('objection-db-errors');
 const { BusinessError } = require('../errors');
 
@@ -15,6 +16,11 @@ function errorHandler() {
         ctx.body = { message: `${err.columns.join(',')} already exists!` };
       } else if (err instanceof BusinessError) {
         ctx.status = 422;
+        ctx.body = { message: err.message };
+      } else if (err instanceof NotFoundError) {
+        ctx.status = 404;
+      } else {
+        ctx.status = 500;
         ctx.body = { message: err.message };
       }
     }

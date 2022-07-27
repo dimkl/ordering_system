@@ -143,10 +143,9 @@ describe("POST /order_items", () => {
 
   it("throws 404 for not existing product_id", async () => {
     const order = await DataFactory.createOrder();
-    const product = await DataFactory.createProduct();
 
     const response = await request.post(`/order_items`)
-      .send({ order_id: order.uuid, product_id: product.uuid + '1' })
+      .send({ order_id: order.uuid, product_id: uuid.v4()})
       .set("Accept", "application/json");
 
     expect(response.status).toBe(404);

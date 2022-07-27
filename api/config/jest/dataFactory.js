@@ -195,6 +195,23 @@ class DataFactory {
 
     return { ...productAvailability[0], shop, product };
   }
+
+  static async createProductIngredient(options = {}, product = {}, ingredient = {}) {
+    if (!product.id) {
+      product = await this.createProduct(product);
+    }
+
+    if (!ingredient.id) {
+      ingredient = await this.createIngredient(ingredient);
+    }
+
+    const productIngredient = await knex('product_ingredients').insert({
+      ingredient_id: ingredient.id, product_id: product.id,
+      ...options
+    });
+
+    return { ...productIngredient[0], ingredient, product };
+  }
 }
 
 module.exports = DataFactory;

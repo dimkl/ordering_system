@@ -25,6 +25,10 @@ class Customer extends Password(BaseModel) {
       }
     }
   }
+
+  get scopes() {
+    return [];
+  }
 }
 
 module.exports = Customer;

@@ -17,11 +17,11 @@ const router = new Router();
 // setup params
 router.param('customer_id', loadCustomer);
 
-router.get('/customers', verifyToken(), authorize('urn:customers:r'), ListController);
-router.get('/customers/:customer_id', verifyToken(), authorize('urn:customers:r'), ListController);
-router.post('/customers', verifyToken(), authorize('urn:customers:c'), CreateController);
-router.patch('/customers/:customer_id', verifyToken(), authorize('urn:customers:u'), UpdateController);
-router.delete('/customers/:customer_id', verifyToken(), authorize('urn:customers:d'), DeleteController);
+router.get('/customers', verifyToken(), authorize(['urn:customers:r']), ListController);
+router.get('/customers/:customer_id', verifyToken(), authorize(['urn:customers:r']), ListController);
+router.post('/customers', verifyToken(), authorize(['urn:customers:c']), CreateController);
+router.patch('/customers/:customer_id', verifyToken(), authorize(['urn:customers:u']), UpdateController);
+router.delete('/customers/:customer_id', verifyToken(), authorize(['urn:customers:d']), DeleteController);
 
 // actions
 router.post('/customers/login', LoginController);

@@ -22,16 +22,16 @@ router.param('order_id', loadOrder)
       .param('order_item_id', loadOrderItem);
 router.use(verifyToken());
 
-router.get('/orders', authorize('urn:orders:r'), ListController);
-router.get('/orders/:order_id', authorize('urn:orders:r'), ListController);
-router.post('/orders', authorize('urn:orders:c'), CreateController);
-router.patch('/orders/:order_id', authorize('urn:orders:u'), UpdateController);
-router.delete('/orders/:order_id', authorize('urn:orders:d'), DeleteController);
-router.post('/orders/:order_id/:action', authorize('urn:orders:t'), TransitionController);
+router.get('/orders', authorize(['urn:orders:r']), ListController);
+router.get('/orders/:order_id', authorize(['urn:orders:r']), ListController);
+router.post('/orders', authorize(['urn:orders:c']), CreateController);
+router.patch('/orders/:order_id', authorize(['urn:orders:u']), UpdateController);
+router.delete('/orders/:order_id', authorize(['urn:orders:d']), DeleteController);
+router.post('/orders/:order_id/:action', authorize(['urn:orders:t']), TransitionController);
 
-router.post('/order_items', authorize('urn:order_items:c'), AddOrderItemController);
-router.post('/order_items/:order_item_id/:action', authorize('urn:order_items:t'), TransitionOrderItemController);
-router.delete('/order_items/:order_item_id', authorize('urn:order_items:d'), RemoveOrderItemController);
-router.patch('/order_items/:order_item_id', authorize('urn:order_items:u'), UpdateOrderItemController);
+router.post('/order_items', authorize(['urn:order_items:c']), AddOrderItemController);
+router.post('/order_items/:order_item_id/:action', authorize(['urn:order_items:t']), TransitionOrderItemController);
+router.delete('/order_items/:order_item_id', authorize(['urn:order_items:d']), RemoveOrderItemController);
+router.patch('/order_items/:order_item_id', authorize(['urn:order_items:u']), UpdateOrderItemController);
 
 module.exports = router;

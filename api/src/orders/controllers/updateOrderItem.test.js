@@ -44,8 +44,8 @@ describe("PATCH /order_items/:order_item_id", () => {
   });
 
   it("throws 404 for not existing order_item_id", async () => {
-    const response = await request.delete(`/order_items/${uuid.v4()}`)
-      .send({})
+    const response = await request.patch(`/order_items/${uuid.v4()}`)
+      .send({ quantity: 10 })
       .set("Accept", "application/json");
 
     expect(response.status).toBe(404);

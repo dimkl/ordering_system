@@ -1,8 +1,8 @@
 {
-  "$id": "/schemas/product",
+  "$id": "/schemas/ingredient",
   "$async": true,
-  "title": "Product",
-  "description": "Product schema",
+  "title": "Ingredient",
+  "description": "Ingredient schema",
   "type": "object",
   "properties": {
     "id": {
@@ -20,16 +20,6 @@
       "minLength": 1,
       "maxLength": 255
     },
-    "qr": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 255
-    },
-    "sku": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 100
-    },
     "uuid": {
       "readOnly": true,
       "type": "string",
@@ -44,14 +34,34 @@
       "readOnly": true,
       "type": "string"
     },
-    "variant_id": {
-      "type": "integer",
-      "exclusiveMinimum": 0
+    "allergen": {
+      "type": "boolean",
+      "default": false
+    },
+    "suitable_for_diet": {
+      "$ref": "#/definitions/suitable_for_diet"
     }
   },
   "required": [
-    "title",
-    "sku"
+    "title"
   ],
+  "definitions": {
+    "suitable_for_diet": {
+      "enum": [
+        "all",
+        "diabetic",
+        "gluten_free",
+        "halal",
+        "hindu",
+        "kosher",
+        "low_calorie",
+        "low_fat",
+        "low_lactose",
+        "low_salt",
+        "vegan",
+        "vegetarian"
+      ]
+    }
+  },
   "additionalProperties": false
 }

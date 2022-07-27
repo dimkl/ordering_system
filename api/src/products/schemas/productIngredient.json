@@ -1,0 +1,35 @@
+{
+  "$id": "/schemas/productIngredient",
+  "$async": true,
+  "title": "ProductIngredient",
+  "description": "ProductIngredient schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "exclusiveMinimum": 0
+    },
+    "created_at": {
+      "readOnly": true,
+      "type": "string"
+    },
+    "updated_at": {
+      "readOnly": true,
+      "type": "string"
+    },
+    "ingredient_id": {
+      "type": "integer",
+      "exclusiveMinimum": 0
+    },
+    "product_id": {
+      "type": "integer",
+      "exclusiveMinimum": 0
+    }
+  },
+  "required": [
+    "ingredient_id",
+    "product_id"
+  ],
+  "additionalProperties": false
+}

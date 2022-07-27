@@ -1,15 +1,12 @@
 {
-  "$id": "/schemas/product",
+  "$id": "/schemas/variation.create",
   "$async": true,
-  "title": "Product",
-  "description": "Product schema",
+  "http_method": "POST",
+  "http_path": "/variations",
+  "title": "Variation",
+  "description": "Variation schema",
   "type": "object",
   "properties": {
-    "id": {
-      "readOnly": true,
-      "type": "integer",
-      "exclusiveMinimum": 0
-    },
     "title": {
       "type": "string",
       "minLength": 1,
@@ -30,28 +27,20 @@
       "minLength": 1,
       "maxLength": 100
     },
-    "uuid": {
-      "readOnly": true,
-      "type": "string",
-      "minLength": 36,
-      "maxLength": 36
-    },
-    "created_at": {
-      "readOnly": true,
-      "type": "string"
-    },
-    "updated_at": {
-      "readOnly": true,
-      "type": "string"
-    },
     "variant_id": {
-      "type": "integer",
-      "exclusiveMinimum": 0
+      "$ref": "defs#/definitions/id_or_uuid"
+    },
+    "ingredients": {
+      "type": "array",
+      "items": {
+        "$ref": "defs#/definitions/id_or_uuid"
+      }
     }
   },
   "required": [
     "title",
-    "sku"
+    "variant_id",
+    "ingredients"
   ],
   "additionalProperties": false
 }

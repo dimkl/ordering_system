@@ -10,6 +10,8 @@ const ProductAddIngredientController = require('./controllers/products/addIngred
 const IngredientListController = require('./controllers/ingredients/list');
 const IngredientCreateController = require('./controllers/ingredients/create');
 
+const VariationCreateController = require('./controllers/variations/create');
+
 const loadProduct = require('./helpers/loadProduct');
 const loadIngredient = require('./helpers/loadIngredient');
 
@@ -25,6 +27,8 @@ router.post('/products/ingredients', authorize(['urn:products:c']), ProductAddIn
 router.get('/products', authorize(['urn:products:r']), ProductListController);
 router.get('/products/:product_id', authorize(['urn:products:r']), ProductListController);
 router.post('/products', authorize(['urn:products:c']), ProductCreateController);
+
+router.post('/variations', authorize(['urn:products:c']), VariationCreateController);
 
 router.get('/ingredients', authorize(['urn:ingredients:r']), IngredientListController);
 router.get('/ingredients/:ingredient_id', authorize(['urn:ingredients:r']), IngredientListController);

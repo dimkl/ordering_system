@@ -21,5 +21,8 @@ const base = {
 module.exports = {
   development: { ...base },
   production: { ...base },
-  test: { ...base }
+  test: { 
+    ...base,
+    connection: 'postgresql://postgres:123456@localhost:5432/ordering_system_test'
+  }
 };

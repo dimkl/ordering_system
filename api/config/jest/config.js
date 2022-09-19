@@ -9,7 +9,10 @@ module.exports = {
   coverageDirectory: "coverage",
   coveragePathIgnorePatterns: [
     "/node_modules/",
-    "<rootDir>/integrationTest/"
+    "<rootDir>/integrationTest/",
+    "<rootDir>/config/",
+    // TODO: remove the next line
+    "<rootDir>/src/shared/"
   ],
   coverageProvider: "v8",
   coverageThreshold: {

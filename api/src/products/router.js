@@ -10,16 +10,21 @@ const ProductAddIngredientController = require('./controllers/products/addIngred
 const IngredientListController = require('./controllers/ingredients/list');
 const IngredientCreateController = require('./controllers/ingredients/create');
 
+const CategoryListController = require('./controllers/categories/list');
+const CategoryCreateController = require('./controllers/categories/create');
+
 const VariationCreateController = require('./controllers/variations/create');
 
 const loadProduct = require('./helpers/loadProduct');
 const loadIngredient = require('./helpers/loadIngredient');
+const loadCategory = require('./helpers/loadCategory');
 
 const router = new Router();
 
 // setup params
 router.param('product_id', loadProduct)
-  .param('ingredient_id', loadIngredient);
+  .param('ingredient_id', loadIngredient)
+  .param('category_id', loadCategory);
 router.use(verifyToken());
 
 router.post('/products/ingredients', authorize(['urn:products:c']), ProductAddIngredientController);
@@ -33,5 +38,9 @@ router.post('/variations', authorize(['urn:products:c']), VariationCreateControl
 router.get('/ingredients', authorize(['urn:ingredients:r']), IngredientListController);
 router.get('/ingredients/:ingredient_id', authorize(['urn:ingredients:r']), IngredientListController);
 router.post('/ingredients', authorize(['urn:ingredients:c']), IngredientCreateController);
+
+router.get('/categories', authorize(['urn:categories:r']), CategoryListController);
+router.get('/categories/:category_id', authorize(['urn:categories:r']), CategoryListController);
+router.post('/categories', authorize(['urn:categories:c']), CategoryCreateController);
 
 module.exports = router;

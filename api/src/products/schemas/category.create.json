@@ -1,0 +1,30 @@
+{
+  "$id": "/schemas/category.create",
+  "$async": true,
+  "http_method": "POST",
+  "http_path": "/categories",
+  "title": "category",
+  "description": "category schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "readOnly": true,
+      "type": "integer",
+      "exclusiveMinimum": 0
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    }
+  },
+  "required": [
+    "title"
+  ],
+  "additionalProperties": false
+}

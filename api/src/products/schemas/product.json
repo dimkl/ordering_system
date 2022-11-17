@@ -47,6 +47,10 @@
     "variant_id": {
       "type": "integer",
       "exclusiveMinimum": 0
+    },
+    "category_id": {
+      "type": "integer",
+      "exclusiveMinimum": 0
     }
   },
   "required": [

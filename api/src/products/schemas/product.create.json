@@ -26,6 +26,9 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 100
+    },
+    "category_id":  {
+      "$ref": "defs#/definitions/id_or_uuid"
     }
   },
   "required": [

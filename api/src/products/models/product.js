@@ -36,6 +36,14 @@ class Product extends BaseModel {
           from: 'products.id',
           to: 'products.variant_id',
         }
+      },
+      category: {
+        relation: BaseModel.BelongsToOneRelation,
+        modelClass: __dirname + '/category',
+        join: {
+          from: 'products.category_id',
+          to: 'categories.id'
+        }
       }
     }
   }

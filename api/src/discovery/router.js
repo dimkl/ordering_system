@@ -1,15 +1,12 @@
-const Router = require('koa-router');
-const ajv = require('../shared/ajv');
-const getPublicKey = require('../shared/getPublicKey');
+const { DiscoveryApiFactory } = require("@dimkl/ajv-discovery-api");
+const Router = require("koa-router");
+const getPublicKey = require("../shared/getPublicKey");
 
 const router = new Router();
+const discoveryApi = DiscoveryApiFactory.getInstance();
 
-router.get('/discovery', (ctx) => {
-  const schemas = Object.keys(ajv.schemas)
-    .filter(s => s.startsWith('/schemas/'))
-    .map(s => ajv.getSchema(s).schema);
-
-  ctx.body = { schemas, publicKey: getPublicKey() };
+router.get("/discovery", (ctx) => {
+  ctx.body = { schemas: discoveryApi.getSchemas(), publicKey: getPublicKey() };
 });
 
 module.exports = router;

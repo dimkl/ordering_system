@@ -1,30 +1,50 @@
-const Router = require('koa-router');
+const Router = require("koa-router");
 
-const verifyToken = require('../shared/middlewares/verifyToken');
-const authorize = require('../shared/middlewares/authorize');
+const ControllerFactory = require("../shared/controllerFactory");
 
-const ListController = require('./controllers/list');
-const CreateController = require('./controllers/create');
-const UpdateController = require('./controllers/update');
-const DeleteController = require('./controllers/delete');
-const LoginController = require('./controllers/login');
-const SignupController = require('./controllers/signup');
+const listController = require("./controllers/list");
+const createController = require("./controllers/create");
+const updateController = require("./controllers/update");
+const deleteController = require("./controllers/delete");
+const loginController = require("./controllers/login");
+const signupController = require("./controllers/signup");
 
-const loadCustomer = require('./helpers/loadCustomer');
+const loadCustomer = require("./helpers/loadCustomer");
 
 const router = new Router();
 
 // setup params
-router.param('customer_id', loadCustomer);
+router.param("customer_id", loadCustomer);
 
-router.get('/customers', verifyToken(), authorize(['urn:customers:r']), ListController);
-router.get('/customers/:customer_id', verifyToken(), authorize(['urn:customers:r']), ListController);
-router.post('/customers', verifyToken(), authorize(['urn:customers:c']), CreateController);
-router.patch('/customers/:customer_id', verifyToken(), authorize(['urn:customers:u']), UpdateController);
-router.delete('/customers/:customer_id', verifyToken(), authorize(['urn:customers:d']), DeleteController);
+router.get(
+  "/customers",
+  ControllerFactory.create({ ...listController, scopes: ["urn:customers:r"] })
+);
+router.get(
+  "/customers/:customer_id",
+  ControllerFactory.create({ ...listController, scopes: ["urn:customers:r"] })
+);
+router.post(
+  "/customers",
+  ControllerFactory.create({ ...createController, scopes: ["urn:customers:c"] })
+);
+router.patch(
+  "/customers/:customer_id",
+  ControllerFactory.create({ ...updateController, scopes: ["urn:customers:u"] })
+);
+router.delete(
+  "/customers/:customer_id",
+  ControllerFactory.create({ ...deleteController, scopes: ["urn:customers:d"] })
+);
 
 // actions
-router.post('/customers/login', LoginController);
-router.post('/customers/signup', SignupController);
+router.post(
+  "/customers/login",
+  ControllerFactory.create({ ...loginController })
+);
+router.post(
+  "/customers/signup",
+  ControllerFactory.create({ ...signupController })
+);
 
 module.exports = router;

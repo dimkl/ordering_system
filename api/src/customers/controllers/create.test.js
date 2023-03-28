@@ -58,7 +58,7 @@ describe("POST /customers", () => {
     expect(response.body).toMatchSnapshot();
   });
 
-  it("throws validation error with additional properties", async () => {
+  it("omits additional properties", async () => {
     const response = await request.post("/customers")
       .send({
         "first_name": "Dimitris",
@@ -66,11 +66,18 @@ describe("POST /customers", () => {
         "email": "dimitris.klouvas@gmail.com",
         "password": "1234",
         "id": 2,
-        "created_at": Date.now()
+        "created_at": "1680046371850"
       })
       .set("Accept", "application/json");
 
-    expect(response.status).toBe(400);
-    expect(response.body).toMatchSnapshot();
+    expect(response.status).toBe(200);
+    expect(response.body.id).not.toEqual(2);
+    expect(response.body.created_at).not.toEqual("1680046371850");
+    expect(response.body).toMatchSnapshot({
+      id: expect.any(Number),
+      uuid: expect.any(String),
+      created_at: expect.any(String),
+      updated_at: expect.any(String),
+    });
   });
 });

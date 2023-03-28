@@ -8,7 +8,7 @@ function errorHandler() {
     try {
       await next();
     } catch (err) {
-      if (err instanceof ValidationError) {
+      if (err instanceof ValidationError || err.validation) {
         ctx.status = 400;
         ctx.body = err.errors;
       } else if (err instanceof UniqueViolationError) {

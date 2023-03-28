@@ -1,11 +1,11 @@
-const Customer = require('../models/customer');
+const Customer = require("../models/customer");
 
 const handler = async (ctx, next) => {
-  if (ctx.customer){
-    ctx.body = ctx.customer;  
+  if (ctx.customer) {
+    ctx.body = ctx.customer;
     return next();
   }
-  ctx.body = await Customer.query().modify('publicColumns');
+  ctx.body = await Customer.query().modify("publicColumns");
 };
 
-module.exports = handler ;
+module.exports = { handler };

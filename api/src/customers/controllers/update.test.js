@@ -67,14 +67,15 @@ describe("PATCH /customers/:customer_id", () => {
     expect(response.body).toMatchSnapshot();
   });
 
-  it("throws validation error with additional properties", async () => {
+  it("omits additional properties", async () => {
     const customer = await DataFactory.createCustomer();
 
     const response = await request.patch(`/customers/${customer.uuid}`)
-      .send({ created_at: Date.now() })
+      .send({ created_at: "1680046371850", first_name: "aloha" })
       .set("Accept", "application/json");
 
-    expect(response.status).toBe(400);
-    expect(response.body).toMatchSnapshot();
+    expect(response.status).toBe(200);
+    expect(response.body.created_at).not.toEqual("1680046371850");
+    expect(response.body.first_name).toEqual("aloha");
   });
 });

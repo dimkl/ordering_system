@@ -2,7 +2,7 @@ const schema = require("../schemas/order.create.json");
 
 const Order = require("../models/order");
 const Customer = require("../../customers/models/customer");
-const TimeSlot = require("../../slots/models/timeSlot");
+const TimeSlot = require("../../availability/models/timeSlot");
 
 async function handler(ctx, next) {
   const data = ctx.request.validatedData;

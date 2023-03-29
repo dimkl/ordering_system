@@ -49,7 +49,7 @@ class Order extends BaseModel {
       },
       timeSlot: {
         relation: BaseModel.BelongsToOneRelation,
-        modelClass: __dirname + '/../../slots/models/timeSlot',
+        modelClass: __dirname + '/../../availability/models/timeSlot',
         join: {
           from: 'orders.time_slot_id',
           to: 'time_slots.id'
@@ -57,7 +57,7 @@ class Order extends BaseModel {
       },
       slot: {
         relation: BaseModel.BelongsToOneRelation,
-        modelClass: __dirname + '/../../slots/models/slot',
+        modelClass: __dirname + '/../../availability/models/slot',
         join: {
           from: 'orders.time_slot_id',
           to: 'slots.id',

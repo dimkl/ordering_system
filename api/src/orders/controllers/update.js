@@ -1,5 +1,5 @@
 const Customer = require("../../customers/models/customer");
-const TimeSlot = require("../../slots/models/timeSlot");
+const TimeSlot = require("../../availability/models/timeSlot");
 
 const schema = require("../schemas/order.patch.json");
 

@@ -1,12 +1,7 @@
-const ajv = require('../../shared/ajv');
-
-const schema = require('../schemas/shop.menu.json');
-
-ajv.addSchema(schema);
-ajv.validateSchema(schema);
+const schema = require("../schemas/shop.menu.json");
 
 const handler = async (ctx, next) => {
-  ctx.body = await ctx.shop.$query().modify('availableProducts');
+  ctx.body = await ctx.shop.$query().modify("availableProducts");
 };
 
-module.exports = handler;
+module.exports = { schema, handler };

@@ -1,20 +1,27 @@
-const Router = require('koa-router');
+const Router = require("koa-router");
 
-const verifyToken = require('../shared/middlewares/verifyToken');
-const authorize = require('../shared/middlewares/authorize');
+const ControllerFactory = require("../shared/controllerFactory");
 
-const MenuController = require('./controllers/menu');
-const ListController = require('./controllers/list');
+const menuController = require("./controllers/menu");
+const listController = require("./controllers/list");
 
-const loadShop = require('./helpers/loadShop');
+const loadShop = require("./helpers/loadShop");
 
 const router = new Router();
 
-router.param('shop_id', loadShop);
-router.use(verifyToken());
+router.param("shop_id", loadShop);
 
-router.get('/shops/:shop_id/menu', authorize(['urn:shops:m']), MenuController);
-router.get('/shops', authorize(['urn:shops:r']), ListController);
-router.get('/shops/:shop_id', authorize(['urn:products:r']), ListController);
+router.get(
+  "/shops/:shop_id/menu",
+  ControllerFactory.create({ ...menuController, scopes: ["urn:shops:m"] })
+);
+router.get(
+  "/shops",
+  ControllerFactory.create({ ...listController, scopes: ["urn:shops:r"] })
+);
+router.get(
+  "/shops/:shop_id",
+  ControllerFactory.create({ ...listController, scopes: ["urn:shops:r"] })
+);
 
 module.exports = router;

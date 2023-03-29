@@ -1,20 +1,12 @@
-const ajv = require('../../../shared/ajv');
+const schema = require("../../schemas/timeSlot.reserve.json");
+const TimeSlotReserve = require("../../services/timeSlotReserve");
 
-const schema = require('../../schemas/timeSlot.reserve.json');
-const TimeSlotReserve = require('../../services/timeSlotReserve');
-
-const { cameCaseKeys } = require('../../../shared/transformKeys');
-
-ajv.addSchema(schema);
-ajv.validateSchema(schema);
+const { camelCaseKeys } = require("../../../shared/transformKeys");
 
 async function handler(ctx, next) {
-  const validate = ajv.compile(schema);
-  const requestBody = ctx.request.body;
+  const data = ctx.request.validatedData;
 
-  const data = await validate(requestBody);
-
-  ctx.body = await TimeSlotReserve.process(requestBody.customer_id, requestBody.slot_id, cameCaseKeys(data));
+  ctx.body = await TimeSlotReserve.process(camelCaseKeys(data));
 }
 
-module.exports = handler;
+module.exports = { handler, schema };

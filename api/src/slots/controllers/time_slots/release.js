@@ -1,5 +1,3 @@
-const schema = require('../../schemas/timeSlot.release.json');
-
 const handler = async (ctx, next) => {
   try {
     await ctx.timeSlot.$query().delete();
@@ -10,4 +8,4 @@ const handler = async (ctx, next) => {
   }
 };
 
-module.exports = handler;
+module.exports = { handler };

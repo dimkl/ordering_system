@@ -1,41 +1,100 @@
-const Router = require('koa-router');
+const Router = require("koa-router");
 
-const verifyToken = require('../shared/middlewares/verifyToken');
-const authorize = require('../shared/middlewares/authorize');
+const ControllerFactory = require("../shared/controllerFactory");
 
-const loadTimeSlot = require('./helpers/loadTimeSlot');
-const loadSlot = require('./helpers/loadSlot');
-const loadShop = require('./helpers/loadShop');
+const loadTimeSlot = require("./helpers/loadTimeSlot");
+const loadSlot = require("./helpers/loadSlot");
+const loadShop = require("./helpers/loadShop");
 
-const TimeSlotListController = require('./controllers/time_slots/list');
-const TimeSloReserveController = require('./controllers/time_slots/reserve');
-const TimeSlotUpdateController = require('./controllers/time_slots/update');
-const TimeSlotReleaseController = require('./controllers/time_slots/release');
+const timeSlotListController = require("./controllers/time_slots/list");
+const timeSloReserveController = require("./controllers/time_slots/reserve");
+const timeSlotUpdateController = require("./controllers/time_slots/update");
+const timeSlotReleaseController = require("./controllers/time_slots/release");
 
-const SlotAvailableController = require('./controllers/slots/available');
-const SlotCreateController = require('./controllers/slots/create');
-const SlotUpdateController = require('./controllers/slots/update');
-const SlotDeleteController = require('./controllers/slots/delete');
+const slotAvailableController = require("./controllers/slots/available");
+const slotCreateController = require("./controllers/slots/create");
+const slotUpdateController = require("./controllers/slots/update");
+const slotDeleteController = require("./controllers/slots/delete");
 
 const router = new Router();
 
 // setup params
-router.param('time_slot_id', loadTimeSlot)
-      .param('slot_id', loadSlot)
-      .param('shop_id', loadShop);
-router.use(verifyToken());
+router
+  .param("time_slot_id", loadTimeSlot)
+  .param("slot_id", loadSlot)
+  .param("shop_id", loadShop);
 
-router.get('/time_slots', authorize(['urn:time_slots:r']), TimeSlotListController);
-router.get('/time_slots/:time_slot_id', authorize(['urn:time_slots:r']), TimeSlotListController);
-router.post('/time_slots/reserve', authorize(['urn:time_slots:c']), TimeSloReserveController);
-router.patch('/time_slots/:time_slot_id', authorize(['urn:time_slots:u']), TimeSlotUpdateController);
-router.delete('/time_slots/release/:time_slot_id', authorize(['urn:time_slots:d']), TimeSlotReleaseController);
+router.get(
+  "/time_slots",
+  ControllerFactory.create({
+    ...timeSlotListController,
+    scopes: ["urn:time_slots:r"],
+  })
+);
+router.get(
+  "/time_slots/:time_slot_id",
+  ControllerFactory.create({
+    ...timeSlotListController,
+    scopes: ["urn:time_slots:r"],
+  })
+);
+router.post(
+  "/time_slots/reserve",
+  ControllerFactory.create({
+    ...timeSloReserveController,
+    scopes: ["urn:time_slots:c"],
+  })
+);
+router.patch(
+  "/time_slots/:time_slot_id",
+  ControllerFactory.create({
+    ...timeSlotUpdateController,
+    scopes: ["urn:time_slots:u"],
+  })
+);
+router.delete(
+  "/time_slots/release/:time_slot_id",
+  ControllerFactory.create({
+    ...timeSlotReleaseController,
+    scopes: ["urn:time_slots:d"],
+  })
+);
 
-router.post('/slots', authorize(['urn:slots:c']), SlotCreateController);
-router.patch('/slots/:slot_id', authorize(['urn:slots:u']), SlotUpdateController);
-router.delete('/slots/:slot_id', authorize(['urn:slots:d']), SlotDeleteController);
+router.post(
+  "/slots",
+  ControllerFactory.create({
+    ...slotCreateController,
+    scopes: ["urn:slots:c"],
+  })
+);
+router.patch(
+  "/slots/:slot_id",
+  ControllerFactory.create({
+    ...slotUpdateController,
+    scopes: ["urn:slots:u"],
+  })
+);
+router.delete(
+  "/slots/:slot_id",
+  ControllerFactory.create({
+    ...slotDeleteController,
+    scopes: ["urn:slots:d"],
+  })
+);
 
-router.get('/slots/:shop_id/available', authorize(['urn:slots:a']), SlotAvailableController);
-router.get('/slots/:shop_id/available/:slot_id', authorize(['urn:slots:a']), SlotAvailableController);
+router.get(
+  "/slots/:shop_id/available",
+  ControllerFactory.create({
+    ...slotAvailableController,
+    scopes: ["urn:slots:r"],
+  })
+);
+router.get(
+  "/slots/:shop_id/available/:slot_id",
+  ControllerFactory.create({
+    ...slotAvailableController,
+    scopes: ["urn:slots:r"],
+  })
+);
 
 module.exports = router;

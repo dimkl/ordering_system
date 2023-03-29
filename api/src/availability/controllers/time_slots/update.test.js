@@ -73,7 +73,7 @@ describe("PATCH /time_slots/:time_slot_id", () => {
     });
   });
 
-  it("throws validation error with additional properties", async () => {
+  it("omits additional properties", async () => {
     const timeSlot = await DataFactory.createTimeSlot();
 
     const response = await request

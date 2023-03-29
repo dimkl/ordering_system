@@ -1,17 +1,12 @@
-const ajv = require('../../../shared/ajv');
-
-const schema = require('../../schemas/ingredient.create.json');
-const Ingredient = require('../../models/ingredient');
-
-ajv.addSchema(schema);
-ajv.validateSchema(schema);
+const schema = require("../../schemas/ingredient.create.json");
+const Ingredient = require("../../models/ingredient");
 
 async function handler(ctx, next) {
-  const validate = ajv.compile(schema);
+  const data = ctx.request.validatedData;
 
-  const data = await validate(ctx.request.body);
+  ctx.body = await Ingredient.query()
+    .modify("publicInsertColumns")
+    .insert(data);
+}
 
-  ctx.body = await Ingredient.query().modify('publicInsertColumns').insert(data);
-};
-
-module.exports = handler;
+module.exports = { schema, handler };

@@ -3,26 +3,29 @@
  * @data-factory true
  */
 
-const uuid = require('uuid');
+const uuid = require("uuid");
 
 describe("POST /variations", () => {
   let knex;
-  beforeAll(() => knex = require('../../../shared/setupModels')());
-  beforeEach(() => knex.raw('truncate products, ingredients cascade;'));
+  beforeAll(() => (knex = require("../../../shared/setupModels")()));
+  beforeEach(() => knex.raw("truncate products, ingredients cascade;"));
   afterAll(() => knex.destroy());
 
   it("create product variation", async () => {
     const { ingredient, product } = await DataFactory.createProductIngredient();
-    const ingredient2 = await DataFactory.createIngredient({ title: 'Ingredient 2' });
+    const ingredient2 = await DataFactory.createIngredient({
+      title: "Ingredient 2",
+    });
     await DataFactory.createProductIngredient({}, product, ingredient2);
 
-    const response = await request.post(`/variations`)
+    const response = await request
+      .post(`/variations`)
       .send({
         title: "Variation",
         description: "Variation description",
         sku: `${product.sku}-1`,
         variant_id: product.uuid,
-        ingredients: [ingredient.uuid]
+        ingredients: [ingredient.uuid],
       })
       .set("Accept", "application/json");
 
@@ -42,15 +45,15 @@ describe("POST /variations", () => {
           created_at: expect.any(String),
           updated_at: expect.any(String),
           suitable_for_diet: "all",
-          allergen: false
+          allergen: false,
         }),
         expect.objectContaining({
           uuid: ingredient2.uuid,
           created_at: expect.any(String),
           updated_at: expect.any(String),
           suitable_for_diet: "all",
-          allergen: false
-        })
+          allergen: false,
+        }),
       ]),
       variations: expect.arrayContaining([
         expect.objectContaining({
@@ -68,10 +71,10 @@ describe("POST /variations", () => {
               created_at: expect.any(String),
               updated_at: expect.any(String),
               suitable_for_diet: "all",
-              allergen: false
-            })
-          ])
-        })
+              allergen: false,
+            }),
+          ]),
+        }),
       ]),
     });
     expect(response.body.ingredients.length).toBe(2);
@@ -81,13 +84,14 @@ describe("POST /variations", () => {
 
   it("throws 404 for not existing ingredient_id", async () => {
     const product = await DataFactory.createProduct();
-    const response = await request.post(`/variations`)
+    const response = await request
+      .post(`/variations`)
       .send({
         title: "Variation",
         description: "Variation description",
         sku: `${product.sku}-1`,
         variant_id: product.uuid,
-        ingredients: [uuid.v4()]
+        ingredients: [uuid.v4()],
       })
       .set("Accept", "application/json");
 
@@ -96,34 +100,41 @@ describe("POST /variations", () => {
 
   it("throws 404 for not existing product_id", async () => {
     const ingredient = await DataFactory.createIngredient();
-    const response = await request.post(`/variations`)
+    const response = await request
+      .post(`/variations`)
       .send({
         title: "Variation",
         description: "Variation description",
         sku: "aloha-1",
         variant_id: uuid.v4(),
-        ingredients: [ingredient.uuid]
+        ingredients: [ingredient.uuid],
       })
       .set("Accept", "application/json");
 
     expect(response.status).toBe(404);
   });
 
-  it("throws validation error with additional properties", async () => {
+  it("omits additional properties", async () => {
     const { ingredient, product } = await DataFactory.createProductIngredient();
 
-    const response = await request.post(`/variations`)
+    const response = await request
+      .post(`/variations`)
       .send({
         title: "Variation",
         description: "Variation description",
         sku: `${product.sku}-1`,
         variant_id: product.uuid,
         ingredients: [ingredient.uuid],
-        created_at: '2022-07-26T22:01:22.539Z'
+        created_at: "1680046371850",
       })
       .set("Accept", "application/json");
 
-    expect(response.status).toBe(400);
-    expect(response.body).toMatchSnapshot();
+    expect(response.status).toBe(200);
+    expect(response.body.created_at).not.toEqual("1680046371850");
+    expect(response.body.uuid).toEqual(product.uuid);
+
+    const variation = response.body.variations[0];
+    expect(variation.description).toEqual("Variation description");
+    expect(variation.ingredients[0].uuid).toEqual(ingredient.uuid);
   });
 });

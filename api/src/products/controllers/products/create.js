@@ -1,17 +1,10 @@
-const ajv = require('../../../shared/ajv');
-
-const schema = require('../../schemas/product.create.json');
-const Product = require('../../models/product');
-
-ajv.addSchema(schema);
-ajv.validateSchema(schema);
+const schema = require("../../schemas/product.create.json");
+const Product = require("../../models/product");
 
 async function handler(ctx, next) {
-  const validate = ajv.compile(schema);
+  const data = ctx.request.validatedData;
 
-  const data = await validate(ctx.request.body);
+  ctx.body = await Product.query().modify("publicInsertColumns").insert(data);
+}
 
-  ctx.body = await Product.query().modify('publicInsertColumns').insert(data);
-};
-
-module.exports = handler;
+module.exports = { schema, handler };

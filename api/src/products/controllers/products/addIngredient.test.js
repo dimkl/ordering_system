@@ -3,19 +3,20 @@
  * @data-factory true
  */
 
-const uuid = require('uuid');
+const uuid = require("uuid");
 
 describe("POST /products/ingredients", () => {
   let knex;
-  beforeAll(() => knex = require('../../../shared/setupModels')());
-  beforeEach(() => knex.raw('truncate products, ingredients cascade;'));
+  beforeAll(() => (knex = require("../../../shared/setupModels")()));
+  beforeEach(() => knex.raw("truncate products, ingredients cascade;"));
   afterAll(() => knex.destroy());
 
   it("create product ingredient", async () => {
     const ingredient = await DataFactory.createIngredient();
     const product = await DataFactory.createProduct();
 
-    const response = await request.post(`/products/ingredients`)
+    const response = await request
+      .post(`/products/ingredients`)
       .send({
         ingredient_id: ingredient.uuid,
         product_id: product.uuid,
@@ -36,8 +37,8 @@ describe("POST /products/ingredients", () => {
           created_at: expect.any(String),
           updated_at: expect.any(String),
           suitable_for_diet: "all",
-          allergen: false
-        })
+          allergen: false,
+        }),
       ]),
     });
     expect(response.body.ingredients.length).toBe(1);
@@ -45,7 +46,8 @@ describe("POST /products/ingredients", () => {
 
   it("throws 404 for not existing ingredient_id", async () => {
     const product = await DataFactory.createProduct();
-    const response = await request.post(`/products/ingredients`)
+    const response = await request
+      .post(`/products/ingredients`)
       .send({
         ingredient_id: uuid.v4(),
         product_id: product.uuid,
@@ -57,7 +59,8 @@ describe("POST /products/ingredients", () => {
 
   it("throws 404 for not existing product_id", async () => {
     const ingredient = await DataFactory.createIngredient();
-    const response = await request.post(`/products/ingredients`)
+    const response = await request
+      .post(`/products/ingredients`)
       .send({
         ingredient_id: ingredient.uuid,
         product_id: uuid.v4(),
@@ -67,19 +70,22 @@ describe("POST /products/ingredients", () => {
     expect(response.status).toBe(404);
   });
 
-  it("throws validation error with additional properties", async () => {
+  it("omits additional properties", async () => {
     const ingredient = await DataFactory.createIngredient();
     const product = await DataFactory.createProduct();
 
-    const response = await request.post(`/products/ingredients`)
+    const response = await request
+      .post(`/products/ingredients`)
       .send({
         ingredient_id: ingredient.uuid,
         product_id: product.uuid,
-        created_at: '2022-07-26T22:01:22.539Z'
+        created_at: "1680046371850",
       })
       .set("Accept", "application/json");
 
-    expect(response.status).toBe(400);
-    expect(response.body).toMatchSnapshot();
+    expect(response.status).toBe(200);
+    expect(response.body.created_at).not.toEqual("1680046371850");
+    expect(response.body.uuid).toEqual(product.uuid);
+    expect(response.body.ingredients[0].uuid).toEqual(ingredient.uuid);
   });
 });

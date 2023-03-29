@@ -2,18 +2,15 @@
   "$id": "/schemas/shop.menu",
   "$async": true,
   "http_method": "GET",
-  "http_path": "/shops/:id/menu",
+  "http_path": "/shops/:shop_id/menu",
   "title": "Menu",
   "description": "Shop menu schema",
   "type": "object",
   "properties": {
-    "id": {
-      "readOnly": true,
-      "type": "number"
+    "shop_id": {
+      "$ref": "defs#/definitions/id_or_uuid"
     }
   },
-  "required": [
-    "id"
-  ],
+  "required": ["shop_id"],
   "additionalProperties": false
 }

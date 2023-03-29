@@ -1,22 +1,14 @@
-const ajv = require('../../shared/ajv');
+const Order = require("../models/order");
+const OrderTransition = require("../services/orderTransition");
 
-const Order = require('../models/order');
-const OrderTransition = require('../services/orderTransition');
-
-const schema = require('../schemas/order.transition.json');
-
-ajv.addSchema(schema);
-ajv.validateSchema(schema);
+const schema = require("../schemas/order.transition.json");
 
 async function handler(ctx, next) {
-  const validate = ajv.compile(schema);
-
-  const data = await validate({ action: ctx.params.action });
-
+  const data = ctx.request.validatedData;
   const order = await Order.findWithOrderItemsAndProducts(ctx.order.id);
   await OrderTransition.process(order, data.action);
 
   ctx.body = order;
 }
 
-module.exports = handler;
+module.exports = { schema, handler };

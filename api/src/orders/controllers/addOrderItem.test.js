@@ -2,19 +2,24 @@
  * @integration-test true
  * @data-factory true
  */
-const uuid = require('uuid');
+const uuid = require("uuid");
 
 describe("POST /order_items", () => {
   let knex;
-  beforeAll(() => knex = require('../../shared/setupModels')());
-  beforeEach(() => knex.raw('truncate orders, order_items, customers, users, products cascade;'));
+  beforeAll(() => (knex = require("../../shared/setupModels")()));
+  beforeEach(() =>
+    knex.raw(
+      "truncate orders, order_items, customers, users, products cascade;"
+    )
+  );
   afterAll(() => knex.destroy());
 
   it("creates and returns an order item", async () => {
     const order = await DataFactory.createOrder();
     const product = await DataFactory.createProduct();
 
-    const response = await request.post(`/order_items`)
+    const response = await request
+      .post(`/order_items`)
       .send({ product_id: product.uuid, order_id: order.uuid })
       .set("Accept", "application/json");
 
@@ -31,14 +36,14 @@ describe("POST /order_items", () => {
           created_at: expect.any(String),
           updated_at: expect.any(String),
           product: {
-            title: 'Product',
+            title: "Product",
             uuid: product.uuid,
             description: "Product description",
-            qr: null
+            qr: null,
           },
           quantity: 1,
-          state: "draft"
-        })
+          state: "draft",
+        }),
       ]),
     });
     expect(response.body.order_items.length).toBe(1);
@@ -48,7 +53,8 @@ describe("POST /order_items", () => {
     const order = await DataFactory.createOrder();
     const product = await DataFactory.createProduct();
 
-    const response = await request.post(`/order_items`)
+    const response = await request
+      .post(`/order_items`)
       .send({ product_id: product.uuid, order_id: order.id })
       .set("Accept", "application/json");
 
@@ -65,14 +71,14 @@ describe("POST /order_items", () => {
           created_at: expect.any(String),
           updated_at: expect.any(String),
           product: {
-            title: 'Product',
+            title: "Product",
             uuid: product.uuid,
             description: "Product description",
-            qr: null
+            qr: null,
           },
           quantity: 1,
-          state: "draft"
-        })
+          state: "draft",
+        }),
       ]),
     });
     expect(response.body.order_items.length).toBe(1);
@@ -82,7 +88,8 @@ describe("POST /order_items", () => {
     const order = await DataFactory.createOrder();
     const product = await DataFactory.createProduct();
 
-    const response = await request.post(`/order_items`)
+    const response = await request
+      .post(`/order_items`)
       .send({ product_id: product.id, order_id: order.uuid })
       .set("Accept", "application/json");
 
@@ -99,21 +106,22 @@ describe("POST /order_items", () => {
           created_at: expect.any(String),
           updated_at: expect.any(String),
           product: {
-            title: 'Product',
+            title: "Product",
             uuid: product.uuid,
             description: "Product description",
-            qr: null
+            qr: null,
           },
           quantity: 1,
-          state: "draft"
-        })
+          state: "draft",
+        }),
       ]),
     });
     expect(response.body.order_items.length).toBe(1);
   });
 
   it("throws validation error for required properties", async () => {
-    const response = await request.post(`/order_items`)
+    const response = await request
+      .post(`/order_items`)
       .send({})
       .set("Accept", "application/json");
 
@@ -121,21 +129,30 @@ describe("POST /order_items", () => {
     expect(response.body).toMatchSnapshot();
   });
 
-  it("throws validation error with additional properties", async () => {
+  it("omits additional properties", async () => {
     const order = await DataFactory.createOrder();
     const product = await DataFactory.createProduct();
 
-    const response = await request.post(`/order_items`)
-      .send({ order_id: order.uuid, product_id: product.uuid, created_at: Date.now() })
+    const response = await request
+      .post(`/order_items`)
+      .send({
+        order_id: order.uuid,
+        product_id: product.uuid,
+        created_at: "1680046371850",
+      })
       .set("Accept", "application/json");
 
-    expect(response.status).toBe(400);
-    expect(response.body).toMatchSnapshot();
+    expect(response.status).toBe(200);
+    expect(response.body.order_items[0].product.uuid).toEqual(product.uuid);
+    expect(response.body.created_at).not.toEqual("1680046371850");
   });
 
   it("throws 404 for not existing order_id", async () => {
-    const response = await request.post(`/order_items`)
-      .send({ order_id: uuid.v4() })
+    const product = await DataFactory.createProduct();
+
+    const response = await request
+      .post(`/order_items`)
+      .send({ order_id: uuid.v4(), product_id: product.uuid })
       .set("Accept", "application/json");
 
     expect(response.status).toBe(404);
@@ -144,20 +161,26 @@ describe("POST /order_items", () => {
   it("throws 404 for not existing product_id", async () => {
     const order = await DataFactory.createOrder();
 
-    const response = await request.post(`/order_items`)
-      .send({ order_id: order.uuid, product_id: uuid.v4()})
+    const response = await request
+      .post(`/order_items`)
+      .send({ order_id: order.uuid, product_id: uuid.v4() })
       .set("Accept", "application/json");
 
     expect(response.status).toBe(404);
   });
 
-  describe('when existing order_item exists', () => {
-    it('updates quantity of existing order_item based on product_id', async () => {
+  describe("when existing order_item exists", () => {
+    it("updates quantity of existing order_item based on product_id", async () => {
       const order = await DataFactory.createOrder();
       const product = await DataFactory.createProduct();
-      await DataFactory.createOrderItem({ quantity: 1 }, { id: order.id }, { id: product.id });
+      await DataFactory.createOrderItem(
+        { quantity: 1 },
+        { id: order.id },
+        { id: product.id }
+      );
 
-      const response = await request.post(`/order_items`)
+      const response = await request
+        .post(`/order_items`)
         .send({ order_id: order.uuid, product_id: product.uuid, quantity: 2 })
         .set("Accept", "application/json");
 
@@ -174,14 +197,14 @@ describe("POST /order_items", () => {
             created_at: expect.any(String),
             updated_at: expect.any(String),
             product: {
-              title: 'Product',
+              title: "Product",
               uuid: product.uuid,
               description: "Product description",
-              qr: null
+              qr: null,
             },
             quantity: 3,
-            state: "draft"
-          })
+            state: "draft",
+          }),
         ]),
       });
       expect(response.body.order_items.length).toBe(1);

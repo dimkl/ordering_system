@@ -106,17 +106,3 @@ Array [
   },
 ]
 `;
-
-exports[`POST /orders throws validation error with additional properties 1`] = `
-Array [
-  Object {
-    "instancePath": "",
-    "keyword": "additionalProperties",
-    "message": "must NOT have additional properties",
-    "params": Object {
-      "additionalProperty": "created_at",
-    },
-    "schemaPath": "#/additionalProperties",
-  },
-]
-`;

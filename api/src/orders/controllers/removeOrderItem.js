@@ -1,4 +1,4 @@
-const Order = require('../models/order');
+const Order = require("../models/order");
 
 const handler = async (ctx, next) => {
   try {
@@ -12,4 +12,4 @@ const handler = async (ctx, next) => {
   }
 };
 
-module.exports = handler ;
+module.exports = { handler };

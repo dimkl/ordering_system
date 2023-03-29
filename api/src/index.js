@@ -1,15 +1,25 @@
-require('dotenv').config({ path: process.env.DOTENV_CONFIG_PATH, override: true });
+require("dotenv").config({
+  path: process.env.DOTENV_CONFIG_PATH,
+  override: true,
+});
 
-const setupModels = require('./shared/setupModels');
-const { isTestingEnv } = require('./shared/helpers');
-const errorHandler = require('./shared/middlewares/errorHandler');
+const { DiscoveryApiFactory } = require("@dimkl/ajv-discovery-api");
 
-const Koa = require('koa');
-const logger = require('koa-logger');
-const json = require('koa-json');
-const bodyParser = require('koa-bodyparser');
+const setupModels = require("./shared/setupModels");
+const { isTestingEnv } = require("./shared/helpers");
+const errorHandler = require("./shared/middlewares/errorHandler");
+const definitionsSchema = require("./shared/schemas/definitions.json");
 
-const router = require('./router');
+const Koa = require("koa");
+const logger = require("koa-logger");
+const json = require("koa-json");
+const bodyParser = require("koa-bodyparser");
+
+const router = require("./router");
+
+// Add some shared schema defintions
+const discoveryApi = DiscoveryApiFactory.getInstance();
+discoveryApi.registerSchema(definitionsSchema);
 
 const app = new Koa();
 

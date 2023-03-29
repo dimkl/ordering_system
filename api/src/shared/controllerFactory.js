@@ -1,6 +1,7 @@
 const compose = require("koa-compose");
 const { DiscoveryApiFactory } = require("@dimkl/ajv-discovery-api");
 
+const discoveryApi = DiscoveryApiFactory.getInstance();
 const verifyToken = require("./middlewares/verifyToken");
 const authorize = require("./middlewares/authorize");
 
@@ -23,13 +24,14 @@ class ControllerFactory {
   }
 
   static validateMiddleware(schema) {
-    const discoveryApi = DiscoveryApiFactory.getInstance();
     discoveryApi.registerSchema(schema);
 
     return async function validate(ctx, next) {
       await discoveryApi.validateSchema({
         schema,
-        dataAccessor: () => ctx.request.body,
+        dataAccessor: () => {
+          return { ...ctx.params, ...ctx.request.body };
+        },
         dataSetter: (dt) => {
           ctx.request.validatedData = dt;
         },

@@ -1,24 +1,19 @@
-const ajv = require('../../shared/ajv');
+const schema = require("../schemas/order.create.json");
 
-const schema = require('../schemas/order.create.json');
-
-const Order = require('../models/order');
-const Customer = require('../../customers/models/customer');
-const TimeSlot = require('../../slots/models/timeSlot');
-
-ajv.addSchema(schema);
-ajv.validateSchema(schema);
+const Order = require("../models/order");
+const Customer = require("../../customers/models/customer");
+const TimeSlot = require("../../slots/models/timeSlot");
 
 async function handler(ctx, next) {
-  const validate = ajv.compile(schema);
-  const requestBody = ctx.request.body;
+  const data = ctx.request.validatedData;
+  const customerId = await Customer.getId(data.customer_id);
+  const timeSlotId = await TimeSlot.getId(data.time_slot_id);
 
-  const data = await validate(requestBody);
-  const customerId = await Customer.getId(requestBody.customer_id);
-  const timeSlotId = await TimeSlot.getId(requestBody.time_slot_id);
-
-  const order = await Order.query().insert({ ...data, customer_id: customerId, time_slot_id: timeSlotId });
-  ctx.body = await Order.query().modify('publicColumns').findById(order.id);
+  const order = await Order.query().insert({
+    customer_id: customerId,
+    time_slot_id: timeSlotId,
+  });
+  ctx.body = await Order.query().modify("publicColumns").findById(order.id);
 }
 
-module.exports = handler;
+module.exports = { schema, handler };

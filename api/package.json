@@ -4,9 +4,10 @@
   "description": "Ordering System",
   "main": "src/index.js",
   "scripts": {
+    "build": "tsc",
     "test": "DOTENV_CONFIG_PATH=.env.test.local jest --runInBand --config='./config/jest/config.js'",
     "test:debug": "DOTENV_CONFIG_PATH=.env.test.local node inspect node_modules/jest/bin/jest.js --runInBand --config='./config/jest/config.js'",
-    "start": "node src/index.js",
+    "start": "npm run build && node dist/index.js",
     "start:dev": "nodemon src/index.js",
     "debug": "node inspect src/index.js",
     "db:migration:create": "knex migrate:make --client pg --knexfile ./config/knexfile.js",
@@ -52,10 +53,15 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@types/jest": "^29.5.0",
+    "@types/knex": "^0.16.1",
+    "@types/node": "^18.15.11",
     "dotenv": "^16.0.0",
     "jest": "^27.5.1",
     "nodemon": "^2.0.20",
-    "supertest": "^6.2.2"
+    "supertest": "^6.2.2",
+    "ts-jest": "^29.0.5",
+    "typescript": "^5.0.2"
   },
   "engines": {
     "node": ">=16.18"

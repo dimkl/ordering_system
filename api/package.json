@@ -1,7 +1,7 @@
 {
-  "name": "ordering-system",
+  "name": "@dimkl/ordering-system-api",
   "version": "0.0.1",
-  "description": "Ordering System",
+  "description": "Ordering System Api",
   "main": "src/index.js",
   "scripts": {
     "build": "tsc",

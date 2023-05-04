@@ -33,6 +33,7 @@
   },
   "homepage": "https://github.com/dimkl/ordering_system#readme",
   "dependencies": {
+    "@clerk/backend": "^0.18.0",
     "@dimkl/ajv-discovery-api": "^0.1.4",
     "@dimkl/ajv-discovery-sdk": "^0.1.3",
     "ajv-formats": "^2.1.1",

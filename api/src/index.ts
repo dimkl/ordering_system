@@ -17,6 +17,7 @@ import json from "koa-json";
 import bodyParser from "koa-bodyparser";
 
 import { router } from "./router";
+import { type } from "os";
 
 // Add some shared schema defintions
 const discoveryApi = DiscoveryApiFactory.getInstance();

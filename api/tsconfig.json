@@ -5,11 +5,10 @@
     /* Projects */
 
     /* Language and Environment */
-    "target": "es2019" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
-
+    "target": "ES2020" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
     /* Modules */
-    "module": "ES2020" /* Specify what module code is generated. */,
-    "moduleResolution": "node16",
+    "module": "CommonJS" /* Specify what module code is generated. */,
+    "moduleResolution": "node",
 
     /* JavaScript Support */
     "outDir": "./dist",
@@ -30,10 +29,6 @@
 
     /* Completeness */
     "skipLibCheck": true /* Skip type checking all .d.ts files. */
-  },
-  "globals": {
-    "DataFactory": true,
-    "request": true
   },
   "include": ["src/**/*.ts", "config/**/*.ts", "db/**/*.ts", "global.d.ts"]
 }

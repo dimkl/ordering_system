@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PATCH /customers/:customer_id does not have required properties 1`] = `
+{
+  "created_at": Any<String>,
+  "email": "dimitris.klouvas@gmail.com",
+  "first_name": "Dimitris",
+  "id": Any<Number>,
+  "last_name": "Klouvas",
+  "updated_at": Any<String>,
+  "uuid": Any<String>,
+}
+`;
+
+exports[`PATCH /customers/:customer_id throws validation error for unique email 1`] = `
+{
+  "message": "email already exists!",
+}
+`;

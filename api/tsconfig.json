@@ -5,25 +5,35 @@
     /* Projects */
 
     /* Language and Environment */
-    "target": "es2016",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+    "target": "es2019" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
 
     /* Modules */
-    "module": "commonjs",                                /* Specify what module code is generated. */
+    "module": "ES2020" /* Specify what module code is generated. */,
+    "moduleResolution": "node16",
 
     /* JavaScript Support */
+    "outDir": "./dist",
 
+    // "importsNotUsedAsValues": "error",
+    "noImplicitAny": false, // until codebase implicit any is reduced
     /* Emit */
-    "declaration": true,                              /* Generate .d.ts files from TypeScript and JavaScript files in your project. */
+    "declaration": true /* Generate .d.ts files from TypeScript and JavaScript files in your project. */,
     "declarationDir": "./types",
 
     /* Interop Constraints */
-    "esModuleInterop": true,                             /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */
-    "forceConsistentCasingInFileNames": true,            /* Ensure that casing is correct in imports. */
+    "esModuleInterop": true /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */,
+    "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
+    "resolveJsonModule": true,
 
     /* Type Checking */
-    "strict": true,                                      /* Enable all strict type-checking options. */
+    "strict": true /* Enable all strict type-checking options. */,
 
     /* Completeness */
-    "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
-  }
+    "skipLibCheck": true /* Skip type checking all .d.ts files. */
+  },
+  "globals": {
+    "DataFactory": true,
+    "request": true
+  },
+  "include": ["src/**/*.ts", "config/**/*.ts", "db/**/*.ts", "global.d.ts"]
 }

@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GET /time_slots returns all time_slots 1`] = `
+{
+  "created_at": Any<String>,
+  "customer_id": Any<String>,
+  "ended_at": null,
+  "id": Any<Number>,
+  "slot_id": Any<String>,
+  "started_at": Any<String>,
+  "updated_at": Any<String>,
+  "uuid": Any<String>,
+}
+`;
+
+exports[`GET /time_slots returns specified time_slot 1`] = `
+{
+  "created_at": Any<String>,
+  "customer_id": Any<String>,
+  "ended_at": null,
+  "id": Any<Number>,
+  "slot_id": Any<String>,
+  "started_at": Any<String>,
+  "updated_at": Any<String>,
+  "uuid": Any<String>,
+}
+`;
+
+exports[`GET /time_slots returns specified time_slot using uuid 1`] = `
+{
+  "created_at": Any<String>,
+  "customer_id": Any<String>,
+  "ended_at": null,
+  "id": Any<Number>,
+  "slot_id": Any<String>,
+  "started_at": Any<String>,
+  "updated_at": Any<String>,
+  "uuid": Any<String>,
+}
+`;

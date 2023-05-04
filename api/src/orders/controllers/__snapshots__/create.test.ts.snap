@@ -1,0 +1,108 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`POST /orders creates and returns a order 1`] = `
+{
+  "created_at": Any<String>,
+  "customer_id": Any<String>,
+  "id": Any<Number>,
+  "state": "draft",
+  "time_slot_id": Any<String>,
+  "updated_at": Any<String>,
+  "uuid": Any<String>,
+}
+`;
+
+exports[`POST /orders creates and returns a order using internal customer_id 1`] = `
+{
+  "created_at": Any<String>,
+  "customer_id": Any<String>,
+  "id": Any<Number>,
+  "state": "draft",
+  "time_slot_id": Any<String>,
+  "updated_at": Any<String>,
+  "uuid": Any<String>,
+}
+`;
+
+exports[`POST /orders throws validation error for not existing customer_id 1`] = `
+[
+  {
+    "instancePath": "/customer_id",
+    "keyword": "type",
+    "message": "must be integer",
+    "params": {
+      "type": "integer",
+    },
+    "schemaPath": "defs#/definitions/id_or_uuid/anyOf/0/type",
+  },
+  {
+    "instancePath": "/customer_id",
+    "keyword": "format",
+    "message": "must match format "uuid"",
+    "params": {
+      "format": "uuid",
+    },
+    "schemaPath": "defs#/definitions/id_or_uuid/anyOf/1/format",
+  },
+  {
+    "instancePath": "/customer_id",
+    "keyword": "anyOf",
+    "message": "must match a schema in anyOf",
+    "params": {},
+    "schemaPath": "defs#/definitions/id_or_uuid/anyOf",
+  },
+]
+`;
+
+exports[`POST /orders throws validation error for not existing time_slot_id 1`] = `
+[
+  {
+    "instancePath": "/time_slot_id",
+    "keyword": "type",
+    "message": "must be integer",
+    "params": {
+      "type": "integer",
+    },
+    "schemaPath": "defs#/definitions/id_or_uuid/anyOf/0/type",
+  },
+  {
+    "instancePath": "/time_slot_id",
+    "keyword": "format",
+    "message": "must match format "uuid"",
+    "params": {
+      "format": "uuid",
+    },
+    "schemaPath": "defs#/definitions/id_or_uuid/anyOf/1/format",
+  },
+  {
+    "instancePath": "/time_slot_id",
+    "keyword": "anyOf",
+    "message": "must match a schema in anyOf",
+    "params": {},
+    "schemaPath": "defs#/definitions/id_or_uuid/anyOf",
+  },
+]
+`;
+
+exports[`POST /orders throws validation error for required properties 1`] = `
+[
+  {
+    "instancePath": "",
+    "keyword": "required",
+    "message": "must have required property 'customer_id'",
+    "params": {
+      "missingProperty": "customer_id",
+    },
+    "schemaPath": "#/required",
+  },
+  {
+    "instancePath": "",
+    "keyword": "required",
+    "message": "must have required property 'time_slot_id'",
+    "params": {
+      "missingProperty": "time_slot_id",
+    },
+    "schemaPath": "#/required",
+  },
+]
+`;

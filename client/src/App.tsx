@@ -2,11 +2,19 @@
 import logo from "./logo.svg";
 import "./App.css";
 
-// 1. import `ChakraProvider` component
-import { ChakraProvider } from "@chakra-ui/react";
-import { Button } from "@chakra-ui/react";
+import {
+  ClerkProvider,
+  SignIn,
+  SignedIn,
+  SignedOut,
+  UserButton,
+  SignUp,
+} from "@clerk/clerk-react";
 
-function App() {
+// import { ChakraProvider } from "@chakra-ui/react";
+// import { Button } from "@chakra-ui/react";
+
+function Layout() {
   return (
     <div className="App">
       <header className="App-header">
@@ -22,16 +30,23 @@ function App() {
         >
           Learn React
         </a>
-        <Button>Chakra button</Button>
+        <SignedIn>
+          <UserButton></UserButton>
+        </SignedIn>
+        <SignedOut>
+          <SignIn></SignIn>
+        </SignedOut>
       </header>
     </div>
   );
 }
 
-export default () => {
+export default function App() {
   return (
-    <ChakraProvider>
-      <App />
-    </ChakraProvider>
+    // <ChakraProvider>
+      <ClerkProvider publishableKey="pk_test_cG9saXNoZWQtc2hyaW1wLTAuY2xlcmsuYWNjb3VudHMuZGV2JA">
+        <Layout />
+      </ClerkProvider>
+    // </ChakraProvider>
   );
-};
+}

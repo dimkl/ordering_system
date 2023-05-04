@@ -4,8 +4,8 @@ import type { Context, Next, Middleware } from "koa";
 import compose from "koa-compose";
 import { DiscoveryApiFactory } from "@dimkl/ajv-discovery-api";
 
-import { verifyToken } from "./middlewares/verifyToken";
-import { authorize } from "./middlewares/authorize";
+import { verifyToken } from "./middlewares/clerk/verifyToken";
+import { authorize } from "./middlewares/clerk/authorize";
 
 const discoveryApi = DiscoveryApiFactory.getInstance();
 

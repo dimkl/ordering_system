@@ -1,7 +1,23 @@
 import type { Context, Next } from "koa";
+import type { IncomingHttpHeaders } from "http";
 
 import { constants } from "@clerk/backend";
 import { clerkClient, clerkOptions } from "./clerkClient";
+
+const getSingleValue = (value?: string[] | string): string | undefined => {
+  return (Array.isArray(value) ? value[0] : value) || undefined;
+};
+
+const getOptionsFromHeaders = (headers: IncomingHttpHeaders) => {
+  return {
+    forwardedPort: getSingleValue(headers["x-forwarded-port"]),
+    forwardedHost: getSingleValue(headers["x-forwarded-host"]),
+    referrer: headers["referer"],
+    userAgent: headers["user-agent"],
+    origin: headers["origin"],
+    host: headers["host"] as string,
+  };
+};
 
 export const verifyToken = () => {
   return async function verifyToken(ctx: Context, next: Next) {
@@ -15,9 +31,8 @@ export const verifyToken = () => {
         cookieToken,
         headerToken,
         clientUat,
-        origin: ctx.headers["origin"],
-        host: ctx.headers["host"] as string,
         ...clerkOptions,
+        ...getOptionsFromHeaders(ctx.headers),
       });
 
       if (requestState.isUnknown) {

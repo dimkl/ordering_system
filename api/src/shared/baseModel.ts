@@ -4,8 +4,6 @@ import { DBErrors } from "objection-db-errors";
 import addFormats from "ajv-formats";
 
 export class BaseModel extends DBErrors(Model) {
-  uuid?: string;
-
   static get modifiers() {
     return {
       publicColumns(query) {
@@ -52,7 +50,9 @@ export class BaseModel extends DBErrors(Model) {
   }
 
   generateUuid() {
-    this.uuid = uuidv4();
+    if ('uuid' in this){
+      this.uuid = uuidv4();
+    }
   }
 
   static findByIdOrUid(idOrUid: string | number) {

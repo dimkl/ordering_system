@@ -19,7 +19,7 @@ module.exports = {
   coverageDirectory: "coverage",
   coveragePathIgnorePatterns: [
     "/node_modules/",
-    "<rootDir>/integrationTest/",
+    "<rootDir>/e2e/",
     "<rootDir>/config/",
     // TODO: remove the next line
     "<rootDir>/src/shared/",

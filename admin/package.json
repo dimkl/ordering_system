@@ -1,20 +1,36 @@
 {
-  "name": "@dimkl/ordering-system-admin",
-  "version": "0.0.1",
-  "description": "Ordering System Admin",
-  "main": "index.js",
+  "version": "1.0.0",
+  "private": true,
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./index.js"
+    "build": "tsc",
+    "lint": "eslint \"src\"",
+    "start": "dotenv -c '.env' -- node dist/app"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
+    "adminjs": "^7.7.2",
     "@adminjs/koa": "^4.0.1",
-    "@adminjs/sql": "^2.1.0",
     "@koa/router": "^12.0.0",
-    "adminjs": "^7.0.9",
-    "koa": "^2.14.2"
-  }
+    "koa": "^2.14.2",
+    "koa2-formidable": "^1.0.3",
+    "@adminjs/sql": "^2.2.1",
+    "pg": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "@typescript-eslint/eslint-plugin": "^5.58.0",
+    "@typescript-eslint/parser": "^5.58.0",
+    "dotenv-cli": "^7.2.1",
+    "eslint": "^8.38.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^3.1.0",
+    "typescript": "^5.0.4",
+    "@types/koa": "^2.13.11"
+  },
+  "name": "orders-admin"
 }

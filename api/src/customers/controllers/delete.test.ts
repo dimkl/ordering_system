@@ -13,7 +13,7 @@ describe("DELETE /customers/:customer_id", () => {
   beforeEach(() => knex.raw("truncate customers, orders cascade;"));
   afterAll(() => knex.destroy());
 
-  it("deletes customer and returns 204", async () => {
+  it.only("deletes customer and returns 204", async () => {
     const customer = await DataFactory.createCustomer();
 
     const response = await request

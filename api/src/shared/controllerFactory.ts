@@ -5,7 +5,7 @@ import compose from "koa-compose";
 import { DiscoveryApiFactory } from "@dimkl/ajv-discovery-api";
 
 import { verifyToken } from "./middlewares/clerk/verifyToken";
-import { authorize } from "./middlewares/clerk/authorize";
+import { createAuthorize } from "./middlewares/authorize";
 
 const discoveryApi = DiscoveryApiFactory.getInstance();
 
@@ -21,7 +21,7 @@ export class ControllerFactory {
 
     if (scopes.length > 0) {
       middlewares.push(verifyToken());
-      middlewares.push(authorize(scopes));
+      middlewares.push(createAuthorize(scopes));
     }
     if (schema) {
       middlewares.push(this.validateMiddleware(schema));

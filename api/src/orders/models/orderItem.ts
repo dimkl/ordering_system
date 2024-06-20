@@ -2,6 +2,13 @@ import { BaseModel } from "../../shared/baseModel";
 import schema from "../schemas/orderItem.json";
 
 export class OrderItem extends BaseModel {
+  created_at!: Date;
+  updated_at!: Date;
+  order_id!: number;
+  quantity!: number;
+  product_id!: number;
+  uuid!: string;
+
   static get tableName() {
     return "order_items";
   }

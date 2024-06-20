@@ -1,6 +1,6 @@
 export const cors = (origins: string[]) => {
   return (ctx, next) => {
-    const origin = ctx.headers["origin"] as string;
+    const origin = ctx.headers["origin"] || "";
     if (!origins.includes(origin)) {
       return;
     }

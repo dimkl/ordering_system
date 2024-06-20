@@ -5,16 +5,16 @@
   "main": "dist/src/index.js",
   "scripts": {
     "build": "rm -rf dist/ && tsc",
-    "test": "DOTENV_CONFIG_PATH=.env.test NODE_ENV=test npm run db:migrate && jest --runInBand --config='./config/jest/config.js'",
+    "test": "DOTENV_CONFIG_PATH=.env.test NODE_ENV=test npm run db:migrate && DOTENV_CONFIG_PATH=.env.test NODE_ENV=test jest --runInBand --config='./config/jest/config.js'",
     "test:debug": "DOTENV_CONFIG_PATH=.env.test node inspect node_modules/jest/bin/jest.js --runInBand --config='./config/jest/config.js'",
-    "start": "DOTENV_CONFIG_PATH=.env.local ts-node src/index.ts",
+    "start": "DOTENV_CONFIG_PATH=.env.development ts-node src/index.ts",
     "start:dev": "nodemon src/index.js",
     "debug": "node inspect src/index.js",
-    "db:migration:create": "npm run build && DOTENV_CONFIG_PATH=../.env.local knex migrate:make --esm --client pg -x ts --knexfile ./config/knexfile.ts",
-    "db:migrate": "npm run build && DOTENV_CONFIG_PATH=../.env.local knex migrate:latest --esm --knexfile ./config/knexfile.ts",
-    "db:rollback": "npm run build && DOTENV_CONFIG_PATH=../.env.local knex migrate:rollback --esm --knexfile ./config/knexfile.ts",
-    "db:seed:create": "npm run build && DOTENV_CONFIG_PATH=../.env.local knex seed:make --esm --client pg --knexfile ./config/knexfile.ts",
-    "db:seed": "npm run build && DOTENV_CONFIG_PATH=../.env.local knex seed:run --esm --knexfile ./config/knexfile.ts",
+    "db:migration:create": "npm run build && DOTENV_CONFIG_PATH=../.env.development knex migrate:make --esm --client pg -x ts --knexfile ./config/knexfile.ts",
+    "db:migrate": "npm run build && DOTENV_CONFIG_PATH=../.env.development knex migrate:latest --esm --knexfile ./config/knexfile.ts",
+    "db:rollback": "npm run build && DOTENV_CONFIG_PATH=../.env.development knex migrate:rollback --esm --knexfile ./config/knexfile.ts",
+    "db:seed:create": "npm run build && DOTENV_CONFIG_PATH=../.env.development knex seed:make --esm --client pg --knexfile ./config/knexfile.ts",
+    "db:seed": "npm run build && DOTENV_CONFIG_PATH=../.env.development knex seed:run --esm --knexfile ./config/knexfile.ts",
     "setup": "npm run build && npm run db:migrate && npm run db:seed"
   },
   "repository": {

@@ -20,11 +20,7 @@ export const development = { ...base };
 
 export const production = { ...base };
 
-export const test = {
-  ...base,
-  connection:
-    "postgresql://postgres:123456@localhost:5432/ordering_system_test",
-};
+export const test = { ...base };
 
 export default {
   development,

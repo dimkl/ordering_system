@@ -4,6 +4,11 @@ import type { Slot } from "./slot";
 import { BaseModel } from "../../shared/baseModel";
 import schema from "../schemas/timeSlot.json";
 export class TimeSlot extends BaseModel {
+  created_at!: Date;
+  updated_at!: Date;
+  slot_id!: number;
+  customer_id!: number;
+  uuid!: string;
   static get tableName() {
     return "time_slots";
   }

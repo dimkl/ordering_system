@@ -25,7 +25,7 @@ const handler = async (ctx: Context, _next: Next) => {
     });
   }
 
-  ctx.body = await Order.findWithOrderItemsAndProducts(orderItem.order_id);
+  ctx.body = await Order.findWithOrderItemsAndProducts(orderId);
 };
 
 export { schema, handler };

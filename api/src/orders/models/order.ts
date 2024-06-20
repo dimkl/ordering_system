@@ -6,6 +6,12 @@ import { BaseModel } from "../../shared/baseModel";
 import schema from "../schemas/order.json";
 
 export class Order extends BaseModel {
+  created_at!: Date;
+  updated_at!: Date;
+  customer_id!: number;
+  time_slot_id!: number;
+  uuid!: string;
+
   static get tableName() {
     return "orders";
   }

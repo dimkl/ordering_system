@@ -23,7 +23,7 @@ describe("Customer purchase flow", () => {
 
     let response;
     // 1. create customer
-    response = await await request
+    response = await request
       .post("/customers")
       .send({
         first_name: "First",

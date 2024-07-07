@@ -8,7 +8,9 @@ const handler = async (ctx: Context, _next: Next) => {
   const data = ctx.request.validatedData;
   const orderId = ctx.orderItem.order_id;
 
-  await ctx.orderItem.$query().patch(data);
+  if (Object.keys(data).length > 0) {
+    await ctx.orderItem.$query().patch(data).returning("*");
+  }
 
   ctx.body = await Order.findWithOrderItemsAndProducts(orderId);
 };

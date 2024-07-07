@@ -1,15 +1,15 @@
-import type { Context, Next } from "koa";
+import type { Context } from "koa";
 
 import schema from "../../schemas/timeSlot.reserve.json";
 import { TimeSlotReserve } from "../../services/timeSlotReserve";
+import type { TimeSlotReserveParams } from "../../services/timeSlotReserve";
 
 import { camelCaseKeys } from "../../../shared/transformKeys";
 
-async function handler(ctx: Context, next: Next) {
-  // @ts-ignore
-  const data = ctx.request.validatedData;
+async function handler(ctx: Context) {
+  // @ts-expect-error validatedData are added as part of the request validation
+  const data = ctx.request.validatedData as TimeSlotReserveParams;
 
-  // @ts-ignore
   ctx.body = await TimeSlotReserve.process(camelCaseKeys(data));
 }
 

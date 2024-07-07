@@ -10,7 +10,7 @@ describe("Shop", () => {
           manager_id: 1,
           name: "Shop",
           uuid: uuidv4(),
-          opening_days: [6],
+          opening_days: [6]
         });
         const date = new Date("2022-04-23");
 
@@ -25,7 +25,7 @@ describe("Shop", () => {
           name: "Shop",
           uuid: uuidv4(),
           opening_time: "08:00:00Z",
-          opening_days: [0, 1, 2, 3, 4, 5],
+          opening_days: [0, 1, 2, 3, 4, 5]
         });
         const date = new Date("2022-04-23");
 
@@ -40,7 +40,7 @@ describe("Shop", () => {
           manager_id: 1,
           name: "Shop",
           uuid: uuidv4(),
-          opening_time: "08:00:00Z",
+          opening_time: "08:00:00Z"
         });
         const date = new Date("2022-04-23");
 
@@ -56,13 +56,11 @@ describe("Shop", () => {
           name: "Shop",
           uuid: uuidv4(),
           opening_time: "08:00:00Z",
-          opening_days: [6],
+          opening_days: [6]
         });
         const date = new Date("2022-04-23");
 
-        expect(shop.openingDate(date)?.toISOString()).toBe(
-          "2022-04-23T08:00:00.000Z"
-        );
+        expect(shop.openingDate(date)?.toISOString()).toBe("2022-04-23T08:00:00.000Z");
       });
     });
   });
@@ -74,7 +72,7 @@ describe("Shop", () => {
           manager_id: 1,
           name: "Shop",
           uuid: uuidv4(),
-          opening_days: [6],
+          opening_days: [6]
         });
         const date = new Date("2022-04-23");
 
@@ -89,7 +87,7 @@ describe("Shop", () => {
           name: "Shop",
           uuid: uuidv4(),
           closing_time: "00:00:00Z",
-          opening_days: [0, 1, 2, 3, 4, 5],
+          opening_days: [0, 1, 2, 3, 4, 5]
         });
         const date = new Date("2022-04-23");
 
@@ -104,7 +102,7 @@ describe("Shop", () => {
           manager_id: 1,
           name: "Shop",
           uuid: uuidv4(),
-          closing_time: "00:00:00Z",
+          closing_time: "00:00:00Z"
         });
         const date = new Date("2022-04-23");
 
@@ -120,13 +118,11 @@ describe("Shop", () => {
           name: "Shop",
           uuid: uuidv4(),
           closing_time: "22:00:00Z",
-          opening_days: [6],
+          opening_days: [6]
         });
         const date = new Date("2022-04-23");
 
-        expect(shop.closingDate(date)?.toISOString()).toBe(
-          "2022-04-23T22:00:00.000Z"
-        );
+        expect(shop.closingDate(date)?.toISOString()).toBe("2022-04-23T22:00:00.000Z");
       });
 
       describe("and closing_time is in early morning (< opening_time)", () => {
@@ -137,13 +133,11 @@ describe("Shop", () => {
             uuid: uuidv4(),
             opening_time: "08:00:00Z",
             closing_time: "02:00:00Z",
-            opening_days: [6],
+            opening_days: [6]
           });
           const date = new Date("2022-04-23");
 
-          expect(shop.closingDate(date)?.toISOString()).toBe(
-            "2022-04-24T02:00:00.000Z"
-          );
+          expect(shop.closingDate(date)?.toISOString()).toBe("2022-04-24T02:00:00.000Z");
         });
 
         describe("and closing_time is the same as opening_time", () => {
@@ -154,13 +148,11 @@ describe("Shop", () => {
               uuid: uuidv4(),
               opening_time: "08:00:00Z",
               closing_time: "08:00:00Z",
-              opening_days: [6],
+              opening_days: [6]
             });
             const date = new Date("2022-04-23");
 
-            expect(shop.closingDate(date)?.toISOString()).toBe(
-              "2022-04-24T08:00:00.000Z"
-            );
+            expect(shop.closingDate(date)?.toISOString()).toBe("2022-04-24T08:00:00.000Z");
           });
         });
       });
@@ -176,7 +168,7 @@ describe("Shop", () => {
           uuid: uuidv4(),
           opening_time: "08:00:00Z",
           closing_time: "08:00:00Z",
-          opening_days: [6],
+          opening_days: [6]
         });
         const startDate = new Date("2022-04-23T20:00:00.00Z");
         const endDate = new Date("2022-04-23T19:00:00.00Z");
@@ -193,7 +185,7 @@ describe("Shop", () => {
           uuid: uuidv4(),
           opening_time: "08:00:00Z",
           closing_time: "19:00:00Z",
-          opening_days: [6],
+          opening_days: [6]
         });
         const startDate = new Date("2022-04-23T20:00:00.00Z");
 
@@ -206,7 +198,7 @@ describe("Shop", () => {
         const shop = Shop.fromJson({
           manager_id: 1,
           name: "Shop",
-          uuid: uuidv4(),
+          uuid: uuidv4()
         });
         jest.spyOn(shop, "openingDate").mockReturnValueOnce(undefined);
 
@@ -223,7 +215,7 @@ describe("Shop", () => {
           manager_id: 1,
           name: "Shop",
           opening_time: "08:00:00Z",
-          opening_days: [6],
+          opening_days: [6]
         });
         jest.spyOn(shop, "closingDate").mockReturnValueOnce(undefined);
 
@@ -241,7 +233,7 @@ describe("Shop", () => {
           name: "Shop",
           opening_time: "19:00:00Z",
           closing_time: "22:00:00Z",
-          opening_days: [6],
+          opening_days: [6]
         });
 
         const startDate = new Date("2022-04-23T15:00:00.00Z");
@@ -258,7 +250,7 @@ describe("Shop", () => {
           name: "Shop",
           opening_time: "19:00:00Z",
           closing_time: "22:00:00Z",
-          opening_days: [6],
+          opening_days: [6]
         });
 
         const startDate = new Date("2022-04-23T23:00:00.00Z");
@@ -275,7 +267,7 @@ describe("Shop", () => {
           name: "Shop",
           opening_time: "19:00:00Z",
           closing_time: "22:00:00Z",
-          opening_days: [6],
+          opening_days: [6]
         });
 
         const startDate = new Date("2022-04-23T15:00:00.00Z");
@@ -292,7 +284,7 @@ describe("Shop", () => {
           name: "Shop",
           opening_time: "19:00:00Z",
           closing_time: "22:00:00Z",
-          opening_days: [6],
+          opening_days: [6]
         });
 
         const startDate = new Date("2022-04-23T20:00:00.00Z");
@@ -309,7 +301,7 @@ describe("Shop", () => {
           name: "Shop",
           opening_time: "19:00:00Z",
           closing_time: "22:00:00Z",
-          opening_days: [6],
+          opening_days: [6]
         });
 
         const startDate = new Date("2022-04-23T19:30:00.00Z");
@@ -326,7 +318,7 @@ describe("Shop", () => {
           name: "Shop",
           opening_time: "19:00:00Z",
           closing_time: "22:00:00Z",
-          opening_days: [6],
+          opening_days: [6]
         });
 
         const startDate = new Date("2022-04-23T19:00:00.00Z");

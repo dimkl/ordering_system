@@ -15,9 +15,7 @@ describe("GET /customers/:customer_id?", () => {
   it("returns all customers", async () => {
     await DataFactory.createCustomer();
 
-    const response = await request
-      .get("/customers")
-      .set("Accept", "application/json");
+    const response = await request.get("/customers").set("Accept", "application/json");
 
     expect(response.status).toBe(200);
     expect(response.body.length).toBe(1);
@@ -25,7 +23,7 @@ describe("GET /customers/:customer_id?", () => {
       id: expect.any(Number),
       uuid: expect.any(String),
       created_at: expect.any(String),
-      updated_at: expect.any(String),
+      updated_at: expect.any(String)
     });
   });
 
@@ -41,7 +39,7 @@ describe("GET /customers/:customer_id?", () => {
       id: expect.any(Number),
       uuid: expect.any(String),
       created_at: expect.any(String),
-      updated_at: expect.any(String),
+      updated_at: expect.any(String)
     });
   });
 
@@ -57,14 +55,12 @@ describe("GET /customers/:customer_id?", () => {
       id: expect.any(Number),
       uuid: expect.any(String),
       created_at: expect.any(String),
-      updated_at: expect.any(String),
+      updated_at: expect.any(String)
     });
   });
 
   it("returns empty list of customers when there are no customers", async () => {
-    const response = await request
-      .get("/customers")
-      .set("Accept", "application/json");
+    const response = await request.get("/customers").set("Accept", "application/json");
 
     expect(response.status).toBe(200);
     expect(response.body).toEqual([]);

@@ -13,9 +13,9 @@ const FSM = StateMachine.factory({
     {
       name: "cancel",
       from: ["draft", "placed", "in_progress"],
-      to: "canceled",
+      to: "canceled"
     },
-    { name: "goto", from: "*", to: (s) => s },
+    { name: "goto", from: "*", to: (s) => s }
   ],
   methods: {
     onTransition: (lifecycle, order) => {
@@ -26,12 +26,10 @@ const FSM = StateMachine.factory({
     },
     onPlace: (lifecycle, order) => {
       return Promise.all(
-        order.order_items.map((oi) =>
-          OrderItemTransition.process(oi, order, "place")
-        )
+        order.order_items.map((oi) => OrderItemTransition.process(oi, order, "place"))
       );
-    },
-  },
+    }
+  }
 });
 
 export class OrderTransition {

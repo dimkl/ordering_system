@@ -23,9 +23,9 @@ export class Section extends BaseModel {
         modelClass: __dirname + "/shop.ts",
         join: {
           from: "sections.shop_id",
-          to: "shops.id",
-        },
-      },
+          to: "shops.id"
+        }
+      }
     };
   }
 }

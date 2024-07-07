@@ -25,15 +25,10 @@ export class Shop extends BaseModel {
       ...super.modifiers,
       availableProducts(query) {
         query
-          .join(
-            "product_availability",
-            "product_availability.shop_id",
-            "=",
-            "shops.id"
-          )
+          .join("product_availability", "product_availability.shop_id", "=", "shops.id")
           .withGraphJoined("products")
           .where("product_availability.quantity", ">", 0);
-      },
+      }
     };
   }
 
@@ -46,11 +41,11 @@ export class Shop extends BaseModel {
           from: "shops.id",
           through: {
             from: "product_availability.shop_id",
-            to: "product_availability.product_id",
+            to: "product_availability.product_id"
           },
-          to: "products.id",
-        },
-      },
+          to: "products.id"
+        }
+      }
     };
   }
 
@@ -64,14 +59,7 @@ export class Shop extends BaseModel {
 
     const [hours, minutes, seconds] = this.opening_time.split(":");
     return new Date(
-      Date.UTC(
-        year,
-        month,
-        day,
-        Number(hours) || 0,
-        Number(minutes) || 0,
-        Number(seconds) || 0
-      )
+      Date.UTC(year, month, day, Number(hours) || 0, Number(minutes) || 0, Number(seconds) || 0)
     );
   }
 
@@ -90,14 +78,7 @@ export class Shop extends BaseModel {
     if (openingHours && openingHours >= Number(hours)) day += 1;
 
     return new Date(
-      Date.UTC(
-        year,
-        month,
-        day,
-        Number(hours) || 0,
-        Number(minutes) || 0,
-        Number(seconds) || 0
-      )
+      Date.UTC(year, month, day, Number(hours) || 0, Number(minutes) || 0, Number(seconds) || 0)
     );
   }
 
@@ -108,23 +89,14 @@ export class Shop extends BaseModel {
 
     // startDate is before opening or after closing
     if (!this.openingDate(startDate)) return false;
-    if (
-      !isBetween(
-        startDate,
-        this.openingDate(startDate),
-        this.closingDate(startDate)
-      )
-    )
+    if (!isBetween(startDate, this.openingDate(startDate), this.closingDate(startDate)))
       return false;
 
     if (!endDate) return true;
 
     // endDate is before opening or after closing
     if (!this.closingDate(endDate)) return false;
-    if (
-      !isBetween(endDate, this.openingDate(endDate), this.closingDate(endDate))
-    )
-      return false;
+    if (!isBetween(endDate, this.openingDate(endDate), this.closingDate(endDate))) return false;
 
     return true;
   }

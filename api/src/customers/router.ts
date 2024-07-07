@@ -38,11 +38,5 @@ router.delete(
 );
 
 // actions
-router.post(
-  "/customers/login",
-  ControllerFactory.create({ ...loginController })
-);
-router.post(
-  "/customers/signup",
-  ControllerFactory.create({ ...signupController })
-);
+router.post("/customers/login", ControllerFactory.create({ ...loginController }));
+router.post("/customers/signup", ControllerFactory.create({ ...signupController }));

@@ -10,7 +10,7 @@ export async function seed(knex: Knex) {
       sku: "table-1",
       uuid: uuidv4(),
       active: true,
-      capacity: 5,
-    },
+      capacity: 5
+    }
   ]);
 }

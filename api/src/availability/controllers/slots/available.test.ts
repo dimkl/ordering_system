@@ -10,9 +10,7 @@ describe("GET /slots/:shop_id/available/:slot_id?", () => {
   let knex: Knex;
   beforeAll(() => (knex = setupModels()));
   beforeEach(() =>
-    knex.raw(
-      "truncate orders, order_items, customers, users, products, time_slots, slots cascade;"
-    )
+    knex.raw("truncate orders, order_items, customers, users, products, time_slots, slots cascade;")
   );
   afterAll(() => knex.destroy());
 
@@ -31,7 +29,7 @@ describe("GET /slots/:shop_id/available/:slot_id?", () => {
       user_id: expect.any(String),
       uuid: expect.any(String),
       created_at: expect.any(String),
-      updated_at: expect.any(String),
+      updated_at: expect.any(String)
     });
   });
 
@@ -60,7 +58,7 @@ describe("GET /slots/:shop_id/available/:slot_id?", () => {
       user_id: expect.any(String),
       uuid: expect.any(String),
       created_at: expect.any(String),
-      updated_at: expect.any(String),
+      updated_at: expect.any(String)
     });
   });
 
@@ -78,7 +76,7 @@ describe("GET /slots/:shop_id/available/:slot_id?", () => {
       user_id: expect.any(String),
       uuid: expect.any(String),
       created_at: expect.any(String),
-      updated_at: expect.any(String),
+      updated_at: expect.any(String)
     });
   });
 

@@ -10,7 +10,7 @@ import { createAuthorize } from "./middlewares/authorize";
 const discoveryApi = DiscoveryApiFactory.getInstance();
 
 type ControllerFactoryParams = {
-  handler: (ctx: Context, next: Next) => {};
+  handler: (ctx: Context, next: Next) => unknown;
   schema?: AnySchema;
   scopes?: string[];
 };
@@ -40,13 +40,13 @@ export class ControllerFactory {
       await discoveryApi.validateSchema({
         schema,
         dataAccessor: () => {
-          // @ts-ignore
+          // @ts-expect-error request body is object or null
           return { ...ctx.params, ...ctx.request.body };
         },
         dataSetter: (dt) => {
-          // @ts-ignore
+          // @ts-expect-error validatedData are added as part of the request validation
           ctx.request.validatedData = dt;
-        },
+        }
       });
 
       return next();

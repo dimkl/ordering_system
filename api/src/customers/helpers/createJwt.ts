@@ -16,10 +16,7 @@ const JWT_PRIVATE_KEY = process.env.JWT_PRIVATE_KEY as Secret;
 //   )];
 // }
 
-export async function createJwt(
-  customerUuid: string,
-  { role = "customer" } = {}
-) {
+export async function createJwt(customerUuid: string, { role = "customer" } = {}) {
   const customer = await Customer.query()
     .modify("tokenColumns")
     .where({ uuid: customerUuid })
@@ -33,12 +30,12 @@ export async function createJwt(
     ...customer,
     role,
     sub: customerUuid,
-    scopes: allowedScopes,
+    scopes: allowedScopes
   };
 
   const access_token = await jsonwebtoken.sign(payload, JWT_PRIVATE_KEY, {
     expiresIn: JWT_EXPIRATION,
-    algorithm: JWT_ALGORITHM,
+    algorithm: JWT_ALGORITHM
   });
 
   return { role, access_token, scopes: allowedScopes };

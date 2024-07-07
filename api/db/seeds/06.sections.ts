@@ -9,7 +9,7 @@ export async function seed(knex: Knex) {
       user_id: 1,
       name: "Section",
       sku: "section-1",
-      uuid: uuidv4(),
-    },
+      uuid: uuidv4()
+    }
   ]);
 }

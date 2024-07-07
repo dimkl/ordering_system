@@ -24,14 +24,14 @@ export async function seed(knex: Knex) {
       last_name: "Customer",
       email: "customer1@example.com",
       password: await createPassword(),
-      uuid: uuidv4(),
+      uuid: uuidv4()
     },
     {
       first_name: "Second",
       last_name: "Customer",
       email: "customer2@example.com",
       password: await createPassword(),
-      uuid: uuidv4(),
-    },
+      uuid: uuidv4()
+    }
   ]);
 }

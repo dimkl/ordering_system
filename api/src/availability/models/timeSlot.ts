@@ -34,14 +34,10 @@ export class TimeSlot extends BaseModel {
       },
       reserved(query, startedAt, endedAt) {
         query.where("started_at", "<=", endedAt).where(function () {
-          // @ts-ignore
-          this.where("ended_at", ">=", startedAt).orWhere(
-            "ended_at",
-            "is",
-            null
-          );
+          // @ts-expect-error this is the same type as query
+          this.where("ended_at", ">=", startedAt).orWhere("ended_at", "is", null);
         });
-      },
+      }
     };
   }
 
@@ -52,17 +48,17 @@ export class TimeSlot extends BaseModel {
         modelClass: __dirname + "/../../customers/models/customer.ts",
         join: {
           from: "time_slots.customer_id",
-          to: "customers.id",
-        },
+          to: "customers.id"
+        }
       },
       slot: {
         relation: BaseModel.BelongsToOneRelation,
         modelClass: __dirname + "/slot.ts",
         join: {
           from: "time_slots.slot_id",
-          to: "slots.id",
-        },
-      },
+          to: "slots.id"
+        }
+      }
     };
   }
 }

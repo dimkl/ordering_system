@@ -21,9 +21,9 @@ export class Holiday extends BaseModel {
         modelClass: __dirname + "/../../shops/models/shop.ts",
         join: {
           from: "holidays.shop_id",
-          to: "shops.id",
-        },
-      },
+          to: "shops.id"
+        }
+      }
     };
   }
 }

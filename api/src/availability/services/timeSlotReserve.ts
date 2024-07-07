@@ -4,7 +4,7 @@ import { Customer } from "../../customers/models/customer";
 import { BusinessError } from "../../shared/errors";
 import { snakeCaseKeys } from "../../shared/transformKeys";
 
-type TimeSlotReserveParams = {
+export type TimeSlotReserveParams = {
   customerId: number | string;
   slotId: number | string;
   startedAt?: string;
@@ -12,7 +12,7 @@ type TimeSlotReserveParams = {
 };
 export class TimeSlotReserve {
   static async process({ customerId, slotId, ...data }: TimeSlotReserveParams) {
-    const customer = await Customer.findByIdOrUid(customerId) as Customer;
+    const customer = (await Customer.findByIdOrUid(customerId)) as Customer;
     if (!customer) {
       throw new BusinessError(`Customer ${customerId} does not exist!`);
     }
@@ -50,7 +50,7 @@ export class TimeSlotReserve {
       .insert({
         ...snakeCaseKeys(data),
         customer_id: customer.id,
-        slot_id: slot.id,
+        slot_id: slot.id
       });
   }
 

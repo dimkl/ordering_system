@@ -21,7 +21,7 @@ describe("POST /products/ingredients", () => {
       .post(`/products/ingredients`)
       .send({
         ingredient_id: ingredient.uuid,
-        product_id: product.uuid,
+        product_id: product.uuid
       })
       .set("Accept", "application/json");
 
@@ -39,9 +39,9 @@ describe("POST /products/ingredients", () => {
           created_at: expect.any(String),
           updated_at: expect.any(String),
           suitable_for_diet: "all",
-          allergen: false,
-        }),
-      ]),
+          allergen: false
+        })
+      ])
     });
     expect(response.body.ingredients.length).toBe(1);
   });
@@ -52,7 +52,7 @@ describe("POST /products/ingredients", () => {
       .post(`/products/ingredients`)
       .send({
         ingredient_id: uuidv4(),
-        product_id: product.uuid,
+        product_id: product.uuid
       })
       .set("Accept", "application/json");
 
@@ -65,7 +65,7 @@ describe("POST /products/ingredients", () => {
       .post(`/products/ingredients`)
       .send({
         ingredient_id: ingredient.uuid,
-        product_id: uuidv4(),
+        product_id: uuidv4()
       })
       .set("Accept", "application/json");
 
@@ -81,7 +81,7 @@ describe("POST /products/ingredients", () => {
       .send({
         ingredient_id: ingredient.uuid,
         product_id: product.uuid,
-        created_at: "1680046371850",
+        created_at: "1680046371850"
       })
       .set("Accept", "application/json");
 

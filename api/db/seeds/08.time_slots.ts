@@ -11,7 +11,7 @@ export async function seed(knex: Knex) {
       customer_id: 1,
       uuid: uuidv4(),
       started_at: new Date(now),
-      ended_at: new Date(now + 3600000),
-    },
+      ended_at: new Date(now + 3600000)
+    }
   ]);
 }

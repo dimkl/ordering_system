@@ -20,7 +20,7 @@ describe("POST /customers", () => {
         first_name: "Dimitris",
         last_name: "Klouvas",
         email: "dimitris.klouvas@gmail.com",
-        password: "1234",
+        password: "1234"
       })
       .set("Accept", "application/json");
 
@@ -29,15 +29,12 @@ describe("POST /customers", () => {
       id: expect.any(Number),
       uuid: expect.any(String),
       created_at: expect.any(String),
-      updated_at: expect.any(String),
+      updated_at: expect.any(String)
     });
   });
 
   it("throws validation error for required properties", async () => {
-    const response = await request
-      .post("/customers")
-      .send({})
-      .set("Accept", "application/json");
+    const response = await request.post("/customers").send({}).set("Accept", "application/json");
 
     expect(response.status).toBe(400);
     expect(response.body).toMatchSnapshot();
@@ -49,7 +46,7 @@ describe("POST /customers", () => {
       first_name: "First",
       last_name: "Customer",
       email,
-      password: "1234",
+      password: "1234"
     });
 
     const response = await request
@@ -58,7 +55,7 @@ describe("POST /customers", () => {
         first_name: "Dimitris",
         last_name: "Klouvas",
         email: email,
-        password: "1234",
+        password: "1234"
       })
       .set("Accept", "application/json");
 
@@ -75,7 +72,7 @@ describe("POST /customers", () => {
         email: "dimitris.klouvas@gmail.com",
         password: "1234",
         id: 2,
-        created_at: "1680046371850",
+        created_at: "1680046371850"
       })
       .set("Accept", "application/json");
 
@@ -86,7 +83,7 @@ describe("POST /customers", () => {
       id: expect.any(Number),
       uuid: expect.any(String),
       created_at: expect.any(String),
-      updated_at: expect.any(String),
+      updated_at: expect.any(String)
     });
   });
 });

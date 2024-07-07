@@ -6,14 +6,14 @@ const base = {
   connection: process.env.DATABASE_URL,
   migrations: {
     directory: __dirname + "/../dist/db/migrations",
-    tableName: "migrations",
+    tableName: "migrations"
   },
   seeds: {
-    directory: __dirname + "/../dist/db/seeds",
+    directory: __dirname + "/../dist/db/seeds"
   },
   searchPath: ["public"],
   asyncStackTraces: true,
-  useNullAsDefault: true,
+  useNullAsDefault: true
 };
 
 export const development = { ...base };
@@ -25,5 +25,5 @@ export const test = { ...base };
 export default {
   development,
   production,
-  test,
+  test
 };

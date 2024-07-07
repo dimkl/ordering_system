@@ -30,7 +30,7 @@ router.post(
   "/products/ingredients",
   ControllerFactory.create({
     ...productAddIngredientController,
-    scopes: ["urn:products:c"],
+    scopes: ["urn:products:c"]
   })
 );
 
@@ -38,21 +38,21 @@ router.get(
   "/products",
   ControllerFactory.create({
     ...productListController,
-    scopes: ["urn:products:r"],
+    scopes: ["urn:products:r"]
   })
 );
 router.get(
   "/products/:product_id",
   ControllerFactory.create({
     ...productListController,
-    scopes: ["urn:products:r"],
+    scopes: ["urn:products:r"]
   })
 );
 router.post(
   "/products",
   ControllerFactory.create({
     ...productCreateController,
-    scopes: ["urn:products:c"],
+    scopes: ["urn:products:c"]
   })
 );
 
@@ -60,7 +60,7 @@ router.post(
   "/variations",
   ControllerFactory.create({
     ...variationCreateController,
-    scopes: ["urn:products:c"],
+    scopes: ["urn:products:c"]
   })
 );
 
@@ -68,21 +68,21 @@ router.get(
   "/ingredients",
   ControllerFactory.create({
     ...ingredientListController,
-    scopes: ["urn:ingredients:r"],
+    scopes: ["urn:ingredients:r"]
   })
 );
 router.get(
   "/ingredients/:ingredient_id",
   ControllerFactory.create({
     ...ingredientListController,
-    scopes: ["urn:ingredients:r"],
+    scopes: ["urn:ingredients:r"]
   })
 );
 router.post(
   "/ingredients",
   ControllerFactory.create({
     ...ingredientCreateController,
-    scopes: ["urn:ingredients:c"],
+    scopes: ["urn:ingredients:c"]
   })
 );
 
@@ -90,20 +90,20 @@ router.get(
   "/categories",
   ControllerFactory.create({
     ...categoryListController,
-    scopes: ["urn:categories:r"],
+    scopes: ["urn:categories:r"]
   })
 );
 router.get(
   "/categories/:category_id",
   ControllerFactory.create({
     ...categoryListController,
-    scopes: ["urn:categories:r"],
+    scopes: ["urn:categories:r"]
   })
 );
 router.post(
   "/categories",
   ControllerFactory.create({
     ...categoryCreateController,
-    scopes: ["urn:categories:c"],
+    scopes: ["urn:categories:c"]
   })
 );

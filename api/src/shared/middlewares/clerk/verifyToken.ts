@@ -15,7 +15,7 @@ const getOptionsFromHeaders = (headers: IncomingHttpHeaders) => {
     referrer: headers["referer"],
     userAgent: headers["user-agent"],
     origin: headers["origin"],
-    host: headers["host"] as string,
+    host: headers["host"] as string
   };
 };
 
@@ -32,14 +32,14 @@ export const verifyToken = () => {
         headerToken,
         clientUat,
         ...clerkOptions,
-        ...getOptionsFromHeaders(ctx.headers),
+        ...getOptionsFromHeaders(ctx.headers)
       });
 
       if (requestState.isUnknown) {
         ctx.response.headers = {
           [constants.Headers.AuthReason]: requestState.reason,
           [constants.Headers.AuthMessage]: requestState.message,
-          [constants.Headers.AuthStatus]: requestState.status,
+          [constants.Headers.AuthStatus]: requestState.status
         };
         ctx.status = 401;
         return;
@@ -50,13 +50,13 @@ export const verifyToken = () => {
           [constants.Headers.AuthReason]: requestState.reason,
           [constants.Headers.AuthMessage]: requestState.message,
           [constants.Headers.AuthStatus]: requestState.status,
-          "content-type": "text/html",
+          "content-type": "text/html"
         };
 
         const { publishableKey, frontendApi } = clerkOptions;
         ctx.body = clerkClient.localInterstitial({
           publishableKey,
-          frontendApi,
+          frontendApi
         });
         ctx.status = 401;
         return;

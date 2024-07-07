@@ -27,7 +27,8 @@ export class Slot extends BaseModel {
       active(query) {
         query.where({ active: true });
       },
-      available(query, shopId, startDate, endDate) {
+      available(query, shopId) {
+        // available(query, shopId, _startDate, _endDate) {
         query
           // .leftJoinRelated('time_slots(reservedTimeSlots)')
           // .modifiers({
@@ -35,7 +36,7 @@ export class Slot extends BaseModel {
           // })
           .joinRelated("section.shop")
           .where("section.shop_id", "=", shopId);
-      },
+      }
     };
   }
 
@@ -46,25 +47,25 @@ export class Slot extends BaseModel {
         modelClass: __dirname + "/../../users/models/user.ts",
         join: {
           from: "slots.user_id",
-          to: "users.id",
-        },
+          to: "users.id"
+        }
       },
       section: {
         relation: BaseModel.BelongsToOneRelation,
         modelClass: __dirname + "/../../shops/models/section.ts",
         join: {
           from: "slots.section_id",
-          to: "sections.id",
-        },
+          to: "sections.id"
+        }
       },
       time_slots: {
         relation: BaseModel.HasManyRelation,
         modelClass: __dirname + "/timeSlot.ts",
         join: {
           from: "slots.id",
-          to: "time_slots.slot_id",
-        },
-      },
+          to: "time_slots.slot_id"
+        }
+      }
     };
   }
 }

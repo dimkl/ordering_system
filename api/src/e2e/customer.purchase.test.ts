@@ -9,11 +9,7 @@ import setupModels from "../shared/setupModels";
 describe("Customer purchase flow", () => {
   let knex: Knex;
   beforeAll(() => (knex = setupModels()));
-  beforeEach(() =>
-    knex.raw(
-      "truncate orders, order_items, customers, users, products cascade;"
-    )
-  );
+  beforeEach(() => knex.raw("truncate orders, order_items, customers, users, products cascade;"));
   afterAll(() => knex.destroy());
 
   it("completes process", async () => {
@@ -29,7 +25,7 @@ describe("Customer purchase flow", () => {
         first_name: "First",
         last_name: "Customer",
         email: "customer@example.com",
-        password: "123456",
+        password: "123456"
       })
       .set("Accept", "application/json");
 
@@ -42,7 +38,7 @@ describe("Customer purchase flow", () => {
       .send({
         customer_id: customerId,
         slot_id: slot.uuid,
-        started_at: "2022-04-23T22:00:00.000Z",
+        started_at: "2022-04-23T22:00:00.000Z"
       })
       .set("Accept", "application/json");
     expect(response.status).toBe(200);
@@ -80,9 +76,7 @@ describe("Customer purchase flow", () => {
     const orderItems = response.body.order_items;
 
     // 5. places order
-    response = await request
-      .post(`/orders/${orderId}/place`)
-      .set("Accept", "application/json");
+    response = await request.post(`/orders/${orderId}/place`).set("Accept", "application/json");
     expect(response.status).toBe(200);
     expect(response.body.state).toBe("placed");
     expect(response.body.order_items[0].state).toBe("placed");
@@ -126,9 +120,7 @@ describe("Customer purchase flow", () => {
     expect(response.body.state).toBe("payment_requested");
 
     // 9. user-waiter invoices orders (add discount or extra charges)
-    response = await request
-      .post(`/orders/${orderId}/invoice`)
-      .set("Accept", "application/json");
+    response = await request.post(`/orders/${orderId}/invoice`).set("Accept", "application/json");
     expect(response.status).toBe(200);
     expect(response.body.state).toBe("invoiced");
 

@@ -8,6 +8,7 @@ export function errorHandler() {
   return async function errorHandlerMiddleware(ctx: Context, next: Next) {
     try {
       await next();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       if (err?.validation) {
         ctx.status = 400;

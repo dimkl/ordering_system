@@ -7,10 +7,10 @@ const FSM = StateMachine.factory({
     { name: "process", from: "placed", to: "prepared" },
     { name: "deliver", from: "prepared", to: "delivered" },
     { name: "cancel", from: ["draft", "placed"], to: "canceled" },
-    { name: "goto", from: "*", to: (s) => s },
+    { name: "goto", from: "*", to: (s) => s }
   ],
   methods: {
-    onTransition: (lifecycle, orderItem, order) => {
+    onTransition: (lifecycle, orderItem) => {
       if (["goto", "init"].includes(lifecycle.transition)) {
         return true;
       }
@@ -25,16 +25,14 @@ const FSM = StateMachine.factory({
       return true;
     },
     onDeliver: (lifecycle, orderItem, order) => {
-      const allOrderItemsDelivered = order.order_items.every(
-        (oi) => oi.state === "delivered"
-      );
+      const allOrderItemsDelivered = order.order_items.every((oi) => oi.state === "delivered");
       if (order.state === "processing" && allOrderItemsDelivered) {
         return order.$query().patch({ state: "delivered" });
       }
 
       return true;
-    },
-  },
+    }
+  }
 });
 
 export class OrderItemTransition {

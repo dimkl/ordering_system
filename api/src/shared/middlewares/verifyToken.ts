@@ -13,7 +13,7 @@ export const verifyToken = () => {
 
       const token = authHeader.split("Bearer ")[1];
       ctx.tokenClaims = await jsonwebtoken.verify(token, getPublicKey(), {
-        algorithms: ["RS256"],
+        algorithms: ["RS256"]
       });
 
       return next();

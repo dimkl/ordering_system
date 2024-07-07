@@ -11,11 +11,7 @@ import setupModels from "../../shared/setupModels";
 describe("DELETE /orders/:order_id", () => {
   let knex: Knex;
   beforeAll(() => (knex = setupModels()));
-  beforeEach(() =>
-    knex.raw(
-      "truncate orders, order_items, customers, users, products cascade;"
-    )
-  );
+  beforeEach(() => knex.raw("truncate orders, order_items, customers, users, products cascade;"));
   afterAll(() => knex.destroy());
 
   it("deletes customer and returns 204", async () => {
@@ -29,9 +25,7 @@ describe("DELETE /orders/:order_id", () => {
   });
 
   it("throws 404 when customer does not exist", async () => {
-    const response = await request
-      .delete(`/orders/${uuidv4()}`)
-      .set("Accept", "application/json");
+    const response = await request.delete(`/orders/${uuidv4()}`).set("Accept", "application/json");
 
     expect(response.status).toBe(404);
   });

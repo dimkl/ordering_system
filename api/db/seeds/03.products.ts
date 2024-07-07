@@ -10,7 +10,7 @@ export async function seed(knex: Knex) {
       description: "Product description",
       uuid: uuidv4(),
       id: 1,
-      category_id: 1,
+      category_id: 1
     },
     {
       title: "Product (variant 1)",
@@ -19,7 +19,7 @@ export async function seed(knex: Knex) {
       uuid: uuidv4(),
       id: 2,
       variant_id: 1,
-      category_id: 1,
+      category_id: 1
     },
     {
       title: "Product (variant 2)",
@@ -27,7 +27,7 @@ export async function seed(knex: Knex) {
       description: "Product variant 2 description",
       uuid: uuidv4(),
       id: 3,
-      variant_id: 1,
-    },
+      variant_id: 1
+    }
   ]);
 }

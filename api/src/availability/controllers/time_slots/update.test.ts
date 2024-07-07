@@ -10,21 +10,15 @@ describe("PATCH /time_slots/:time_slot_id", () => {
   let knex: Knex;
   beforeAll(() => (knex = setupModels()));
   beforeEach(() =>
-    knex.raw(
-      "truncate customers, users, time_slots, slots, sections, shops cascade;"
-    )
+    knex.raw("truncate customers, users, time_slots, slots, sections, shops cascade;")
   );
   afterAll(() => knex.destroy());
 
   it("updates and returns updated time_slot", async () => {
     const timeSlot = await DataFactory.createTimeSlot();
-    const slot = await DataFactory.createSlot(
-      {},
-      {},
-      { email: "aloha@example.com" }
-    );
+    const slot = await DataFactory.createSlot({}, {}, { email: "aloha@example.com" });
     const customer = await DataFactory.createCustomer({
-      email: "timeSlot.update@example.com",
+      email: "timeSlot.update@example.com"
     });
 
     const response = await request
@@ -33,7 +27,7 @@ describe("PATCH /time_slots/:time_slot_id", () => {
         started_at: "2022-04-21T15:28:27.602Z",
         ended_at: "2022-05-21T15:28:27.602Z",
         customer_id: customer.uuid,
-        slot_id: slot.uuid,
+        slot_id: slot.uuid
       })
       .set("Accept", "application/json");
 
@@ -46,7 +40,7 @@ describe("PATCH /time_slots/:time_slot_id", () => {
       id: timeSlot.id,
       customer_id: customer.uuid,
       slot_id: slot.uuid,
-      uuid: timeSlot.uuid,
+      uuid: timeSlot.uuid
     });
     expect(timeSlot.customer_id).not.toEqual(customer.id);
     expect(timeSlot.slot_id).not.toEqual(slot.id);
@@ -73,7 +67,7 @@ describe("PATCH /time_slots/:time_slot_id", () => {
       id: timeSlot.id,
       customer_id: timeSlot.customer.uuid,
       slot_id: timeSlot.slot.uuid,
-      uuid: timeSlot.uuid,
+      uuid: timeSlot.uuid
     });
   });
 
@@ -84,7 +78,7 @@ describe("PATCH /time_slots/:time_slot_id", () => {
       .patch(`/time_slots/${timeSlot.uuid}`)
       .send({
         created_at: "1680046371850",
-        started_at: "2022-04-21T15:28:27.602Z",
+        started_at: "2022-04-21T15:28:27.602Z"
       })
       .set("Accept", "application/json");
 

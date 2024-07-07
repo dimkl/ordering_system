@@ -1,14 +1,15 @@
 // my-custom-environment
 import NodeEnvironment from "jest-environment-node";
+import type { JestEnvironmentConfig, EnvironmentContext } from "@jest/environment";
 import { DataFactory } from "./dataFactory";
 import app from "../../src/index";
 import supertest from "supertest";
 
 class TestEnvironment extends NodeEnvironment {
   testPath: string;
-  docblockPragmas: Record<string, any>;
+  docblockPragmas: Record<string, string | string[]>;
 
-  constructor(config: any, context: any) {
+  constructor(config: JestEnvironmentConfig, context: EnvironmentContext) {
     super(config, context);
     this.testPath = context.testPath;
     this.docblockPragmas = context.docblockPragmas;
@@ -30,20 +31,14 @@ class TestEnvironment extends NodeEnvironment {
   }
 
   async teardown() {
-    if (
-      this.docblockPragmas["integration-test"] === "true" &&
-      this.global.app
-    ) {
-      // @ts-ignore
+    if (this.docblockPragmas["integration-test"] === "true" && this.global.app) {
+      // @ts-expect-error The `app` is not defined in the global
       this.global.app.close();
       this.global.app = null;
       this.global.request = null;
     }
 
-    if (
-      this.docblockPragmas["data-factory"] === "true" &&
-      this.global.DataFactory
-    ) {
+    if (this.docblockPragmas["data-factory"] === "true" && this.global.DataFactory) {
       this.global.DataFactory = null;
     }
 

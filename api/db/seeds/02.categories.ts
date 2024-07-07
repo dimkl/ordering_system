@@ -8,31 +8,31 @@ export async function seed(knex: Knex) {
       title: "Starters",
       description: "Starters description",
       uuid: uuidv4(),
-      id: 1,
+      id: 1
     },
     {
       title: "Breakfast",
       description: "Breakfast description",
       uuid: uuidv4(),
-      id: 2,
+      id: 2
     },
     {
       title: "Main Menu",
       description: "Main Menu description",
       uuid: uuidv4(),
-      id: 3,
+      id: 3
     },
     {
       title: "Dessert",
       description: "Dessert description",
       uuid: uuidv4(),
-      id: 4,
+      id: 4
     },
     {
       title: "Beverage",
       description: "Beverage description",
       uuid: uuidv4(),
-      id: 5,
-    },
+      id: 5
+    }
   ]);
 }

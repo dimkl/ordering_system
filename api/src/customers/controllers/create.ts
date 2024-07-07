@@ -1,16 +1,14 @@
-import type { Context, Next } from "koa";
+import type { Context } from "koa";
 
 import schema from "../schemas/customer.create.json";
 import { Customer } from "../models/customer";
 
-const handler = async (ctx: Context, next: Next) => {
+const handler = async (ctx: Context) => {
   const customer = await Customer.query().insert(
-    // @ts-ignore
+    // @ts-expect-error validatedData are added as part of the request validation
     ctx.request.validatedData
   );
-  ctx.body = await Customer.query()
-    .modify("publicColumns")
-    .findById(customer.id);
+  ctx.body = await Customer.query().modify("publicColumns").findById(customer.id);
 };
 
 export { schema, handler };

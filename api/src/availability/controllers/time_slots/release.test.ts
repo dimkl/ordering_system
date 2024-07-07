@@ -11,9 +11,7 @@ describe("DELETE /time_slots/release/:time_slot_id", () => {
   let knex: Knex;
   beforeAll(() => (knex = setupModels()));
   beforeEach(() =>
-    knex.raw(
-      "truncate orders, order_items, customers, users, products, time_slots, slots cascade;"
-    )
+    knex.raw("truncate orders, order_items, customers, users, products, time_slots, slots cascade;")
   );
   afterAll(() => knex.destroy());
 

@@ -14,9 +14,7 @@ export class User extends Password()(BaseModel) {
   }
 
   static get public_columns() {
-    return Object.keys(schema.properties).filter(
-      (k) => !SENSITIVE_COLUMNS.includes(k)
-    );
+    return Object.keys(schema.properties).filter((k) => !SENSITIVE_COLUMNS.includes(k));
   }
 
   get scopes() {

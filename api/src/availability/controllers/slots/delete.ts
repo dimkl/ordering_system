@@ -1,11 +1,11 @@
-import type { Context, Next } from "koa";
+import type { Context } from "koa";
 
-export const handler = async (ctx: Context, next: Next) => {
+export const handler = async (ctx: Context) => {
   try {
     await ctx.slot.$query().delete();
     ctx.status = 204;
-  } catch (err: any) {
+  } catch (err) {
     ctx.status = 422;
-    ctx.body = { message: err.message };
+    ctx.body = { message: (err as Error).message };
   }
 };

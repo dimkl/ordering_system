@@ -10,9 +10,7 @@ describe("POST /orders", () => {
   let knex: Knex;
   beforeAll(() => (knex = setupModels()));
   beforeEach(() =>
-    knex.raw(
-      "truncate orders, order_items, customers, users, products, time_slots, slots cascade;"
-    )
+    knex.raw("truncate orders, order_items, customers, users, products, time_slots, slots cascade;")
   );
   afterAll(() => knex.destroy());
 
@@ -23,7 +21,7 @@ describe("POST /orders", () => {
       .post("/orders")
       .send({
         customer_id: timeSlot.customer.uuid,
-        time_slot_id: timeSlot.uuid,
+        time_slot_id: timeSlot.uuid
       })
       .set("Accept", "application/json");
 
@@ -34,7 +32,7 @@ describe("POST /orders", () => {
       created_at: expect.any(String),
       updated_at: expect.any(String),
       customer_id: expect.any(String),
-      time_slot_id: expect.any(String),
+      time_slot_id: expect.any(String)
     });
     expect(response.body.customer_id).toEqual(timeSlot.customer.uuid);
   });
@@ -54,16 +52,13 @@ describe("POST /orders", () => {
       created_at: expect.any(String),
       updated_at: expect.any(String),
       customer_id: expect.any(String),
-      time_slot_id: expect.any(String),
+      time_slot_id: expect.any(String)
     });
     expect(response.body.customer_id).toEqual(timeSlot.customer.uuid);
   });
 
   it("throws validation error for required properties", async () => {
-    const response = await request
-      .post("/orders")
-      .send({})
-      .set("Accept", "application/json");
+    const response = await request.post("/orders").send({}).set("Accept", "application/json");
 
     expect(response.status).toBe(400);
     expect(response.body).toMatchSnapshot();
@@ -76,7 +71,7 @@ describe("POST /orders", () => {
       .post("/orders")
       .send({
         customer_id: timeSlot.customer.uuid + "1",
-        time_slot_id: timeSlot.uuid,
+        time_slot_id: timeSlot.uuid
       })
       .set("Accept", "application/json");
 
@@ -91,7 +86,7 @@ describe("POST /orders", () => {
       .post("/orders")
       .send({
         customer_id: timeSlot.customer.uuid,
-        time_slot_id: timeSlot.uuid + "1",
+        time_slot_id: timeSlot.uuid + "1"
       })
       .set("Accept", "application/json");
 
@@ -102,7 +97,7 @@ describe("POST /orders", () => {
   it("omits additional properties", async () => {
     const timeSlot = await DataFactory.createTimeSlot();
     const customer = await DataFactory.createCustomer({
-      email: "order.create@example.com",
+      email: "order.create@example.com"
     });
 
     const response = await request
@@ -110,7 +105,7 @@ describe("POST /orders", () => {
       .send({
         customer_id: customer.uuid,
         time_slot_id: timeSlot.uuid,
-        created_at: "1680046371850",
+        created_at: "1680046371850"
       })
       .set("Accept", "application/json");
 

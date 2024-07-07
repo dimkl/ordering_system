@@ -14,7 +14,7 @@ const DIETS = Object.freeze([
   "low_lactose",
   "low_salt",
   "vegan",
-  "vegetarian",
+  "vegetarian"
 ]);
 
 export function up(knex: Knex) {

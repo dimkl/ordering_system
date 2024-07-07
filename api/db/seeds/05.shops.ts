@@ -10,7 +10,7 @@ export async function seed(knex: Knex) {
       uuid: uuidv4(),
       opening_time: "08:00",
       closing_time: "00:00",
-      opening_days: "{0,1,2,3,4,5}",
-    },
+      opening_days: "{0,1,2,3,4,5}"
+    }
   ]);
 }

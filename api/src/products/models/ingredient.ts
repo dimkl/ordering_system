@@ -1,7 +1,7 @@
 import { BaseModel } from "../../shared/baseModel";
 import schema from "../schemas/ingredient.json";
 
-export class Ingredient extends BaseModel{
+export class Ingredient extends BaseModel {
   static get tableName() {
     return "ingredients";
   }

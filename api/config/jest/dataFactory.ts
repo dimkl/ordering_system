@@ -1,18 +1,9 @@
 import type { Customer } from "../../src/customers/models/customer";
-import type {
-  Product,
-  Ingredient,
-  ProductIngredient,
-} from "../../src/products/models";
+import type { Product, Ingredient, ProductIngredient } from "../../src/products/models";
 import type { Order, OrderItem } from "../../src/orders/models";
 import type { User } from "../../src/users/models/user";
 import type { Slot, TimeSlot } from "../../src/availability/models";
-import type {
-  Shop,
-  Section,
-  ProductAvailability,
-  Holiday,
-} from "../../src/shops/models";
+import type { Shop, Section, ProductAvailability, Holiday } from "../../src/shops/models";
 
 import { v4 as uuidv4 } from "uuid";
 
@@ -26,10 +17,9 @@ export class DataFactory {
         first_name: "Dimitris",
         last_name: "Klouvas",
         email: "dimitris.klouvas@gmail.com",
-        password:
-          "$2b$10$R4dVWhqUOPMM.87/xnUdEuQxMNLVjbDlolPd5Vw0RK5CgQjIhGYbO",
+        password: "$2b$10$R4dVWhqUOPMM.87/xnUdEuQxMNLVjbDlolPd5Vw0RK5CgQjIhGYbO",
         uuid: uuidv4(),
-        ...options,
+        ...options
       });
 
     return customers[0];
@@ -42,7 +32,7 @@ export class DataFactory {
         title: "Ingredient",
         description: "Ingredient description",
         uuid: uuidv4(),
-        ...options,
+        ...options
       });
 
     return ingredients[0];
@@ -56,7 +46,7 @@ export class DataFactory {
         sku: "product-code-1",
         description: "Product description",
         uuid: uuidv4(),
-        ...options,
+        ...options
       });
 
     return products[0];
@@ -79,7 +69,7 @@ export class DataFactory {
       customer_id: customer?.id,
       time_slot_id: timeSlot.id,
       state: "draft",
-      uuid: uuidv4(),
+      uuid: uuidv4()
     };
 
     const orders = await knex("orders")
@@ -87,8 +77,8 @@ export class DataFactory {
       .insert<Order[]>([
         {
           ...defaultValues,
-          ...options,
-        },
+          ...options
+        }
       ]);
 
     return { ...orders[0], customer, timeSlot } as Order;
@@ -116,8 +106,8 @@ export class DataFactory {
           product_id: product.id,
           state: "draft",
           uuid: uuidv4(),
-          ...options,
-        },
+          ...options
+        }
       ]);
 
     return { ...order_items[0], product, order };
@@ -129,13 +119,13 @@ export class DataFactory {
       last_name: "Klouvas",
       email: "dimitris.klouvas@gmail.com",
       password: "$2b$10$R4dVWhqUOPMM.87/xnUdEuQxMNLVjbDlolPd5Vw0RK5CgQjIhGYbO",
-      uuid: uuidv4(),
+      uuid: uuidv4()
     };
     const users = await knex("users")
       .returning("*")
       .insert<User[]>({
         ...defaultValues,
-        ...options,
+        ...options
       });
 
     return users[0];
@@ -155,7 +145,7 @@ export class DataFactory {
         opening_time: "15:00",
         closing_time: "23:00",
         opening_days: [0, 1, 2, 3, 4, 5, 6],
-        ...options,
+        ...options
       });
 
     return { ...shops[0], user } as Shop;
@@ -171,7 +161,7 @@ export class DataFactory {
     }
 
     if (!shop?.id) {
-      shop = (await this.createShop(shop, user)) as any as Shop;
+      shop = await this.createShop(shop, user);
     }
 
     const sections = await knex("sections")
@@ -182,7 +172,7 @@ export class DataFactory {
         name: "Section",
         sku: "section-1",
         uuid: uuidv4(),
-        ...options,
+        ...options
       });
 
     return { ...sections[0], shop, user } as Section;
@@ -211,7 +201,7 @@ export class DataFactory {
         uuid: uuidv4(),
         active: true,
         capacity: 1,
-        ...options,
+        ...options
       });
 
     return { ...slots[0], section, user } as Slot;
@@ -240,7 +230,7 @@ export class DataFactory {
         customer_id: customer.id,
         started_at: new Date().toISOString(),
         uuid: uuidv4(),
-        ...options,
+        ...options
       });
 
     return { ...time_slots[0], slot, customer } as TimeSlot;
@@ -260,7 +250,7 @@ export class DataFactory {
       shop_id: shop.id,
       date: newYear,
       name: "New Year",
-      ...options,
+      ...options
     });
 
     return { ...holidays[0], shop };
@@ -280,13 +270,11 @@ export class DataFactory {
       product = await this.createProduct(product);
     }
 
-    const productAvailability = await knex("product_availability").insert<
-      ProductAvailability[]
-    >({
+    const productAvailability = await knex("product_availability").insert<ProductAvailability[]>({
       shop_id: shop.id,
       product_id: product.id,
       quantity: 2,
-      ...options,
+      ...options
     });
 
     return { ...productAvailability[0], shop, product };
@@ -305,12 +293,10 @@ export class DataFactory {
       ingredient = await this.createIngredient(ingredient);
     }
 
-    const productIngredient = await knex("product_ingredients").insert<
-      ProductIngredient[]
-    >({
+    const productIngredient = await knex("product_ingredients").insert<ProductIngredient[]>({
       ingredient_id: ingredient.id,
       product_id: product.id,
-      ...options,
+      ...options
     });
 
     return { ...productIngredient[0], ingredient, product };

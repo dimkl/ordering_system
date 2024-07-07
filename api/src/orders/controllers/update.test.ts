@@ -9,11 +9,7 @@ import setupModels from "../../shared/setupModels";
 describe("PATCH /orders/:order_id", () => {
   let knex: Knex;
   beforeAll(() => (knex = setupModels()));
-  beforeEach(() =>
-    knex.raw(
-      "truncate orders, order_items, customers, users, products cascade;"
-    )
-  );
+  beforeEach(() => knex.raw("truncate orders, order_items, customers, users, products cascade;"));
   afterAll(() => knex.destroy());
 
   it("updates and returns updated order", async () => {
@@ -29,7 +25,7 @@ describe("PATCH /orders/:order_id", () => {
       .patch(`/orders/${order.uuid}`)
       .send({
         customer_id: timeSlot.customer.uuid,
-        time_slot_id: timeSlot.uuid,
+        time_slot_id: timeSlot.uuid
       })
       .set("Accept", "application/json");
 
@@ -41,7 +37,7 @@ describe("PATCH /orders/:order_id", () => {
       updated_at: expect.any(String),
       customer_id: timeSlot.customer.uuid,
       time_slot_id: timeSlot.uuid,
-      state: "draft",
+      state: "draft"
     });
     const unixUpdatedAt = new Date(response.body.updated_at).getTime();
     expect(unixUpdatedAt).toBeGreaterThan(order.updated_at.getTime());
@@ -63,7 +59,7 @@ describe("PATCH /orders/:order_id", () => {
       updated_at: order.updated_at.toISOString(),
       customer_id: order.customer.uuid,
       time_slot_id: order.timeSlot.uuid,
-      state: "draft",
+      state: "draft"
     });
   });
 

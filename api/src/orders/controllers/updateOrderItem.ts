@@ -1,10 +1,10 @@
-import type { Context, Next } from "koa";
+import type { Context } from "koa";
 
 import schema from "../schemas/orderItem.patch.json";
 import { Order } from "../models";
 
-const handler = async (ctx: Context, _next: Next) => {
-  // @ts-ignore
+const handler = async (ctx: Context) => {
+  // @ts-expect-error validatedData are added as part of the request validation
   const data = ctx.request.validatedData;
   const orderId = ctx.orderItem.order_id;
 

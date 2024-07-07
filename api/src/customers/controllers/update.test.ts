@@ -21,7 +21,7 @@ describe("PATCH /customers/:customer_id", () => {
         first_name: "Dimitris+2",
         last_name: "Klouvas+2",
         email: "dimitris.klouvas+2@gmail.com",
-        password: "123456",
+        password: "123456"
       })
       .set("Accept", "application/json");
 
@@ -33,7 +33,7 @@ describe("PATCH /customers/:customer_id", () => {
       id: customer.id,
       uuid: customer.uuid,
       created_at: customer.created_at.toISOString(),
-      updated_at: expect.any(String),
+      updated_at: expect.any(String)
     });
     const unixUpdatedAt = new Date(response.body.updated_at).getTime();
     expect(unixUpdatedAt).toBeGreaterThan(customer.updated_at.getTime());
@@ -52,14 +52,14 @@ describe("PATCH /customers/:customer_id", () => {
       id: expect.any(Number),
       uuid: expect.any(String),
       created_at: expect.any(String),
-      updated_at: expect.any(String),
+      updated_at: expect.any(String)
     });
   });
 
   it("throws validation error for unique email", async () => {
     const existingCustomer = await DataFactory.createCustomer();
     const newCustomer = await DataFactory.createCustomer({
-      email: "customer-update@example.com",
+      email: "customer-update@example.com"
     });
 
     const response = await request
@@ -68,7 +68,7 @@ describe("PATCH /customers/:customer_id", () => {
         first_name: "Dimitris",
         last_name: "Klouvas",
         email: existingCustomer.email,
-        password: "1234",
+        password: "1234"
       })
       .set("Accept", "application/json");
 

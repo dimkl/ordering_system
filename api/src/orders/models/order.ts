@@ -34,7 +34,7 @@ export class Order extends BaseModel {
           .select("customer.uuid as customer_id")
           .joinRelated("timeSlot")
           .select("timeSlot.uuid as time_slot_id");
-      },
+      }
     };
   }
 
@@ -45,24 +45,24 @@ export class Order extends BaseModel {
         modelClass: __dirname + "/orderItem.ts",
         join: {
           from: "orders.id",
-          to: "order_items.order_id",
-        },
+          to: "order_items.order_id"
+        }
       },
       customer: {
         relation: BaseModel.BelongsToOneRelation,
         modelClass: __dirname + "/../../customers/models/customer.ts",
         join: {
           from: "orders.customer_id",
-          to: "customers.id",
-        },
+          to: "customers.id"
+        }
       },
       timeSlot: {
         relation: BaseModel.BelongsToOneRelation,
         modelClass: __dirname + "/../../availability/models/timeSlot.ts",
         join: {
           from: "orders.time_slot_id",
-          to: "time_slots.id",
-        },
+          to: "time_slots.id"
+        }
       },
       slot: {
         relation: BaseModel.BelongsToOneRelation,
@@ -72,10 +72,10 @@ export class Order extends BaseModel {
           to: "slots.id",
           through: {
             from: "time_slots.id",
-            to: "time_slots.slot_id",
-          },
-        },
-      },
+            to: "time_slots.slot_id"
+          }
+        }
+      }
     };
   }
 
@@ -86,21 +86,12 @@ export class Order extends BaseModel {
       .modifiers({
         selectOrderItem(builder) {
           builder
-            .select(
-              "id",
-              "uuid",
-              "state",
-              "quantity",
-              "created_at",
-              "updated_at"
-            )
+            .select("id", "uuid", "state", "quantity", "created_at", "updated_at")
             .orderBy("id", "asc");
         },
         selectProduct(builder) {
-          builder
-            .select("title", "description", "qr", "uuid")
-            .orderBy("id", "asc");
-        },
+          builder.select("title", "description", "qr", "uuid").orderBy("id", "asc");
+        }
       })
       .findById(orderId);
   }

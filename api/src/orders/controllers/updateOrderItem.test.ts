@@ -11,11 +11,7 @@ import setupModels from "../../shared/setupModels";
 describe("PATCH /order_items/:order_item_id", () => {
   let knex: Knex;
   beforeAll(() => (knex = setupModels()));
-  beforeEach(() =>
-    knex.raw(
-      "truncate orders, order_items, customers, users, products cascade;"
-    )
-  );
+  beforeEach(() => knex.raw("truncate orders, order_items, customers, users, products cascade;"));
   afterAll(() => knex.destroy());
 
   it("patch an order item", async () => {
@@ -42,12 +38,12 @@ describe("PATCH /order_items/:order_item_id", () => {
             title: "Product",
             uuid: orderItem.product.uuid,
             description: "Product description",
-            qr: null,
+            qr: null
           },
           quantity: 10,
-          state: "draft",
-        }),
-      ]),
+          state: "draft"
+        })
+      ])
     });
     expect(response.body.order_items.length).toBe(1);
   });

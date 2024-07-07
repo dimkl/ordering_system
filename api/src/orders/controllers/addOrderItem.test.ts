@@ -11,11 +11,7 @@ import setupModels from "../../shared/setupModels";
 describe("POST /order_items", () => {
   let knex: Knex;
   beforeAll(() => (knex = setupModels()));
-  beforeEach(() =>
-    knex.raw(
-      "truncate orders, order_items, customers, users, products cascade;"
-    )
-  );
+  beforeEach(() => knex.raw("truncate orders, order_items, customers, users, products cascade;"));
   afterAll(() => knex.destroy());
 
   it("creates and returns an order item", async () => {
@@ -43,12 +39,12 @@ describe("POST /order_items", () => {
             title: "Product",
             uuid: product.uuid,
             description: "Product description",
-            qr: null,
+            qr: null
           },
           quantity: 1,
-          state: "draft",
-        }),
-      ]),
+          state: "draft"
+        })
+      ])
     });
     expect(response.body.order_items.length).toBe(1);
   });
@@ -78,12 +74,12 @@ describe("POST /order_items", () => {
             title: "Product",
             uuid: product.uuid,
             description: "Product description",
-            qr: null,
+            qr: null
           },
           quantity: 1,
-          state: "draft",
-        }),
-      ]),
+          state: "draft"
+        })
+      ])
     });
     expect(response.body.order_items.length).toBe(1);
   });
@@ -113,21 +109,18 @@ describe("POST /order_items", () => {
             title: "Product",
             uuid: product.uuid,
             description: "Product description",
-            qr: null,
+            qr: null
           },
           quantity: 1,
-          state: "draft",
-        }),
-      ]),
+          state: "draft"
+        })
+      ])
     });
     expect(response.body.order_items.length).toBe(1);
   });
 
   it("throws validation error for required properties", async () => {
-    const response = await request
-      .post(`/order_items`)
-      .send({})
-      .set("Accept", "application/json");
+    const response = await request.post(`/order_items`).send({}).set("Accept", "application/json");
 
     expect(response.status).toBe(400);
     expect(response.body).toMatchSnapshot();
@@ -142,7 +135,7 @@ describe("POST /order_items", () => {
       .send({
         order_id: order.uuid,
         product_id: product.uuid,
-        created_at: "1680046371850",
+        created_at: "1680046371850"
       })
       .set("Accept", "application/json");
 
@@ -177,11 +170,7 @@ describe("POST /order_items", () => {
     it("updates quantity of existing order_item based on product_id", async () => {
       const order = await DataFactory.createOrder();
       const product = await DataFactory.createProduct();
-      await DataFactory.createOrderItem(
-        { quantity: 1 },
-        { id: order.id },
-        { id: product.id }
-      );
+      await DataFactory.createOrderItem({ quantity: 1 }, { id: order.id }, { id: product.id });
 
       const response = await request
         .post(`/order_items`)
@@ -204,12 +193,12 @@ describe("POST /order_items", () => {
               title: "Product",
               uuid: product.uuid,
               description: "Product description",
-              qr: null,
+              qr: null
             },
             quantity: 3,
-            state: "draft",
-          }),
-        ]),
+            state: "draft"
+          })
+        ])
       });
       expect(response.body.order_items.length).toBe(1);
     });

@@ -22,9 +22,9 @@ export class ProductAvailability extends BaseModel {
         modelClass: __dirname + "/shop.ts",
         join: {
           from: "product_availability.shop_id",
-          to: "shops.id",
-        },
-      },
+          to: "shops.id"
+        }
+      }
     };
   }
 }

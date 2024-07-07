@@ -9,25 +9,19 @@ import setupModels from "../../../shared/setupModels";
 describe("PATCH /slots/:slot_id", () => {
   let knex: Knex;
   beforeAll(() => (knex = setupModels()));
-  beforeEach(() =>
-    knex.raw("truncate users, time_slots, slots, sections, shops cascade;")
-  );
+  beforeEach(() => knex.raw("truncate users, time_slots, slots, sections, shops cascade;"));
   afterAll(() => knex.destroy());
 
   it("updates and returns updated slot", async () => {
     const slot = await DataFactory.createSlot();
-    const section = await DataFactory.createSection(
-      {},
-      {},
-      { email: "aloha@example.com" }
-    );
+    const section = await DataFactory.createSection({}, {}, { email: "aloha@example.com" });
 
     const response = await request
       .patch(`/slots/${slot.uuid}`)
       .send({
         active: false,
         user_id: section.user.uuid,
-        section_id: section.uuid,
+        section_id: section.uuid
       })
       .set("Accept", "application/json");
 
@@ -40,7 +34,7 @@ describe("PATCH /slots/:slot_id", () => {
       section_id: section.uuid,
       sku: "table-1",
       user_id: section.user.uuid,
-      uuid: slot.uuid,
+      uuid: slot.uuid
     });
     expect(slot.user_id).not.toEqual(section.user.id);
     expect(slot.section_id).not.toEqual(section.id);
@@ -66,7 +60,7 @@ describe("PATCH /slots/:slot_id", () => {
       section_id: slot.section.uuid,
       sku: "table-1",
       user_id: slot.user.uuid,
-      uuid: slot.uuid,
+      uuid: slot.uuid
     });
   });
 

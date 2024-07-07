@@ -17,7 +17,7 @@ describe("POST /variations", () => {
   it("create product variation", async () => {
     const { ingredient, product } = await DataFactory.createProductIngredient();
     const ingredient2 = await DataFactory.createIngredient({
-      title: "Ingredient 2",
+      title: "Ingredient 2"
     });
     await DataFactory.createProductIngredient({}, product, ingredient2);
 
@@ -28,7 +28,7 @@ describe("POST /variations", () => {
         description: "Variation description",
         sku: `${product.sku}-1`,
         variant_id: product.uuid,
-        ingredients: [ingredient.uuid],
+        ingredients: [ingredient.uuid]
       })
       .set("Accept", "application/json");
 
@@ -48,15 +48,15 @@ describe("POST /variations", () => {
           created_at: expect.any(String),
           updated_at: expect.any(String),
           suitable_for_diet: "all",
-          allergen: false,
+          allergen: false
         }),
         expect.objectContaining({
           uuid: ingredient2.uuid,
           created_at: expect.any(String),
           updated_at: expect.any(String),
           suitable_for_diet: "all",
-          allergen: false,
-        }),
+          allergen: false
+        })
       ]),
       variations: expect.arrayContaining([
         expect.objectContaining({
@@ -74,11 +74,11 @@ describe("POST /variations", () => {
               created_at: expect.any(String),
               updated_at: expect.any(String),
               suitable_for_diet: "all",
-              allergen: false,
-            }),
-          ]),
-        }),
-      ]),
+              allergen: false
+            })
+          ])
+        })
+      ])
     });
     expect(response.body.ingredients.length).toBe(2);
     expect(response.body.variations.length).toBe(1);
@@ -94,7 +94,7 @@ describe("POST /variations", () => {
         description: "Variation description",
         sku: `${product.sku}-1`,
         variant_id: product.uuid,
-        ingredients: [uuidv4()],
+        ingredients: [uuidv4()]
       })
       .set("Accept", "application/json");
 
@@ -110,7 +110,7 @@ describe("POST /variations", () => {
         description: "Variation description",
         sku: "aloha-1",
         variant_id: uuidv4(),
-        ingredients: [ingredient.uuid],
+        ingredients: [ingredient.uuid]
       })
       .set("Accept", "application/json");
 
@@ -128,7 +128,7 @@ describe("POST /variations", () => {
         sku: `${product.sku}-1`,
         variant_id: product.uuid,
         ingredients: [ingredient.uuid],
-        created_at: "1680046371850",
+        created_at: "1680046371850"
       })
       .set("Accept", "application/json");
 

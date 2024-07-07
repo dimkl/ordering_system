@@ -11,9 +11,7 @@ import setupModels from "../../shared/setupModels";
 describe("DELETE /order_items/:order_item_id", () => {
   let knex: Knex;
   beforeAll(() => (knex = setupModels()));
-  beforeEach(() =>
-    knex.raw("truncate order_items, customers, users, products cascade;")
-  );
+  beforeEach(() => knex.raw("truncate order_items, customers, users, products cascade;"));
   afterAll(() => knex.destroy());
 
   it("removes an order item", async () => {
@@ -30,7 +28,7 @@ describe("DELETE /order_items/:order_item_id", () => {
       updated_at: expect.any(String),
       uuid: orderItem.order.uuid,
       customer_id: orderItem.order.customer.uuid,
-      order_items: [],
+      order_items: []
     });
   });
 

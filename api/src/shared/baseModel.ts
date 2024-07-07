@@ -7,12 +7,12 @@ export class BaseModel extends DBErrors(Model) {
   static get modifiers() {
     return {
       publicColumns(query) {
-        // @ts-ignore
+        // @ts-expect-error this is missing definition for modelClass
         const cls = this.modelClass();
         query.select(cls.public_columns.map((c) => `${cls.tableName}.${c}`));
       },
       publicInsertColumns(query) {
-        // @ts-ignore
+        // @ts-expect-error this is missing definition for modelClass
         const cls = this.modelClass();
         query.returning(cls.public_columns.map((c) => `${cls.tableName}.${c}`));
       }
@@ -41,8 +41,9 @@ export class BaseModel extends DBErrors(Model) {
   }
 
   async $beforeUpdate() {
-    // @ts-ignore
-    this.updated_at = new Date().toISOString();
+    if ("updated_at" in this) {
+      this.updated_at = new Date().toISOString();
+    }
   }
 
   get hasUuid() {
@@ -70,7 +71,7 @@ export class BaseModel extends DBErrors(Model) {
     if (!idOrUid) return idOrUid;
     if (Number(idOrUid)) return idOrUid;
 
-    // @ts-ignore
+    // @ts-expect-error there will always be an id in models
     const { id } = await this.findByIdOrUid(idOrUid).select("id");
 
     return id;

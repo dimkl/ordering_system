@@ -2,6 +2,8 @@ import { BaseModel } from "../../shared/baseModel";
 import schema from "../schemas/product.json";
 
 export class Product extends BaseModel {
+  uuid!: string;
+
   static get tableName() {
     return "products";
   }
@@ -24,26 +26,26 @@ export class Product extends BaseModel {
           to: "ingredients.id",
           through: {
             from: "product_ingredients.product_id",
-            to: "product_ingredients.ingredient_id",
-          },
-        },
+            to: "product_ingredients.ingredient_id"
+          }
+        }
       },
       variations: {
         relation: BaseModel.HasManyRelation,
         modelClass: __dirname + "/product.ts",
         join: {
           from: "products.id",
-          to: "products.variant_id",
-        },
+          to: "products.variant_id"
+        }
       },
       category: {
         relation: BaseModel.BelongsToOneRelation,
         modelClass: __dirname + "/category.ts",
         join: {
           from: "products.category_id",
-          to: "categories.id",
-        },
-      },
+          to: "categories.id"
+        }
+      }
     };
   }
 
@@ -51,10 +53,8 @@ export class Product extends BaseModel {
     return {
       ...super.modifiers,
       joinVariations(query) {
-        query
-          .withGraphJoined("variations")
-          .where("products.variant_id", "is", null);
-      },
+        query.withGraphJoined("variations").where("products.variant_id", "is", null);
+      }
     };
   }
 
@@ -68,9 +68,7 @@ export class Product extends BaseModel {
   static findVariationsWithIngredients(productId) {
     return this.query()
       .modify(["publicColumns", "joinVariations"])
-      .withGraphFetched(
-        "[ingredients(publicColumns), variations.ingredients(publicColumns)]"
-      )
+      .withGraphFetched("[ingredients(publicColumns), variations.ingredients(publicColumns)]")
       .findById(productId);
   }
 }

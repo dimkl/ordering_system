@@ -40,8 +40,13 @@ export class ControllerFactory {
       await discoveryApi.validateSchema({
         schema,
         dataAccessor: () => {
-          // @ts-expect-error request body is object or null
-          return { ...ctx.params, ...ctx.request.body };
+          if (Array.isArray(ctx.request.body)) {
+            return ctx.request.body.map((body) => {
+              return { ...ctx.params, ...body };
+            });
+          }
+
+          return { ...ctx.params, ...(ctx.request.body || {}) };
         },
         dataSetter: (dt) => {
           // @ts-expect-error validatedData are added as part of the request validation

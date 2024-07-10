@@ -37,6 +37,46 @@ describe("POST /orders", () => {
     expect(response.body.customer_id).toEqual(timeSlot.customer.uuid);
   });
 
+  it("creates and returns bulk orders", async () => {
+    const timeSlot = await DataFactory.createTimeSlot();
+    const otherTimeSlot = await DataFactory.createTimeSlot({}, timeSlot.customer, timeSlot.slot);
+
+    const data = [
+      {
+        customer_id: timeSlot.customer.uuid,
+        time_slot_id: timeSlot.uuid
+      },
+      {
+        customer_id: otherTimeSlot.customer.uuid,
+        time_slot_id: otherTimeSlot.uuid
+      }
+    ];
+
+    const response = await request.post("/orders").send(data).set("Accept", "application/json");
+
+    expect(response.status).toBe(200);
+    expect(response.body.length).toBe(2);
+    expect(response.body[0]).toMatchSnapshot({
+      id: expect.any(Number),
+      uuid: expect.any(String),
+      created_at: expect.any(String),
+      updated_at: expect.any(String),
+      customer_id: expect.any(String),
+      time_slot_id: expect.any(String)
+    });
+    expect(response.body[1]).toMatchSnapshot({
+      id: expect.any(Number),
+      uuid: expect.any(String),
+      created_at: expect.any(String),
+      updated_at: expect.any(String),
+      customer_id: expect.any(String),
+      time_slot_id: expect.any(String)
+    });
+
+    expect(response.body[0].time_slot_id).toEqual(timeSlot.uuid);
+    expect(response.body[1].time_slot_id).toEqual(otherTimeSlot.uuid);
+  });
+
   it("creates and returns a order using internal customer_id", async () => {
     const timeSlot = await DataFactory.createTimeSlot();
 

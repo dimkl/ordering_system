@@ -9,14 +9,25 @@ import { TimeSlot } from "../../availability/models";
 const handler = async (ctx: Context) => {
   // @ts-expect-error validatedData are added as part of the request validation
   const data = ctx.request.validatedData;
-  const customerId = await Customer.getId(data.customer_id);
-  const timeSlotId = await TimeSlot.getId(data.time_slot_id);
+  const bulkData = Array.isArray(data) ? data : [data];
 
-  const order = await Order.query().insert({
-    customer_id: customerId,
-    time_slot_id: timeSlotId
-  });
-  ctx.body = await Order.query().modify("publicColumns").findById(order.id);
+  const orders = await Promise.all(
+    bulkData.map(async (dt) => {
+      const customerId = await Customer.getId(dt.customer_id);
+      const timeSlotId = await TimeSlot.getId(dt.time_slot_id);
+
+      return Order.query().insert({
+        customer_id: customerId,
+        time_slot_id: timeSlotId
+      });
+    })
+  );
+
+  const orderQs = Order.query().modify("publicColumns");
+  ctx.body =
+    orders.length > 1
+      ? await orderQs.findByIds(orders.map((o) => o.id))
+      : await orderQs.findById(orders[0].id);
 };
 
 export { schema, handler };

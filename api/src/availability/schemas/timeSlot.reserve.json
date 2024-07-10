@@ -8,12 +8,10 @@
   "type": "object",
   "properties": {
     "started_at": {
-      "readOnly": true,
       "type": "string",
       "format": "date-time"
     },
     "ended_at": {
-      "readOnly": true,
       "type": "string",
       "format": "date-time"
     },
@@ -24,10 +22,6 @@
       "$ref": "defs#/definitions/id_or_uuid"
     }
   },
-  "required": [
-    "started_at",
-    "customer_id",
-    "slot_id"
-  ],
+  "required": ["started_at", "customer_id", "slot_id"],
   "additionalProperties": false
 }

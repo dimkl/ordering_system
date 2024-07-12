@@ -8,6 +8,7 @@ exports[`GET /time_slots returns all time_slots 1`] = `
   "id": Any<Number>,
   "slot_id": Any<String>,
   "started_at": Any<String>,
+  "uid": Any<String>,
   "updated_at": Any<String>,
   "uuid": Any<String>,
 }
@@ -21,6 +22,7 @@ exports[`GET /time_slots returns specified time_slot 1`] = `
   "id": Any<Number>,
   "slot_id": Any<String>,
   "started_at": Any<String>,
+  "uid": Any<String>,
   "updated_at": Any<String>,
   "uuid": Any<String>,
 }
@@ -34,6 +36,7 @@ exports[`GET /time_slots returns specified time_slot using uuid 1`] = `
   "id": Any<Number>,
   "slot_id": Any<String>,
   "started_at": Any<String>,
+  "uid": Any<String>,
   "updated_at": Any<String>,
   "uuid": Any<String>,
 }

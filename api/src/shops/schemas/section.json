@@ -22,6 +22,12 @@
       "readOnly": true,
       "type": "string"
     },
+    "uid": {
+      "readOnly": true,
+      "type": "string",
+      "minLength": 26,
+      "maxLength": 26
+    },
     "uuid": {
       "readOnly": true,
       "type": "string",
@@ -43,11 +49,6 @@
       "exclusiveMinimum": 0
     }
   },
-  "required": [
-    "name",
-    "sku",
-    "shop_id",
-    "user_id"
-  ],
+  "required": ["name", "sku", "shop_id", "user_id"],
   "additionalProperties": false
 }

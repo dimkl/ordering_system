@@ -38,6 +38,12 @@
       "readOnly": true,
       "type": "string"
     },
+    "uid": {
+      "readOnly": true,
+      "type": "string",
+      "minLength": 26,
+      "maxLength": 26
+    },
     "uuid": {
       "readOnly": true,
       "type": "string",
@@ -49,22 +55,10 @@
       "default": "guest"
     }
   },
-  "required": [
-    "first_name",
-    "last_name",
-    "email",
-    "password",
-    "role"
-  ],
+  "required": ["first_name", "last_name", "email", "password", "role"],
   "definitions": {
     "role": {
-      "enum": [
-        "guest",
-        "waiter",
-        "chef",
-        "other",
-        "admin"
-      ]
+      "enum": ["guest", "waiter", "chef", "other", "admin"]
     }
   },
   "additionalProperties": false

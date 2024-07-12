@@ -19,6 +19,12 @@
       "type": "string",
       "format": "date-time"
     },
+    "uid": {
+      "readOnly": true,
+      "type": "string",
+      "minLength": 26,
+      "maxLength": 26
+    },
     "uuid": {
       "readOnly": true,
       "type": "string",
@@ -48,9 +54,6 @@
       "exclusiveMinimum": 0
     }
   },
-  "required": [
-    "section_id",
-    "sku"
-  ],
+  "required": ["section_id", "sku"],
   "additionalProperties": false
 }

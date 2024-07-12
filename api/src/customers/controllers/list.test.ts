@@ -22,6 +22,7 @@ describe("GET /customers/:customer_id?", () => {
     expect(response.body[0]).toMatchSnapshot({
       id: expect.any(Number),
       uuid: expect.any(String),
+      uid: expect.any(String),
       created_at: expect.any(String),
       updated_at: expect.any(String)
     });
@@ -38,6 +39,7 @@ describe("GET /customers/:customer_id?", () => {
     expect(response.body).toMatchSnapshot({
       id: expect.any(Number),
       uuid: expect.any(String),
+      uid: expect.any(String),
       created_at: expect.any(String),
       updated_at: expect.any(String)
     });
@@ -54,6 +56,7 @@ describe("GET /customers/:customer_id?", () => {
     expect(response.body).toMatchSnapshot({
       id: expect.any(Number),
       uuid: expect.any(String),
+      uid: expect.any(String),
       created_at: expect.any(String),
       updated_at: expect.any(String)
     });

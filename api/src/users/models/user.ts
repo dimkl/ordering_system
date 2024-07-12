@@ -5,6 +5,7 @@ import schema from "../schemas/user.json";
 const SENSITIVE_COLUMNS = ["password"];
 
 export class User extends Password()(BaseModel) {
+  uid!: string;
   static get tableName() {
     return "users";
   }
@@ -31,5 +32,6 @@ export interface User {
   email: string;
   password: string;
   uuid: string;
+  uid: string;
   role: "guest" | "waiter" | "chef" | "other" | "admin";
 }

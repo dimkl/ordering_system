@@ -32,11 +32,13 @@ describe("PATCH /order_items/:order_item_id", () => {
       order_items: expect.arrayContaining([
         expect.objectContaining({
           uuid: expect.any(String),
+          uid: expect.any(String),
           created_at: expect.any(String),
           updated_at: expect.any(String),
           product: {
             title: "Product",
             uuid: orderItem.product.uuid,
+            uid: expect.any(String),
             description: "Product description",
             qr: null
           },

@@ -2,7 +2,7 @@ import type { Knex } from "knex";
 
 export async function up(knex: Knex) {
   const addUidColumn = (table: Knex.CreateTableBuilder) => {
-    table.string("uid").notNullable().unique();
+    table.string("uid").notNullable().unique().alter();
   };
 
   await knex.schema.alterTable("customers", addUidColumn);

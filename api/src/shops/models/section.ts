@@ -4,6 +4,8 @@ import type { User } from "../../users/models/user";
 import type { Shop } from "./shop";
 
 export class Section extends BaseModel {
+  uid!: string;
+
   static get tableName() {
     return "sections";
   }
@@ -35,6 +37,7 @@ export interface Section {
   created_at: Date;
   updated_at: Date;
   uuid: string;
+  uid: string;
   name: string;
   sku: string;
   shop_id: number;

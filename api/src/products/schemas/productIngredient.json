@@ -25,11 +25,14 @@
     "product_id": {
       "type": "integer",
       "exclusiveMinimum": 0
+    },
+    "uid": {
+      "readOnly": true,
+      "type": "string",
+      "minLength": 26,
+      "maxLength": 26
     }
   },
-  "required": [
-    "ingredient_id",
-    "product_id"
-  ],
+  "required": ["ingredient_id", "product_id"],
   "additionalProperties": false
 }

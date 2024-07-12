@@ -19,6 +19,12 @@
       "type": "string",
       "format": "date-time"
     },
+    "uid": {
+      "readOnly": true,
+      "type": "string",
+      "minLength": 26,
+      "maxLength": 26
+    },
     "uuid": {
       "readOnly": true,
       "type": "string",
@@ -43,10 +49,6 @@
       "exclusiveMinimum": 0
     }
   },
-  "required": [
-    "started_at",
-    "customer_id",
-    "slot_id"
-  ],
+  "required": ["started_at", "customer_id", "slot_id"],
   "additionalProperties": false
 }

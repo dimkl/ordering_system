@@ -11,6 +11,7 @@ export class Order extends BaseModel {
   customer_id!: number;
   time_slot_id!: number;
   uuid!: string;
+  uid!: string;
 
   static get tableName() {
     return "orders";
@@ -86,11 +87,11 @@ export class Order extends BaseModel {
       .modifiers({
         selectOrderItem(builder) {
           builder
-            .select("id", "uuid", "state", "quantity", "created_at", "updated_at")
+            .select("id", "uid", "uuid", "state", "quantity", "created_at", "updated_at")
             .orderBy("id", "asc");
         },
         selectProduct(builder) {
-          builder.select("title", "description", "qr", "uuid").orderBy("id", "asc");
+          builder.select("title", "description", "qr", "uid", "uuid").orderBy("id", "asc");
         }
       })
       .findById(orderId);
@@ -103,6 +104,7 @@ export interface Order {
   customer_id: number;
   time_slot_id: number;
   uuid: string;
+  uid: string;
   state:
     | "draft"
     | "placed"

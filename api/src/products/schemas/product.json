@@ -30,6 +30,12 @@
       "minLength": 1,
       "maxLength": 100
     },
+    "uid": {
+      "readOnly": true,
+      "type": "string",
+      "minLength": 26,
+      "maxLength": 26
+    },
     "uuid": {
       "readOnly": true,
       "type": "string",
@@ -53,9 +59,6 @@
       "exclusiveMinimum": 0
     }
   },
-  "required": [
-    "title",
-    "sku"
-  ],
+  "required": ["title", "sku"],
   "additionalProperties": false
 }

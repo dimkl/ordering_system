@@ -13,6 +13,7 @@ export class Customer extends Password()(BaseModel) {
   created_at!: Date;
   updated_at!: Date;
   uuid!: string;
+  uid!: string;
 
   static get tableName() {
     return "customers";
@@ -49,4 +50,5 @@ export interface Customer {
   created_at: Date;
   updated_at: Date;
   uuid: string;
+  uid: string;
 }

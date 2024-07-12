@@ -29,12 +29,14 @@
     "shop_id": {
       "type": "integer",
       "exclusiveMinimum": 0
+    },
+    "uid": {
+      "readOnly": true,
+      "type": "string",
+      "minLength": 26,
+      "maxLength": 26
     }
   },
-  "required": [
-    "name",
-    "date",
-    "shop_id"
-  ],
+  "required": ["name", "date", "shop_id"],
   "additionalProperties": false
 }

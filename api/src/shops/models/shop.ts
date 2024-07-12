@@ -107,6 +107,7 @@ export interface Shop {
   created_at: Date;
   updated_at: Date;
   uuid: string;
+  uid: string;
   name: string;
   lat: number;
   lng: number;

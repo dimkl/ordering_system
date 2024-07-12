@@ -6,6 +6,7 @@ import type { Slot, TimeSlot } from "../../src/availability/models";
 import type { Shop, Section, ProductAvailability, Holiday } from "../../src/shops/models";
 
 import { v4 as uuidv4 } from "uuid";
+import { ulid } from "ulid";
 
 import { knex } from "../../src/shared/knex";
 
@@ -19,6 +20,7 @@ export class DataFactory {
         email: "dimitris.klouvas@gmail.com",
         password: "$2b$10$R4dVWhqUOPMM.87/xnUdEuQxMNLVjbDlolPd5Vw0RK5CgQjIhGYbO",
         uuid: uuidv4(),
+        uid: ulid(),
         ...options
       });
 
@@ -32,6 +34,7 @@ export class DataFactory {
         title: "Ingredient",
         description: "Ingredient description",
         uuid: uuidv4(),
+        uid: ulid(),
         ...options
       });
 
@@ -46,6 +49,7 @@ export class DataFactory {
         sku: "product-code-1",
         description: "Product description",
         uuid: uuidv4(),
+        uid: ulid(),
         ...options
       });
 
@@ -69,7 +73,8 @@ export class DataFactory {
       customer_id: customer?.id,
       time_slot_id: timeSlot.id,
       state: "draft",
-      uuid: uuidv4()
+      uuid: uuidv4(),
+      uid: ulid()
     };
 
     const orders = await knex("orders")
@@ -106,6 +111,7 @@ export class DataFactory {
           product_id: product.id,
           state: "draft",
           uuid: uuidv4(),
+          uid: ulid(),
           ...options
         }
       ]);
@@ -119,7 +125,8 @@ export class DataFactory {
       last_name: "Klouvas",
       email: "dimitris.klouvas@gmail.com",
       password: "$2b$10$R4dVWhqUOPMM.87/xnUdEuQxMNLVjbDlolPd5Vw0RK5CgQjIhGYbO",
-      uuid: uuidv4()
+      uuid: uuidv4(),
+      uid: ulid()
     };
     const users = await knex("users")
       .returning("*")
@@ -142,6 +149,7 @@ export class DataFactory {
         manager_id: user.id,
         name: "Shop",
         uuid: uuidv4(),
+        uid: ulid(),
         opening_time: "15:00",
         closing_time: "23:00",
         opening_days: [0, 1, 2, 3, 4, 5, 6],
@@ -172,6 +180,7 @@ export class DataFactory {
         name: "Section",
         sku: "section-1",
         uuid: uuidv4(),
+        uid: ulid(),
         ...options
       });
 
@@ -199,6 +208,7 @@ export class DataFactory {
         user_id: user.id,
         sku: "table-1",
         uuid: uuidv4(),
+        uid: ulid(),
         active: true,
         capacity: 1,
         ...options
@@ -230,6 +240,7 @@ export class DataFactory {
         customer_id: customer.id,
         started_at: new Date().toISOString(),
         uuid: uuidv4(),
+        uid: ulid(),
         ...options
       });
 
@@ -250,6 +261,7 @@ export class DataFactory {
       shop_id: shop.id,
       date: newYear,
       name: "New Year",
+      uid: ulid(),
       ...options
     });
 
@@ -274,6 +286,7 @@ export class DataFactory {
       shop_id: shop.id,
       product_id: product.id,
       quantity: 2,
+      uid: ulid(),
       ...options
     });
 
@@ -296,6 +309,7 @@ export class DataFactory {
     const productIngredient = await knex("product_ingredients").insert<ProductIngredient[]>({
       ingredient_id: ingredient.id,
       product_id: product.id,
+      uid: ulid(),
       ...options
     });
 

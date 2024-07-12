@@ -35,6 +35,12 @@
       "$ref": "#/definitions/state",
       "default": "draft"
     },
+    "uid": {
+      "readOnly": true,
+      "type": "string",
+      "minLength": 26,
+      "maxLength": 26
+    },
     "uuid": {
       "readOnly": true,
       "type": "string",
@@ -42,19 +48,10 @@
       "maxLength": 36
     }
   },
-  "required": [
-    "order_id",
-    "product_id"
-  ],
+  "required": ["order_id", "product_id"],
   "definitions": {
     "state": {
-      "enum": [
-        "draft",
-        "placed",
-        "prepared",
-        "delivered",
-        "canceled"
-      ]
+      "enum": ["draft", "placed", "prepared", "delivered", "canceled"]
     }
   },
   "additionalProperties": false

@@ -38,6 +38,12 @@
       "readOnly": true,
       "type": "string"
     },
+    "uid": {
+      "readOnly": true,
+      "type": "string",
+      "minLength": 26,
+      "maxLength": 26
+    },
     "uuid": {
       "readOnly": true,
       "type": "string",
@@ -45,11 +51,6 @@
       "maxLength": 36
     }
   },
-  "required": [
-    "first_name",
-    "last_name",
-    "email",
-    "password"
-  ],
+  "required": ["first_name", "last_name", "email", "password"],
   "additionalProperties": false
 }

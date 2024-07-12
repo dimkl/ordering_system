@@ -3,6 +3,8 @@ import { BaseModel } from "../../shared/baseModel";
 import schema from "../schemas/productAvailability.json";
 
 export class ProductAvailability extends BaseModel {
+  uid!: string;
+
   static get tableName() {
     return "product_availability";
   }
@@ -31,6 +33,7 @@ export class ProductAvailability extends BaseModel {
 
 export interface ProductAvailability {
   id: number;
+  uid: string;
   created_at: Date;
   updated_at: Date;
   quantity: number;

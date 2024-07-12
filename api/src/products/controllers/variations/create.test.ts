@@ -64,6 +64,7 @@ describe("POST /variations", () => {
           created_at: expect.any(String),
           updated_at: expect.any(String),
           uuid: expect.any(String),
+          uid: expect.any(String),
           title: "Variation",
           variant_id: product.id,
           sku: `${product.sku}-1`,

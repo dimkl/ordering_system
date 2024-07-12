@@ -38,6 +38,7 @@ export interface Ingredient {
   created_at: Date;
   updated_at: Date;
   uuid: string;
+  uid: string;
   allergen: boolean;
   suitable_for_diet: SuitableForDiet;
 }

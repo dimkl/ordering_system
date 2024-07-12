@@ -26,6 +26,7 @@ describe("GET /time_slots", () => {
       slot_id: expect.any(String),
       customer_id: expect.any(String),
       uuid: expect.any(String),
+      uid: expect.any(String),
       started_at: expect.any(String),
       created_at: expect.any(String),
       updated_at: expect.any(String)
@@ -45,6 +46,7 @@ describe("GET /time_slots", () => {
       slot_id: expect.any(String),
       customer_id: expect.any(String),
       uuid: expect.any(String),
+      uid: expect.any(String),
       started_at: expect.any(String),
       created_at: expect.any(String),
       updated_at: expect.any(String)
@@ -64,6 +66,7 @@ describe("GET /time_slots", () => {
       slot_id: expect.any(String),
       customer_id: expect.any(String),
       uuid: expect.any(String),
+      uid: expect.any(String),
       started_at: expect.any(String),
       created_at: expect.any(String),
       updated_at: expect.any(String)

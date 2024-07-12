@@ -7,6 +7,7 @@ exports[`POST /customers creates and returns a customer 1`] = `
   "first_name": "Dimitris",
   "id": Any<Number>,
   "last_name": "Klouvas",
+  "uid": Any<String>,
   "updated_at": Any<String>,
   "uuid": Any<String>,
 }
@@ -19,6 +20,7 @@ exports[`POST /customers omits additional properties 1`] = `
   "first_name": "Dimitris",
   "id": Any<Number>,
   "last_name": "Klouvas",
+  "uid": Any<String>,
   "updated_at": Any<String>,
   "uuid": Any<String>,
 }

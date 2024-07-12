@@ -8,6 +8,7 @@ export class OrderItem extends BaseModel {
   quantity!: number;
   product_id!: number;
   uuid!: string;
+  uid!: string;
 
   static get tableName() {
     return "order_items";
@@ -51,5 +52,6 @@ export interface OrderItem {
   quantity: number;
   product_id: number;
   uuid: string;
+  uid: string;
   state: "draft" | "placed" | "prepared" | "delivered" | "canceled";
 }

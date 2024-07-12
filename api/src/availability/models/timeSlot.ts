@@ -9,6 +9,8 @@ export class TimeSlot extends BaseModel {
   slot_id!: number;
   customer_id!: number;
   uuid!: string;
+  uid!: string;
+
   static get tableName() {
     return "time_slots";
   }
@@ -72,6 +74,7 @@ export interface TimeSlot {
   slot_id: number;
   customer_id: number;
   uuid: string;
+  uid: string;
   slot?: Slot;
   customer?: Customer;
 }

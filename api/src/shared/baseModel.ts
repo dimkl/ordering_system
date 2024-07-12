@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 import { Model, AjvValidator } from "objection";
 import { DBErrors } from "objection-db-errors";
 import addFormats from "ajv-formats";
+import { ulid } from "ulid";
 
 export class BaseModel extends DBErrors(Model) {
   static get modifiers() {
@@ -53,6 +54,9 @@ export class BaseModel extends DBErrors(Model) {
   generateUuid() {
     if ("uuid" in this) {
       this.uuid = uuidv4();
+    }
+    if ("uid" in this) {
+      this.uid = ulid();
     }
   }
 

@@ -33,11 +33,13 @@ describe("POST /order_items", () => {
       order_items: expect.arrayContaining([
         expect.objectContaining({
           uuid: expect.any(String),
+          uid: expect.any(String),
           created_at: expect.any(String),
           updated_at: expect.any(String),
           product: {
             title: "Product",
             uuid: product.uuid,
+            uid: expect.any(String),
             description: "Product description",
             qr: null
           },
@@ -64,15 +66,18 @@ describe("POST /order_items", () => {
       created_at: expect.any(String),
       updated_at: expect.any(String),
       uuid: order.uuid,
+      uid: order.uid,
       customer_id: order.customer.uuid,
       order_items: expect.arrayContaining([
         expect.objectContaining({
           uuid: expect.any(String),
+          uid: expect.any(String),
           created_at: expect.any(String),
           updated_at: expect.any(String),
           product: {
             title: "Product",
             uuid: product.uuid,
+            uid: product.uid,
             description: "Product description",
             qr: null
           },
@@ -99,15 +104,18 @@ describe("POST /order_items", () => {
       created_at: expect.any(String),
       updated_at: expect.any(String),
       uuid: order.uuid,
+      uid: order.uid,
       customer_id: order.customer.uuid,
       order_items: expect.arrayContaining([
         expect.objectContaining({
           uuid: expect.any(String),
+          uid: expect.any(String),
           created_at: expect.any(String),
           updated_at: expect.any(String),
           product: {
             title: "Product",
             uuid: product.uuid,
+            uid: product.uid,
             description: "Product description",
             qr: null
           },
@@ -183,15 +191,18 @@ describe("POST /order_items", () => {
         created_at: expect.any(String),
         updated_at: expect.any(String),
         uuid: order.uuid,
+        uid: order.uid,
         customer_id: order.customer.uuid,
         order_items: expect.arrayContaining([
           expect.objectContaining({
             uuid: expect.any(String),
+            uid: expect.any(String),
             created_at: expect.any(String),
             updated_at: expect.any(String),
             product: {
               title: "Product",
               uuid: product.uuid,
+              uid: product.uid,
               description: "Product description",
               qr: null
             },

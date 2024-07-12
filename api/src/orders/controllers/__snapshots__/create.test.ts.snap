@@ -7,6 +7,7 @@ exports[`POST /orders creates and returns a order 1`] = `
   "id": Any<Number>,
   "state": "draft",
   "time_slot_id": Any<String>,
+  "uid": Any<String>,
   "updated_at": Any<String>,
   "uuid": Any<String>,
 }
@@ -19,6 +20,7 @@ exports[`POST /orders creates and returns a order using internal customer_id 1`]
   "id": Any<Number>,
   "state": "draft",
   "time_slot_id": Any<String>,
+  "uid": Any<String>,
   "updated_at": Any<String>,
   "uuid": Any<String>,
 }
@@ -31,6 +33,7 @@ exports[`POST /orders creates and returns bulk orders 1`] = `
   "id": Any<Number>,
   "state": "draft",
   "time_slot_id": Any<String>,
+  "uid": Any<String>,
   "updated_at": Any<String>,
   "uuid": Any<String>,
 }
@@ -43,6 +46,7 @@ exports[`POST /orders creates and returns bulk orders 2`] = `
   "id": Any<Number>,
   "state": "draft",
   "time_slot_id": Any<String>,
+  "uid": Any<String>,
   "updated_at": Any<String>,
   "uuid": Any<String>,
 }

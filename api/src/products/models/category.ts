@@ -22,4 +22,5 @@ export interface Category {
   created_at: Date;
   updated_at: Date;
   uuid: string;
+  uid: string;
 }

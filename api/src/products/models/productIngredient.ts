@@ -7,6 +7,7 @@ export class ProductIngredient extends BaseModel {
   updated_at!: Date;
   ingredient_id!: number;
   product_id!: number;
+  uid!: string;
 
   static get tableName() {
     return "product_ingredients";
@@ -19,10 +20,6 @@ export class ProductIngredient extends BaseModel {
   static get public_columns() {
     return Object.keys(schema.properties);
   }
-
-  get hasUuid() {
-    return false;
-  }
 }
 
 export interface ProductIngredient {
@@ -31,4 +28,5 @@ export interface ProductIngredient {
   updated_at: Date;
   ingredient_id: number;
   product_id: number;
+  uid: string;
 }

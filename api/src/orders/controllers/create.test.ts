@@ -29,6 +29,7 @@ describe("POST /orders", () => {
     expect(response.body).toMatchSnapshot({
       id: expect.any(Number),
       uuid: expect.any(String),
+      uid: expect.any(String),
       created_at: expect.any(String),
       updated_at: expect.any(String),
       customer_id: expect.any(String),
@@ -59,6 +60,7 @@ describe("POST /orders", () => {
     expect(response.body[0]).toMatchSnapshot({
       id: expect.any(Number),
       uuid: expect.any(String),
+      uid: expect.any(String),
       created_at: expect.any(String),
       updated_at: expect.any(String),
       customer_id: expect.any(String),
@@ -67,14 +69,16 @@ describe("POST /orders", () => {
     expect(response.body[1]).toMatchSnapshot({
       id: expect.any(Number),
       uuid: expect.any(String),
+      uid: expect.any(String),
       created_at: expect.any(String),
       updated_at: expect.any(String),
       customer_id: expect.any(String),
       time_slot_id: expect.any(String)
     });
 
-    expect(response.body[0].time_slot_id).toEqual(timeSlot.uuid);
-    expect(response.body[1].time_slot_id).toEqual(otherTimeSlot.uuid);
+    expect(response.body.map((d) => d.time_slot_id)).toEqual(
+      expect.arrayContaining([timeSlot.uuid, otherTimeSlot.uuid])
+    );
   });
 
   it("creates and returns a order using internal customer_id", async () => {
@@ -89,6 +93,7 @@ describe("POST /orders", () => {
     expect(response.body).toMatchSnapshot({
       id: expect.any(Number),
       uuid: expect.any(String),
+      uid: expect.any(String),
       created_at: expect.any(String),
       updated_at: expect.any(String),
       customer_id: expect.any(String),

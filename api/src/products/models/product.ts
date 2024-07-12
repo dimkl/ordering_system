@@ -3,6 +3,7 @@ import schema from "../schemas/product.json";
 
 export class Product extends BaseModel {
   uuid!: string;
+  uid!: string;
 
   static get tableName() {
     return "products";
@@ -82,6 +83,7 @@ export interface Product {
   created_at: Date;
   updated_at: Date;
   uuid: string;
+  uid: string;
   variant_id: number;
   category_id: number;
 }

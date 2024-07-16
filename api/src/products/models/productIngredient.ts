@@ -2,12 +2,11 @@ import { BaseModel } from "../../shared/baseModel";
 import schema from "../schemas/productIngredient.json";
 
 export class ProductIngredient extends BaseModel {
-  id!: number;
+  id!: string;
   created_at!: Date;
   updated_at!: Date;
   ingredient_id!: number;
   product_id!: number;
-  uid!: string;
 
   static get tableName() {
     return "product_ingredients";
@@ -20,13 +19,16 @@ export class ProductIngredient extends BaseModel {
   static get public_columns() {
     return Object.keys(schema.properties);
   }
+
+  get hasUidAsId() {
+    return true;
+  }
 }
 
 export interface ProductIngredient {
-  id: number;
+  id: string;
   created_at: Date;
   updated_at: Date;
   ingredient_id: number;
   product_id: number;
-  uid: string;
 }

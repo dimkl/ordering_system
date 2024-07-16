@@ -308,7 +308,7 @@ export class DataFactory {
     const productIngredient = await knex("product_ingredients").insert<ProductIngredient[]>({
       ingredient_id: ingredient.id,
       product_id: product.id,
-      uid: ulid(),
+      id: ulid(),
       ...options
     });
 

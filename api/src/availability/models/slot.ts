@@ -5,7 +5,7 @@ import { BaseModel } from "../../shared/baseModel";
 import schema from "../schemas/slot.json";
 
 export class Slot extends BaseModel {
-  uid!: string;
+  id!: string;
 
   static get tableName() {
     return "slots";
@@ -65,10 +65,14 @@ export class Slot extends BaseModel {
       }
     };
   }
+
+  get hasUidAsId() {
+    return true;
+  }
 }
 
 export interface Slot {
-  id: number;
+  id: string;
   created_at: Date;
   updated_at: Date;
   capacity: number;
@@ -76,8 +80,6 @@ export interface Slot {
   sku: string;
   section_id: string;
   user_id: number;
-  uuid: string;
-  uid: string;
 
   user: User;
   section: Section;

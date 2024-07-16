@@ -19,7 +19,7 @@
       "$ref": "defs#/definitions/uid"
     },
     "slot_id": {
-      "$ref": "defs#/definitions/id_or_uuid"
+      "$ref": "defs#/definitions/uid"
     }
   },
   "additionalProperties": false

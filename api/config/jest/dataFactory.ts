@@ -202,8 +202,7 @@ export class DataFactory {
         section_id: section.id,
         user_id: user.id,
         sku: "table-1",
-        uuid: uuidv4(),
-        uid: ulid(),
+        id: ulid(),
         active: true,
         capacity: 1,
         ...options

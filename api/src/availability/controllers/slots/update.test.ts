@@ -17,7 +17,7 @@ describe("PATCH /slots/:slot_id", () => {
     const section = await DataFactory.createSection({}, {}, { email: "aloha@example.com" });
 
     const response = await request
-      .patch(`/slots/${slot.uuid}`)
+      .patch(`/slots/${slot.id}`)
       .send({
         active: false,
         user_id: section.user.uuid,
@@ -33,8 +33,7 @@ describe("PATCH /slots/:slot_id", () => {
       id: slot.id,
       section_id: section.id,
       sku: "table-1",
-      user_id: section.user.uuid,
-      uuid: slot.uuid
+      user_id: section.user.uuid
     });
     expect(slot.user_id).not.toEqual(section.user.id);
     expect(slot.section_id).not.toEqual(section.id);
@@ -48,7 +47,7 @@ describe("PATCH /slots/:slot_id", () => {
     const slot = await DataFactory.createSlot();
 
     const response = await request
-      .patch(`/slots/${slot.uuid}`)
+      .patch(`/slots/${slot.id}`)
       .send({})
       .set("Accept", "application/json");
 
@@ -60,8 +59,7 @@ describe("PATCH /slots/:slot_id", () => {
       id: slot.id,
       section_id: slot.section_id,
       sku: "table-1",
-      user_id: slot.user.uuid,
-      uuid: slot.uuid
+      user_id: slot.user.uuid
     });
   });
 
@@ -69,7 +67,7 @@ describe("PATCH /slots/:slot_id", () => {
     const slot = await DataFactory.createSlot({ active: true });
 
     const response = await request
-      .patch(`/slots/${slot.uuid}`)
+      .patch(`/slots/${slot.id}`)
       .send({ created_at: "1680046371850", active: false })
       .set("Accept", "application/json");
 

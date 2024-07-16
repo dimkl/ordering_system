@@ -5,13 +5,11 @@ exports[`GET /slots/:shop_id/available/:slot_id? returns all available slots 1`]
   "active": true,
   "capacity": 1,
   "created_at": Any<String>,
-  "id": Any<Number>,
+  "id": Any<String>,
   "section_id": Any<String>,
   "sku": "table-1",
-  "uid": Any<String>,
   "updated_at": Any<String>,
   "user_id": Any<String>,
-  "uuid": Any<String>,
 }
 `;
 
@@ -20,27 +18,10 @@ exports[`GET /slots/:shop_id/available/:slot_id? returns available specified slo
   "active": true,
   "capacity": 1,
   "created_at": Any<String>,
-  "id": Any<Number>,
+  "id": Any<String>,
   "section_id": Any<String>,
   "sku": "table-1",
-  "uid": Any<String>,
   "updated_at": Any<String>,
   "user_id": Any<String>,
-  "uuid": Any<String>,
-}
-`;
-
-exports[`GET /slots/:shop_id/available/:slot_id? returns available specified slot using uuid 1`] = `
-{
-  "active": true,
-  "capacity": 1,
-  "created_at": Any<String>,
-  "id": Any<Number>,
-  "section_id": Any<String>,
-  "sku": "table-1",
-  "uid": Any<String>,
-  "updated_at": Any<String>,
-  "user_id": Any<String>,
-  "uuid": Any<String>,
 }
 `;

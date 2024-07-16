@@ -6,7 +6,7 @@ import schema from "../schemas/timeSlot.json";
 export class TimeSlot extends BaseModel {
   created_at!: Date;
   updated_at!: Date;
-  slot_id!: number;
+  slot_id!: string;
   customer_id!: string;
   id!: string;
 
@@ -26,11 +26,7 @@ export class TimeSlot extends BaseModel {
     return {
       ...super.modifiers,
       publicColumns(query) {
-        query
-          .select("time_slots.*")
-          .joinRelated("customer")
-          .joinRelated("slot")
-          .select("slot.uuid as slot_id");
+        query.select("time_slots.*").joinRelated("customer");
       },
       reserved(query, startedAt, endedAt) {
         query.where("started_at", "<=", endedAt).where(function () {
@@ -73,7 +69,7 @@ export interface TimeSlot {
   updated_at: Date;
   started_at: Date;
   ended_at: Date;
-  slot_id: number;
+  slot_id: string;
   customer_id: string;
   slot?: Slot;
   customer?: Customer;

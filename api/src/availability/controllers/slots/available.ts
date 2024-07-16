@@ -6,7 +6,7 @@ import { BusinessError } from "../../../shared/errors";
 export const handler = async (ctx: Context, next: Next) => {
   if (ctx.slot) {
     if (!ctx.slot.active) {
-      throw new BusinessError(`Slot ${ctx.slot.uid} is not available!`);
+      throw new BusinessError(`Slot ${ctx.slot.id} is not available!`);
     }
 
     ctx.body = ctx.slot;

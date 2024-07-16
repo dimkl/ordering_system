@@ -26,7 +26,7 @@ describe("DELETE /slots/:slot_id", () => {
   it("deletes time_slot using uuid and returns 204", async () => {
     const slot = await DataFactory.createSlot();
 
-    const response = await request.delete(`/slots/${slot.uuid}`).set("Accept", "application/json");
+    const response = await request.delete(`/slots/${slot.id}`).set("Accept", "application/json");
 
     expect(response.status).toBe(204);
   });

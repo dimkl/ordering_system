@@ -27,7 +27,7 @@ describe("PATCH /time_slots/:time_slot_id", () => {
         started_at: "2022-04-21T15:28:27.602Z",
         ended_at: "2022-05-21T15:28:27.602Z",
         customer_id: customer.id,
-        slot_id: slot.uuid
+        slot_id: slot.id
       })
       .set("Accept", "application/json");
 
@@ -39,7 +39,7 @@ describe("PATCH /time_slots/:time_slot_id", () => {
       updated_at: expect.any(String),
       id: timeSlot.id,
       customer_id: customer.id,
-      slot_id: slot.uuid
+      slot_id: slot.id
     });
     expect(timeSlot.customer_id).not.toEqual(customer.id);
     expect(timeSlot.slot_id).not.toEqual(slot.id);
@@ -65,7 +65,7 @@ describe("PATCH /time_slots/:time_slot_id", () => {
       updated_at: timeSlot.updated_at.toISOString(),
       id: timeSlot.id,
       customer_id: timeSlot.customer_id,
-      slot_id: timeSlot.slot.uuid
+      slot_id: timeSlot.slot_id
     });
   });
 

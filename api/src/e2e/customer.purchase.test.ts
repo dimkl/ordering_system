@@ -37,7 +37,7 @@ describe("Customer purchase flow", () => {
       .post(`/time_slots/reserve`)
       .send({
         customer_id: customerId,
-        slot_id: slot.uuid,
+        slot_id: slot.id,
         started_at: "2022-04-23T22:00:00.000Z"
       })
       .set("Accept", "application/json");

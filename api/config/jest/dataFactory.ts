@@ -260,7 +260,7 @@ export class DataFactory {
       shop_id: shop.id,
       date: newYear,
       name: "New Year",
-      uid: ulid(),
+      id: ulid(),
       ...options
     });
 

@@ -2,7 +2,7 @@ import { BaseModel } from "../../shared/baseModel";
 import schema from "../schemas/holiday.json";
 
 export class Holiday extends BaseModel {
-  uid!: string;
+  id!: string;
   static get tableName() {
     return "holidays";
   }
@@ -27,11 +27,14 @@ export class Holiday extends BaseModel {
       }
     };
   }
+
+  get hasUidAsId() {
+    return true;
+  }
 }
 
 export interface Holiday {
-  id: number;
-  uid: string;
+  id: string;
   created_at: Date;
   updated_at: Date;
   name: string;

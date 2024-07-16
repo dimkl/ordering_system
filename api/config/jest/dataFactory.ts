@@ -285,7 +285,7 @@ export class DataFactory {
       shop_id: shop.id,
       product_id: product.id,
       quantity: 2,
-      uid: ulid(),
+      id: ulid(),
       ...options
     });
 

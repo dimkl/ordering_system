@@ -4,6 +4,8 @@
  */
 import type { Knex } from "knex";
 
+import { ulid } from "ulid";
+
 import setupModels from "../../../shared/setupModels";
 
 describe("GET /time_slots", () => {
@@ -22,11 +24,9 @@ describe("GET /time_slots", () => {
     expect(response.status).toBe(200);
     expect(response.body.length).toBe(1);
     expect(response.body[0]).toMatchSnapshot({
-      id: expect.any(Number),
+      id: expect.any(String),
       slot_id: expect.any(String),
       customer_id: expect.any(String),
-      uuid: expect.any(String),
-      uid: expect.any(String),
       started_at: expect.any(String),
       created_at: expect.any(String),
       updated_at: expect.any(String)
@@ -42,11 +42,9 @@ describe("GET /time_slots", () => {
 
     expect(response.status).toBe(200);
     expect(response.body).toMatchSnapshot({
-      id: expect.any(Number),
+      id: expect.any(String),
       slot_id: expect.any(String),
       customer_id: expect.any(String),
-      uuid: expect.any(String),
-      uid: expect.any(String),
       started_at: expect.any(String),
       created_at: expect.any(String),
       updated_at: expect.any(String)
@@ -57,16 +55,14 @@ describe("GET /time_slots", () => {
     const timeSlot = await DataFactory.createTimeSlot();
 
     const response = await request
-      .get("/time_slots/" + timeSlot.uuid)
+      .get("/time_slots/" + timeSlot.id)
       .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
     expect(response.body).toMatchSnapshot({
-      id: expect.any(Number),
+      id: expect.any(String),
       slot_id: expect.any(String),
       customer_id: expect.any(String),
-      uuid: expect.any(String),
-      uid: expect.any(String),
       started_at: expect.any(String),
       created_at: expect.any(String),
       updated_at: expect.any(String)
@@ -81,9 +77,7 @@ describe("GET /time_slots", () => {
   });
 
   it("throws 404 when specified time_slot does not exist", async () => {
-    const response = await request
-      .get("/time_slots/" + Math.floor(Math.random() * 100))
-      .set("Accept", "application/json");
+    const response = await request.get("/time_slots/" + ulid()).set("Accept", "application/json");
 
     expect(response.status).toBe(404);
   });

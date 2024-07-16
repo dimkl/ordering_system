@@ -62,28 +62,12 @@ exports[`POST /orders throws validation error for not existing time_slot_id 1`] 
 [
   {
     "instancePath": "/time_slot_id",
-    "keyword": "type",
-    "message": "must be integer",
+    "keyword": "maxLength",
+    "message": "must NOT have more than 26 characters",
     "params": {
-      "type": "integer",
+      "limit": 26,
     },
-    "schemaPath": "defs#/definitions/id_or_uuid/anyOf/0/type",
-  },
-  {
-    "instancePath": "/time_slot_id",
-    "keyword": "format",
-    "message": "must match format "uuid"",
-    "params": {
-      "format": "uuid",
-    },
-    "schemaPath": "defs#/definitions/id_or_uuid/anyOf/1/format",
-  },
-  {
-    "instancePath": "/time_slot_id",
-    "keyword": "anyOf",
-    "message": "must match a schema in anyOf",
-    "params": {},
-    "schemaPath": "defs#/definitions/id_or_uuid/anyOf",
+    "schemaPath": "defs#/definitions/uid/maxLength",
   },
 ]
 `;

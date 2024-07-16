@@ -234,8 +234,7 @@ export class DataFactory {
         slot_id: slot.id,
         customer_id: customer.id,
         started_at: new Date().toISOString(),
-        uuid: uuidv4(),
-        uid: ulid(),
+        id: ulid(),
         ...options
       });
 

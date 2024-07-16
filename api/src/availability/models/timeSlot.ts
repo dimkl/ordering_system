@@ -8,8 +8,7 @@ export class TimeSlot extends BaseModel {
   updated_at!: Date;
   slot_id!: number;
   customer_id!: string;
-  uuid!: string;
-  uid!: string;
+  id!: string;
 
   static get tableName() {
     return "time_slots";
@@ -62,18 +61,20 @@ export class TimeSlot extends BaseModel {
       }
     };
   }
+
+  get hasUidAsId() {
+    return true;
+  }
 }
 
 export interface TimeSlot {
-  id: number;
+  id: string;
   created_at: Date;
   updated_at: Date;
   started_at: Date;
   ended_at: Date;
   slot_id: number;
   customer_id: string;
-  uuid: string;
-  uid: string;
   slot?: Slot;
   customer?: Customer;
 }

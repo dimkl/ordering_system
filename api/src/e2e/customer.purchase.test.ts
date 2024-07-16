@@ -42,7 +42,7 @@ describe("Customer purchase flow", () => {
       })
       .set("Accept", "application/json");
     expect(response.status).toBe(200);
-    const timeSlotId = response.body.uuid;
+    const timeSlotId = response.body.id;
 
     // 3. retrieve shop menu
     response = await request

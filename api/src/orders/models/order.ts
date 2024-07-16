@@ -11,7 +11,7 @@ export class Order extends BaseModel {
   created_at!: Date;
   updated_at!: Date;
   customer_id!: string;
-  time_slot_id!: number;
+  time_slot_id!: string;
 
   static get tableName() {
     return "orders";
@@ -29,11 +29,7 @@ export class Order extends BaseModel {
     return {
       ...super.modifiers,
       publicColumns(query) {
-        query
-          .select("orders.*")
-          .joinRelated("customer")
-          .joinRelated("timeSlot")
-          .select("timeSlot.uuid as time_slot_id");
+        query.select("orders.*").joinRelated("customer");
       }
     };
   }
@@ -105,7 +101,7 @@ export interface Order {
   created_at: Date;
   updated_at: Date;
   customer_id: string;
-  time_slot_id: number;
+  time_slot_id: string;
   state:
     | "draft"
     | "placed"

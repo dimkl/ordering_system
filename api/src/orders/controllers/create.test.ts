@@ -21,7 +21,7 @@ describe("POST /orders", () => {
       .post("/orders")
       .send({
         customer_id: timeSlot.customer_id,
-        time_slot_id: timeSlot.uuid
+        time_slot_id: timeSlot.id
       })
       .set("Accept", "application/json");
 
@@ -43,11 +43,11 @@ describe("POST /orders", () => {
     const data = [
       {
         customer_id: timeSlot.customer_id,
-        time_slot_id: timeSlot.uuid
+        time_slot_id: timeSlot.id
       },
       {
         customer_id: otherTimeSlot.customer_id,
-        time_slot_id: otherTimeSlot.uuid
+        time_slot_id: otherTimeSlot.id
       }
     ];
 
@@ -71,7 +71,7 @@ describe("POST /orders", () => {
     });
 
     expect(response.body.map((d) => d.time_slot_id)).toEqual(
-      expect.arrayContaining([timeSlot.uuid, otherTimeSlot.uuid])
+      expect.arrayContaining([timeSlot.id, otherTimeSlot.id])
     );
   });
 
@@ -108,7 +108,7 @@ describe("POST /orders", () => {
       .post("/orders")
       .send({
         customer_id: timeSlot.customer_id.substring(0, -1) + "1",
-        time_slot_id: timeSlot.uuid
+        time_slot_id: timeSlot.id
       })
       .set("Accept", "application/json");
 
@@ -123,7 +123,7 @@ describe("POST /orders", () => {
       .post("/orders")
       .send({
         customer_id: timeSlot.customer_id,
-        time_slot_id: timeSlot.uuid + "1"
+        time_slot_id: timeSlot.id + "1"
       })
       .set("Accept", "application/json");
 
@@ -141,7 +141,7 @@ describe("POST /orders", () => {
       .post("/orders")
       .send({
         customer_id: customer.id,
-        time_slot_id: timeSlot.uuid,
+        time_slot_id: timeSlot.id,
         created_at: "1680046371850"
       })
       .set("Accept", "application/json");

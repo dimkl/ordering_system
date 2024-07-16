@@ -12,7 +12,10 @@ async function handler(ctx: Context) {
   const slotId = await Slot.getId(data.slot_id);
 
   if (Object.keys(data).length > 0) {
-    await ctx.timeSlot.$query().patch({ ...data, customer_id: customerId, slot_id: slotId });
+    await ctx.timeSlot
+      .$query()
+      .patch({ ...data, customer_id: customerId, slot_id: slotId })
+      .returning("*");
   }
 
   ctx.body = await ctx.timeSlot.$query().modify("publicColumns");

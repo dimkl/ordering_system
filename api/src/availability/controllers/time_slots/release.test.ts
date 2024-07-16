@@ -29,7 +29,7 @@ describe("DELETE /time_slots/release/:time_slot_id", () => {
     const timeSlot = await DataFactory.createTimeSlot();
 
     const response = await request
-      .delete(`/time_slots/release/${timeSlot.uuid}`)
+      .delete(`/time_slots/release/${timeSlot.id}`)
       .set("Accept", "application/json");
 
     expect(response.status).toBe(204);

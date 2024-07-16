@@ -68,7 +68,7 @@ export class BaseModel extends DBErrors(Model) {
   static whereByIdOrUid(idsOrUids: string[] | number[] | string | number) {
     const idsOrUidsList = Array.isArray(idsOrUids) ? idsOrUids : [idsOrUids];
 
-    if (this.tableName === "customers") {
+    if (["customers", "categories"].includes(this.tableName)) {
       return this.query().whereIn(`${this.tableName}.id`, idsOrUidsList);
     }
 

@@ -85,5 +85,5 @@ export interface Product {
   uuid: string;
   uid: string;
   variant_id: number;
-  category_id: number;
+  category_id: string;
 }

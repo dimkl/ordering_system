@@ -27,13 +27,10 @@
       "minLength": 1,
       "maxLength": 100
     },
-    "category_id":  {
-      "$ref": "defs#/definitions/id_or_uuid"
+    "category_id": {
+      "$ref": "defs#/definitions/uid"
     }
   },
-  "required": [
-    "title",
-    "sku"
-  ],
+  "required": ["title", "sku"],
   "additionalProperties": false
 }

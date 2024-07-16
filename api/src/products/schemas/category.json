@@ -7,8 +7,9 @@
   "properties": {
     "id": {
       "readOnly": true,
-      "type": "integer",
-      "exclusiveMinimum": 0
+      "type": "string",
+      "minLength": 26,
+      "maxLength": 26
     },
     "title": {
       "type": "string",
@@ -19,18 +20,6 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 255
-    },
-    "uid": {
-      "readOnly": true,
-      "type": "string",
-      "minLength": 26,
-      "maxLength": 26
-    },
-    "uuid": {
-      "readOnly": true,
-      "type": "string",
-      "minLength": 36,
-      "maxLength": 36
     },
     "created_at": {
       "readOnly": true,

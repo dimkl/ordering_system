@@ -9,8 +9,7 @@
   "properties": {
     "id": {
       "readOnly": true,
-      "type": "integer",
-      "exclusiveMinimum": 0
+      "$ref": "defs#/definitions/uid"
     },
     "title": {
       "type": "string",
@@ -23,8 +22,6 @@
       "maxLength": 255
     }
   },
-  "required": [
-    "title"
-  ],
+  "required": ["title"],
   "additionalProperties": false
 }

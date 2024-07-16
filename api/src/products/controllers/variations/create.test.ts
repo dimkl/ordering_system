@@ -6,6 +6,8 @@
 import type { Knex } from "knex";
 
 import { v4 as uuidv4 } from "uuid";
+import { ulid } from "ulid";
+
 import setupModels from "../../../shared/setupModels";
 
 describe("POST /variations", () => {
@@ -28,7 +30,7 @@ describe("POST /variations", () => {
         description: "Variation description",
         sku: `${product.sku}-1`,
         variant_id: product.uuid,
-        ingredients: [ingredient.uuid]
+        ingredients: [ingredient.id]
       })
       .set("Accept", "application/json");
 
@@ -44,14 +46,14 @@ describe("POST /variations", () => {
       description: product.description,
       ingredients: expect.arrayContaining([
         expect.objectContaining({
-          uuid: ingredient.uuid,
+          id: ingredient.id,
           created_at: expect.any(String),
           updated_at: expect.any(String),
           suitable_for_diet: "all",
           allergen: false
         }),
         expect.objectContaining({
-          uuid: ingredient2.uuid,
+          id: ingredient2.id,
           created_at: expect.any(String),
           updated_at: expect.any(String),
           suitable_for_diet: "all",
@@ -71,7 +73,7 @@ describe("POST /variations", () => {
           description: "Variation description",
           ingredients: expect.arrayContaining([
             expect.objectContaining({
-              uuid: ingredient.uuid,
+              id: ingredient.id,
               created_at: expect.any(String),
               updated_at: expect.any(String),
               suitable_for_diet: "all",
@@ -95,7 +97,7 @@ describe("POST /variations", () => {
         description: "Variation description",
         sku: `${product.sku}-1`,
         variant_id: product.uuid,
-        ingredients: [uuidv4()]
+        ingredients: [ulid()]
       })
       .set("Accept", "application/json");
 
@@ -111,7 +113,7 @@ describe("POST /variations", () => {
         description: "Variation description",
         sku: "aloha-1",
         variant_id: uuidv4(),
-        ingredients: [ingredient.uuid]
+        ingredients: [ingredient.id]
       })
       .set("Accept", "application/json");
 
@@ -128,7 +130,7 @@ describe("POST /variations", () => {
         description: "Variation description",
         sku: `${product.sku}-1`,
         variant_id: product.uuid,
-        ingredients: [ingredient.uuid],
+        ingredients: [ingredient.id],
         created_at: "1680046371850"
       })
       .set("Accept", "application/json");
@@ -139,6 +141,6 @@ describe("POST /variations", () => {
 
     const variation = response.body.variations[0];
     expect(variation.description).toEqual("Variation description");
-    expect(variation.ingredients[0].uuid).toEqual(ingredient.uuid);
+    expect(variation.ingredients[0].id).toEqual(ingredient.id);
   });
 });

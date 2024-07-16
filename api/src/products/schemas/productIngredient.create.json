@@ -8,15 +8,12 @@
   "type": "object",
   "properties": {
     "ingredient_id": {
-      "$ref": "defs#/definitions/id_or_uuid"
+      "$ref": "defs#/definitions/uid"
     },
     "product_id": {
       "$ref": "defs#/definitions/id_or_uuid"
     }
   },
-  "required": [
-    "ingredient_id",
-    "product_id"
-  ],
+  "required": ["ingredient_id", "product_id"],
   "additionalProperties": false
 }

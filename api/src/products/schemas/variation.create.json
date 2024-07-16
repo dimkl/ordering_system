@@ -33,14 +33,10 @@
     "ingredients": {
       "type": "array",
       "items": {
-        "$ref": "defs#/definitions/id_or_uuid"
+        "$ref": "defs#/definitions/uid"
       }
     }
   },
-  "required": [
-    "title",
-    "variant_id",
-    "ingredients"
-  ],
+  "required": ["title", "variant_id", "ingredients"],
   "additionalProperties": false
 }

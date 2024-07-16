@@ -32,8 +32,7 @@ export class DataFactory {
       .insert<Ingredient[]>({
         title: "Ingredient",
         description: "Ingredient description",
-        uuid: uuidv4(),
-        uid: ulid(),
+        id: ulid(),
         ...options
       });
 

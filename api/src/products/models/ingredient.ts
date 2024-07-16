@@ -2,6 +2,8 @@ import { BaseModel } from "../../shared/baseModel";
 import schema from "../schemas/ingredient.json";
 
 export class Ingredient extends BaseModel {
+  id!: string;
+
   static get tableName() {
     return "ingredients";
   }
@@ -12,6 +14,10 @@ export class Ingredient extends BaseModel {
 
   static get public_columns() {
     return Object.keys(schema.properties);
+  }
+
+  get hasUidAsId() {
+    return true;
   }
 }
 
@@ -30,15 +36,13 @@ type SuitableForDiet =
   | "vegetarian";
 
 export interface Ingredient {
-  id: number;
+  id: string;
   title: string;
   description: string;
   qr: string;
   sku: string;
   created_at: Date;
   updated_at: Date;
-  uuid: string;
-  uid: string;
   allergen: boolean;
   suitable_for_diet: SuitableForDiet;
 }

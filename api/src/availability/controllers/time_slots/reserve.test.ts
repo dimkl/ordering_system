@@ -29,7 +29,7 @@ describe("POST /time_slots/reserve", () => {
       .send({
         started_at: startedAt.toISOString(),
         ended_at: endedAt.toISOString(),
-        customer_id: customer.uuid,
+        customer_id: customer.id,
         slot_id: slot.uuid
       })
       .set("Accept", "application/json");
@@ -39,7 +39,6 @@ describe("POST /time_slots/reserve", () => {
       started_at: startedAt.toISOString(),
       ended_at: endedAt.toISOString(),
       // TODO: Replace id with uuids
-      // customer_id: customer.uuid,
       // slot_id: slot.uuid
       customer_id: customer.id,
       slot_id: slot.id
@@ -63,7 +62,7 @@ describe("POST /time_slots/reserve", () => {
       .send({
         started_at: timeSlot.started_at.toISOString(),
         ended_at: timeSlot.ended_at.toISOString(),
-        customer_id: timeSlot.customer.uuid,
+        customer_id: timeSlot.customer_id,
         slot_id: timeSlot.slot.uuid
       })
       .set("Accept", "application/json");
@@ -97,7 +96,7 @@ describe("POST /time_slots/reserve", () => {
       .send({
         started_at: startedAt.toISOString(),
         ended_at: endedAt.toISOString(),
-        customer_id: customer.uuid,
+        customer_id: customer.id,
         slot_id: slot.uuid
       })
       .set("Accept", "application/json");
@@ -121,7 +120,7 @@ describe("POST /time_slots/reserve", () => {
       .send({
         started_at: startedAt.toISOString(),
         ended_at: endedAt.toISOString(),
-        customer_id: customer.uuid,
+        customer_id: customer.id,
         slot_id: slot.uuid
       })
       .set("Accept", "application/json");
@@ -147,7 +146,7 @@ describe("POST /time_slots/reserve", () => {
       .send({
         started_at: startedAt.toISOString(),
         ended_at: endedAt.toISOString(),
-        customer_id: customer.uuid,
+        customer_id: customer.id,
         slot_id: slot.uuid
       })
       .set("Accept", "application/json");

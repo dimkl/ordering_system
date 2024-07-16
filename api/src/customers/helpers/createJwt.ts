@@ -16,10 +16,10 @@ const JWT_PRIVATE_KEY = process.env.JWT_PRIVATE_KEY as Secret;
 //   )];
 // }
 
-export async function createJwt(customerUuid: string, { role = "customer" } = {}) {
+export async function createJwt(customerId: string, { role = "customer" } = {}) {
   const customer = await Customer.query()
     .modify("tokenColumns")
-    .where({ uuid: customerUuid })
+    .where({ id: customerId })
     .first()
     .throwIfNotFound();
 
@@ -29,7 +29,7 @@ export async function createJwt(customerUuid: string, { role = "customer" } = {}
   const payload = {
     ...customer,
     role,
-    sub: customerUuid,
+    sub: customerId,
     scopes: allowedScopes
   };
 

@@ -20,7 +20,7 @@ describe("POST /orders", () => {
     const response = await request
       .post("/orders")
       .send({
-        customer_id: timeSlot.customer.uuid,
+        customer_id: timeSlot.customer_id,
         time_slot_id: timeSlot.uuid
       })
       .set("Accept", "application/json");
@@ -35,7 +35,7 @@ describe("POST /orders", () => {
       customer_id: expect.any(String),
       time_slot_id: expect.any(String)
     });
-    expect(response.body.customer_id).toEqual(timeSlot.customer.uuid);
+    expect(response.body.customer_id).toEqual(timeSlot.customer_id);
   });
 
   it("creates and returns bulk orders", async () => {
@@ -44,11 +44,11 @@ describe("POST /orders", () => {
 
     const data = [
       {
-        customer_id: timeSlot.customer.uuid,
+        customer_id: timeSlot.customer_id,
         time_slot_id: timeSlot.uuid
       },
       {
-        customer_id: otherTimeSlot.customer.uuid,
+        customer_id: otherTimeSlot.customer_id,
         time_slot_id: otherTimeSlot.uuid
       }
     ];
@@ -86,7 +86,7 @@ describe("POST /orders", () => {
 
     const response = await request
       .post("/orders")
-      .send({ customer_id: timeSlot.customer.id, time_slot_id: timeSlot.id })
+      .send({ customer_id: timeSlot.customer_id, time_slot_id: timeSlot.id })
       .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
@@ -99,7 +99,7 @@ describe("POST /orders", () => {
       customer_id: expect.any(String),
       time_slot_id: expect.any(String)
     });
-    expect(response.body.customer_id).toEqual(timeSlot.customer.uuid);
+    expect(response.body.customer_id).toEqual(timeSlot.customer_id);
   });
 
   it("throws validation error for required properties", async () => {
@@ -115,7 +115,7 @@ describe("POST /orders", () => {
     const response = await request
       .post("/orders")
       .send({
-        customer_id: timeSlot.customer.uuid + "1",
+        customer_id: timeSlot.customer_id.substring(0, -1) + "1",
         time_slot_id: timeSlot.uuid
       })
       .set("Accept", "application/json");
@@ -130,7 +130,7 @@ describe("POST /orders", () => {
     const response = await request
       .post("/orders")
       .send({
-        customer_id: timeSlot.customer.uuid,
+        customer_id: timeSlot.customer_id,
         time_slot_id: timeSlot.uuid + "1"
       })
       .set("Accept", "application/json");
@@ -148,7 +148,7 @@ describe("POST /orders", () => {
     const response = await request
       .post("/orders")
       .send({
-        customer_id: customer.uuid,
+        customer_id: customer.id,
         time_slot_id: timeSlot.uuid,
         created_at: "1680046371850"
       })
@@ -156,6 +156,6 @@ describe("POST /orders", () => {
 
     expect(response.status).toBe(200);
     expect(response.body.created_at).not.toEqual("1680046371850");
-    expect(response.body.customer_id).toEqual(customer.uuid);
+    expect(response.body.customer_id).toEqual(customer.id);
   });
 });

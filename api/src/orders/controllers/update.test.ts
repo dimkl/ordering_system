@@ -24,7 +24,7 @@ describe("PATCH /orders/:order_id", () => {
     const response = await request
       .patch(`/orders/${order.uuid}`)
       .send({
-        customer_id: timeSlot.customer.uuid,
+        customer_id: timeSlot.customer_id,
         time_slot_id: timeSlot.uuid
       })
       .set("Accept", "application/json");
@@ -35,7 +35,7 @@ describe("PATCH /orders/:order_id", () => {
       uuid: order.uuid,
       created_at: order.created_at.toISOString(),
       updated_at: expect.any(String),
-      customer_id: timeSlot.customer.uuid,
+      customer_id: timeSlot.customer_id,
       time_slot_id: timeSlot.uuid,
       state: "draft"
     });
@@ -57,7 +57,7 @@ describe("PATCH /orders/:order_id", () => {
       uuid: order.uuid,
       created_at: order.created_at.toISOString(),
       updated_at: order.updated_at.toISOString(),
-      customer_id: order.customer.uuid,
+      customer_id: order.customer_id,
       time_slot_id: order.timeSlot.uuid,
       state: "draft"
     });

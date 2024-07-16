@@ -30,7 +30,7 @@ describe("Customer purchase flow", () => {
       .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
-    const customerId = response.body.uuid;
+    const customerId = response.body.id;
 
     // 2. reserve time_slot
     response = await request

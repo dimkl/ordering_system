@@ -10,9 +10,9 @@ const handler = async (ctx: Context) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { repeat_password, ...data } = ctx.request.validatedData;
 
-  const { uuid } = await Customer.query().modify("publicInsertColumns").insert(data);
+  const { id } = await Customer.query().modify("publicInsertColumns").insert(data);
 
-  ctx.body = await createJwt(uuid);
+  ctx.body = await createJwt(id);
 };
 
 export { schema, handler };

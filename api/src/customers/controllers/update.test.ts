@@ -16,7 +16,7 @@ describe("PATCH /customers/:customer_id", () => {
     const customer = await DataFactory.createCustomer();
 
     const response = await request
-      .patch(`/customers/${customer.uuid}`)
+      .patch(`/customers/${customer.id}`)
       .send({
         first_name: "Dimitris+2",
         last_name: "Klouvas+2",
@@ -31,7 +31,6 @@ describe("PATCH /customers/:customer_id", () => {
       first_name: "Dimitris+2",
       last_name: "Klouvas+2",
       id: customer.id,
-      uuid: customer.uuid,
       created_at: customer.created_at.toISOString(),
       updated_at: expect.any(String)
     });
@@ -43,15 +42,13 @@ describe("PATCH /customers/:customer_id", () => {
     const customer = await DataFactory.createCustomer();
 
     const response = await request
-      .patch(`/customers/${customer.uuid}`)
+      .patch(`/customers/${customer.id}`)
       .send({})
       .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
     expect(response.body).toMatchSnapshot({
-      id: expect.any(Number),
-      uuid: expect.any(String),
-      uid: expect.any(String),
+      id: expect.any(String),
       created_at: expect.any(String),
       updated_at: expect.any(String)
     });
@@ -64,7 +61,7 @@ describe("PATCH /customers/:customer_id", () => {
     });
 
     const response = await request
-      .patch(`/customers/${newCustomer.uuid}`)
+      .patch(`/customers/${newCustomer.id}`)
       .send({
         first_name: "Dimitris",
         last_name: "Klouvas",
@@ -81,7 +78,7 @@ describe("PATCH /customers/:customer_id", () => {
     const customer = await DataFactory.createCustomer();
 
     const response = await request
-      .patch(`/customers/${customer.uuid}`)
+      .patch(`/customers/${customer.id}`)
       .send({ created_at: "1680046371850", first_name: "aloha" })
       .set("Accept", "application/json");
 

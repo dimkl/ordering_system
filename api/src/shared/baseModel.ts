@@ -36,9 +36,7 @@ export class BaseModel extends DBErrors(Model) {
   async $beforeInsert(queryContext) {
     await super.$beforeInsert(queryContext);
 
-    if (this.hasUuid) {
-      this.generateUuid();
-    }
+    this.generateUuid();
   }
 
   async $beforeUpdate() {
@@ -47,8 +45,8 @@ export class BaseModel extends DBErrors(Model) {
     }
   }
 
-  get hasUuid() {
-    return true;
+  get hasUidAsId() {
+    return false;
   }
 
   generateUuid() {
@@ -58,6 +56,9 @@ export class BaseModel extends DBErrors(Model) {
     if ("uid" in this) {
       this.uid = ulid();
     }
+    if ("id" in this && this.hasUidAsId) {
+      this.id = ulid();
+    }
   }
 
   static findByIdOrUid(idOrUid: string | number) {
@@ -65,8 +66,13 @@ export class BaseModel extends DBErrors(Model) {
   }
 
   static whereByIdOrUid(idsOrUids: string[] | number[] | string | number) {
-    const column = Number(idsOrUids) ? `${this.tableName}.id` : `${this.tableName}.uuid`;
     const idsOrUidsList = Array.isArray(idsOrUids) ? idsOrUids : [idsOrUids];
+
+    if (this.tableName === "customers") {
+      return this.query().whereIn(`${this.tableName}.id`, idsOrUidsList);
+    }
+
+    const column = Number(idsOrUids) ? `${this.tableName}.id` : `${this.tableName}.uuid`;
 
     return this.query().whereIn(column, idsOrUidsList);
   }

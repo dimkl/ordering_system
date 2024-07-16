@@ -8,7 +8,7 @@ import schema from "../schemas/order.json";
 export class Order extends BaseModel {
   created_at!: Date;
   updated_at!: Date;
-  customer_id!: number;
+  customer_id!: string;
   time_slot_id!: number;
   uuid!: string;
   uid!: string;
@@ -32,7 +32,6 @@ export class Order extends BaseModel {
         query
           .select("orders.*")
           .joinRelated("customer")
-          .select("customer.uuid as customer_id")
           .joinRelated("timeSlot")
           .select("timeSlot.uuid as time_slot_id");
       }
@@ -101,7 +100,7 @@ export interface Order {
   id: number;
   created_at: Date;
   updated_at: Date;
-  customer_id: number;
+  customer_id: string;
   time_slot_id: number;
   uuid: string;
   uid: string;

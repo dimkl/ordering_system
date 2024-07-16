@@ -5,15 +5,13 @@ import schema from "../schemas/customer.json";
 const SENSITIVE_COLUMNS = ["password"];
 
 export class Customer extends Password()(BaseModel) {
-  id!: number;
+  id!: string;
   first_name!: string;
   last_name!: string;
   email!: string;
   password!: string;
   created_at!: Date;
   updated_at!: Date;
-  uuid!: string;
-  uid!: string;
 
   static get tableName() {
     return "customers";
@@ -39,16 +37,18 @@ export class Customer extends Password()(BaseModel) {
   get scopes() {
     return [];
   }
+
+  get hasUidAsId() {
+    return true;
+  }
 }
 
 export interface Customer {
-  id: number;
+  id: string;
   first_name: string;
   last_name: string;
   email: string;
   password: string;
   created_at: Date;
   updated_at: Date;
-  uuid: string;
-  uid: string;
 }

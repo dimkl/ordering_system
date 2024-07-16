@@ -8,15 +8,12 @@
   "type": "object",
   "properties": {
     "customer_id": {
-      "$ref": "defs#/definitions/id_or_uuid"
+      "$ref": "defs#/definitions/uid"
     },
     "time_slot_id": {
       "$ref": "defs#/definitions/id_or_uuid"
     }
   },
-  "required": [
-    "customer_id",
-    "time_slot_id"
-  ],
+  "required": ["customer_id", "time_slot_id"],
   "additionalProperties": false
 }

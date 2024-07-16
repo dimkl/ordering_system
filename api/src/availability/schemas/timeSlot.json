@@ -41,8 +41,9 @@
       "format": "date-time"
     },
     "customer_id": {
-      "type": "integer",
-      "exclusiveMinimum": 0
+      "type": "string",
+      "minLength": 26,
+      "maxLength": 26
     },
     "slot_id": {
       "type": "integer",

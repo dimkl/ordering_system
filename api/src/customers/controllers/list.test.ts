@@ -20,9 +20,7 @@ describe("GET /customers/:customer_id?", () => {
     expect(response.status).toBe(200);
     expect(response.body.length).toBe(1);
     expect(response.body[0]).toMatchSnapshot({
-      id: expect.any(Number),
-      uuid: expect.any(String),
-      uid: expect.any(String),
+      id: expect.any(String),
       created_at: expect.any(String),
       updated_at: expect.any(String)
     });
@@ -36,27 +34,9 @@ describe("GET /customers/:customer_id?", () => {
       .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
+    expect(response.body.id).toEqual(customer.id);
     expect(response.body).toMatchSnapshot({
-      id: expect.any(Number),
-      uuid: expect.any(String),
-      uid: expect.any(String),
-      created_at: expect.any(String),
-      updated_at: expect.any(String)
-    });
-  });
-
-  it("returns specified customer using uuid", async () => {
-    const customer = await DataFactory.createCustomer();
-
-    const response = await request
-      .get("/customers/" + customer.uuid)
-      .set("Accept", "application/json");
-
-    expect(response.status).toBe(200);
-    expect(response.body).toMatchSnapshot({
-      id: expect.any(Number),
-      uuid: expect.any(String),
-      uid: expect.any(String),
+      id: expect.any(String),
       created_at: expect.any(String),
       updated_at: expect.any(String)
     });

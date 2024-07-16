@@ -7,7 +7,7 @@ export class TimeSlot extends BaseModel {
   created_at!: Date;
   updated_at!: Date;
   slot_id!: number;
-  customer_id!: number;
+  customer_id!: string;
   uuid!: string;
   uid!: string;
 
@@ -30,7 +30,6 @@ export class TimeSlot extends BaseModel {
         query
           .select("time_slots.*")
           .joinRelated("customer")
-          .select("customer.uuid as customer_id")
           .joinRelated("slot")
           .select("slot.uuid as slot_id");
       },
@@ -72,7 +71,7 @@ export interface TimeSlot {
   started_at: Date;
   ended_at: Date;
   slot_id: number;
-  customer_id: number;
+  customer_id: string;
   uuid: string;
   uid: string;
   slot?: Slot;

@@ -3,6 +3,9 @@ import type { Context, Next } from "koa";
 import { NotFoundError } from "objection";
 import { UniqueViolationError } from "objection-db-errors";
 import { BusinessError } from "../errors";
+import { debug } from "debug";
+
+const errorDebug = debug("api:error");
 
 export function errorHandler() {
   return async function errorHandlerMiddleware(ctx: Context, next: Next) {
@@ -23,6 +26,7 @@ export function errorHandler() {
         ctx.status = 404;
       } else {
         ctx.status = 500;
+        errorDebug("Error %o", err);
         ctx.body = { message: err.message };
       }
     }

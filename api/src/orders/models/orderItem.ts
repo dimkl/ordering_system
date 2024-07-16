@@ -2,13 +2,12 @@ import { BaseModel } from "../../shared/baseModel";
 import schema from "../schemas/orderItem.json";
 
 export class OrderItem extends BaseModel {
+  id!: string;
   created_at!: Date;
   updated_at!: Date;
   order_id!: number;
   quantity!: number;
   product_id!: number;
-  uuid!: string;
-  uid!: string;
 
   static get tableName() {
     return "order_items";
@@ -42,16 +41,18 @@ export class OrderItem extends BaseModel {
       }
     };
   }
+
+  get hasUidAsId() {
+    return true;
+  }
 }
 
 export interface OrderItem {
-  id: number;
+  id: string;
   created_at: Date;
   updated_at: Date;
   order_id: number;
   quantity: number;
   product_id: number;
-  uuid: string;
-  uid: string;
   state: "draft" | "placed" | "prepared" | "delivered" | "canceled";
 }

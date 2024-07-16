@@ -109,8 +109,7 @@ export class DataFactory {
           order_id: order.id,
           product_id: product.id,
           state: "draft",
-          uuid: uuidv4(),
-          uid: ulid(),
+          id: ulid(),
           ...options
         }
       ]);

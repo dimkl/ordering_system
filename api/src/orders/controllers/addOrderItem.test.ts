@@ -32,8 +32,7 @@ describe("POST /order_items", () => {
       customer_id: order.customer_id,
       order_items: expect.arrayContaining([
         expect.objectContaining({
-          uuid: expect.any(String),
-          uid: expect.any(String),
+          id: expect.any(String),
           created_at: expect.any(String),
           updated_at: expect.any(String),
           product: {
@@ -70,8 +69,7 @@ describe("POST /order_items", () => {
       customer_id: order.customer_id,
       order_items: expect.arrayContaining([
         expect.objectContaining({
-          uuid: expect.any(String),
-          uid: expect.any(String),
+          id: expect.any(String),
           created_at: expect.any(String),
           updated_at: expect.any(String),
           product: {
@@ -108,8 +106,7 @@ describe("POST /order_items", () => {
       customer_id: order.customer_id,
       order_items: expect.arrayContaining([
         expect.objectContaining({
-          uuid: expect.any(String),
-          uid: expect.any(String),
+          id: expect.any(String),
           created_at: expect.any(String),
           updated_at: expect.any(String),
           product: {
@@ -195,8 +192,7 @@ describe("POST /order_items", () => {
         customer_id: order.customer_id,
         order_items: expect.arrayContaining([
           expect.objectContaining({
-            uuid: expect.any(String),
-            uid: expect.any(String),
+            id: expect.any(String),
             created_at: expect.any(String),
             updated_at: expect.any(String),
             product: {

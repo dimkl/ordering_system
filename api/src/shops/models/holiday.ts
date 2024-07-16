@@ -39,5 +39,5 @@ export interface Holiday {
   updated_at: Date;
   name: string;
   date: Date;
-  shop_id: number;
+  shop_id: string;
 }

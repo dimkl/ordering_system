@@ -29,8 +29,9 @@
       "exclusiveMinimum": 0
     },
     "shop_id": {
-      "type": "integer",
-      "exclusiveMinimum": 0
+      "type": "string",
+      "minLength": 26,
+      "maxLength": 26
     }
   },
   "required": ["product_id", "shop_id"],

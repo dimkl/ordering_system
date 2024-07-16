@@ -42,7 +42,7 @@ export interface Section {
   updated_at: Date;
   name: string;
   sku: string;
-  shop_id: number;
+  shop_id: string;
   user_id: number;
 
   user: User;

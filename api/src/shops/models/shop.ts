@@ -4,6 +4,8 @@ import schema from "../schemas/shop.json";
 import type { User } from "../../users/models/user";
 
 export class Shop extends BaseModel {
+  id!: string;
+
   static get tableName() {
     return "shops";
   }
@@ -47,6 +49,10 @@ export class Shop extends BaseModel {
         }
       }
     };
+  }
+
+  get hasUidAsId() {
+    return true;
   }
 
   openingDate(date) {
@@ -103,11 +109,9 @@ export class Shop extends BaseModel {
 }
 
 export interface Shop {
-  id: number;
+  id: string;
   created_at: Date;
   updated_at: Date;
-  uuid: string;
-  uid: string;
   name: string;
   lat: number;
   lng: number;

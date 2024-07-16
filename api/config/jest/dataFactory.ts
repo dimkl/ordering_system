@@ -144,8 +144,7 @@ export class DataFactory {
       .insert<Shop[]>({
         manager_id: user.id,
         name: "Shop",
-        uuid: uuidv4(),
-        uid: ulid(),
+        id: ulid(),
         opening_time: "15:00",
         closing_time: "23:00",
         opening_days: [0, 1, 2, 3, 4, 5, 6],

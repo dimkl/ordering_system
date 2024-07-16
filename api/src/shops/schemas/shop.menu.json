@@ -8,7 +8,7 @@
   "type": "object",
   "properties": {
     "shop_id": {
-      "$ref": "defs#/definitions/id_or_uuid"
+      "$ref": "defs#/definitions/uid"
     }
   },
   "required": ["shop_id"],

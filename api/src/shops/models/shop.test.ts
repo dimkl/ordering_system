@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from "uuid";
+import { ulid } from "ulid";
 
 import { Shop } from "./shop";
 
@@ -9,7 +9,7 @@ describe("Shop", () => {
         const shop = Shop.fromJson({
           manager_id: 1,
           name: "Shop",
-          uuid: uuidv4(),
+          id: ulid(),
           opening_days: [6]
         });
         const date = new Date("2022-04-23");
@@ -23,7 +23,7 @@ describe("Shop", () => {
         const shop = Shop.fromJson({
           manager_id: 1,
           name: "Shop",
-          uuid: uuidv4(),
+          id: ulid(),
           opening_time: "08:00:00Z",
           opening_days: [0, 1, 2, 3, 4, 5]
         });
@@ -39,7 +39,7 @@ describe("Shop", () => {
         const shop = Shop.fromJson({
           manager_id: 1,
           name: "Shop",
-          uuid: uuidv4(),
+          id: ulid(),
           opening_time: "08:00:00Z"
         });
         const date = new Date("2022-04-23");
@@ -54,7 +54,7 @@ describe("Shop", () => {
         const shop = Shop.fromJson({
           manager_id: 1,
           name: "Shop",
-          uuid: uuidv4(),
+          id: ulid(),
           opening_time: "08:00:00Z",
           opening_days: [6]
         });
@@ -71,7 +71,7 @@ describe("Shop", () => {
         const shop = Shop.fromJson({
           manager_id: 1,
           name: "Shop",
-          uuid: uuidv4(),
+          id: ulid(),
           opening_days: [6]
         });
         const date = new Date("2022-04-23");
@@ -85,7 +85,7 @@ describe("Shop", () => {
         const shop = Shop.fromJson({
           manager_id: 1,
           name: "Shop",
-          uuid: uuidv4(),
+          id: ulid(),
           closing_time: "00:00:00Z",
           opening_days: [0, 1, 2, 3, 4, 5]
         });
@@ -101,7 +101,7 @@ describe("Shop", () => {
         const shop = Shop.fromJson({
           manager_id: 1,
           name: "Shop",
-          uuid: uuidv4(),
+          id: ulid(),
           closing_time: "00:00:00Z"
         });
         const date = new Date("2022-04-23");
@@ -116,7 +116,7 @@ describe("Shop", () => {
         const shop = Shop.fromJson({
           manager_id: 1,
           name: "Shop",
-          uuid: uuidv4(),
+          id: ulid(),
           closing_time: "22:00:00Z",
           opening_days: [6]
         });
@@ -130,7 +130,7 @@ describe("Shop", () => {
           const shop = Shop.fromJson({
             manager_id: 1,
             name: "Shop",
-            uuid: uuidv4(),
+            id: ulid(),
             opening_time: "08:00:00Z",
             closing_time: "02:00:00Z",
             opening_days: [6]
@@ -145,7 +145,7 @@ describe("Shop", () => {
             const shop = Shop.fromJson({
               manager_id: 1,
               name: "Shop",
-              uuid: uuidv4(),
+              id: ulid(),
               opening_time: "08:00:00Z",
               closing_time: "08:00:00Z",
               opening_days: [6]
@@ -165,7 +165,7 @@ describe("Shop", () => {
         const shop = Shop.fromJson({
           manager_id: 1,
           name: "Shop",
-          uuid: uuidv4(),
+          id: ulid(),
           opening_time: "08:00:00Z",
           closing_time: "08:00:00Z",
           opening_days: [6]
@@ -182,7 +182,7 @@ describe("Shop", () => {
         const shop = Shop.fromJson({
           manager_id: 1,
           name: "Shop",
-          uuid: uuidv4(),
+          id: ulid(),
           opening_time: "08:00:00Z",
           closing_time: "19:00:00Z",
           opening_days: [6]
@@ -198,7 +198,7 @@ describe("Shop", () => {
         const shop = Shop.fromJson({
           manager_id: 1,
           name: "Shop",
-          uuid: uuidv4()
+          id: ulid()
         });
         jest.spyOn(shop, "openingDate").mockReturnValueOnce(undefined);
 

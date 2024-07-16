@@ -29,8 +29,9 @@
       "format": "date-time"
     },
     "shop_id": {
-      "type": "integer",
-      "exclusiveMinimum": 0
+      "type": "string",
+      "minLength": 26,
+      "maxLength": 26
     }
   },
   "required": ["name", "date", "shop_id"],

@@ -8,7 +8,7 @@
   "type": "object",
   "properties": {
     "section_id": {
-      "$ref": "defs#/definitions/id_or_uuid"
+      "$ref": "defs#/definitions/uid"
     },
     "user_id": {
       "$ref": "defs#/definitions/id_or_uuid"
@@ -27,9 +27,6 @@
       "exclusiveMinimum": 0
     }
   },
-  "required": [
-    "section_id",
-    "sku"
-  ],
+  "required": ["section_id", "sku"],
   "additionalProperties": false
 }

@@ -76,7 +76,8 @@ export class BaseModel extends DBErrors(Model) {
         "product_availability",
         "holidays",
         "order_items",
-        "ingredients"
+        "ingredients",
+        "sections"
       ].includes(this.tableName)
     ) {
       return this.query().whereIn(`${this.tableName}.id`, idsOrUidsList);

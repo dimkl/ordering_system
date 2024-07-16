@@ -176,8 +176,7 @@ export class DataFactory {
         user_id: user.id,
         name: "Section",
         sku: "section-1",
-        uuid: uuidv4(),
-        uid: ulid(),
+        id: ulid(),
         ...options
       });
 

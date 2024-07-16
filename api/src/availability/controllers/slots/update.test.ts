@@ -21,7 +21,7 @@ describe("PATCH /slots/:slot_id", () => {
       .send({
         active: false,
         user_id: section.user.uuid,
-        section_id: section.uuid
+        section_id: section.id
       })
       .set("Accept", "application/json");
 
@@ -31,7 +31,7 @@ describe("PATCH /slots/:slot_id", () => {
       created_at: slot.created_at.toISOString(),
       updated_at: expect.any(String),
       id: slot.id,
-      section_id: section.uuid,
+      section_id: section.id,
       sku: "table-1",
       user_id: section.user.uuid,
       uuid: slot.uuid
@@ -58,7 +58,7 @@ describe("PATCH /slots/:slot_id", () => {
       created_at: slot.created_at.toISOString(),
       updated_at: slot.updated_at.toISOString(),
       id: slot.id,
-      section_id: slot.section.uuid,
+      section_id: slot.section_id,
       sku: "table-1",
       user_id: slot.user.uuid,
       uuid: slot.uuid

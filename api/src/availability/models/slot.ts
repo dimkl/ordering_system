@@ -19,12 +19,7 @@ export class Slot extends BaseModel {
     return {
       ...super.modifiers,
       publicColumns(query) {
-        query
-          .select("slots.*")
-          .joinRelated("user")
-          .select("user.uuid as user_id")
-          .joinRelated("section")
-          .select("section.uuid as section_id");
+        query.select("slots.*").joinRelated("user").select("user.uuid as user_id");
       },
       active(query) {
         query.where({ active: true });
@@ -79,7 +74,7 @@ export interface Slot {
   capacity: number;
   active: boolean;
   sku: string;
-  section_id: number;
+  section_id: string;
   user_id: number;
   uuid: string;
   uid: string;

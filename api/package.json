@@ -14,6 +14,7 @@
     "db:migrate:new": "npm run build && DOTENV_CONFIG_PATH=../.env.development knex migrate:make --esm --client pg -x ts --knexfile ./config/knexfile.ts",
     "db:migrate:test": "npm run build && DOTENV_CONFIG_PATH=../.env.test knex migrate:latest --esm --knexfile ./config/knexfile.ts",
     "db:rollback": "npm run build && DOTENV_CONFIG_PATH=../.env.development knex migrate:rollback --esm --knexfile ./config/knexfile.ts",
+    "db:rollback:test": "npm run build && DOTENV_CONFIG_PATH=../.env.test knex migrate:rollback --esm --knexfile ./config/knexfile.ts",
     "db:seed:new": "npm run build && DOTENV_CONFIG_PATH=../.env.development knex seed:make --esm --client pg --knexfile ./config/knexfile.ts",
     "db:seed": "npm run build && DOTENV_CONFIG_PATH=../.env.development knex seed:run --esm --knexfile ./config/knexfile.ts",
     "setup": "npm run build && npm run db:migrate && npm run db:seed"

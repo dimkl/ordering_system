@@ -5,6 +5,7 @@
 import type { Knex } from "knex";
 
 import { v4 as uuidv4 } from "uuid";
+import { ulid } from "ulid";
 
 import setupModels from "../../shared/setupModels";
 
@@ -20,15 +21,14 @@ describe("POST /order_items", () => {
 
     const response = await request
       .post(`/order_items`)
-      .send({ product_id: product.uuid, order_id: order.uuid })
+      .send({ product_id: product.uuid, order_id: order.id })
       .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
     expect(response.body).toMatchObject({
-      id: expect.any(Number),
+      id: order.id,
       created_at: expect.any(String),
       updated_at: expect.any(String),
-      uuid: order.uuid,
       customer_id: order.customer_id,
       order_items: expect.arrayContaining([
         expect.objectContaining({
@@ -61,11 +61,9 @@ describe("POST /order_items", () => {
 
     expect(response.status).toBe(200);
     expect(response.body).toMatchObject({
-      id: expect.any(Number),
+      id: order.id,
       created_at: expect.any(String),
       updated_at: expect.any(String),
-      uuid: order.uuid,
-      uid: order.uid,
       customer_id: order.customer_id,
       order_items: expect.arrayContaining([
         expect.objectContaining({
@@ -93,16 +91,14 @@ describe("POST /order_items", () => {
 
     const response = await request
       .post(`/order_items`)
-      .send({ product_id: product.id, order_id: order.uuid })
+      .send({ product_id: product.id, order_id: order.id })
       .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
     expect(response.body).toMatchObject({
-      id: expect.any(Number),
+      id: order.id,
       created_at: expect.any(String),
       updated_at: expect.any(String),
-      uuid: order.uuid,
-      uid: order.uid,
       customer_id: order.customer_id,
       order_items: expect.arrayContaining([
         expect.objectContaining({
@@ -138,7 +134,7 @@ describe("POST /order_items", () => {
     const response = await request
       .post(`/order_items`)
       .send({
-        order_id: order.uuid,
+        order_id: order.id,
         product_id: product.uuid,
         created_at: "1680046371850"
       })
@@ -154,7 +150,7 @@ describe("POST /order_items", () => {
 
     const response = await request
       .post(`/order_items`)
-      .send({ order_id: uuidv4(), product_id: product.uuid })
+      .send({ order_id: ulid(), product_id: product.uuid })
       .set("Accept", "application/json");
 
     expect(response.status).toBe(404);
@@ -165,7 +161,7 @@ describe("POST /order_items", () => {
 
     const response = await request
       .post(`/order_items`)
-      .send({ order_id: order.uuid, product_id: uuidv4() })
+      .send({ order_id: order.id, product_id: uuidv4() })
       .set("Accept", "application/json");
 
     expect(response.status).toBe(404);
@@ -179,16 +175,14 @@ describe("POST /order_items", () => {
 
       const response = await request
         .post(`/order_items`)
-        .send({ order_id: order.uuid, product_id: product.uuid, quantity: 2 })
+        .send({ order_id: order.id, product_id: product.uuid, quantity: 2 })
         .set("Accept", "application/json");
 
       expect(response.status).toBe(200);
       expect(response.body).toMatchObject({
-        id: expect.any(Number),
+        id: order.id,
         created_at: expect.any(String),
         updated_at: expect.any(String),
-        uuid: order.uuid,
-        uid: order.uid,
         customer_id: order.customer_id,
         order_items: expect.arrayContaining([
           expect.objectContaining({

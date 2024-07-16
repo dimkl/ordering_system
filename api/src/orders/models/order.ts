@@ -6,12 +6,12 @@ import { BaseModel } from "../../shared/baseModel";
 import schema from "../schemas/order.json";
 
 export class Order extends BaseModel {
+  id!: string;
+
   created_at!: Date;
   updated_at!: Date;
   customer_id!: string;
   time_slot_id!: number;
-  uuid!: string;
-  uid!: string;
 
   static get tableName() {
     return "orders";
@@ -95,15 +95,17 @@ export class Order extends BaseModel {
       })
       .findById(orderId);
   }
+
+  get hasUidAsId() {
+    return true;
+  }
 }
 export interface Order {
-  id: number;
+  id: string;
   created_at: Date;
   updated_at: Date;
   customer_id: string;
   time_slot_id: number;
-  uuid: string;
-  uid: string;
   state:
     | "draft"
     | "placed"

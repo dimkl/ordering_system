@@ -8,12 +8,13 @@
     "id": {
       "readOnly": true,
       "type": "string",
-      "minLength": 36,
-      "maxLength": 36
+      "minLength": 26,
+      "maxLength": 26
     },
     "order_id": {
-      "type": "integer",
-      "exclusiveMinimum": 0
+      "type": "string",
+      "minLength": 26,
+      "maxLength": 26
     },
     "created_at": {
       "readOnly": true,

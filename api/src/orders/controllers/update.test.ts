@@ -22,7 +22,7 @@ describe("PATCH /orders/:order_id", () => {
       { email: "order.update@example.com" }
     );
     const response = await request
-      .patch(`/orders/${order.uuid}`)
+      .patch(`/orders/${order.id}`)
       .send({
         customer_id: timeSlot.customer_id,
         time_slot_id: timeSlot.uuid
@@ -32,7 +32,6 @@ describe("PATCH /orders/:order_id", () => {
     expect(response.status).toBe(200);
     expect(response.body).toMatchObject({
       id: order.id,
-      uuid: order.uuid,
       created_at: order.created_at.toISOString(),
       updated_at: expect.any(String),
       customer_id: timeSlot.customer_id,
@@ -47,14 +46,13 @@ describe("PATCH /orders/:order_id", () => {
     const order = await DataFactory.createOrder();
 
     const response = await request
-      .patch(`/orders/${order.uuid}`)
+      .patch(`/orders/${order.id}`)
       .send({})
       .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
     expect(response.body).toMatchObject({
       id: order.id,
-      uuid: order.uuid,
       created_at: order.created_at.toISOString(),
       updated_at: order.updated_at.toISOString(),
       customer_id: order.customer_id,
@@ -67,7 +65,7 @@ describe("PATCH /orders/:order_id", () => {
     const order = await DataFactory.createOrder();
 
     const response = await request
-      .patch(`/orders/${order.uuid}`)
+      .patch(`/orders/${order.id}`)
       .send({ created_at: "1680046371850" })
       .set("Accept", "application/json");
 

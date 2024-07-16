@@ -71,8 +71,7 @@ export class DataFactory {
       customer_id: customer?.id,
       time_slot_id: timeSlot.id,
       state: "draft",
-      uuid: uuidv4(),
-      uid: ulid()
+      id: ulid()
     };
 
     const orders = await knex("orders")

@@ -24,14 +24,13 @@ describe("PATCH /order_items/:order_item_id", () => {
 
     expect(response.status).toBe(200);
     expect(response.body).toMatchObject({
-      id: expect.any(Number),
+      id: orderItem.order_id,
       created_at: expect.any(String),
       updated_at: expect.any(String),
-      uuid: orderItem.order.uuid,
       customer_id: orderItem.order.customer_id,
       order_items: expect.arrayContaining([
         expect.objectContaining({
-          id: expect.any(String),
+          id: orderItem.id,
           created_at: expect.any(String),
           updated_at: expect.any(String),
           product: {

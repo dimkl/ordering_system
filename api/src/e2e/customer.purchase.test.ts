@@ -60,7 +60,7 @@ describe("Customer purchase flow", () => {
       .set("Accept", "application/json");
     expect(response.status).toBe(200);
     expect(response.body.state).toBe("draft");
-    const orderId = response.body.uuid;
+    const orderId = response.body.id;
 
     response = await request
       .post(`/order_items`)

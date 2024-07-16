@@ -17,9 +17,7 @@ describe("DELETE /orders/:order_id", () => {
   it("deletes customer and returns 204", async () => {
     const order = await DataFactory.createOrder();
 
-    const response = await request
-      .delete(`/orders/${order.uuid}`)
-      .set("Accept", "application/json");
+    const response = await request.delete(`/orders/${order.id}`).set("Accept", "application/json");
 
     expect(response.status).toBe(204);
   });

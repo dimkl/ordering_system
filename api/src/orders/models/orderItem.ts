@@ -5,7 +5,7 @@ export class OrderItem extends BaseModel {
   id!: string;
   created_at!: Date;
   updated_at!: Date;
-  order_id!: number;
+  order_id!: string;
   quantity!: number;
   product_id!: number;
 
@@ -51,7 +51,7 @@ export interface OrderItem {
   id: string;
   created_at: Date;
   updated_at: Date;
-  order_id: number;
+  order_id: string;
   quantity: number;
   product_id: number;
   state: "draft" | "placed" | "prepared" | "delivered" | "canceled";

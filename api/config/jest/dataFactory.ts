@@ -121,8 +121,7 @@ export class DataFactory {
       last_name: "Klouvas",
       email: "dimitris.klouvas@gmail.com",
       password: "$2b$10$R4dVWhqUOPMM.87/xnUdEuQxMNLVjbDlolPd5Vw0RK5CgQjIhGYbO",
-      uuid: uuidv4(),
-      uid: ulid()
+      id: ulid()
     };
     const users = await knex("users")
       .returning("*")

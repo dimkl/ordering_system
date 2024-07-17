@@ -19,7 +19,7 @@ export class Slot extends BaseModel {
     return {
       ...super.modifiers,
       publicColumns(query) {
-        query.select("slots.*").joinRelated("user").select("user.uuid as user_id");
+        query.select("slots.*").joinRelated("user");
       },
       active(query) {
         query.where({ active: true });

@@ -27,8 +27,9 @@
       "maxLength": 26
     },
     "user_id": {
-      "type": "integer",
-      "exclusiveMinimum": 0
+      "type": "string",
+      "minLength": 26,
+      "maxLength": 26
     },
     "sku": {
       "type": "string",

@@ -49,3 +49,4 @@ jobs:
           NODE_ENV: test
           CLERK_PUBLISHABLE_KEY: ${{ secrets.CLERK_PUBLISHABLE_KEY }}
           CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}
+          MOCK_AUTH_REQUEST_SCOPES: "*"

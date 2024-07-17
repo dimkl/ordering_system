@@ -1,15 +1,15 @@
 import type { Knex } from "knex";
 
-import { v4 as uuidv4 } from "uuid";
+import { userIds, shopIds, sectionIds } from "../seed-constants";
 
 export async function seed(knex: Knex) {
   await knex("sections").insert([
     {
-      shop_id: 1,
-      user_id: 1,
+      shop_id: shopIds.Shop1,
+      user_id: userIds.First,
       name: "Section",
       sku: "section-1",
-      uuid: uuidv4()
+      id: sectionIds.Section1
     }
   ]);
 }

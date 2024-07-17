@@ -1,11 +1,13 @@
-import { v4 as uuidv4 } from "uuid";
+import type { Knex } from "knex";
 
-exports.seed = async function (knex) {
+import { ingredientIds } from "../seed-constants";
+
+export async function seed(knex: Knex) {
   await knex("ingredients").insert([
     {
       title: "Ingredient 1",
       description: "Ingredient 1 description",
-      uuid: uuidv4()
+      id: ingredientIds.Ingredient1
     }
   ]);
-};
+}

@@ -1,9 +1,14 @@
 import type { Knex } from "knex";
 
-import { v4 as uuidv4 } from "uuid";
+import { orderIds, orderItemIds, productIds } from "../seed-constants";
 
 export async function seed(knex: Knex) {
   await knex("order_items").insert([
-    { order_id: 1, product_id: 1, state: "draft", uuid: uuidv4() }
+    {
+      order_id: orderIds.Draft,
+      product_id: productIds.Product1,
+      state: "draft",
+      id: orderItemIds.Item1
+    }
   ]);
 }

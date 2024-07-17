@@ -1,7 +1,8 @@
 import type { Knex } from "knex";
 
 import bcrypt from "bcrypt";
-import { v4 as uuidv4 } from "uuid";
+
+import { customerIds } from "../seed-constants";
 
 const SALT_ROUNDS = 10;
 
@@ -24,14 +25,14 @@ export async function seed(knex: Knex) {
       last_name: "Customer",
       email: "customer1@example.com",
       password: await createPassword(),
-      uuid: uuidv4()
+      id: customerIds.First
     },
     {
       first_name: "Second",
       last_name: "Customer",
       email: "customer2@example.com",
       password: await createPassword(),
-      uuid: uuidv4()
+      id: customerIds.Second
     }
   ]);
 }

@@ -1,13 +1,13 @@
 import type { Knex } from "knex";
 
-import { v4 as uuidv4 } from "uuid";
+import { userIds, shopIds } from "../seed-constants";
 
 export async function seed(knex: Knex) {
   await knex("shops").insert([
     {
-      manager_id: 1,
+      manager_id: userIds.First,
       name: "Shop",
-      uuid: uuidv4(),
+      id: shopIds.Shop1,
       opening_time: "08:00",
       closing_time: "00:00",
       opening_days: "{0,1,2,3,4,5}"

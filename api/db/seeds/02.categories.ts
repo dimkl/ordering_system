@@ -1,38 +1,33 @@
 import type { Knex } from "knex";
 
-import { v4 as uuidv4 } from "uuid";
+import { categoriIds } from "../seed-constants";
 
 export async function seed(knex: Knex) {
   await knex("categories").insert([
     {
       title: "Starters",
       description: "Starters description",
-      uuid: uuidv4(),
-      id: 1
+      id: categoriIds.Starters
     },
     {
       title: "Breakfast",
       description: "Breakfast description",
-      uuid: uuidv4(),
-      id: 2
+      id: categoriIds.Breakfast
     },
     {
       title: "Main Menu",
       description: "Main Menu description",
-      uuid: uuidv4(),
-      id: 3
+      id: categoriIds.Main
     },
     {
       title: "Dessert",
       description: "Dessert description",
-      uuid: uuidv4(),
-      id: 4
+      id: categoriIds.Dessert
     },
     {
       title: "Beverage",
       description: "Beverage description",
-      uuid: uuidv4(),
-      id: 5
+      id: categoriIds.Beverage
     }
   ]);
 }

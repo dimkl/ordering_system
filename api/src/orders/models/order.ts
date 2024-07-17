@@ -86,7 +86,7 @@ export class Order extends BaseModel {
             .orderBy("id", "asc");
         },
         selectProduct(builder) {
-          builder.select("title", "description", "qr", "uid", "uuid").orderBy("id", "asc");
+          builder.select("id", "title", "description", "qr").orderBy("id", "asc");
         }
       })
       .findById(orderId);

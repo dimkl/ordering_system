@@ -64,13 +64,13 @@ describe("Customer purchase flow", () => {
 
     response = await request
       .post(`/order_items`)
-      .send({ order_id: orderId, product_id: product1.uuid })
+      .send({ order_id: orderId, product_id: product1.id })
       .set("Accept", "application/json");
     expect(response.status).toBe(200);
 
     response = await request
       .post(`/order_items`)
-      .send({ order_id: orderId, product_id: product2.uuid })
+      .send({ order_id: orderId, product_id: product2.id })
       .set("Accept", "application/json");
     expect(response.status).toBe(200);
     const orderItems = response.body.order_items;

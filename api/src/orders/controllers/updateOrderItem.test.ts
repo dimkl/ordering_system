@@ -35,8 +35,7 @@ describe("PATCH /order_items/:order_item_id", () => {
           updated_at: expect.any(String),
           product: {
             title: "Product",
-            uuid: orderItem.product.uuid,
-            uid: expect.any(String),
+            id: orderItem.product_id,
             description: "Product description",
             qr: null
           },

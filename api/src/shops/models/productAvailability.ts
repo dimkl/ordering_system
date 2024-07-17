@@ -40,6 +40,6 @@ export interface ProductAvailability {
   created_at: Date;
   updated_at: Date;
   quantity: number;
-  product_id: number;
+  product_id: string;
   shop_id: string;
 }

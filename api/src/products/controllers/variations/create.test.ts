@@ -5,7 +5,6 @@
 
 import type { Knex } from "knex";
 
-import { v4 as uuidv4 } from "uuid";
 import { ulid } from "ulid";
 
 import setupModels from "../../../shared/setupModels";
@@ -29,17 +28,16 @@ describe("POST /variations", () => {
         title: "Variation",
         description: "Variation description",
         sku: `${product.sku}-1`,
-        variant_id: product.uuid,
+        variant_id: product.id,
         ingredients: [ingredient.id]
       })
       .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
     expect(response.body).toMatchObject({
-      id: expect.any(Number),
+      id: expect.any(String),
       created_at: expect.any(String),
       updated_at: expect.any(String),
-      uuid: product.uuid,
       title: product.title,
       sku: product.sku,
       variant_id: null,
@@ -62,11 +60,9 @@ describe("POST /variations", () => {
       ]),
       variations: expect.arrayContaining([
         expect.objectContaining({
-          id: expect.any(Number),
+          id: expect.any(String),
           created_at: expect.any(String),
           updated_at: expect.any(String),
-          uuid: expect.any(String),
-          uid: expect.any(String),
           title: "Variation",
           variant_id: product.id,
           sku: `${product.sku}-1`,
@@ -96,7 +92,7 @@ describe("POST /variations", () => {
         title: "Variation",
         description: "Variation description",
         sku: `${product.sku}-1`,
-        variant_id: product.uuid,
+        variant_id: product.id,
         ingredients: [ulid()]
       })
       .set("Accept", "application/json");
@@ -112,7 +108,7 @@ describe("POST /variations", () => {
         title: "Variation",
         description: "Variation description",
         sku: "aloha-1",
-        variant_id: uuidv4(),
+        variant_id: ulid(),
         ingredients: [ingredient.id]
       })
       .set("Accept", "application/json");
@@ -129,7 +125,7 @@ describe("POST /variations", () => {
         title: "Variation",
         description: "Variation description",
         sku: `${product.sku}-1`,
-        variant_id: product.uuid,
+        variant_id: product.id,
         ingredients: [ingredient.id],
         created_at: "1680046371850"
       })
@@ -137,7 +133,7 @@ describe("POST /variations", () => {
 
     expect(response.status).toBe(200);
     expect(response.body.created_at).not.toEqual("1680046371850");
-    expect(response.body.uuid).toEqual(product.uuid);
+    expect(response.body.id).toEqual(product.id);
 
     const variation = response.body.variations[0];
     expect(variation.description).toEqual("Variation description");

@@ -4,7 +4,6 @@
  */
 import type { Knex } from "knex";
 
-import { v4 as uuidv4 } from "uuid";
 import { ulid } from "ulid";
 
 import setupModels from "../../shared/setupModels";
@@ -21,7 +20,7 @@ describe("POST /order_items", () => {
 
     const response = await request
       .post(`/order_items`)
-      .send({ product_id: product.uuid, order_id: order.id })
+      .send({ product_id: product.id, order_id: order.id })
       .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
@@ -37,8 +36,7 @@ describe("POST /order_items", () => {
           updated_at: expect.any(String),
           product: {
             title: "Product",
-            uuid: product.uuid,
-            uid: expect.any(String),
+            id: product.id,
             description: "Product description",
             qr: null
           },
@@ -56,7 +54,7 @@ describe("POST /order_items", () => {
 
     const response = await request
       .post(`/order_items`)
-      .send({ product_id: product.uuid, order_id: order.id })
+      .send({ product_id: product.id, order_id: order.id })
       .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
@@ -71,9 +69,8 @@ describe("POST /order_items", () => {
           created_at: expect.any(String),
           updated_at: expect.any(String),
           product: {
+            id: product.id,
             title: "Product",
-            uuid: product.uuid,
-            uid: product.uid,
             description: "Product description",
             qr: null
           },
@@ -107,8 +104,7 @@ describe("POST /order_items", () => {
           updated_at: expect.any(String),
           product: {
             title: "Product",
-            uuid: product.uuid,
-            uid: product.uid,
+            id: product.id,
             description: "Product description",
             qr: null
           },
@@ -135,13 +131,13 @@ describe("POST /order_items", () => {
       .post(`/order_items`)
       .send({
         order_id: order.id,
-        product_id: product.uuid,
+        product_id: product.id,
         created_at: "1680046371850"
       })
       .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
-    expect(response.body.order_items[0].product.uuid).toEqual(product.uuid);
+    expect(response.body.order_items[0].product.id).toEqual(product.id);
     expect(response.body.created_at).not.toEqual("1680046371850");
   });
 
@@ -150,7 +146,7 @@ describe("POST /order_items", () => {
 
     const response = await request
       .post(`/order_items`)
-      .send({ order_id: ulid(), product_id: product.uuid })
+      .send({ order_id: ulid(), product_id: product.id })
       .set("Accept", "application/json");
 
     expect(response.status).toBe(404);
@@ -161,7 +157,7 @@ describe("POST /order_items", () => {
 
     const response = await request
       .post(`/order_items`)
-      .send({ order_id: order.id, product_id: uuidv4() })
+      .send({ order_id: order.id, product_id: ulid() })
       .set("Accept", "application/json");
 
     expect(response.status).toBe(404);
@@ -175,7 +171,7 @@ describe("POST /order_items", () => {
 
       const response = await request
         .post(`/order_items`)
-        .send({ order_id: order.id, product_id: product.uuid, quantity: 2 })
+        .send({ order_id: order.id, product_id: product.id, quantity: 2 })
         .set("Accept", "application/json");
 
       expect(response.status).toBe(200);
@@ -191,8 +187,7 @@ describe("POST /order_items", () => {
             updated_at: expect.any(String),
             product: {
               title: "Product",
-              uuid: product.uuid,
-              uid: product.uid,
+              id: product.id,
               description: "Product description",
               qr: null
             },

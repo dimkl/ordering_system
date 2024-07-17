@@ -4,7 +4,6 @@
  */
 import type { Knex } from "knex";
 
-import { v4 as uuidv4 } from "uuid";
 import { ulid } from "ulid";
 
 import setupModels from "../../../shared/setupModels";
@@ -23,16 +22,15 @@ describe("POST /products/ingredients", () => {
       .post(`/products/ingredients`)
       .send({
         ingredient_id: ingredient.id,
-        product_id: product.uuid
+        product_id: product.id
       })
       .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
     expect(response.body).toMatchObject({
-      id: expect.any(Number),
+      id: product.id,
       created_at: expect.any(String),
       updated_at: expect.any(String),
-      uuid: product.uuid,
       title: product.title,
       description: product.description,
       ingredients: expect.arrayContaining([
@@ -54,7 +52,7 @@ describe("POST /products/ingredients", () => {
       .post(`/products/ingredients`)
       .send({
         ingredient_id: ulid(),
-        product_id: product.uuid
+        product_id: product.id
       })
       .set("Accept", "application/json");
 
@@ -67,7 +65,7 @@ describe("POST /products/ingredients", () => {
       .post(`/products/ingredients`)
       .send({
         ingredient_id: ingredient.id,
-        product_id: uuidv4()
+        product_id: ulid()
       })
       .set("Accept", "application/json");
 
@@ -82,14 +80,14 @@ describe("POST /products/ingredients", () => {
       .post(`/products/ingredients`)
       .send({
         ingredient_id: ingredient.id,
-        product_id: product.uuid,
+        product_id: product.id,
         created_at: "1680046371850"
       })
       .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
     expect(response.body.created_at).not.toEqual("1680046371850");
-    expect(response.body.uuid).toEqual(product.uuid);
+    expect(response.body.id).toEqual(product.id);
     expect(response.body.ingredients[0].id).toEqual(ingredient.id);
   });
 });

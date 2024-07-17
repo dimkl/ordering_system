@@ -2,8 +2,7 @@ import { BaseModel } from "../../shared/baseModel";
 import schema from "../schemas/product.json";
 
 export class Product extends BaseModel {
-  uuid!: string;
-  uid!: string;
+  id!: string;
 
   static get tableName() {
     return "products";
@@ -72,18 +71,20 @@ export class Product extends BaseModel {
       .withGraphFetched("[ingredients(publicColumns), variations.ingredients(publicColumns)]")
       .findById(productId);
   }
+
+  get hasUidAsId() {
+    return true;
+  }
 }
 
 export interface Product {
-  id: number;
+  id: string;
   title: string;
   description: string;
   qr: string;
   sku: string;
   created_at: Date;
   updated_at: Date;
-  uuid: string;
-  uid: string;
-  variant_id: number;
+  variant_id: string;
   category_id: string;
 }

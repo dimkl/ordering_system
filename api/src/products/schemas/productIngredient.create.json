@@ -11,7 +11,7 @@
       "$ref": "defs#/definitions/uid"
     },
     "product_id": {
-      "$ref": "defs#/definitions/id_or_uuid"
+      "$ref": "defs#/definitions/uid"
     }
   },
   "required": ["ingredient_id", "product_id"],

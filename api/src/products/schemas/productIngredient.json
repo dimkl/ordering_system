@@ -25,8 +25,9 @@
       "maxLength": 26
     },
     "product_id": {
-      "type": "integer",
-      "exclusiveMinimum": 0
+      "type": "string",
+      "minLength": 26,
+      "maxLength": 26
     }
   },
   "required": ["ingredient_id", "product_id"],

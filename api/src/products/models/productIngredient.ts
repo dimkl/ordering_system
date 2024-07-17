@@ -6,7 +6,7 @@ export class ProductIngredient extends BaseModel {
   created_at!: Date;
   updated_at!: Date;
   ingredient_id!: string;
-  product_id!: number;
+  product_id!: string;
 
   static get tableName() {
     return "product_ingredients";
@@ -30,5 +30,5 @@ export interface ProductIngredient {
   created_at: Date;
   updated_at: Date;
   ingredient_id: string;
-  product_id: number;
+  product_id: string;
 }

@@ -28,7 +28,7 @@
       "maxLength": 100
     },
     "variant_id": {
-      "$ref": "defs#/definitions/id_or_uuid"
+      "$ref": "defs#/definitions/uid"
     },
     "ingredients": {
       "type": "array",

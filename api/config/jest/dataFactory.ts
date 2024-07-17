@@ -5,7 +5,6 @@ import type { User } from "../../src/users/models/user";
 import type { Slot, TimeSlot } from "../../src/availability/models";
 import type { Shop, Section, ProductAvailability, Holiday } from "../../src/shops/models";
 
-import { v4 as uuidv4 } from "uuid";
 import { ulid } from "ulid";
 
 import { knex } from "../../src/shared/knex";
@@ -46,8 +45,7 @@ export class DataFactory {
         title: "Product",
         sku: "product-code-1",
         description: "Product description",
-        uuid: uuidv4(),
-        uid: ulid(),
+        id: ulid(),
         ...options
       });
 

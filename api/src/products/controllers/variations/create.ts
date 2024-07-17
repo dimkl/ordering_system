@@ -1,31 +1,34 @@
 import type { Context } from "koa";
 
+import { ForeignKeyViolationError } from "objection";
+
 import schema from "../../schemas/variation.create.json";
 
-import { Product, ProductIngredient, Ingredient } from "../../models";
-import { loadProduct } from "../../helpers/loadProduct";
+import { Product, ProductIngredient } from "../../models";
 
 const handler = async (ctx: Context) => {
   // @ts-expect-error validatedData are added as part of the request validation
-  const { ingredients: ingIds, ...data } = ctx.request.validatedData;
-  await loadProduct(data.variant_id, ctx, async () => {});
-  const ingredients = (await Ingredient.whereByIdOrUid(ingIds).throwIfNotFound()) as Ingredient[];
+  const { ingredients, ...data } = ctx.request.validatedData;
 
   // TODO: validate that product should NOT be a variant
   // TODO: validate that at least 1 ingredient exists in variant
 
-  const insertData = { ...data, variant_id: ctx.product.id };
-  const variation = (await Product.query()
-    .modify("publicInsertColumns")
-    .insert(insertData)) as Product;
+  try {
+    const variation = await Product.query().modify("publicColumns").insert(data);
 
-  const productIngredientsData = ingredients.map((ingredient) => ({
-    ingredient_id: ingredient.id,
-    product_id: variation.id
-  }));
-  await ProductIngredient.query().insert(productIngredientsData);
+    const productIngredientsData = ingredients.map((ingredientId) => ({
+      ingredient_id: ingredientId,
+      product_id: variation.id
+    }));
+    await ProductIngredient.query().insert(productIngredientsData);
 
-  ctx.body = await Product.findVariationsWithIngredients(variation.variant_id);
+    ctx.body = await Product.findVariationsWithIngredients(variation.variant_id);
+  } catch (err) {
+    if (err instanceof ForeignKeyViolationError) {
+      return;
+    }
+    throw err;
+  }
 };
 
 export { schema, handler };

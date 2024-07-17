@@ -4,7 +4,6 @@
  */
 import type { Knex } from "knex";
 
-// import { v4 as uuidv4 } from "uuid";
 import setupModels from "../../../shared/setupModels";
 
 describe("POST /products", () => {

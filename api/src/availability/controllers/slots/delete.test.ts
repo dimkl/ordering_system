@@ -4,7 +4,8 @@
  */
 import type { Knex } from "knex";
 
-import { v4 as uuidv4 } from "uuid";
+import { ulid } from "ulid";
+
 import setupModels from "../../../shared/setupModels";
 
 describe("DELETE /slots/:slot_id", () => {
@@ -32,7 +33,7 @@ describe("DELETE /slots/:slot_id", () => {
   });
 
   it("throws 404 when time_slot does not exist", async () => {
-    const response = await request.delete(`/slots/${uuidv4()}`).set("Accept", "application/json");
+    const response = await request.delete(`/slots/${ulid()}`).set("Accept", "application/json");
 
     expect(response.status).toBe(404);
   });

@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from "uuid";
 import { Model, AjvValidator } from "objection";
 import { DBErrors } from "objection-db-errors";
 import addFormats from "ajv-formats";

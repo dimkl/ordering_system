@@ -4,7 +4,7 @@
  */
 import type { Knex } from "knex";
 
-import { v4 as uuidv4 } from "uuid";
+import { ulid } from "ulid";
 
 import setupModels from "../../shared/setupModels";
 
@@ -23,7 +23,7 @@ describe("DELETE /orders/:order_id", () => {
   });
 
   it("throws 404 when customer does not exist", async () => {
-    const response = await request.delete(`/orders/${uuidv4()}`).set("Accept", "application/json");
+    const response = await request.delete(`/orders/${ulid()}`).set("Accept", "application/json");
 
     expect(response.status).toBe(404);
   });

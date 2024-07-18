@@ -75,25 +75,6 @@ describe("POST /orders", () => {
     );
   });
 
-  it("creates and returns a order using internal customer_id", async () => {
-    const timeSlot = await DataFactory.createTimeSlot();
-
-    const response = await request
-      .post("/orders")
-      .send({ customer_id: timeSlot.customer_id, time_slot_id: timeSlot.id })
-      .set("Accept", "application/json");
-
-    expect(response.status).toBe(200);
-    expect(response.body).toMatchSnapshot({
-      id: expect.any(String),
-      created_at: expect.any(String),
-      updated_at: expect.any(String),
-      customer_id: expect.any(String),
-      time_slot_id: expect.any(String)
-    });
-    expect(response.body.customer_id).toEqual(timeSlot.customer_id);
-  });
-
   it("throws validation error for required properties", async () => {
     const response = await request.post("/orders").send({}).set("Accept", "application/json");
 

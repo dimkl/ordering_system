@@ -1,6 +1,6 @@
 import type { Context, Next } from "koa";
 
-import { NotFoundError } from "objection";
+import { NotFoundError, ForeignKeyViolationError } from "objection";
 import { UniqueViolationError } from "objection-db-errors";
 import { BusinessError } from "../errors";
 import { debug } from "debug";
@@ -22,7 +22,7 @@ export function errorHandler() {
       } else if (err instanceof BusinessError) {
         ctx.status = 422;
         ctx.body = { message: err.message };
-      } else if (err instanceof NotFoundError) {
+      } else if (err instanceof NotFoundError || err instanceof ForeignKeyViolationError) {
         ctx.status = 404;
       } else {
         ctx.status = 500;

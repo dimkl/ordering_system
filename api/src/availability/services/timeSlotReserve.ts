@@ -12,12 +12,13 @@ export type TimeSlotReserveParams = {
 };
 export class TimeSlotReserve {
   static async process({ customerId, slotId, ...data }: TimeSlotReserveParams) {
-    const customer = (await Customer.findByIdOrUid(customerId)) as Customer;
+    const customer = (await Customer.query().findById(customerId)) as Customer;
     if (!customer) {
       throw new BusinessError(`Customer ${customerId} does not exist!`);
     }
 
-    const slot = (await Slot.findByIdOrUid(slotId)
+    const slot = (await Slot.query()
+      .findById(slotId)
       .modify("active")
       .withGraphJoined("section.shop")) as Slot;
     if (!slot) {

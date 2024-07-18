@@ -3,7 +3,7 @@ import type { Context, Next } from "koa";
 import { OrderItem } from "../models";
 
 export async function loadOrderItem(orderItemId: number | string, ctx: Context, next: Next) {
-  ctx.orderItem = await OrderItem.findByIdOrUid(orderItemId).modify("publicColumns");
+  ctx.orderItem = await OrderItem.query().findById(orderItemId).modify("publicColumns");
 
   if (!ctx.orderItem) return (ctx.status = 404);
   if (!ctx.order) return next();

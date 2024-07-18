@@ -3,7 +3,7 @@ import type { Context, Next } from "koa";
 import { TimeSlot } from "../models";
 
 export async function loadTimeSlot(timeSlotId: number | string, ctx: Context, next: Next) {
-  ctx.timeSlot = await TimeSlot.findByIdOrUid(timeSlotId).modify("publicColumns");
+  ctx.timeSlot = await TimeSlot.query().findById(timeSlotId).modify("publicColumns");
 
   if (!ctx.timeSlot) return (ctx.status = 404);
   if (!ctx.slot) return next();

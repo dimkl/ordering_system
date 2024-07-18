@@ -49,37 +49,4 @@ export class BaseModel extends DBErrors(Model) {
       this.id = ulid();
     }
   }
-
-  static findByIdOrUid(idOrUid: string | number) {
-    return this.whereByIdOrUid(idOrUid).first().throwIfNotFound();
-  }
-
-  static whereByIdOrUid(idsOrUids: string[] | number[] | string | number) {
-    const idsOrUidsList = Array.isArray(idsOrUids) ? idsOrUids : [idsOrUids];
-
-    if (
-      [
-        "customers",
-        "categories",
-        "product_ingredients",
-        "product_availability",
-        "holidays",
-        "order_items",
-        "ingredients",
-        "sections",
-        "orders",
-        "time_slots",
-        "slots",
-        "shops",
-        "users",
-        "products"
-      ].includes(this.tableName)
-    ) {
-      return this.query().whereIn(`${this.tableName}.id`, idsOrUidsList);
-    }
-
-    const column = Number(idsOrUids) ? `${this.tableName}.id` : `${this.tableName}.uuid`;
-
-    return this.query().whereIn(column, idsOrUidsList);
-  }
 }

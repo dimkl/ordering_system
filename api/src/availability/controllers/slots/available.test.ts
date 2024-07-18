@@ -86,6 +86,85 @@ describe("GET /slots/:shop_id/available/:slot_id?", () => {
     expect(response.status).toBe(404);
   });
 
+  it("returns all available slots for specific section", async () => {
+    const slot1 = await DataFactory.createSlot();
+    const slot2 = await DataFactory.createSlot({}, {}, slot1.user, slot1.shop);
+    expect(slot1.section_id).not.toEqual(slot2.section_id);
+
+    const response = await request
+      .get(`/slots/${slot1.section.shop_id}/available?section_id=${slot1.section_id}`)
+      .set("Accept", "application/json");
+
+    expect(response.status).toBe(200);
+    expect(response.body.length).toBe(1);
+    expect(response.body[0]).toMatchObject({
+      id: slot1.id,
+      section_id: slot1.section_id,
+      user_id: slot1.user_id,
+      created_at: slot1.created_at,
+      updated_at: slot1.updated_at,
+      capacity: slot1.capacity
+    });
+  });
+
+  it("returns all available slots for specific capacity", async () => {
+    const slot1 = await DataFactory.createSlot({ capacity: 10 });
+    const slot2 = await DataFactory.createSlot({}, {}, slot1.user, slot1.shop);
+    expect(slot1.section_id).not.toEqual(slot2.section_id);
+
+    const response = await request
+      .get(`/slots/${slot1.section.shop_id}/available?capacity=10`)
+      .set("Accept", "application/json");
+
+    expect(response.status).toBe(200);
+    expect(response.body.length).toBe(1);
+    expect(response.body[0]).toMatchObject({
+      id: slot1.id,
+      section_id: slot1.section_id,
+      user_id: slot1.user_id,
+      created_at: slot1.created_at,
+      updated_at: slot1.updated_at,
+      capacity: slot1.capacity
+    });
+  });
+
+  it("returns all available slots for specific capacity & section", async () => {
+    const { user, section, ..._section1Slot5 } = await DataFactory.createSlot({
+      capacity: 5
+    });
+    const _section2Slot5 = await DataFactory.createSlot({ capacity: 5 }, {}, user, section.shop);
+    const _section2Slot10 = await DataFactory.createSlot({ capacity: 10 }, {}, user, section.shop);
+    const section1Slot6 = await DataFactory.createSlot(
+      { capacity: 6 },
+      section,
+      user,
+      section.shop
+    );
+    const section1Slot10 = await DataFactory.createSlot(
+      { capacity: 10 },
+      section,
+      user,
+      section.shop
+    );
+
+    const response = await request
+      .get(`/slots/${section.shop_id}/available?section_id=${section.id}&capacity=6`)
+      .set("Accept", "application/json");
+
+    expect(response.status).toBe(200);
+    expect(response.body.length).toBe(2);
+    expect(response.body).toMatchObject(
+      expect.arrayContaining([
+        expect.objectContaining({
+          id: section1Slot6.id
+        }),
+        expect.objectContaining({
+          id: section1Slot10.id
+        })
+      ])
+    );
+  });
+
   //TODO: implement
   it.skip("returns 422 for shop not yet opened", async () => {
     const slot = await DataFactory.createSlot();

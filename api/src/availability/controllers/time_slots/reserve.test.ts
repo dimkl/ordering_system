@@ -38,8 +38,6 @@ describe("POST /time_slots/reserve", () => {
     expect(response.body).toMatchObject({
       started_at: startedAt.toISOString(),
       ended_at: endedAt.toISOString(),
-      // TODO: Replace id with uuids
-      // slot_id: slot.id
       customer_id: customer.id,
       slot_id: slot.id
     });

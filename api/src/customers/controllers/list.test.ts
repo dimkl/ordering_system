@@ -4,6 +4,8 @@
  */
 import type { Knex } from "knex";
 
+import { ulid } from "ulid";
+
 import setupModels from "../../shared/setupModels";
 
 describe("GET /customers/:customer_id?", () => {
@@ -50,9 +52,7 @@ describe("GET /customers/:customer_id?", () => {
   });
 
   it("throws 404 when specified customer does not exist", async () => {
-    const response = await request
-      .get("/customers/" + Math.floor(Math.random() * 100))
-      .set("Accept", "application/json");
+    const response = await request.get(`/customers/${ulid()}`).set("Accept", "application/json");
 
     expect(response.status).toBe(404);
   });

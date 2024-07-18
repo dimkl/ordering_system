@@ -4,6 +4,8 @@
  */
 import type { Knex } from "knex";
 
+import { ulid } from "ulid";
+
 import setupModels from "../../../shared/setupModels";
 
 describe("GET /slots/:shop_id/available/:slot_id?", () => {
@@ -77,9 +79,8 @@ describe("GET /slots/:shop_id/available/:slot_id?", () => {
   it("throws 404 when specified slot does not exist", async () => {
     const slot = await DataFactory.createSlot();
 
-    const randomSlotId = Math.floor(Math.random() * 100);
     const response = await request
-      .get(`/slots/${slot.section.shop_id}/available/${randomSlotId}`)
+      .get(`/slots/${slot.section.shop_id}/available/${ulid()}`)
       .set("Accept", "application/json");
 
     expect(response.status).toBe(404);

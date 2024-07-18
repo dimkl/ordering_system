@@ -71,10 +71,6 @@ export class Product extends BaseModel {
       .withGraphFetched("[ingredients(publicColumns), variations.ingredients(publicColumns)]")
       .findById(productId);
   }
-
-  get hasUidAsId() {
-    return true;
-  }
 }
 
 export interface Product {

@@ -51,10 +51,6 @@ export class Shop extends BaseModel {
     };
   }
 
-  get hasUidAsId() {
-    return true;
-  }
-
   openingDate(date) {
     if (!this.opening_time || !this.opening_days) return;
     if (!this.opening_days.includes(date.getUTCDay())) return;

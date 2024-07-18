@@ -29,10 +29,6 @@ export class ProductAvailability extends BaseModel {
       }
     };
   }
-
-  get hasUidAsId() {
-    return true;
-  }
 }
 
 export interface ProductAvailability {

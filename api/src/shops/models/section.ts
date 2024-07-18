@@ -30,10 +30,6 @@ export class Section extends BaseModel {
       }
     };
   }
-
-  get hasUidAsId() {
-    return true;
-  }
 }
 
 export interface Section {

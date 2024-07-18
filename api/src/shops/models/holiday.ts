@@ -27,10 +27,6 @@ export class Holiday extends BaseModel {
       }
     };
   }
-
-  get hasUidAsId() {
-    return true;
-  }
 }
 
 export interface Holiday {

@@ -57,10 +57,6 @@ export class TimeSlot extends BaseModel {
       }
     };
   }
-
-  get hasUidAsId() {
-    return true;
-  }
 }
 
 export interface TimeSlot {

@@ -35,7 +35,7 @@ export class BaseModel extends DBErrors(Model) {
   async $beforeInsert(queryContext) {
     await super.$beforeInsert(queryContext);
 
-    this.generateUuid();
+    this.generateUid();
   }
 
   async $beforeUpdate() {
@@ -44,18 +44,8 @@ export class BaseModel extends DBErrors(Model) {
     }
   }
 
-  get hasUidAsId() {
-    return false;
-  }
-
-  generateUuid() {
-    if ("uuid" in this) {
-      this.uuid = uuidv4();
-    }
-    if ("uid" in this) {
-      this.uid = ulid();
-    }
-    if ("id" in this && this.hasUidAsId) {
+  generateUid() {
+    if ("id" in this) {
       this.id = ulid();
     }
   }

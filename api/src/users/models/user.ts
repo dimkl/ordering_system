@@ -22,10 +22,6 @@ export class User extends Password()(BaseModel) {
   get scopes() {
     return [];
   }
-
-  get hasUidAsId() {
-    return true;
-  }
 }
 
 export interface User {

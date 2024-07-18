@@ -91,10 +91,6 @@ export class Order extends BaseModel {
       })
       .findById(orderId);
   }
-
-  get hasUidAsId() {
-    return true;
-  }
 }
 export interface Order {
   id: string;

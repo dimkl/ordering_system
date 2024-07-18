@@ -41,10 +41,6 @@ export class OrderItem extends BaseModel {
       }
     };
   }
-
-  get hasUidAsId() {
-    return true;
-  }
 }
 
 export interface OrderItem {

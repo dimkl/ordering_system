@@ -11,6 +11,10 @@ export class Slot extends BaseModel {
     return "slots";
   }
 
+  static get public_columns() {
+    return Object.keys(schema.properties);
+  }
+
   static get jsonSchema() {
     return schema;
   }
@@ -18,9 +22,6 @@ export class Slot extends BaseModel {
   static get modifiers() {
     return {
       ...super.modifiers,
-      publicColumns(query) {
-        query.select("slots.*").joinRelated("user");
-      },
       active(query) {
         query.where({ active: true });
       },

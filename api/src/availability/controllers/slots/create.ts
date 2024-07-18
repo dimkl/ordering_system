@@ -1,24 +1,30 @@
 import type { Context } from "koa";
 
+import { ForeignKeyViolationError } from "objection";
+
 import { Slot } from "../../models";
-import { Section } from "../../../shops/models";
-import { User } from "../../../users/models/user";
 
 import schema from "../../schemas/slot.create.json";
 
 const handler = async (ctx: Context) => {
   // @ts-expect-error validatedData are added as part of the request validation
   const data = ctx.request.validatedData;
-  const slotId = await Section.getId(data.section_id);
-  const userId = await User.getId(data.user_id);
+  const bulkData = Array.isArray(data) ? data : [data];
 
-  ctx.body = await Slot.query()
-    .modify("publicInsertColumns")
-    .insert({
-      ...data,
-      user_id: userId,
-      slot_id: slotId
-    });
+  try {
+    const slots = await Slot.query().insert(bulkData).returning("id");
+
+    const slotQs = Slot.query().modify("publicColumns");
+    ctx.body =
+      slots.length > 1
+        ? await slotQs.findByIds(slots.map((o) => o.id))
+        : await slotQs.findById(slots[0].id);
+  } catch (err) {
+    if (err instanceof ForeignKeyViolationError) {
+      return;
+    }
+    throw err;
+  }
 };
 
 export { handler, schema };

@@ -27,6 +27,6 @@
       "exclusiveMinimum": 0
     }
   },
-  "required": ["section_id", "sku"],
+  "required": ["section_id", "sku", "capacity"],
   "additionalProperties": false
 }

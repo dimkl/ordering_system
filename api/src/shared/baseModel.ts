@@ -82,14 +82,4 @@ export class BaseModel extends DBErrors(Model) {
 
     return this.query().whereIn(column, idsOrUidsList);
   }
-
-  static async getId(idOrUid: string | number) {
-    if (!idOrUid) return idOrUid;
-    if (Number(idOrUid)) return idOrUid;
-
-    // @ts-expect-error there will always be an id in models
-    const { id } = await this.findByIdOrUid(idOrUid).select("id");
-
-    return id;
-  }
 }

@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`POST /slots creates and returns a slot 1`] = `
+{
+  "active": true,
+  "capacity": 5,
+  "created_at": Any<String>,
+  "id": Any<String>,
+  "section_id": Any<String>,
+  "sku": "slot-sku-1",
+  "updated_at": Any<String>,
+  "user_id": null,
+}
+`;
+
+exports[`POST /slots creates and returns bulk slots 1`] = `
+{
+  "active": true,
+  "capacity": 5,
+  "created_at": Any<String>,
+  "id": Any<String>,
+  "section_id": Any<String>,
+  "sku": "slot-sku-1",
+  "updated_at": Any<String>,
+  "user_id": Any<String>,
+}
+`;
+
+exports[`POST /slots creates and returns bulk slots 2`] = `
+{
+  "active": false,
+  "capacity": 10,
+  "created_at": Any<String>,
+  "id": Any<String>,
+  "section_id": Any<String>,
+  "sku": "slot-sku-2",
+  "updated_at": Any<String>,
+  "user_id": null,
+}
+`;
+
+exports[`POST /slots throws validation error for not existing section_id 1`] = `
+[
+  {
+    "instancePath": "/section_id",
+    "keyword": "minLength",
+    "message": "must NOT have fewer than 26 characters",
+    "params": {
+      "limit": 26,
+    },
+    "schemaPath": "defs#/definitions/uid/minLength",
+  },
+]
+`;
+
+exports[`POST /slots throws validation error for not existing user_id 1`] = `
+[
+  {
+    "instancePath": "/user_id",
+    "keyword": "minLength",
+    "message": "must NOT have fewer than 26 characters",
+    "params": {
+      "limit": 26,
+    },
+    "schemaPath": "defs#/definitions/uid/minLength",
+  },
+]
+`;
+
+exports[`POST /slots throws validation error for required properties 1`] = `
+[
+  {
+    "instancePath": "",
+    "keyword": "required",
+    "message": "must have required property 'section_id'",
+    "params": {
+      "missingProperty": "section_id",
+    },
+    "schemaPath": "#/required",
+  },
+  {
+    "instancePath": "",
+    "keyword": "required",
+    "message": "must have required property 'sku'",
+    "params": {
+      "missingProperty": "sku",
+    },
+    "schemaPath": "#/required",
+  },
+  {
+    "instancePath": "",
+    "keyword": "required",
+    "message": "must have required property 'capacity'",
+    "params": {
+      "missingProperty": "capacity",
+    },
+    "schemaPath": "#/required",
+  },
+]
+`;

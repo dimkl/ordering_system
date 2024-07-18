@@ -3,11 +3,15 @@ import type { Context, Next } from "koa";
 import { TimeSlot } from "../models";
 
 export async function loadTimeSlot(timeSlotId: number | string, ctx: Context, next: Next) {
-  ctx.timeSlot = await TimeSlot.query().findById(timeSlotId).modify("publicColumns");
+  ctx.timeSlot = await TimeSlot.query()
+    .findById(timeSlotId)
+    .modify("publicColumns")
+    .throwIfNotFound();
 
-  if (!ctx.timeSlot) return (ctx.status = 404);
   if (!ctx.slot) return next();
 
+  // TODO(dimkl): in what scenario is this used.
+  // I cannot find a route with both of the path params defined
   if (ctx.timeSlot.order_id != ctx.slot.id) {
     ctx.status = 400;
     ctx.body = {

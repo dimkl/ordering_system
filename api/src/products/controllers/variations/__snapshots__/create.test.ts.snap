@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`POST /variations throws 400 when no ingredients provided 1`] = `
+[
+  {
+    "instancePath": "/ingredients",
+    "keyword": "minItems",
+    "message": "must NOT have fewer than 1 items",
+    "params": {
+      "limit": 1,
+    },
+    "schemaPath": "#/properties/ingredients/minItems",
+  },
+]
+`;
+
+exports[`POST /variations throws 422 when variant is an existing variation 1`] = `
+{
+  "message": "A variation should be a variant of a product, not of another variation",
+}
+`;

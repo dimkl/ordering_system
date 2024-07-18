@@ -81,6 +81,7 @@ export interface Product {
   sku: string;
   created_at: Date;
   updated_at: Date;
+  // Original product ID that product variations depend
   variant_id: string;
   category_id: string;
 }

@@ -84,6 +84,50 @@ describe("POST /variations", () => {
     expect(response.body.variations[0].ingredients.length).toBe(1);
   });
 
+  it("throws 422 when variant is an existing variation", async () => {
+    const { ingredient, product } = await DataFactory.createProductIngredient();
+    const variation = await DataFactory.createProduct({
+      variant_id: product.id,
+      sku: "product-code-1-1"
+    });
+    const ingredient2 = await DataFactory.createIngredient({
+      title: "Ingredient 2"
+    });
+    await DataFactory.createProductIngredient({}, product, ingredient2);
+
+    const response = await request
+      .post(`/variations`)
+      .send({
+        title: "Variation",
+        description: "Variation description",
+        sku: `${variation.sku}-1`,
+        variant_id: variation.id,
+        ingredients: [ingredient.id]
+      })
+      .set("Accept", "application/json");
+
+    expect(response.status).toBe(422);
+    expect(response.body).toMatchSnapshot();
+  });
+
+  it("throws 400 when no ingredients provided", async () => {
+    const { product } = await DataFactory.createProductIngredient();
+
+    const response = await request
+      .post(`/variations`)
+      .send({
+        title: "Variation",
+        description: "Variation description",
+        sku: `${product.sku}-1`,
+        variant_id: product.id,
+        ingredients: []
+      })
+      .set("Accept", "application/json");
+
+    expect(response.status).toBe(400);
+    expect(response.body).toMatchSnapshot();
+  });
+
   it("throws 404 for not existing ingredient_id", async () => {
     const product = await DataFactory.createProduct();
     const response = await request

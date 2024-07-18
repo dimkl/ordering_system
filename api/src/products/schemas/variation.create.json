@@ -34,7 +34,8 @@
       "type": "array",
       "items": {
         "$ref": "defs#/definitions/uid"
-      }
+      },
+      "minItems": 1
     }
   },
   "required": ["title", "variant_id", "ingredients"],

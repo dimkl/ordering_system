@@ -1,43 +1,25 @@
 # Tasks
 
-## Customers
+## Cleanup
 
-- [x] CRUD customers
-- [] authentication (login & signup)
-- [] authorization
+- [ ] Fix `// @ts-expect-error validatedData are added as part of the request validation` type
 
-## Products
+## Refactoring
 
-- [~] CRUD products
-- [] authorization
+- [ ] Convert JsonSchema to OpenAPI
 
-## Orders
+## Production deployment
 
-- [x] CRUD orders & order_items
-- [x] addOrderItem & removeOrderItem & updateOrderItem
-- [] transition
-- [] authorization
-
-## Users
-
-- [~] CRUD users
-- [] authentication (login & signup)
-- [] authorization
-
-## Slots
-
-- [~] CRUD slots & time_slots & group_slots
-- [] authorization
-
-## Shops
-
-- [~] CRUD shops & sections
-- [] authorization
+- [ ] Buy domain
+- [ ] Find deployment platform
+- [ ] Create GH action to deploy to production
+- [ ] Create Clerk production application
 
 ## Flow
 
-- [] available time_slots (filters: capacity, shop_id, section_id, *startDate, *endDate)
-- [] available slots (filters: capacity, shop_id, section_id, *startDate, *endDate)
-- [] products#available
-- [] populate holidays and use them in shop#isOpen()
-- [] use productAvailability in products#available
+- [ ] Create shop menu
+- [ ] Find available time_slots (filters: capacity, shop_id, section_id, *startDate, *endDate)
+- [ ] available slots (filters: capacity, shop_id, section_id, *startDate, *endDate)
+- [ ] products#available
+- [ ] populate holidays and use them in shop#isOpen()
+- [ ] use productAvailability in products#available

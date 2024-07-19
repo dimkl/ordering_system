@@ -5,8 +5,8 @@
   "main": "dist/src/index.js",
   "scripts": {
     "build": "rm -rf dist/ && tsc",
-    "test": "DOTENV_CONFIG_PATH=.env.test NODE_ENV=test jest --runInBand --config='./config/jest/config.js'",
-    "test:debug": "DOTENV_CONFIG_PATH=.env.test node inspect node_modules/jest/bin/jest.js --runInBand --config='./config/jest/config.js'",
+    "test": "DOTENV_CONFIG_PATH=.env.test NODE_ENV=test jest --runInBand --config='./config/jest/config.ts'",
+    "test:debug": "DOTENV_CONFIG_PATH=.env.test node inspect node_modules/jest/bin/jest.js --runInBand --config='./config/jest/config.ts'",
     "start": "DOTENV_CONFIG_PATH=.env.development ts-node src/index.ts",
     "start:dev": "nodemon src/index.js",
     "debug": "node inspect src/index.js",

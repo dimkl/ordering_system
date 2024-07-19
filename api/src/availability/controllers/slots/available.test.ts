@@ -129,11 +129,11 @@ describe("GET /slots/:shop_id/available/:slot_id?", () => {
   });
 
   it("returns all available slots for specific capacity & section", async () => {
-    const { user, section, ..._section1Slot5 } = await DataFactory.createSlot({
+    const { user, section } = await DataFactory.createSlot({
       capacity: 5
     });
-    const _section2Slot5 = await DataFactory.createSlot({ capacity: 5 }, {}, user, section.shop);
-    const _section2Slot10 = await DataFactory.createSlot({ capacity: 10 }, {}, user, section.shop);
+    await DataFactory.createSlot({ capacity: 5 }, {}, user, section.shop);
+    await DataFactory.createSlot({ capacity: 10 }, {}, user, section.shop);
     const section1Slot6 = await DataFactory.createSlot(
       { capacity: 6 },
       section,

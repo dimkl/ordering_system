@@ -72,7 +72,7 @@ describe("POST /slots", () => {
     });
     expect(response.body[0]).toMatchObject({
       section_id: section.id,
-      user_id: section.user.id,
+      user_id: section.user_id,
       sku: "slot-sku-1"
     });
     expect(response.body[1]).toMatchSnapshot({

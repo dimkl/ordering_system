@@ -28,11 +28,25 @@ export class TimeSlot extends BaseModel {
       publicColumns(query) {
         query.select("time_slots.*").joinRelated("customer");
       },
-      reserved(query, startedAt, endedAt) {
-        query.where("started_at", "<=", endedAt).where(function () {
-          // @ts-expect-error this is the same type as query
-          this.where("ended_at", ">=", startedAt).orWhere("ended_at", "is", null);
-        });
+      reservedSlot(query, shopId, startedAt, endedAt, slotId) {
+        query
+          .modify("inShop", shopId)
+          .whereBetween("started_at", [startedAt, endedAt])
+          .where("slot_id", slotId)
+          .orderBy("started_at");
+      },
+      reserved(query, shopId, startedAt, endedAt) {
+        query
+          .modify("inShop", shopId)
+          .whereBetween("started_at", [startedAt, endedAt])
+          .orderBy("started_at");
+      },
+      inShop(query, shopId: string) {
+        query
+          .innerJoin("slots", "time_slots.slot_id", "slots.id")
+          .innerJoin("sections", "sections.id", "slots.section_id")
+          .where("sections.shop_id", shopId)
+          .where("slots.active", true);
       }
     };
   }
@@ -63,8 +77,8 @@ export interface TimeSlot {
   id: string;
   created_at: Date;
   updated_at: Date;
-  started_at: Date;
-  ended_at: Date;
+  started_at: number;
+  ended_at: number;
   slot_id: string;
   customer_id: string;
   slot?: Slot;

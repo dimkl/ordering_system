@@ -76,7 +76,7 @@ export interface Slot {
   active: boolean;
   sku: string;
   section_id: string;
-  user_id: number;
+  user_id: string;
 
   user: User;
   section: Section;

@@ -1,4 +1,5 @@
 import { TimeSlot, Slot } from "../models";
+import type { Shop } from "../../shops/models";
 import { Customer } from "../../customers/models/customer";
 
 import { BusinessError } from "../../shared/errors";
@@ -25,24 +26,22 @@ export class TimeSlotReserve {
       throw new BusinessError(`Slot ${slotId} does not exist!`);
     }
 
-    const startedAt = data.startedAt ? new Date(data.startedAt) : null;
-    const endedAt = data.endedAt ? new Date(data.endedAt) : null;
+    const shop = slot.section.shop;
 
-    if (!slot.section.shop.isOpen(startedAt, endedAt)) {
-      const errMsgEndedAt = endedAt
-        ? endedAt.toISOString()
-        : slot.section.shop.closingDate(startedAt)?.toISOString();
+    const defaultStartedAt = shop.openingDate(new Date())?.toISOString();
+    const startedAt = new Date(data.startedAt || defaultStartedAt || "");
+    const defaultEndedAt = shop.closingDate(new Date(startedAt))?.toISOString();
+    const endedAt = new Date(data.endedAt || defaultEndedAt || "");
+
+    if (!shop.isOpen(startedAt, endedAt)) {
       throw new BusinessError(
-        `Shop is not open between "${startedAt?.toISOString()}" - "${errMsgEndedAt}"!`
+        `Shop is not open between "${startedAt.toISOString()}" - "${endedAt.toISOString()}"!`
       );
     }
 
-    if (await this.hasIntersection(slot, data)) {
-      const errMsgEndedAt = endedAt
-        ? endedAt.toISOString()
-        : slot.section.shop.closingDate(startedAt)?.toISOString();
+    if (await this.hasIntersection(slot, shop, { startedAt, endedAt })) {
       throw new BusinessError(
-        `Time slot "${startedAt?.toISOString()}" - "${errMsgEndedAt}" is not available!`
+        `Time slot "${startedAt.toISOString()}" - "${endedAt.toISOString()}" is not available!`
       );
     }
 
@@ -58,15 +57,12 @@ export class TimeSlotReserve {
   // https://stackoverflow.com/questions/143552/comparing-date-ranges
   static async hasIntersection(
     slot: Slot,
-    { startedAt, endedAt }: Pick<TimeSlotReserveParams, "startedAt" | "endedAt">
+    shop: Shop,
+    { startedAt, endedAt }: { startedAt?: Date; endedAt?: Date }
   ) {
-    const defaultEndedAt = startedAt
-      ? slot.section.shop.closingDate(new Date(startedAt))?.toISOString()
-      : null;
-
     const timeSlotsCount = await TimeSlot.query()
       .where({ slot_id: slot.id })
-      .modify("reserved", startedAt, endedAt || defaultEndedAt)
+      .modify("reserved", shop.id, startedAt, endedAt)
       .resultSize();
 
     return timeSlotsCount > 0;

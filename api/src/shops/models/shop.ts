@@ -51,7 +51,7 @@ export class Shop extends BaseModel {
     };
   }
 
-  openingDate(date) {
+  openingDate(date: Date): Date | undefined {
     if (!this.opening_time || !this.opening_days) return;
     if (!this.opening_days.includes(date.getUTCDay())) return;
 
@@ -65,7 +65,7 @@ export class Shop extends BaseModel {
     );
   }
 
-  closingDate(date) {
+  closingDate(date): Date | undefined {
     if (!this.closing_time || !this.opening_days) return;
     if (!this.opening_days.includes(date.getUTCDay())) return;
 
@@ -84,7 +84,7 @@ export class Shop extends BaseModel {
     );
   }
 
-  isOpen(startDate, endDate?) {
+  isOpen(startDate: Date, endDate?: Date): boolean {
     if (endDate && startDate > endDate) return false;
 
     const isBetween = (date, start, end) => date >= start && date <= end;
@@ -102,6 +102,11 @@ export class Shop extends BaseModel {
 
     return true;
   }
+
+  // Default time_slot duration in minutes
+  get default_time_slot_duration() {
+    return 60;
+  }
 }
 
 export interface Shop {
@@ -113,7 +118,7 @@ export interface Shop {
   lng: number;
   opening_time: string;
   closing_time: string;
-  opening_days: string;
+  opening_days: number[];
   manager_id: number;
 
   user?: User;

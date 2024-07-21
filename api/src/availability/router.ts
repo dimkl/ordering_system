@@ -10,6 +10,7 @@ import * as timeSlotListController from "./controllers/time_slots/list";
 import * as timeSloReserveController from "./controllers/time_slots/reserve";
 import * as timeSlotUpdateController from "./controllers/time_slots/update";
 import * as timeSlotReleaseController from "./controllers/time_slots/release";
+import * as timeSlotAvailableController from "./controllers/time_slots/available";
 
 import * as slotAvailableController from "./controllers/slots/available";
 import * as slotCreateController from "./controllers/slots/create";
@@ -54,6 +55,13 @@ router.delete(
   ControllerFactory.create({
     ...timeSlotReleaseController,
     scopes: ["urn:time_slots:d"]
+  })
+);
+router.get(
+  "/time_slots/:shop_id/available",
+  ControllerFactory.create({
+    ...timeSlotAvailableController,
+    scopes: ["urn:time_slots:r"]
   })
 );
 

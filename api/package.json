@@ -7,8 +7,8 @@
     "build": "rm -rf dist/ && tsc",
     "test": "DOTENV_CONFIG_PATH=.env.test NODE_ENV=test jest --runInBand --config='./config/jest/config.ts'",
     "test:debug": "DOTENV_CONFIG_PATH=.env.test node inspect node_modules/jest/bin/jest.js --runInBand --config='./config/jest/config.ts'",
-    "start": "DOTENV_CONFIG_PATH=.env.development ts-node src/index.ts",
-    "start:dev": "nodemon src/index.js",
+    "start:dev": "DOTENV_CONFIG_PATH=.env.development ts-node src/index.ts",
+    "start": "node dist/src/index.js",
     "debug": "node inspect src/index.js",
     "db:migrate": "DOTENV_CONFIG_PATH=../.env.development knex migrate:latest --knexfile ./config/knexfile.ts",
     "db:migrate:new": "DOTENV_CONFIG_PATH=../.env.development knex migrate:make --client pg -x ts --knexfile ./config/knexfile.ts",
@@ -17,7 +17,8 @@
     "db:rollback:test": "DOTENV_CONFIG_PATH=../.env.test knex migrate:rollback --knexfile ./config/knexfile.ts",
     "db:seed:new": "DOTENV_CONFIG_PATH=../.env.development knex seed:make --client pg --knexfile ./config/knexfile.ts",
     "db:seed": "DOTENV_CONFIG_PATH=../.env.development knex seed:run --knexfile ./config/knexfile.ts",
-    "setup": "npm run build && npm run db:migrate && npm run db:seed"
+    "setup": "npm run build && npm run db:migrate && npm run db:seed",
+    "watch": "nodemon src/index.js"
   },
   "repository": {
     "type": "git",
@@ -58,6 +59,7 @@
     "ulid": "^2.3.0"
   },
   "devDependencies": {
+    "@flydotio/dockerfile": "^0.5.8",
     "@types/ajv": "^1.0.0",
     "@types/bcrypt": "^5.0.0",
     "@types/dotenv": "^8.2.0",

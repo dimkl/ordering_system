@@ -1,6 +1,8 @@
-import type { Context, Next } from "koa";
+import type { Context, Next, Middleware } from "koa";
 
 import { AuthorizationError } from "../../errors";
+import { getAuth, requireAuth } from "@dimkl/clerk-koa";
+import compose from "koa-compose";
 
 const groupByResource = (scopes: string[]) => {
   return scopes.reduce((group: Record<string, string>, scope: string) => {
@@ -13,14 +15,14 @@ const groupByResource = (scopes: string[]) => {
   }, {});
 };
 
-export const authorize = (requiredScopes: string[] = []) => {
-  return async function authorize(ctx: Context, next: Next) {
+export const authorize = (requiredScopes: string[] = []): Middleware => {
+  async function authorize(ctx: Context, next: Next) {
     try {
-      if (!ctx.auth) {
+      if (!getAuth(ctx)) {
         throw new AuthorizationError("authorization is not loaded!");
       }
 
-      if (!ctx.auth.sessionId) {
+      if (!getAuth(ctx).sessionId) {
         throw new AuthorizationError("user is signedOut!");
       }
       const scopes = ctx.auth.sessionClaims?.scopes;
@@ -42,5 +44,7 @@ export const authorize = (requiredScopes: string[] = []) => {
     } catch (err) {
       ctx.status = 401;
     }
-  };
+  }
+
+  return compose([requireAuth(), authorize]) as Middleware;
 };

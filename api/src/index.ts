@@ -18,6 +18,7 @@ import json from "koa-json";
 import bodyParser from "koa-bodyparser";
 
 import { router } from "./router";
+import { clerkMiddleware } from "@dimkl/clerk-koa";
 
 // Add some shared schema defintions
 const discoveryApi = DiscoveryApiFactory.getInstance();
@@ -35,6 +36,7 @@ if (!isTestingEnv()) {
 app.use(bodyParser());
 // my middlewares
 app.use(errorHandler());
+app.use(clerkMiddleware());
 
 // routes
 app.use(router.routes());

@@ -1,4 +1,4 @@
-import type { Context, Next } from "koa";
+import type { Context, Next, Middleware } from "koa";
 
 import { AuthorizationError } from "../../errors";
 
@@ -13,7 +13,7 @@ const groupByResource = (scopes: string[]) => {
   }, {});
 };
 
-export const authorize = (requiredScopes: string[] = []) => {
+export const authorize = (requiredScopes: string[] = []): Middleware => {
   return async function authorize(ctx: Context, next: Next) {
     try {
       const scopes = process.env.MOCK_AUTH_REQUEST_SCOPES || "";

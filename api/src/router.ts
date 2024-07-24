@@ -1,5 +1,6 @@
 import Router from "koa-router";
 
+import { router as HealthRouter } from "./health/router";
 import { router as CustomersRouter } from "./customers/router";
 import { router as OrdersRouter } from "./orders/router";
 import { router as ProductsRouter } from "./products/router";
@@ -9,6 +10,7 @@ import { router as DiscoveryRouter } from "./discovery/router";
 
 export const router = new Router();
 
+router.use(HealthRouter.routes());
 router.use(CustomersRouter.routes());
 router.use(OrdersRouter.routes());
 router.use(ProductsRouter.routes());

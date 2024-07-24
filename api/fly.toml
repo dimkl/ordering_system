@@ -26,3 +26,6 @@ primary_region = 'ams'
   PORT = "3000"
   HOST = "0.0.0.0"
   CLERK_PUBLISHABLE_KEY = "pk_test_d2FudGVkLXJlaW5kZWVyLTY5LmNsZXJrLmFjY291bnRzLmRldiQ"
+
+[deploy]
+  release_command = "npm run db:migrate"

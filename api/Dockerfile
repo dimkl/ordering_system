@@ -33,12 +33,13 @@ RUN npm run build
 # Remove development dependencies
 RUN npm prune --omit=dev
 
-
 # Final stage for app image
 FROM base
 
 # Copy built application
-COPY --from=build /app /app
+COPY --from=build /app/package.json /app
+COPY --from=build /app/dist /app/dist
+COPY --from=build /app/node_modules /app/node_modules
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000

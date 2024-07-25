@@ -7,8 +7,13 @@ import { router as ProductsRouter } from "./products/router";
 import { router as AvailabilityRouter } from "./availability/router";
 import { router as ShopsRouter } from "./shops/router";
 import { router as DiscoveryRouter } from "./discovery/router";
+import { apiVersion } from "./shared/middlewares/apiVersion";
 
-export const router = new Router();
+export const router = new Router({
+  prefix: "/:version"
+});
+
+router.use(apiVersion(["2024-07-25"]));
 
 router.use(HealthRouter.routes());
 router.use(CustomersRouter.routes());

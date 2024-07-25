@@ -17,7 +17,7 @@ describe("PATCH /slots/:slot_id", () => {
     const section = await DataFactory.createSection({}, {}, { email: "aloha@example.com" });
 
     const response = await request
-      .patch(`/slots/${slot.id}`)
+      .patch(`/${apiVersion}/slots/${slot.id}`)
       .send({
         active: false,
         user_id: section.user_id,
@@ -47,7 +47,7 @@ describe("PATCH /slots/:slot_id", () => {
     const slot = await DataFactory.createSlot();
 
     const response = await request
-      .patch(`/slots/${slot.id}`)
+      .patch(`/${apiVersion}/slots/${slot.id}`)
       .send({})
       .set("Accept", "application/json");
 
@@ -67,7 +67,7 @@ describe("PATCH /slots/:slot_id", () => {
     const slot = await DataFactory.createSlot({ active: true });
 
     const response = await request
-      .patch(`/slots/${slot.id}`)
+      .patch(`/${apiVersion}/slots/${slot.id}`)
       .send({ created_at: "1680046371850", active: false })
       .set("Accept", "application/json");
 

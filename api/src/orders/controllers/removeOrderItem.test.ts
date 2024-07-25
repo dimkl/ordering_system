@@ -18,7 +18,7 @@ describe("DELETE /order_items/:order_item_id", () => {
     const orderItem = await DataFactory.createOrderItem();
 
     const response = await request
-      .delete(`/order_items/${orderItem.id}`)
+      .delete(`/${apiVersion}/order_items/${orderItem.id}`)
       .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
@@ -33,7 +33,7 @@ describe("DELETE /order_items/:order_item_id", () => {
 
   it("throws 404 for not existing order_item_id", async () => {
     const response = await request
-      .delete(`/order_items/${ulid()}`)
+      .delete(`/${apiVersion}/order_items/${ulid()}`)
       .send({})
       .set("Accept", "application/json");
 

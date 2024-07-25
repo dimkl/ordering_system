@@ -17,7 +17,9 @@ describe("GET /customers/:customer_id?", () => {
   it("returns all customers", async () => {
     await DataFactory.createCustomer();
 
-    const response = await request.get("/customers").set("Accept", "application/json");
+    const response = await request
+      .get(`/${apiVersion}/customers`)
+      .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
     expect(response.body.length).toBe(1);
@@ -32,7 +34,7 @@ describe("GET /customers/:customer_id?", () => {
     const customer = await DataFactory.createCustomer();
 
     const response = await request
-      .get("/customers/" + customer.id)
+      .get(`/${apiVersion}/customers/${customer.id}`)
       .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
@@ -45,14 +47,18 @@ describe("GET /customers/:customer_id?", () => {
   });
 
   it("returns empty list of customers when there are no customers", async () => {
-    const response = await request.get("/customers").set("Accept", "application/json");
+    const response = await request
+      .get(`/${apiVersion}/customers`)
+      .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
     expect(response.body).toEqual([]);
   });
 
   it("throws 404 when specified customer does not exist", async () => {
-    const response = await request.get(`/customers/${ulid()}`).set("Accept", "application/json");
+    const response = await request
+      .get(`/${apiVersion}/customers/${ulid()}`)
+      .set("Accept", "application/json");
 
     expect(response.status).toBe(404);
   });

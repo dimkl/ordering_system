@@ -22,7 +22,7 @@ describe("PATCH /orders/:order_id", () => {
       { email: "order.update@example.com" }
     );
     const response = await request
-      .patch(`/orders/${order.id}`)
+      .patch(`/${apiVersion}/orders/${order.id}`)
       .send({
         customer_id: timeSlot.customer_id,
         time_slot_id: timeSlot.id
@@ -46,7 +46,7 @@ describe("PATCH /orders/:order_id", () => {
     const order = await DataFactory.createOrder();
 
     const response = await request
-      .patch(`/orders/${order.id}`)
+      .patch(`/${apiVersion}/orders/${order.id}`)
       .send({})
       .set("Accept", "application/json");
 
@@ -65,7 +65,7 @@ describe("PATCH /orders/:order_id", () => {
     const order = await DataFactory.createOrder();
 
     const response = await request
-      .patch(`/orders/${order.id}`)
+      .patch(`/${apiVersion}/orders/${order.id}`)
       .send({ created_at: "1680046371850" })
       .set("Accept", "application/json");
 

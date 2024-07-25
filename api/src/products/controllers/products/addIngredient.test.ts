@@ -19,7 +19,7 @@ describe("POST /products/ingredients", () => {
     const product = await DataFactory.createProduct();
 
     const response = await request
-      .post(`/products/ingredients`)
+      .post(`/${apiVersion}/products/ingredients`)
       .send({
         ingredient_id: ingredient.id,
         product_id: product.id
@@ -49,7 +49,7 @@ describe("POST /products/ingredients", () => {
   it("throws 404 for not existing ingredient_id", async () => {
     const product = await DataFactory.createProduct();
     const response = await request
-      .post(`/products/ingredients`)
+      .post(`/${apiVersion}/products/ingredients`)
       .send({
         ingredient_id: ulid(),
         product_id: product.id
@@ -62,7 +62,7 @@ describe("POST /products/ingredients", () => {
   it("throws 404 for not existing product_id", async () => {
     const ingredient = await DataFactory.createIngredient();
     const response = await request
-      .post(`/products/ingredients`)
+      .post(`/${apiVersion}/products/ingredients`)
       .send({
         ingredient_id: ingredient.id,
         product_id: ulid()
@@ -77,7 +77,7 @@ describe("POST /products/ingredients", () => {
     const product = await DataFactory.createProduct();
 
     const response = await request
-      .post(`/products/ingredients`)
+      .post(`/${apiVersion}/products/ingredients`)
       .send({
         ingredient_id: ingredient.id,
         product_id: product.id,

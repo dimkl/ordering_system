@@ -18,7 +18,7 @@ describe("PATCH /order_items/:order_item_id", () => {
     const orderItem = await DataFactory.createOrderItem();
 
     const response = await request
-      .patch(`/order_items/${orderItem.id}`)
+      .patch(`/${apiVersion}/order_items/${orderItem.id}`)
       .send({ quantity: 10 })
       .set("Accept", "application/json");
 
@@ -49,7 +49,7 @@ describe("PATCH /order_items/:order_item_id", () => {
 
   it("throws 404 for not existing order_item_id", async () => {
     const response = await request
-      .patch(`/order_items/${ulid()}`)
+      .patch(`/${apiVersion}/order_items/${ulid()}`)
       .send({ quantity: 10 })
       .set("Accept", "application/json");
 
@@ -60,7 +60,7 @@ describe("PATCH /order_items/:order_item_id", () => {
     const orderItem = await DataFactory.createOrderItem();
 
     const response = await request
-      .patch(`/order_items/${orderItem.id}`)
+      .patch(`/${apiVersion}/order_items/${orderItem.id}`)
       .send({ quantity: 10, created_at: "1680046371850" })
       .set("Accept", "application/json");
 

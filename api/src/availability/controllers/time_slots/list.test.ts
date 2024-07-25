@@ -19,7 +19,9 @@ describe("GET /time_slots", () => {
   it("returns all time_slots", async () => {
     await DataFactory.createTimeSlot();
 
-    const response = await request.get("/time_slots").set("Accept", "application/json");
+    const response = await request
+      .get(`/${apiVersion}/time_slots`)
+      .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
     expect(response.body.length).toBe(1);
@@ -37,7 +39,7 @@ describe("GET /time_slots", () => {
     const timeSlot = await DataFactory.createTimeSlot();
 
     const response = await request
-      .get("/time_slots/" + timeSlot.id)
+      .get(`/${apiVersion}/time_slots/${timeSlot.id}`)
       .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
@@ -55,7 +57,7 @@ describe("GET /time_slots", () => {
     const timeSlot = await DataFactory.createTimeSlot();
 
     const response = await request
-      .get("/time_slots/" + timeSlot.id)
+      .get(`/${apiVersion}/time_slots/${timeSlot.id}`)
       .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
@@ -70,14 +72,18 @@ describe("GET /time_slots", () => {
   });
 
   it("returns empty list of time_slots when there are no time_slots", async () => {
-    const response = await request.get("/time_slots").set("Accept", "application/json");
+    const response = await request
+      .get(`/${apiVersion}/time_slots`)
+      .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
     expect(response.body).toEqual([]);
   });
 
   it("throws 404 when specified time_slot does not exist", async () => {
-    const response = await request.get("/time_slots/" + ulid()).set("Accept", "application/json");
+    const response = await request
+      .get(`/${apiVersion}/time_slots/${ulid()}`)
+      .set("Accept", "application/json");
 
     expect(response.status).toBe(404);
   });

@@ -19,7 +19,9 @@ describe("DELETE /slots/:slot_id", () => {
   it("deletes time_slot and returns 204", async () => {
     const slot = await DataFactory.createSlot();
 
-    const response = await request.delete(`/slots/${slot.id}`).set("Accept", "application/json");
+    const response = await request
+      .delete(`/${apiVersion}/slots/${slot.id}`)
+      .set("Accept", "application/json");
 
     expect(response.status).toBe(204);
   });
@@ -27,13 +29,17 @@ describe("DELETE /slots/:slot_id", () => {
   it("deletes time_slot using uuid and returns 204", async () => {
     const slot = await DataFactory.createSlot();
 
-    const response = await request.delete(`/slots/${slot.id}`).set("Accept", "application/json");
+    const response = await request
+      .delete(`/${apiVersion}/slots/${slot.id}`)
+      .set("Accept", "application/json");
 
     expect(response.status).toBe(204);
   });
 
   it("throws 404 when time_slot does not exist", async () => {
-    const response = await request.delete(`/slots/${ulid()}`).set("Accept", "application/json");
+    const response = await request
+      .delete(`/${apiVersion}/slots/${ulid()}`)
+      .set("Accept", "application/json");
 
     expect(response.status).toBe(404);
   });

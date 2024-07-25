@@ -25,7 +25,7 @@ describe("POST /time_slots/reserve", () => {
     endedAt.setUTCHours(18);
 
     const response = await request
-      .post("/time_slots/reserve")
+      .post(`/${apiVersion}/time_slots/reserve`)
       .send({
         started_at: startedAt.toISOString(),
         ended_at: endedAt.toISOString(),
@@ -56,7 +56,7 @@ describe("POST /time_slots/reserve", () => {
     });
 
     const response = await request
-      .post("/time_slots/reserve")
+      .post(`/${apiVersion}/time_slots/reserve`)
       .send({
         started_at: timeSlot.started_at.toISOString(),
         ended_at: timeSlot.ended_at.toISOString(),
@@ -90,7 +90,7 @@ describe("POST /time_slots/reserve", () => {
     endedAt.setUTCHours(18);
 
     const response = await request
-      .post("/time_slots/reserve")
+      .post(`/${apiVersion}/time_slots/reserve`)
       .send({
         started_at: startedAt.toISOString(),
         ended_at: endedAt.toISOString(),
@@ -114,7 +114,7 @@ describe("POST /time_slots/reserve", () => {
     endedAt.setUTCHours(18);
 
     const response = await request
-      .post("/time_slots/reserve")
+      .post(`/${apiVersion}/time_slots/reserve`)
       .send({
         started_at: startedAt.toISOString(),
         ended_at: endedAt.toISOString(),
@@ -140,7 +140,7 @@ describe("POST /time_slots/reserve", () => {
     endedAt.setUTCHours(23, 30);
 
     const response = await request
-      .post("/time_slots/reserve")
+      .post(`/${apiVersion}/time_slots/reserve`)
       .send({
         started_at: startedAt.toISOString(),
         ended_at: endedAt.toISOString(),

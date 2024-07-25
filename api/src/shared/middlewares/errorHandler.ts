@@ -2,7 +2,7 @@ import type { Context, Next } from "koa";
 
 import { NotFoundError, ForeignKeyViolationError } from "objection";
 import { UniqueViolationError } from "objection-db-errors";
-import { BusinessError } from "../errors";
+import { BusinessError, RequestError } from "../errors";
 import { debug } from "debug";
 
 const errorDebug = debug("api:error");
@@ -22,6 +22,9 @@ export function errorHandler() {
       } else if (err instanceof BusinessError) {
         ctx.status = 422;
         ctx.body = { message: err.message };
+      } else if (err instanceof RequestError) {
+        ctx.status = 400;
+        ctx.body = err.message;
       } else if (err instanceof NotFoundError || err instanceof ForeignKeyViolationError) {
         ctx.status = 404;
       } else {

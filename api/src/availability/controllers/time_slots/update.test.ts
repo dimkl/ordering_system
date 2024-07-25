@@ -22,7 +22,7 @@ describe("PATCH /time_slots/:time_slot_id", () => {
     });
 
     const response = await request
-      .patch(`/time_slots/${timeSlot.id}`)
+      .patch(`/${apiVersion}/time_slots/${timeSlot.id}`)
       .send({
         started_at: "2022-04-21T15:28:27.602Z",
         ended_at: "2022-05-21T15:28:27.602Z",
@@ -53,7 +53,7 @@ describe("PATCH /time_slots/:time_slot_id", () => {
     const timeSlot = await DataFactory.createTimeSlot();
 
     const response = await request
-      .patch(`/time_slots/${timeSlot.id}`)
+      .patch(`/${apiVersion}/time_slots/${timeSlot.id}`)
       .send({})
       .set("Accept", "application/json");
 
@@ -73,7 +73,7 @@ describe("PATCH /time_slots/:time_slot_id", () => {
     const timeSlot = await DataFactory.createTimeSlot();
 
     const response = await request
-      .patch(`/time_slots/${timeSlot.id}`)
+      .patch(`/${apiVersion}/time_slots/${timeSlot.id}`)
       .send({
         created_at: "1680046371850",
         started_at: "2022-04-21T15:28:27.602Z"

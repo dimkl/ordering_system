@@ -20,7 +20,7 @@ describe("Customer purchase flow", () => {
     let response;
     // 1. create customer
     response = await request
-      .post("/customers")
+      .post(`/${apiVersion}/customers`)
       .send({
         first_name: "First",
         last_name: "Customer",
@@ -34,7 +34,7 @@ describe("Customer purchase flow", () => {
 
     // 2. reserve time_slot
     response = await request
-      .post(`/time_slots/reserve`)
+      .post(`/${apiVersion}/time_slots/reserve`)
       .send({
         customer_id: customerId,
         slot_id: slot.id,
@@ -46,7 +46,7 @@ describe("Customer purchase flow", () => {
 
     // 3. retrieve shop menu
     response = await request
-      .get(`/shops/${section.shop_id}/menu`)
+      .get(`/${apiVersion}/shops/${section.shop_id}/menu`)
       .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
@@ -55,7 +55,7 @@ describe("Customer purchase flow", () => {
 
     // 4. create order with order items
     response = await request
-      .post(`/orders`)
+      .post(`/${apiVersion}/orders`)
       .send({ customer_id: customerId, time_slot_id: timeSlotId })
       .set("Accept", "application/json");
     expect(response.status).toBe(200);
@@ -63,20 +63,22 @@ describe("Customer purchase flow", () => {
     const orderId = response.body.id;
 
     response = await request
-      .post(`/order_items`)
+      .post(`/${apiVersion}/order_items`)
       .send({ order_id: orderId, product_id: product1.id })
       .set("Accept", "application/json");
     expect(response.status).toBe(200);
 
     response = await request
-      .post(`/order_items`)
+      .post(`/${apiVersion}/order_items`)
       .send({ order_id: orderId, product_id: product2.id })
       .set("Accept", "application/json");
     expect(response.status).toBe(200);
     const orderItems = response.body.order_items;
 
     // 5. places order
-    response = await request.post(`/orders/${orderId}/place`).set("Accept", "application/json");
+    response = await request
+      .post(`/${apiVersion}/orders/${orderId}/place`)
+      .set("Accept", "application/json");
     expect(response.status).toBe(200);
     expect(response.body.state).toBe("placed");
     expect(response.body.order_items[0].state).toBe("placed");
@@ -84,14 +86,14 @@ describe("Customer purchase flow", () => {
 
     // 6. user-chef creates order_item
     response = await request
-      .post(`/order_items/${orderItems[0].id}/process`)
+      .post(`/${apiVersion}/order_items/${orderItems[0].id}/process`)
       .set("Accept", "application/json");
     expect(response.status).toBe(200);
     expect(response.body.state).toBe("processing");
     expect(response.body.order_items[0].state).toBe("prepared");
 
     response = await request
-      .post(`/order_items/${orderItems[1].id}/process`)
+      .post(`/${apiVersion}/order_items/${orderItems[1].id}/process`)
       .set("Accept", "application/json");
     expect(response.status).toBe(200);
     expect(response.body.state).toBe("processing");
@@ -99,14 +101,14 @@ describe("Customer purchase flow", () => {
 
     // 7. user-waiter serves order_item
     response = await request
-      .post(`/order_items/${orderItems[0].id}/deliver`)
+      .post(`/${apiVersion}/order_items/${orderItems[0].id}/deliver`)
       .set("Accept", "application/json");
     expect(response.status).toBe(200);
     expect(response.body.state).toBe("processing");
     expect(response.body.order_items[0].state).toBe("delivered");
 
     response = await request
-      .post(`/order_items/${orderItems[1].id}/deliver`)
+      .post(`/${apiVersion}/order_items/${orderItems[1].id}/deliver`)
       .set("Accept", "application/json");
     expect(response.status).toBe(200);
     expect(response.body.state).toBe("delivered");
@@ -114,18 +116,20 @@ describe("Customer purchase flow", () => {
 
     // 8. customer requests order payment
     response = await request
-      .post(`/orders/${orderId}/requestPayment`)
+      .post(`/${apiVersion}/orders/${orderId}/requestPayment`)
       .set("Accept", "application/json");
     expect(response.status).toBe(200);
     expect(response.body.state).toBe("payment_requested");
 
     // 9. user-waiter invoices orders (add discount or extra charges)
-    response = await request.post(`/orders/${orderId}/invoice`).set("Accept", "application/json");
+    response = await request
+      .post(`/${apiVersion}/orders/${orderId}/invoice`)
+      .set("Accept", "application/json");
     expect(response.status).toBe(200);
     expect(response.body.state).toBe("invoiced");
 
     // 10. customer pays order (trigger pg webhook)
-    // response = await request.post(`/pg`)
+    // response = await request.post(`/${apiVersion}/pg`)
     //   .set("Accept", "application/json");
     // expect(response.status).toBe(200);
     // expect(response.body.state).toBe('paid');

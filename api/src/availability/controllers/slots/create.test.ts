@@ -16,7 +16,7 @@ describe("POST /slots", () => {
     const section = await DataFactory.createSection();
 
     const response = await request
-      .post("/slots")
+      .post(`/${apiVersion}/slots`)
       .send({
         section_id: section.id,
         sku: "slot-sku-1",
@@ -59,7 +59,10 @@ describe("POST /slots", () => {
       }
     ];
 
-    const response = await request.post("/slots").send(data).set("Accept", "application/json");
+    const response = await request
+      .post(`/${apiVersion}/slots`)
+      .send(data)
+      .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
     expect(response.body.length).toBe(2);
@@ -93,7 +96,10 @@ describe("POST /slots", () => {
   });
 
   it("throws validation error for required properties", async () => {
-    const response = await request.post("/slots").send({}).set("Accept", "application/json");
+    const response = await request
+      .post(`/${apiVersion}/slots`)
+      .send({})
+      .set("Accept", "application/json");
 
     expect(response.status).toBe(400);
     expect(response.body).toMatchSnapshot();
@@ -103,7 +109,7 @@ describe("POST /slots", () => {
     const section = await DataFactory.createSection();
 
     const response = await request
-      .post("/slots")
+      .post(`/${apiVersion}/slots`)
       .send({
         section_id: section.id.substring(0, -1) + "1",
         user_id: section.user_id,
@@ -120,7 +126,7 @@ describe("POST /slots", () => {
     const section = await DataFactory.createSection();
 
     const response = await request
-      .post("/slots")
+      .post(`/${apiVersion}/slots`)
       .send({
         section_id: section.id,
         user_id: section.user_id.substring(0, -1) + "1",
@@ -137,7 +143,7 @@ describe("POST /slots", () => {
     const section = await DataFactory.createSection();
 
     const response = await request
-      .post("/slots")
+      .post(`/${apiVersion}/slots`)
       .send({
         user_id: section.user_id,
         section_id: section.id,

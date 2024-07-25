@@ -19,7 +19,7 @@ describe("DELETE /time_slots/release/:time_slot_id", () => {
     const timeSlot = await DataFactory.createTimeSlot();
 
     const response = await request
-      .delete(`/time_slots/release/${timeSlot.id}`)
+      .delete(`/${apiVersion}/time_slots/release/${timeSlot.id}`)
       .set("Accept", "application/json");
 
     expect(response.status).toBe(204);
@@ -29,7 +29,7 @@ describe("DELETE /time_slots/release/:time_slot_id", () => {
     const timeSlot = await DataFactory.createTimeSlot();
 
     const response = await request
-      .delete(`/time_slots/release/${timeSlot.id}`)
+      .delete(`/${apiVersion}/time_slots/release/${timeSlot.id}`)
       .set("Accept", "application/json");
 
     expect(response.status).toBe(204);
@@ -37,7 +37,7 @@ describe("DELETE /time_slots/release/:time_slot_id", () => {
 
   it("throws 404 when time_slot does not exist", async () => {
     const response = await request
-      .delete(`/time_slots/release/${ulid()}`)
+      .delete(`/${apiVersion}/time_slots/release/${ulid()}`)
       .set("Accept", "application/json");
 
     expect(response.status).toBe(404);

@@ -17,14 +17,16 @@ describe("DELETE /customers/:customer_id", () => {
     const customer = await DataFactory.createCustomer();
 
     const response = await request
-      .delete(`/customers/${customer.id}`)
+      .delete(`/${apiVersion}/customers/${customer.id}`)
       .set("Accept", "application/json");
 
     expect(response.status).toBe(204);
   });
 
   it("throws 404 when customer does not exist", async () => {
-    const response = await request.delete(`/customers/${ulid()}`).set("Accept", "application/json");
+    const response = await request
+      .delete(`/${apiVersion}/customers/${ulid()}`)
+      .set("Accept", "application/json");
 
     expect(response.status).toBe(404);
   });

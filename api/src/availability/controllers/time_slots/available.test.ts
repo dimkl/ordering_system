@@ -20,7 +20,7 @@ describe("GET /time_slots/:shop_id/available/:slot_id?", () => {
     const { section, ...slot } = await DataFactory.createSlot();
 
     const response = await request
-      .get(`/time_slots/${section.shop_id}/available`)
+      .get(`/${apiVersion}/time_slots/${section.shop_id}/available`)
       .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
@@ -51,7 +51,7 @@ describe("GET /time_slots/:shop_id/available/:slot_id?", () => {
     });
 
     const response = await request
-      .get(`/time_slots/${slot.section.shop_id}/available`)
+      .get(`/${apiVersion}/time_slots/${slot.section.shop_id}/available`)
       .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
@@ -131,7 +131,7 @@ describe("GET /time_slots/:shop_id/available/:slot_id?", () => {
     );
 
     const response = await request
-      .get(`/time_slots/${slot.section.shop_id}/available`)
+      .get(`/${apiVersion}/time_slots/${slot.section.shop_id}/available`)
       .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
@@ -142,7 +142,7 @@ describe("GET /time_slots/:shop_id/available/:slot_id?", () => {
     const slot = await DataFactory.createSlot({ active: false });
 
     const response = await request
-      .get(`/time_slots/${slot.section.shop_id}/available?slot_id=${slot.id}`)
+      .get(`/${apiVersion}/time_slots/${slot.section.shop_id}/available?slot_id=${slot.id}`)
       .set("Accept", "application/json");
 
     expect(response.status).toBe(422);
@@ -155,7 +155,7 @@ describe("GET /time_slots/:shop_id/available/:slot_id?", () => {
     const slot = await DataFactory.createSlot();
 
     const response = await request
-      .get(`/time_slots/${slot.section.shop_id}/available?slot_id=${ulid()}`)
+      .get(`/${apiVersion}/time_slots/${slot.section.shop_id}/available?slot_id=${ulid()}`)
       .set("Accept", "application/json");
 
     expect(response.status).toBe(404);
@@ -165,7 +165,7 @@ describe("GET /time_slots/:shop_id/available/:slot_id?", () => {
     const slot = await DataFactory.createSlot();
 
     const response = await request
-      .get(`/time_slots/${slot.section.shop_id}/available?section_id=${ulid()}`)
+      .get(`/${apiVersion}/time_slots/${slot.section.shop_id}/available?section_id=${ulid()}`)
       .set("Accept", "application/json");
 
     expect(response.status).toBe(404);
@@ -173,7 +173,7 @@ describe("GET /time_slots/:shop_id/available/:slot_id?", () => {
 
   it("throws 404 when specified shop does not exist", async () => {
     const response = await request
-      .get(`/time_slots/${ulid()}/available}`)
+      .get(`/${apiVersion}/time_slots/${ulid()}/available}`)
       .set("Accept", "application/json");
 
     expect(response.status).toBe(404);
@@ -201,7 +201,7 @@ describe("GET /time_slots/:shop_id/available/:slot_id?", () => {
     const filters = `started_at=${startedAt.toISOString()}&ended_at=${endedAt.toISOString()}`;
 
     const response = await request
-      .get(`/time_slots/${slot.section.shop_id}/available?${filters}`)
+      .get(`/${apiVersion}/time_slots/${slot.section.shop_id}/available?${filters}`)
       .set("Accept", "application/json");
 
     expect(response.status).toBe(422);
@@ -222,7 +222,7 @@ describe("GET /time_slots/:shop_id/available/:slot_id?", () => {
     const filters = `started_at=${startedAt.toISOString()}&ended_at=${endedAt.toISOString()}`;
 
     const response = await request
-      .get(`/time_slots/${slot.section.shop_id}/available?${filters}`)
+      .get(`/${apiVersion}/time_slots/${slot.section.shop_id}/available?${filters}`)
       .set("Accept", "application/json");
 
     expect(response.status).toBe(422);
@@ -236,7 +236,7 @@ describe("GET /time_slots/:shop_id/available/:slot_id?", () => {
     const slot = await DataFactory.createSlot({ active: false });
 
     const response = await request
-      .get(`/time_slots/${slot.section.shop_id}/available`)
+      .get(`/${apiVersion}/time_slots/${slot.section.shop_id}/available`)
       .set("Accept", "application/json");
 
     expect(response.status).toBe(422);
@@ -256,7 +256,7 @@ describe("GET /time_slots/:shop_id/available/:slot_id?", () => {
     const filters = `started_at=${startedAt.toISOString()}&ended_at=${endedAt.toISOString()}`;
 
     const response = await request
-      .get(`/time_slots/${slot.section.shop_id}/available?${filters}`)
+      .get(`/${apiVersion}/time_slots/${slot.section.shop_id}/available?${filters}`)
       .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
@@ -283,7 +283,7 @@ describe("GET /time_slots/:shop_id/available/:slot_id?", () => {
     const filters = `started_at=${reservedStartedAt.toISOString()}&ended_at=${reservedEndedAt.toISOString()}`;
 
     const response = await request
-      .get(`/time_slots/${slot.section.shop_id}/available?${filters}`)
+      .get(`/${apiVersion}/time_slots/${slot.section.shop_id}/available?${filters}`)
       .set("Accept", "application/json");
 
     expect(response.status).toBe(200);

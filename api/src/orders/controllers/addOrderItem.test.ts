@@ -19,7 +19,7 @@ describe("POST /order_items", () => {
     const product = await DataFactory.createProduct();
 
     const response = await request
-      .post(`/order_items`)
+      .post(`/${apiVersion}/order_items`)
       .send({ product_id: product.id, order_id: order.id })
       .set("Accept", "application/json");
 
@@ -49,7 +49,10 @@ describe("POST /order_items", () => {
   });
 
   it("throws validation error for required properties", async () => {
-    const response = await request.post(`/order_items`).send({}).set("Accept", "application/json");
+    const response = await request
+      .post(`/${apiVersion}/order_items`)
+      .send({})
+      .set("Accept", "application/json");
 
     expect(response.status).toBe(400);
     expect(response.body).toMatchSnapshot();
@@ -60,7 +63,7 @@ describe("POST /order_items", () => {
     const product = await DataFactory.createProduct();
 
     const response = await request
-      .post(`/order_items`)
+      .post(`/${apiVersion}/order_items`)
       .send({
         order_id: order.id,
         product_id: product.id,
@@ -77,7 +80,7 @@ describe("POST /order_items", () => {
     const product = await DataFactory.createProduct();
 
     const response = await request
-      .post(`/order_items`)
+      .post(`/${apiVersion}/order_items`)
       .send({ order_id: ulid(), product_id: product.id })
       .set("Accept", "application/json");
 
@@ -88,7 +91,7 @@ describe("POST /order_items", () => {
     const order = await DataFactory.createOrder();
 
     const response = await request
-      .post(`/order_items`)
+      .post(`/${apiVersion}/order_items`)
       .send({ order_id: order.id, product_id: ulid() })
       .set("Accept", "application/json");
 
@@ -102,7 +105,7 @@ describe("POST /order_items", () => {
       await DataFactory.createOrderItem({ quantity: 1 }, { id: order.id }, { id: product.id });
 
       const response = await request
-        .post(`/order_items`)
+        .post(`/${apiVersion}/order_items`)
         .send({ order_id: order.id, product_id: product.id, quantity: 2 })
         .set("Accept", "application/json");
 

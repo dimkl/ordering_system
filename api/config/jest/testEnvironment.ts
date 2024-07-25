@@ -21,7 +21,9 @@ class TestEnvironment extends NodeEnvironment {
     // Will trigger if docblock contains @integration-test true
     if (this.docblockPragmas["integration-test"] === "true") {
       const request = supertest(app);
-      Object.assign(this.global, { app, request });
+      const apiVersion = "2024-07-26";
+
+      Object.assign(this.global, { app, request, apiVersion });
     }
 
     // Will trigger if docblock contains @data-factory true
@@ -36,6 +38,7 @@ class TestEnvironment extends NodeEnvironment {
       this.global.app.close();
       this.global.app = null;
       this.global.request = null;
+      this.global.apiVersion = null;
     }
 
     if (this.docblockPragmas["data-factory"] === "true" && this.global.DataFactory) {

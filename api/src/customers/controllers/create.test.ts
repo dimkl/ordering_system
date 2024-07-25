@@ -16,7 +16,7 @@ describe("POST /customers", () => {
 
   it("creates and returns a customer", async () => {
     const response = await request
-      .post("/customers")
+      .post(`/${apiVersion}/customers`)
       .send({
         first_name: "Dimitris",
         last_name: "Klouvas",
@@ -34,7 +34,10 @@ describe("POST /customers", () => {
   });
 
   it("throws validation error for required properties", async () => {
-    const response = await request.post("/customers").send({}).set("Accept", "application/json");
+    const response = await request
+      .post(`/${apiVersion}/customers`)
+      .send({})
+      .set("Accept", "application/json");
 
     expect(response.status).toBe(400);
     expect(response.body).toMatchSnapshot();
@@ -50,7 +53,7 @@ describe("POST /customers", () => {
     });
 
     const response = await request
-      .post("/customers")
+      .post(`/${apiVersion}/customers`)
       .send({
         first_name: "Dimitris",
         last_name: "Klouvas",
@@ -66,7 +69,7 @@ describe("POST /customers", () => {
   it("omits additional properties", async () => {
     const customId = ulid();
     const response = await request
-      .post("/customers")
+      .post(`/${apiVersion}/customers`)
       .send({
         first_name: "Dimitris",
         last_name: "Klouvas",

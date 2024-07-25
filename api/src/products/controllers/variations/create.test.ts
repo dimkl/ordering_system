@@ -23,7 +23,7 @@ describe("POST /variations", () => {
     await DataFactory.createProductIngredient({}, product, ingredient2);
 
     const response = await request
-      .post(`/variations`)
+      .post(`/${apiVersion}/variations`)
       .send({
         title: "Variation",
         description: "Variation description",
@@ -96,7 +96,7 @@ describe("POST /variations", () => {
     await DataFactory.createProductIngredient({}, product, ingredient2);
 
     const response = await request
-      .post(`/variations`)
+      .post(`/${apiVersion}/variations`)
       .send({
         title: "Variation",
         description: "Variation description",
@@ -114,7 +114,7 @@ describe("POST /variations", () => {
     const { product } = await DataFactory.createProductIngredient();
 
     const response = await request
-      .post(`/variations`)
+      .post(`/${apiVersion}/variations`)
       .send({
         title: "Variation",
         description: "Variation description",
@@ -131,7 +131,7 @@ describe("POST /variations", () => {
   it("throws 404 for not existing ingredient_id", async () => {
     const product = await DataFactory.createProduct();
     const response = await request
-      .post(`/variations`)
+      .post(`/${apiVersion}/variations`)
       .send({
         title: "Variation",
         description: "Variation description",
@@ -147,7 +147,7 @@ describe("POST /variations", () => {
   it("throws 404 for not existing product_id", async () => {
     const ingredient = await DataFactory.createIngredient();
     const response = await request
-      .post(`/variations`)
+      .post(`/${apiVersion}/variations`)
       .send({
         title: "Variation",
         description: "Variation description",
@@ -164,7 +164,7 @@ describe("POST /variations", () => {
     const { ingredient, product } = await DataFactory.createProductIngredient();
 
     const response = await request
-      .post(`/variations`)
+      .post(`/${apiVersion}/variations`)
       .send({
         title: "Variation",
         description: "Variation description",

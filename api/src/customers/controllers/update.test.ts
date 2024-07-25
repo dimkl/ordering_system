@@ -16,7 +16,7 @@ describe("PATCH /customers/:customer_id", () => {
     const customer = await DataFactory.createCustomer();
 
     const response = await request
-      .patch(`/customers/${customer.id}`)
+      .patch(`/${apiVersion}/customers/${customer.id}`)
       .send({
         first_name: "Dimitris+2",
         last_name: "Klouvas+2",
@@ -42,7 +42,7 @@ describe("PATCH /customers/:customer_id", () => {
     const customer = await DataFactory.createCustomer();
 
     const response = await request
-      .patch(`/customers/${customer.id}`)
+      .patch(`/${apiVersion}/customers/${customer.id}`)
       .send({})
       .set("Accept", "application/json");
 
@@ -61,7 +61,7 @@ describe("PATCH /customers/:customer_id", () => {
     });
 
     const response = await request
-      .patch(`/customers/${newCustomer.id}`)
+      .patch(`/${apiVersion}/customers/${newCustomer.id}`)
       .send({
         first_name: "Dimitris",
         last_name: "Klouvas",
@@ -78,7 +78,7 @@ describe("PATCH /customers/:customer_id", () => {
     const customer = await DataFactory.createCustomer();
 
     const response = await request
-      .patch(`/customers/${customer.id}`)
+      .patch(`/${apiVersion}/customers/${customer.id}`)
       .send({ created_at: "1680046371850", first_name: "aloha" })
       .set("Accept", "application/json");
 

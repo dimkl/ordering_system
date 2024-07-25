@@ -18,7 +18,10 @@ describe("POST /products", () => {
       sku: `sku-${(Math.random() * 100).toString()}`
     };
 
-    const response = await request.post(`/products`).send(data).set("Accept", "application/json");
+    const response = await request
+      .post(`/${apiVersion}/products`)
+      .send(data)
+      .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
     expect(response.body).toMatchObject(expect.objectContaining(data));
@@ -36,7 +39,10 @@ describe("POST /products", () => {
       }
     ];
 
-    const response = await request.post(`/products`).send(data).set("Accept", "application/json");
+    const response = await request
+      .post(`/${apiVersion}/products`)
+      .send(data)
+      .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
     expect(response.body).toMatchObject(

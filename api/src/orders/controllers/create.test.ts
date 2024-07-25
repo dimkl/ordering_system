@@ -18,7 +18,7 @@ describe("POST /orders", () => {
     const timeSlot = await DataFactory.createTimeSlot();
 
     const response = await request
-      .post("/orders")
+      .post(`/${apiVersion}/orders`)
       .send({
         customer_id: timeSlot.customer_id,
         time_slot_id: timeSlot.id
@@ -51,7 +51,10 @@ describe("POST /orders", () => {
       }
     ];
 
-    const response = await request.post("/orders").send(data).set("Accept", "application/json");
+    const response = await request
+      .post(`/${apiVersion}/orders`)
+      .send(data)
+      .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
     expect(response.body.length).toBe(2);
@@ -76,7 +79,10 @@ describe("POST /orders", () => {
   });
 
   it("throws validation error for required properties", async () => {
-    const response = await request.post("/orders").send({}).set("Accept", "application/json");
+    const response = await request
+      .post(`/${apiVersion}/orders`)
+      .send({})
+      .set("Accept", "application/json");
 
     expect(response.status).toBe(400);
     expect(response.body).toMatchSnapshot();
@@ -86,7 +92,7 @@ describe("POST /orders", () => {
     const timeSlot = await DataFactory.createTimeSlot();
 
     const response = await request
-      .post("/orders")
+      .post(`/${apiVersion}/orders`)
       .send({
         customer_id: timeSlot.customer_id.substring(0, -1) + "1",
         time_slot_id: timeSlot.id
@@ -101,7 +107,7 @@ describe("POST /orders", () => {
     const timeSlot = await DataFactory.createTimeSlot();
 
     const response = await request
-      .post("/orders")
+      .post(`/${apiVersion}/orders`)
       .send({
         customer_id: timeSlot.customer_id,
         time_slot_id: timeSlot.id + "1"
@@ -119,7 +125,7 @@ describe("POST /orders", () => {
     });
 
     const response = await request
-      .post("/orders")
+      .post(`/${apiVersion}/orders`)
       .send({
         customer_id: customer.id,
         time_slot_id: timeSlot.id,

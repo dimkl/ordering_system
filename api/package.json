@@ -11,7 +11,7 @@
     "start": "node dist/src/index.js",
     "debug": "node inspect src/index.js",
     "db:migrate": "knex migrate:latest --knexfile ./dist/config/knexfile.js",
-    "db:migrate:dev": "DOTENV_CONFIG_PATH=.env.development knex migrate:latest --knexfile ./config/knexfile.ts",
+    "db:migrate:dev": "DOTENV_CONFIG_PATH=.env.development knex migrate:latest --knexfile ./config/knexfile.js",
     "db:migrate:test": "DOTENV_CONFIG_PATH=.env.test knex migrate:latest --knexfile ./config/knexfile.ts",
     "db:migrate:new": "DOTENV_CONFIG_PATH=.env.development knex migrate:make --client pg -x ts --knexfile ./config/knexfile.ts",
     "db:rollback": "knex migrate:rollback --knexfile ./dist/config/knexfile.js",

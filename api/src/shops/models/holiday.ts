@@ -27,6 +27,10 @@ export class Holiday extends BaseModel {
       }
     };
   }
+
+  get idPrefix() {
+    return "hol";
+  }
 }
 
 export interface Holiday {

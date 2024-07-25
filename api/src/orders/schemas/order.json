@@ -8,13 +8,13 @@
     "id": {
       "readOnly": true,
       "type": "string",
-      "minLength": 26,
-      "maxLength": 26
+      "minLength": 30,
+      "maxLength": 30
     },
     "customer_id": {
       "type": "string",
-      "minLength": 26,
-      "maxLength": 26
+      "minLength": 30,
+      "maxLength": 30
     },
     "state": {
       "$ref": "#/definitions/state",
@@ -30,8 +30,8 @@
     },
     "time_slot_id": {
       "type": "string",
-      "minLength": 26,
-      "maxLength": 26
+      "minLength": 30,
+      "maxLength": 30
     }
   },
   "required": ["customer_id", "time_slot_id"],

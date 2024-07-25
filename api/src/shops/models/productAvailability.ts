@@ -29,6 +29,10 @@ export class ProductAvailability extends BaseModel {
       }
     };
   }
+
+  get idPrefix() {
+    return "pra";
+  }
 }
 
 export interface ProductAvailability {

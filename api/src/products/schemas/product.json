@@ -8,8 +8,8 @@
     "id": {
       "readOnly": true,
       "type": "string",
-      "minLength": 26,
-      "maxLength": 26
+      "minLength": 30,
+      "maxLength": 30
     },
     "title": {
       "type": "string",
@@ -41,13 +41,13 @@
     },
     "variant_id": {
       "type": "string",
-      "minLength": 26,
-      "maxLength": 26
+      "minLength": 30,
+      "maxLength": 30
     },
     "category_id": {
       "type": "string",
-      "minLength": 26,
-      "maxLength": 26
+      "minLength": 30,
+      "maxLength": 30
     }
   },
   "required": ["title", "sku"],

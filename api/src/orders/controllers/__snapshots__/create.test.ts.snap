@@ -38,9 +38,9 @@ exports[`POST /orders throws validation error for not existing customer_id 1`] =
   {
     "instancePath": "/customer_id",
     "keyword": "minLength",
-    "message": "must NOT have fewer than 26 characters",
+    "message": "must NOT have fewer than 30 characters",
     "params": {
-      "limit": 26,
+      "limit": 30,
     },
     "schemaPath": "defs#/definitions/uid/minLength",
   },
@@ -52,9 +52,9 @@ exports[`POST /orders throws validation error for not existing time_slot_id 1`] 
   {
     "instancePath": "/time_slot_id",
     "keyword": "maxLength",
-    "message": "must NOT have more than 26 characters",
+    "message": "must NOT have more than 30 characters",
     "params": {
-      "limit": 26,
+      "limit": 30,
     },
     "schemaPath": "defs#/definitions/uid/maxLength",
   },

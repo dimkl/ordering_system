@@ -51,6 +51,10 @@ export class Shop extends BaseModel {
     };
   }
 
+  get idPrefix() {
+    return "shp";
+  }
+
   openingDate(date: Date): Date | undefined {
     if (!this.opening_time || !this.opening_days) return;
     if (!this.opening_days.includes(date.getUTCDay())) return;

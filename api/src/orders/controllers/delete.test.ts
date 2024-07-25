@@ -26,7 +26,7 @@ describe("DELETE /orders/:order_id", () => {
 
   it("throws 404 when customer does not exist", async () => {
     const response = await request
-      .delete(`/${apiVersion}/orders/${ulid()}`)
+      .delete(`/${apiVersion}/orders/ord_${ulid()}`)
       .set("Accept", "application/json");
 
     expect(response.status).toBe(404);

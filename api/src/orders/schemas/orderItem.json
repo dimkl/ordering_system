@@ -8,13 +8,13 @@
     "id": {
       "readOnly": true,
       "type": "string",
-      "minLength": 26,
-      "maxLength": 26
+      "minLength": 30,
+      "maxLength": 30
     },
     "order_id": {
       "type": "string",
-      "minLength": 26,
-      "maxLength": 26
+      "minLength": 30,
+      "maxLength": 30
     },
     "created_at": {
       "readOnly": true,
@@ -31,8 +31,8 @@
     },
     "product_id": {
       "type": "string",
-      "minLength": 26,
-      "maxLength": 26
+      "minLength": 30,
+      "maxLength": 30
     },
     "state": {
       "$ref": "#/definitions/state",

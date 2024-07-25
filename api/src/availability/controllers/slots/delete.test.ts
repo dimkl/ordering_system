@@ -38,7 +38,7 @@ describe("DELETE /slots/:slot_id", () => {
 
   it("throws 404 when time_slot does not exist", async () => {
     const response = await request
-      .delete(`/${apiVersion}/slots/${ulid()}`)
+      .delete(`/${apiVersion}/slots/slt_${ulid()}`)
       .set("Accept", "application/json");
 
     expect(response.status).toBe(404);

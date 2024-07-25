@@ -8,8 +8,8 @@
     "id": {
       "readOnly": true,
       "type": "string",
-      "minLength": 26,
-      "maxLength": 26
+      "minLength": 30,
+      "maxLength": 30
     },
     "created_at": {
       "readOnly": true,
@@ -31,13 +31,13 @@
     },
     "customer_id": {
       "type": "string",
-      "minLength": 26,
-      "maxLength": 26
+      "minLength": 30,
+      "maxLength": 30
     },
     "slot_id": {
       "type": "string",
-      "minLength": 26,
-      "maxLength": 26
+      "minLength": 30,
+      "maxLength": 30
     }
   },
   "required": ["started_at", "customer_id", "slot_id"],

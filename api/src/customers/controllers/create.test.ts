@@ -67,7 +67,7 @@ describe("POST /customers", () => {
   });
 
   it("omits additional properties", async () => {
-    const customId = ulid();
+    const customerId = "cus_" + ulid();
     const response = await request
       .post(`/${apiVersion}/customers`)
       .send({
@@ -75,13 +75,13 @@ describe("POST /customers", () => {
         last_name: "Klouvas",
         email: "dimitris.klouvas@gmail.com",
         password: "1234",
-        id: customId,
+        id: customerId,
         created_at: "1680046371850"
       })
       .set("Accept", "application/json");
 
     expect(response.status).toBe(200);
-    expect(response.body.id).not.toEqual(customId);
+    expect(response.body.id).not.toEqual(customerId);
     expect(response.body.created_at).not.toEqual("1680046371850");
     expect(response.body).toMatchSnapshot({
       id: expect.any(String),

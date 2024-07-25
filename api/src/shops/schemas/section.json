@@ -8,8 +8,8 @@
     "id": {
       "readOnly": true,
       "type": "string",
-      "minLength": 26,
-      "maxLength": 26
+      "minLength": 30,
+      "maxLength": 30
     },
     "name": {
       "type": "string",
@@ -31,13 +31,13 @@
     },
     "shop_id": {
       "type": "string",
-      "minLength": 26,
-      "maxLength": 26
+      "minLength": 30,
+      "maxLength": 30
     },
     "user_id": {
       "type": "string",
-      "minLength": 26,
-      "maxLength": 26
+      "minLength": 30,
+      "maxLength": 30
     }
   },
   "required": ["name", "sku", "shop_id", "user_id"],

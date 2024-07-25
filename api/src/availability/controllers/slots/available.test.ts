@@ -80,7 +80,7 @@ describe("GET /slots/:shop_id/available/:slot_id?", () => {
     const slot = await DataFactory.createSlot();
 
     const response = await request
-      .get(`/${apiVersion}/slots/${slot.section.shop_id}/available/${ulid()}`)
+      .get(`/${apiVersion}/slots/${slot.section.shop_id}/available/slt_${ulid()}`)
       .set("Accept", "application/json");
 
     expect(response.status).toBe(404);

@@ -81,7 +81,7 @@ describe("POST /order_items", () => {
 
     const response = await request
       .post(`/${apiVersion}/order_items`)
-      .send({ order_id: ulid(), product_id: product.id })
+      .send({ order_id: "ord_" + ulid(), product_id: product.id })
       .set("Accept", "application/json");
 
     expect(response.status).toBe(404);
@@ -92,7 +92,7 @@ describe("POST /order_items", () => {
 
     const response = await request
       .post(`/${apiVersion}/order_items`)
-      .send({ order_id: order.id, product_id: ulid() })
+      .send({ order_id: order.id, product_id: "prd_" + ulid() })
       .set("Accept", "application/json");
 
     expect(response.status).toBe(404);

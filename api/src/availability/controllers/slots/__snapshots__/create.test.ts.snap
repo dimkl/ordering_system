@@ -44,9 +44,9 @@ exports[`POST /slots throws validation error for not existing section_id 1`] = `
   {
     "instancePath": "/section_id",
     "keyword": "minLength",
-    "message": "must NOT have fewer than 26 characters",
+    "message": "must NOT have fewer than 30 characters",
     "params": {
-      "limit": 26,
+      "limit": 30,
     },
     "schemaPath": "defs#/definitions/uid/minLength",
   },
@@ -58,9 +58,9 @@ exports[`POST /slots throws validation error for not existing user_id 1`] = `
   {
     "instancePath": "/user_id",
     "keyword": "minLength",
-    "message": "must NOT have fewer than 26 characters",
+    "message": "must NOT have fewer than 30 characters",
     "params": {
-      "limit": 26,
+      "limit": 30,
     },
     "schemaPath": "defs#/definitions/uid/minLength",
   },

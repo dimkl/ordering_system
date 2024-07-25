@@ -75,6 +75,10 @@ export class Order extends BaseModel {
     };
   }
 
+  get idPrefix() {
+    return "ord";
+  }
+
   static findWithOrderItemsAndProducts(orderId) {
     return this.query()
       .modify("publicColumns")

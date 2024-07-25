@@ -49,7 +49,7 @@ describe("PATCH /order_items/:order_item_id", () => {
 
   it("throws 404 for not existing order_item_id", async () => {
     const response = await request
-      .patch(`/${apiVersion}/order_items/${ulid()}`)
+      .patch(`/${apiVersion}/order_items/ort_${ulid()}`)
       .send({ quantity: 10 })
       .set("Accept", "application/json");
 

@@ -30,6 +30,10 @@ export class Section extends BaseModel {
       }
     };
   }
+
+  get idPrefix() {
+    return "sec";
+  }
 }
 
 export interface Section {

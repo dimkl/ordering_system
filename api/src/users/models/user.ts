@@ -22,6 +22,10 @@ export class User extends Password()(BaseModel) {
   get scopes() {
     return [];
   }
+
+  get idPrefix() {
+    return "usr";
+  }
 }
 
 export interface User {

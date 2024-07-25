@@ -66,6 +66,10 @@ export class Slot extends BaseModel {
       }
     };
   }
+
+  get idPrefix() {
+    return "slt";
+  }
 }
 
 export interface Slot {

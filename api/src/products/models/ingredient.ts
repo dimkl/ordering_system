@@ -15,6 +15,10 @@ export class Ingredient extends BaseModel {
   static get public_columns() {
     return Object.keys(schema.properties);
   }
+
+  get idPrefix() {
+    return "ing";
+  }
 }
 
 type SuitableForDiet =

@@ -82,7 +82,7 @@ describe("GET /time_slots", () => {
 
   it("throws 404 when specified time_slot does not exist", async () => {
     const response = await request
-      .get(`/${apiVersion}/time_slots/${ulid()}`)
+      .get(`/${apiVersion}/time_slots/tms_${ulid()}`)
       .set("Accept", "application/json");
 
     expect(response.status).toBe(404);

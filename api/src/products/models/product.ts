@@ -49,6 +49,10 @@ export class Product extends BaseModel {
     };
   }
 
+  get idPrefix() {
+    return "prd";
+  }
+
   static get modifiers() {
     return {
       ...super.modifiers,
@@ -78,6 +82,8 @@ export interface Product {
   title: string;
   description: string;
   qr: string;
+  // Tracks the price, product details, manufacturer, and point-of-sale.
+  // Used in generated barcodes.
   sku: string;
   created_at: Date;
   updated_at: Date;

@@ -37,6 +37,10 @@ export class Customer extends Password()(BaseModel) {
   get scopes() {
     return [];
   }
+
+  get idPrefix() {
+    return "cus";
+  }
 }
 
 export interface Customer {

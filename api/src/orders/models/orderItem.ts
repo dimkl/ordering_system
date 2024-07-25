@@ -41,6 +41,9 @@ export class OrderItem extends BaseModel {
       }
     };
   }
+  get idPrefix() {
+    return "ort";
+  }
 }
 
 export interface OrderItem {

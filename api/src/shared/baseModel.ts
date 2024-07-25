@@ -46,7 +46,8 @@ export class BaseModel extends DBErrors(Model) {
 
   generateUid() {
     if ("id" in this) {
-      this.id = ulid();
+      const prefix = "idPrefix" in this ? `${this.idPrefix}_` : "";
+      this.id = prefix + ulid();
     }
   }
 }

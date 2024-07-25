@@ -137,7 +137,7 @@ describe("POST /variations", () => {
         description: "Variation description",
         sku: `${product.sku}-1`,
         variant_id: product.id,
-        ingredients: [ulid()]
+        ingredients: ["ing_" + ulid()]
       })
       .set("Accept", "application/json");
 
@@ -152,7 +152,7 @@ describe("POST /variations", () => {
         title: "Variation",
         description: "Variation description",
         sku: "aloha-1",
-        variant_id: ulid(),
+        variant_id: "prd_" + ulid(),
         ingredients: [ingredient.id]
       })
       .set("Accept", "application/json");

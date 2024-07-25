@@ -57,7 +57,7 @@ describe("GET /customers/:customer_id?", () => {
 
   it("throws 404 when specified customer does not exist", async () => {
     const response = await request
-      .get(`/${apiVersion}/customers/${ulid()}`)
+      .get(`/${apiVersion}/customers/cus_${ulid()}`)
       .set("Accept", "application/json");
 
     expect(response.status).toBe(404);

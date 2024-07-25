@@ -71,6 +71,10 @@ export class TimeSlot extends BaseModel {
       }
     };
   }
+
+  get idPrefix() {
+    return "tms";
+  }
 }
 
 export interface TimeSlot {

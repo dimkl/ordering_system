@@ -18,7 +18,7 @@ export class DataFactory {
         last_name: "Klouvas",
         email: "dimitris.klouvas@gmail.com",
         password: "$2b$10$R4dVWhqUOPMM.87/xnUdEuQxMNLVjbDlolPd5Vw0RK5CgQjIhGYbO",
-        id: ulid(),
+        id: "cus_" + ulid(),
         ...options
       });
 
@@ -31,7 +31,7 @@ export class DataFactory {
       .insert<Ingredient[]>({
         title: "Ingredient",
         description: "Ingredient description",
-        id: ulid(),
+        id: "ing_" + ulid(),
         ...options
       });
 
@@ -45,7 +45,7 @@ export class DataFactory {
         title: "Product",
         sku: "product-code-1",
         description: "Product description",
-        id: ulid(),
+        id: "prd+" + ulid(),
         ...options
       });
 
@@ -69,7 +69,7 @@ export class DataFactory {
       customer_id: customer?.id,
       time_slot_id: timeSlot.id,
       state: "draft",
-      id: ulid()
+      id: "ord_" + ulid()
     };
 
     const orders = await knex("orders")
@@ -105,7 +105,7 @@ export class DataFactory {
           order_id: order.id,
           product_id: product.id,
           state: "draft",
-          id: ulid(),
+          id: "ort_" + ulid(),
           ...options
         }
       ]);
@@ -119,7 +119,7 @@ export class DataFactory {
       last_name: "Klouvas",
       email: "dimitris.klouvas@gmail.com",
       password: "$2b$10$R4dVWhqUOPMM.87/xnUdEuQxMNLVjbDlolPd5Vw0RK5CgQjIhGYbO",
-      id: ulid()
+      id: "usr_" + ulid()
     };
     const users = await knex("users")
       .returning("*")
@@ -141,7 +141,7 @@ export class DataFactory {
       .insert<Shop[]>({
         manager_id: user.id,
         name: "Shop",
-        id: ulid(),
+        id: "shp_" + ulid(),
         opening_time: "15:00",
         closing_time: "23:00",
         opening_days: [0, 1, 2, 3, 4, 5, 6],
@@ -171,7 +171,7 @@ export class DataFactory {
         user_id: user.id,
         name: "Section",
         sku: "section-1",
-        id: ulid(),
+        id: "sec_" + ulid(),
         ...options
       });
 
@@ -198,7 +198,7 @@ export class DataFactory {
         section_id: section.id,
         user_id: user.id,
         sku: "table-1",
-        id: ulid(),
+        id: "slt_" + ulid(),
         active: true,
         capacity: 1,
         ...options
@@ -229,7 +229,7 @@ export class DataFactory {
         slot_id: slot.id,
         customer_id: customer.id,
         started_at: new Date().toISOString(),
-        id: ulid(),
+        id: "tms_" + ulid(),
         ...options
       });
 
@@ -250,7 +250,7 @@ export class DataFactory {
       shop_id: shop.id,
       date: newYear,
       name: "New Year",
-      id: ulid(),
+      id: "hol_" + ulid(),
       ...options
     });
 
@@ -275,7 +275,7 @@ export class DataFactory {
       shop_id: shop.id,
       product_id: product.id,
       quantity: 2,
-      id: ulid(),
+      id: "pra_" + ulid(),
       ...options
     });
 
@@ -298,7 +298,7 @@ export class DataFactory {
     const productIngredient = await knex("product_ingredients").insert<ProductIngredient[]>({
       ingredient_id: ingredient.id,
       product_id: product.id,
-      id: ulid(),
+      id: "pri_" + ulid(),
       ...options
     });
 

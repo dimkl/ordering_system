@@ -155,7 +155,7 @@ describe("GET /time_slots/:shop_id/available/:slot_id?", () => {
     const slot = await DataFactory.createSlot();
 
     const response = await request
-      .get(`/${apiVersion}/time_slots/${slot.section.shop_id}/available?slot_id=${ulid()}`)
+      .get(`/${apiVersion}/time_slots/${slot.section.shop_id}/available?slot_id=slt_${ulid()}`)
       .set("Accept", "application/json");
 
     expect(response.status).toBe(404);
@@ -165,7 +165,7 @@ describe("GET /time_slots/:shop_id/available/:slot_id?", () => {
     const slot = await DataFactory.createSlot();
 
     const response = await request
-      .get(`/${apiVersion}/time_slots/${slot.section.shop_id}/available?section_id=${ulid()}`)
+      .get(`/${apiVersion}/time_slots/${slot.section.shop_id}/available?section_id=sec_${ulid()}`)
       .set("Accept", "application/json");
 
     expect(response.status).toBe(404);
@@ -173,7 +173,7 @@ describe("GET /time_slots/:shop_id/available/:slot_id?", () => {
 
   it("throws 404 when specified shop does not exist", async () => {
     const response = await request
-      .get(`/${apiVersion}/time_slots/${ulid()}/available}`)
+      .get(`/${apiVersion}/time_slots/shp_${ulid()}/available}`)
       .set("Accept", "application/json");
 
     expect(response.status).toBe(404);

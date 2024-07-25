@@ -51,7 +51,7 @@ describe("POST /products/ingredients", () => {
     const response = await request
       .post(`/${apiVersion}/products/ingredients`)
       .send({
-        ingredient_id: ulid(),
+        ingredient_id: "ing_" + ulid(),
         product_id: product.id
       })
       .set("Accept", "application/json");
@@ -65,7 +65,7 @@ describe("POST /products/ingredients", () => {
       .post(`/${apiVersion}/products/ingredients`)
       .send({
         ingredient_id: ingredient.id,
-        product_id: ulid()
+        product_id: "prd_" + ulid()
       })
       .set("Accept", "application/json");
 

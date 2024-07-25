@@ -12,7 +12,7 @@
 
 - [ ] Buy domain
 - [x] Find deployment platform
-- [ ] Create GH action to deploy to production
+- [x] Create GH action to deploy to production
 - [ ] Create Clerk production application
 
 ## Flow

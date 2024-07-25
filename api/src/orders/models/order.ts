@@ -38,7 +38,7 @@ export class Order extends BaseModel {
     return {
       order_items: {
         relation: BaseModel.HasManyRelation,
-        modelClass: __dirname + "/orderItem.ts",
+        modelClass: __dirname + "/orderItem",
         join: {
           from: "orders.id",
           to: "order_items.order_id"
@@ -46,7 +46,7 @@ export class Order extends BaseModel {
       },
       customer: {
         relation: BaseModel.BelongsToOneRelation,
-        modelClass: __dirname + "/../../customers/models/customer.ts",
+        modelClass: __dirname + "/../../customers/models/customer",
         join: {
           from: "orders.customer_id",
           to: "customers.id"
@@ -54,7 +54,7 @@ export class Order extends BaseModel {
       },
       timeSlot: {
         relation: BaseModel.BelongsToOneRelation,
-        modelClass: __dirname + "/../../availability/models/timeSlot.ts",
+        modelClass: __dirname + "/../../availability/models/timeSlot",
         join: {
           from: "orders.time_slot_id",
           to: "time_slots.id"
@@ -62,7 +62,7 @@ export class Order extends BaseModel {
       },
       slot: {
         relation: BaseModel.BelongsToOneRelation,
-        modelClass: __dirname + "/../../availability/models/slot.ts",
+        modelClass: __dirname + "/../../availability/models/slot",
         join: {
           from: "orders.time_slot_id",
           to: "slots.id",

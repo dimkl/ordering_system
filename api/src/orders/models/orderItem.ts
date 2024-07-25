@@ -25,7 +25,7 @@ export class OrderItem extends BaseModel {
     return {
       product: {
         relation: BaseModel.BelongsToOneRelation,
-        modelClass: __dirname + "/../../products/models/product.ts",
+        modelClass: __dirname + "/../../products/models/product",
         join: {
           from: "order_items.product_id",
           to: "products.id"
@@ -33,7 +33,7 @@ export class OrderItem extends BaseModel {
       },
       order: {
         relation: BaseModel.BelongsToOneRelation,
-        modelClass: __dirname + "/order.ts",
+        modelClass: __dirname + "/order",
         join: {
           from: "order_items.order_id",
           to: "orders.id"

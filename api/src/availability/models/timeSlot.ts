@@ -55,7 +55,7 @@ export class TimeSlot extends BaseModel {
     return {
       customer: {
         relation: BaseModel.BelongsToOneRelation,
-        modelClass: __dirname + "/../../customers/models/customer.ts",
+        modelClass: __dirname + "/../../customers/models/customer",
         join: {
           from: "time_slots.customer_id",
           to: "customers.id"
@@ -63,7 +63,7 @@ export class TimeSlot extends BaseModel {
       },
       slot: {
         relation: BaseModel.BelongsToOneRelation,
-        modelClass: __dirname + "/slot.ts",
+        modelClass: __dirname + "/slot",
         join: {
           from: "time_slots.slot_id",
           to: "slots.id"

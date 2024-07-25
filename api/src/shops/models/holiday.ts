@@ -19,7 +19,7 @@ export class Holiday extends BaseModel {
     return {
       shop: {
         relation: BaseModel.BelongsToOneRelation,
-        modelClass: __dirname + "/../../shops/models/shop.ts",
+        modelClass: __dirname + "/../../shops/models/shop",
         join: {
           from: "holidays.shop_id",
           to: "shops.id"

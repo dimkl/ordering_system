@@ -42,7 +42,7 @@ export class Slot extends BaseModel {
     return {
       user: {
         relation: BaseModel.BelongsToOneRelation,
-        modelClass: __dirname + "/../../users/models/user.ts",
+        modelClass: __dirname + "/../../users/models/user",
         join: {
           from: "slots.user_id",
           to: "users.id"
@@ -50,7 +50,7 @@ export class Slot extends BaseModel {
       },
       section: {
         relation: BaseModel.BelongsToOneRelation,
-        modelClass: __dirname + "/../../shops/models/section.ts",
+        modelClass: __dirname + "/../../shops/models/section",
         join: {
           from: "slots.section_id",
           to: "sections.id"
@@ -58,7 +58,7 @@ export class Slot extends BaseModel {
       },
       time_slots: {
         relation: BaseModel.HasManyRelation,
-        modelClass: __dirname + "/timeSlot.ts",
+        modelClass: __dirname + "/timeSlot",
         join: {
           from: "slots.id",
           to: "time_slots.slot_id"

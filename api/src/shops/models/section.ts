@@ -22,7 +22,7 @@ export class Section extends BaseModel {
     return {
       shop: {
         relation: BaseModel.BelongsToOneRelation,
-        modelClass: __dirname + "/shop.ts",
+        modelClass: __dirname + "/shop",
         join: {
           from: "sections.shop_id",
           to: "shops.id"

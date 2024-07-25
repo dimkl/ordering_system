@@ -20,7 +20,7 @@ export class Product extends BaseModel {
     return {
       ingredients: {
         relation: BaseModel.ManyToManyRelation,
-        modelClass: __dirname + "/ingredient.ts",
+        modelClass: __dirname + "/ingredient",
         join: {
           from: "products.id",
           to: "ingredients.id",
@@ -32,7 +32,7 @@ export class Product extends BaseModel {
       },
       variations: {
         relation: BaseModel.HasManyRelation,
-        modelClass: __dirname + "/product.ts",
+        modelClass: __dirname + "/product",
         join: {
           from: "products.id",
           to: "products.variant_id"
@@ -40,7 +40,7 @@ export class Product extends BaseModel {
       },
       category: {
         relation: BaseModel.BelongsToOneRelation,
-        modelClass: __dirname + "/category.ts",
+        modelClass: __dirname + "/category",
         join: {
           from: "products.category_id",
           to: "categories.id"

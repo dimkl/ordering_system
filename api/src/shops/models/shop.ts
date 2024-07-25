@@ -38,7 +38,7 @@ export class Shop extends BaseModel {
     return {
       products: {
         relation: BaseModel.ManyToManyRelation,
-        modelClass: __dirname + "/../../products/models/product.ts",
+        modelClass: __dirname + "/../../products/models/product",
         join: {
           from: "shops.id",
           through: {

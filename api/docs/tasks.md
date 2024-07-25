@@ -11,7 +11,7 @@
 ## Production deployment
 
 - [ ] Buy domain
-- [ ] Find deployment platform
+- [x] Find deployment platform
 - [ ] Create GH action to deploy to production
 - [ ] Create Clerk production application
 

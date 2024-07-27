@@ -40,11 +40,11 @@ export class ControllerFactory {
         dataAccessor: () => {
           if (Array.isArray(ctx.request.body)) {
             return ctx.request.body.map((body) => {
-              return { ...ctx.params, ...body };
+              return { ...ctx.params, ...ctx.query, ...body };
             });
           }
 
-          return { ...ctx.params, ...(ctx.request.body || {}) };
+          return { ...ctx.params, ...(ctx.request.body || {}), ...ctx.query };
         },
         dataSetter: (dt) => {
           // @ts-expect-error validatedData are added as part of the request validation

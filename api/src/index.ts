@@ -1,11 +1,7 @@
-import dotenv from "dotenv";
-dotenv.config({
-  path: process.env.DOTENV_CONFIG_PATH,
-  override: true
-});
-
 import { DiscoveryApiFactory } from "@dimkl/ajv-discovery-api";
 
+// Keep setupModels as the 1st import since the env variables from the .env
+// files are loaded in this.
 import setupModels from "./shared/setupModels";
 import { isTestingEnv } from "./shared/helpers";
 import { errorHandler } from "./shared/middlewares/errorHandler";

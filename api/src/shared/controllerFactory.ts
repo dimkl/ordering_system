@@ -6,12 +6,10 @@ import { DiscoveryApiFactory } from "@dimkl/ajv-discovery-api";
 
 import { createAuthorize } from "./middlewares/authorize";
 
-import { requireAuth } from "@dimkl/clerk-koa";
-
 const discoveryApi = DiscoveryApiFactory.getInstance();
 
 type ControllerFactoryParams = {
-  handler: (ctx: Context, next: Next) => unknown;
+  handler: Middleware;
   schema?: AnySchema;
   scopes?: string[];
 };

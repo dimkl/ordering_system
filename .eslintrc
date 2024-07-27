@@ -10,6 +10,7 @@
   ],
   "rules": {
     "prettier/prettier": ["error"],
-    "@typescript-eslint/no-unsafe-declaration-merging": "off"
+    "@typescript-eslint/no-unsafe-declaration-merging": "off",
+    "no-unused-vars": ["error"]
   }
 }

@@ -6,8 +6,6 @@ import * as listController from "./controllers/list";
 import * as createController from "./controllers/create";
 import * as updateController from "./controllers/update";
 import * as deleteController from "./controllers/delete";
-import * as loginController from "./controllers/login";
-import * as signupController from "./controllers/signup";
 
 import { loadCustomer } from "./helpers/loadCustomer";
 
@@ -36,7 +34,3 @@ router.delete(
   "/customers/:customer_id",
   ControllerFactory.create({ ...deleteController, scopes: ["urn:customers:d"] })
 );
-
-// actions
-router.post("/customers/login", ControllerFactory.create({ ...loginController }));
-router.post("/customers/signup", ControllerFactory.create({ ...signupController }));

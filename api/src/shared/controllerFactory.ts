@@ -49,6 +49,8 @@ export class ControllerFactory {
         dataSetter: (dt) => {
           // @ts-expect-error validatedData are added as part of the request validation
           ctx.request.validatedData = dt;
+          // It will replace the ctx.request.validatedData
+          ctx.validatedData = dt;
         }
       });
 

@@ -231,6 +231,51 @@ describe("GET /time_slots/:shop_id/available/:slot_id?", () => {
     });
   });
 
+  it("returns 422 for duration greater than shop open hours", async () => {
+    const slot = await DataFactory.createSlot({ active: false });
+
+    const filters = `duration=${8 * 60 + 1}`;
+
+    const response = await request
+      .get(`/${apiVersion}/time_slots/${slot.section.shop_id}/available?${filters}`)
+      .set("Accept", "application/json");
+
+    expect(response.status).toBe(422);
+    expect(response.body).toEqual({
+      message: "The duration should be less than shop open hours. Use a smaller duration!"
+    });
+  });
+
+  it("returns all available time_slots - time_slots with duration smaller than provided are excluded", async () => {
+    const reservedStartedAt = new Date();
+    reservedStartedAt.setUTCHours(17, 0, 0, 0);
+    const reservedEndedAt = new Date();
+    reservedEndedAt.setUTCHours(22, 30, 0, 0);
+    const { slot } = await DataFactory.createTimeSlot({
+      started_at: reservedStartedAt,
+      ended_at: reservedEndedAt
+    });
+
+    const duration = 31;
+    const response = await request
+      .get(`/${apiVersion}/time_slots/${slot.section.shop_id}/available?duration=${duration}`)
+      .set("Accept", "application/json");
+
+    expect(response.status).toBe(200);
+    expect(response.body.length).toEqual(1);
+
+    // opening and closing hours of the shop
+    const startedAt = new Date();
+    startedAt.setUTCHours(15, 0, 0, 0);
+
+    expect(response.body[0]).toMatchObject({
+      slot_id: slot.id,
+      section_id: slot.section_id,
+      started_at: (startedAt.getTime() / 1000) >> 0,
+      ended_at: (reservedStartedAt.getTime() / 1000) >> 0
+    });
+  });
+
   //TODO: implement
   it.skip("returns 422 for shop holiday", async () => {
     const slot = await DataFactory.createSlot({ active: false });

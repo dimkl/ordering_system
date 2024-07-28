@@ -2,26 +2,17 @@ import { Shop } from "../../shops/models/";
 import { TimeSlot, Slot } from "../models";
 import { Section } from "../../shops/models";
 
+import { AvailableFilters } from "../filters/availableFilters";
+
 import {
   ClosedShopError,
   ShopWithoutActiveSlotsError,
   InactiveSlotError,
   IncorrectSlotIdForShopError,
   IncorrectSlotIdForSectionError,
-  IncorrectSectiontIdForShopError
+  IncorrectSectiontIdForShopError,
+  DurationGreaterThanShopOpenHoursError
 } from "../errors";
-// import { snakeCaseKeys } from "../../shared/transformKeys";
-
-export type TimeSlotAvailableParams = {
-  shop: Shop;
-  capacity?: number;
-  section_id?: string;
-  slot_id?: string;
-  started_at?: string;
-  ended_at?: string;
-  // Duration in minutes
-  duration?: number;
-};
 
 type TimeSlotAvailableResult = {
   slot_id: string;
@@ -31,44 +22,55 @@ type TimeSlotAvailableResult = {
 };
 
 /**
- * Find availanle timeslots base
+ * Find available time_slots
  */
 export class TimeSlotFindAvailable {
-  async process({ shop, ...params }: TimeSlotAvailableParams): Promise<TimeSlotAvailableResult[]> {
+  #filters: AvailableFilters;
+  constructor(filters: AvailableFilters) {
+    this.#filters = filters;
+  }
+
+  async process(shop: Shop): Promise<TimeSlotAvailableResult[]> {
     const shopSlots = await Slot.query().modify("available", shop.id);
     if (shopSlots.length === 0) {
       throw new ShopWithoutActiveSlotsError();
     }
 
-    if (params.slot_id) {
-      const selectedSlot = await Slot.query().findById(params.slot_id).throwIfNotFound();
-      if (!shopSlots.some((s) => s.id == params.slot_id)) {
+    if (this.#filters.slot_id) {
+      const selectedSlot = await Slot.query().findById(this.#filters.slot_id).throwIfNotFound();
+      if (!shopSlots.some((s) => s.id == this.#filters.slot_id)) {
         throw new IncorrectSlotIdForShopError();
       }
       if (!selectedSlot.active) {
         throw new InactiveSlotError(selectedSlot.id);
       }
 
-      if (params.section_id && params.section_id !== selectedSlot.section_id) {
+      if (this.#filters.section_id && this.#filters.section_id !== selectedSlot.section_id) {
         throw new IncorrectSlotIdForSectionError();
       }
     }
 
     // TODO(dimkl): (optional) The section_id should be part of the shop provided
-    if (params.section_id) {
-      const selectedSection = await Section.query().findById(params.section_id).throwIfNotFound();
+    if (this.#filters.section_id) {
+      const selectedSection = await Section.query()
+        .findById(this.#filters.section_id)
+        .throwIfNotFound();
       if (selectedSection.shop_id !== shop.id) {
         throw new IncorrectSectiontIdForShopError();
       }
     }
 
-    // TODO(dimkl) Use duration to exclude smaller timeslots
-    // const duration = params.duration || shop.default_time_slot_duration;
+    // TODO(dimkl): (optional) The capacity should be supported by the shop's slots
+
+    // The duration should be less than shop opening hours
+    if (Number(this.#filters.duration) > shop.openInMinutes()) {
+      throw new DurationGreaterThanShopOpenHoursError();
+    }
 
     const defaultStartedAt = shop.openingDate(new Date())?.toISOString();
-    const startedAt = new Date(params.started_at || defaultStartedAt || "");
+    const startedAt = new Date(this.#filters.started_at || defaultStartedAt || "");
     const defaultEndedAt = startedAt && shop.closingDate(new Date(startedAt))?.toISOString();
-    const endedAt = new Date(params.ended_at || defaultEndedAt || "");
+    const endedAt = new Date(this.#filters.ended_at || defaultEndedAt || "");
 
     if (!shop.isOpen(startedAt, endedAt)) {
       throw new ClosedShopError(startedAt, endedAt);
@@ -78,7 +80,7 @@ export class TimeSlotFindAvailable {
       return [];
     }
 
-    const availableDateTimeRange: TimeSlotAvailableResult[] = [];
+    let availableDateTimeRange: TimeSlotAvailableResult[] = [];
     await Promise.all(
       shopSlots.map(async (slot) => {
         const reservedTimeSlotsForSlot = await TimeSlot.query().modify(
@@ -88,7 +90,7 @@ export class TimeSlotFindAvailable {
           endedAt,
           slot.id
         );
-        // when no reserved timeslot, return all the start - end range as available
+        // when no reserved time_slot, return all the start - end range as available
         if (reservedTimeSlotsForSlot.length === 0) {
           availableDateTimeRange.push({
             slot_id: slot.id,
@@ -99,7 +101,7 @@ export class TimeSlotFindAvailable {
           return;
         }
 
-        // create separate datetime ranges excluding reserved time slots
+        // create separate date-time ranges excluding reserved time slots
         let currentStartDate = convertTimestampToEpoch(startedAt.getTime());
         reservedTimeSlotsForSlot.forEach((timeSlot) => {
           // add time range before the reserved time slot
@@ -127,6 +129,15 @@ export class TimeSlotFindAvailable {
         }
       })
     );
+
+    // Exclude time_slots with duration smaller than duration provided
+    if (this.#filters.duration) {
+      const duration = this.#filters.duration;
+      availableDateTimeRange = availableDateTimeRange.filter((result) => {
+        // time_slots dates are in seconds, and duration is in minutes
+        return (result.ended_at - result.started_at) / 60 > duration;
+      });
+    }
 
     return availableDateTimeRange;
   }

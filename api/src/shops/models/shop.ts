@@ -107,6 +107,24 @@ export class Shop extends BaseModel {
     return true;
   }
 
+  openInMinutes(): number {
+    if (!this.opening_time) return 0;
+    if (!this.closing_time) return 0;
+
+    let [hours, minutes, seconds] = this.opening_time.split(":");
+    const openingTimeInSeconds =
+      (Date.UTC(1970, 1, 1, Number(hours) || 0, Number(minutes) || 0, Number(seconds) || 0) /
+        1000) >>
+      0;
+    [hours, minutes, seconds] = this.closing_time.split(":");
+    const closingTimeInSeconds =
+      (Date.UTC(1970, 1, 1, Number(hours) || 0, Number(minutes) || 0, Number(seconds) || 0) /
+        1000) >>
+      0;
+
+    return closingTimeInSeconds / 60 - openingTimeInSeconds / 60;
+  }
+
   // Default time_slot duration in minutes
   get default_time_slot_duration() {
     return 60;

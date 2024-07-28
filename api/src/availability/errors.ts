@@ -27,3 +27,7 @@ export class IncorrectSlotIdForSectionError extends BusinessError {
 export class IncorrectSectiontIdForShopError extends BusinessError {
   message = "The section_id should be part of the shop provided!";
 }
+
+export class DurationGreaterThanShopOpenHoursError extends BusinessError {
+  message = "The duration should be less than shop open hours. Use a smaller duration!";
+}

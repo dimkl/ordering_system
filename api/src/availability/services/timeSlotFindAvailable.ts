@@ -42,13 +42,13 @@ export class TimeSlotFindAvailable {
       }
     }
 
-    // TODO(dimkl): (optional) The section_id should be part of the shop provided
+    // The section_id should be part of the shop provided
     if (this.#filters.section_id) {
       const selectedSection = await Section.query()
         .findById(this.#filters.section_id)
         .throwIfNotFound();
       if (selectedSection.shop_id !== shop.id) {
-        throw new errors.IncorrectSectiontIdForShopError();
+        throw new errors.IncorrectSectionIdForShopError();
       }
     }
 

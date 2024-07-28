@@ -24,7 +24,7 @@ export class IncorrectSlotIdForSectionError extends BusinessError {
   message = "The slot_id should be part of the section provided!";
 }
 
-export class IncorrectSectiontIdForShopError extends BusinessError {
+export class IncorrectSectionIdForShopError extends BusinessError {
   message = "The section_id should be part of the shop provided!";
 }
 

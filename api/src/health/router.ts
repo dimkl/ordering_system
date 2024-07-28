@@ -16,4 +16,4 @@ export const handler = async (ctx: Context) => {
   }
 };
 
-router.get("/health/live", ControllerFactory.create({ handler }));
+router.get("/health", ControllerFactory.create({ handler }));

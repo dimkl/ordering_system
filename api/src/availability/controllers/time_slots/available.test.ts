@@ -290,6 +290,29 @@ describe("GET /time_slots/:shop_id/available/:slot_id?", () => {
     });
   });
 
+  it("returns 422 for unsupported capacity by the shop", async () => {
+    const slot = await DataFactory.createSlot({ capacity: 10 });
+    await DataFactory.createSlot({ capacity: 8 }, slot.section, slot.user, slot.section.shop);
+
+    // Succeeds for supported capacity
+    let response = await request
+      .get(`/${apiVersion}/time_slots/${slot.section.shop_id}/available?capacity=10`)
+      .set("Accept", "application/json");
+
+    expect(response.status).toBe(200);
+    expect(response.body.length).toBe(1);
+
+    // Fails to unsupported
+    response = await request
+      .get(`/${apiVersion}/time_slots/${slot.section.shop_id}/available?capacity=11`)
+      .set("Accept", "application/json");
+
+    expect(response.status).toBe(422);
+    expect(response.body).toEqual({
+      message: "The capacity should be less than shop slots capacity. Use a smaller capacity!"
+    });
+  });
+
   it("returns all available time_slots based on date-time range", async () => {
     const slot = await DataFactory.createSlot();
 

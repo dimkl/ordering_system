@@ -4,15 +4,7 @@ import { Section } from "../../shops/models";
 
 import { AvailableFilters } from "../filters/availableFilters";
 
-import {
-  ClosedShopError,
-  ShopWithoutActiveSlotsError,
-  InactiveSlotError,
-  IncorrectSlotIdForShopError,
-  IncorrectSlotIdForSectionError,
-  IncorrectSectiontIdForShopError,
-  DurationGreaterThanShopOpenHoursError
-} from "../errors";
+import * as errors from "../errors";
 
 type TimeSlotAvailableResult = {
   slot_id: string;
@@ -31,22 +23,22 @@ export class TimeSlotFindAvailable {
   }
 
   async process(shop: Shop): Promise<TimeSlotAvailableResult[]> {
-    const shopSlots = await Slot.query().modify("available", shop.id);
+    let shopSlots = await Slot.query().modify("available", shop.id);
     if (shopSlots.length === 0) {
-      throw new ShopWithoutActiveSlotsError();
+      throw new errors.ShopWithoutActiveSlotsError();
     }
 
     if (this.#filters.slot_id) {
       const selectedSlot = await Slot.query().findById(this.#filters.slot_id).throwIfNotFound();
       if (!shopSlots.some((s) => s.id == this.#filters.slot_id)) {
-        throw new IncorrectSlotIdForShopError();
+        throw new errors.IncorrectSlotIdForShopError();
       }
       if (!selectedSlot.active) {
-        throw new InactiveSlotError(selectedSlot.id);
+        throw new errors.InactiveSlotError(selectedSlot.id);
       }
 
       if (this.#filters.section_id && this.#filters.section_id !== selectedSlot.section_id) {
-        throw new IncorrectSlotIdForSectionError();
+        throw new errors.IncorrectSlotIdForSectionError();
       }
     }
 
@@ -56,15 +48,21 @@ export class TimeSlotFindAvailable {
         .findById(this.#filters.section_id)
         .throwIfNotFound();
       if (selectedSection.shop_id !== shop.id) {
-        throw new IncorrectSectiontIdForShopError();
+        throw new errors.IncorrectSectiontIdForShopError();
       }
     }
 
-    // TODO(dimkl): (optional) The capacity should be supported by the shop's slots
-
     // The duration should be less than shop opening hours
     if (Number(this.#filters.duration) > shop.openInMinutes()) {
-      throw new DurationGreaterThanShopOpenHoursError();
+      throw new errors.DurationGreaterThanShopOpenHoursError();
+    }
+
+    // The capacity should be supported by the shop's slots capacity
+    if (this.#filters.capacity) {
+      shopSlots = shopSlots.filter((slot) => slot.capacity >= Number(this.#filters.capacity));
+      if (shopSlots.length === 0) {
+        throw new errors.UnsupportedCapacityForShopError();
+      }
     }
 
     const defaultStartedAt = shop.openingDate(new Date())?.toISOString();
@@ -73,7 +71,7 @@ export class TimeSlotFindAvailable {
     const endedAt = new Date(this.#filters.ended_at || defaultEndedAt || "");
 
     if (!shop.isOpen(startedAt, endedAt)) {
-      throw new ClosedShopError(startedAt, endedAt);
+      throw new errors.ClosedShopError(startedAt, endedAt);
     }
 
     if (!endedAt || !startedAt) {

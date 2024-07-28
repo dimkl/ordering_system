@@ -8,7 +8,7 @@ export async function loadOrderItem(orderItemId: number | string, ctx: Context, 
     .modify("publicColumns")
     .throwIfNotFound();
 
-  // TODO(dimkl): Check if this such route exists
+  // TODO(dimkl): Check if such route exists
   if (!ctx.order) return next();
 
   if (ctx.orderItem.order_id != ctx.order.id) {

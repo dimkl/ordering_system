@@ -26,14 +26,7 @@ export class Slot extends BaseModel {
         query.where({ active: true });
       },
       available(query, shopId) {
-        // available(query, shopId, _startDate, _endDate) {
-        query
-          // .leftJoinRelated('time_slots(reservedTimeSlots)')
-          // .modifiers({
-          //   reservedTimeSlots: query => query.modify('reserved', startDate, endDate)
-          // })
-          .joinRelated("section.shop")
-          .where("section.shop_id", "=", shopId);
+        query.joinRelated("section.shop").where("section.shop_id", "=", shopId);
       }
     };
   }

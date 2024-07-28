@@ -31,3 +31,7 @@ export class IncorrectSectiontIdForShopError extends BusinessError {
 export class DurationGreaterThanShopOpenHoursError extends BusinessError {
   message = "The duration should be less than shop open hours. Use a smaller duration!";
 }
+
+export class UnsupportedCapacityForShopError extends BusinessError {
+  message = "The capacity should be less than shop slots capacity. Use a smaller capacity!";
+}

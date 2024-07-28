@@ -21,11 +21,11 @@
 ## Flow
 
 - [ ] Create shop menu
-- [ ] Find available time_slots filters:
-  - [ ] capacity
-  - [ ] section_id
-  - [ ] \*startDate
-  - [ ] \*endDate
+- [x] Find available time_slots filters:
+  - [x] capacity
+  - [x] section_id
+  - [x] \*startDate
+  - [x] \*endDate
 - [~] available slots
   - [x] capacity
   - [x] section_id

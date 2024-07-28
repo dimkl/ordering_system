@@ -1,10 +1,11 @@
 import type { Context } from "koa";
 
+import schema from "../../schemas/timeSlot.available.json";
+
 import { TimeSlotFindAvailable } from "../../services/timeSlotFindAvailable";
 
 import { BusinessError } from "../../../shared/errors";
 
-// TODO(dimkl): Validate those query params using json schema
 type Filters = {
   capacity?: number;
   section_id?: string;
@@ -15,8 +16,9 @@ type Filters = {
   duration?: number;
 };
 
-export const handler = async (ctx: Context) => {
-  const filters = ctx.query as Filters;
+const handler = async (ctx: Context) => {
+  // @ts-expect-error validatedData are added as part of the request validation
+  const filters = ctx.request.validatedData as Filters;
 
   // The time_slot duration it should be provided in request, if shop does have a default
   const timeSlotDuration = filters.duration || ctx.shop.default_time_slot_duration;
@@ -34,3 +36,5 @@ export const handler = async (ctx: Context) => {
 
   ctx.body = await new TimeSlotFindAvailable().process({ ...filters, shop: ctx.shop });
 };
+
+export { schema, handler };

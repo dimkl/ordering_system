@@ -1,0 +1,34 @@
+{
+  "$id": "/schemas/timeSlot.available",
+  "$async": true,
+  "http_method": "GET",
+  "http_path": "/time_slots/:shop_id/available",
+  "title": "Available TimeSlot",
+  "description": "Available TimeSlot schema",
+  "type": "object",
+  "properties": {
+    "capacity": {
+      "type": "integer",
+      "exclusiveMinimum": 0
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "ended_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "section_id": {
+      "$ref": "defs#/definitions/uid"
+    },
+    "slot_id": {
+      "$ref": "defs#/definitions/uid"
+    },
+    "duration": {
+      "type": "integer",
+      "exclusiveMinimum": 0
+    }
+  },
+  "additionalProperties": false
+}

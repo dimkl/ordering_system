@@ -289,4 +289,23 @@ describe("GET /time_slots/:shop_id/available/:slot_id?", () => {
     expect(response.status).toBe(200);
     expect(response.body.length).toBe(0);
   });
+
+  it("returns 400 for invalid filters", async () => {
+    const slot = await DataFactory.createSlot({ active: false });
+
+    const startedAt = new Date();
+    startedAt.setUTCHours(20);
+
+    const endedAt = new Date();
+    endedAt.setUTCHours(23, 30);
+
+    const filters = `started_at=true&ended_at=aloha&capacity=a&duration=-1&slot_id=1&section_id=1`;
+
+    const response = await request
+      .get(`/${apiVersion}/time_slots/${slot.section.shop_id}/available?${filters}`)
+      .set("Accept", "application/json");
+
+    expect(response.status).toBe(400);
+    expect(response.body).toMatchSnapshot();
+  });
 });

@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GET /time_slots/:shop_id/available/:slot_id? returns 400 for invalid filters 1`] = `
+[
+  {
+    "instancePath": "/capacity",
+    "keyword": "type",
+    "message": "must be integer",
+    "params": {
+      "type": "integer",
+    },
+    "schemaPath": "#/properties/capacity/type",
+  },
+  {
+    "instancePath": "/started_at",
+    "keyword": "format",
+    "message": "must match format "date-time"",
+    "params": {
+      "format": "date-time",
+    },
+    "schemaPath": "#/properties/started_at/format",
+  },
+  {
+    "instancePath": "/ended_at",
+    "keyword": "format",
+    "message": "must match format "date-time"",
+    "params": {
+      "format": "date-time",
+    },
+    "schemaPath": "#/properties/ended_at/format",
+  },
+  {
+    "instancePath": "/section_id",
+    "keyword": "minLength",
+    "message": "must NOT have fewer than 30 characters",
+    "params": {
+      "limit": 30,
+    },
+    "schemaPath": "defs#/definitions/uid/minLength",
+  },
+  {
+    "instancePath": "/slot_id",
+    "keyword": "minLength",
+    "message": "must NOT have fewer than 30 characters",
+    "params": {
+      "limit": 30,
+    },
+    "schemaPath": "defs#/definitions/uid/minLength",
+  },
+  {
+    "instancePath": "/duration",
+    "keyword": "exclusiveMinimum",
+    "message": "must be > 0",
+    "params": {
+      "comparison": ">",
+      "limit": 0,
+    },
+    "schemaPath": "#/properties/duration/exclusiveMinimum",
+  },
+]
+`;

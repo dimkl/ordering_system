@@ -2,12 +2,12 @@ import { TimeSlot, Slot } from "../models";
 import type { Shop } from "../../shops/models";
 import { Customer } from "../../customers/models/customer";
 
-import { BusinessError } from "../../shared/errors";
+import * as errors from "../errors";
 import { snakeCaseKeys } from "../../shared/transformKeys";
 
 export type TimeSlotReserveParams = {
-  customerId: number | string;
-  slotId: number | string;
+  customerId: string;
+  slotId: string;
   startedAt?: string;
   endedAt?: string;
 };
@@ -15,7 +15,7 @@ export class TimeSlotReserve {
   static async process({ customerId, slotId, ...data }: TimeSlotReserveParams) {
     const customer = (await Customer.query().findById(customerId)) as Customer;
     if (!customer) {
-      throw new BusinessError(`Customer ${customerId} does not exist!`);
+      throw new errors.NotFoundCustomerError(customerId);
     }
 
     const slot = (await Slot.query()
@@ -23,7 +23,7 @@ export class TimeSlotReserve {
       .modify("active")
       .withGraphJoined("section.shop")) as Slot;
     if (!slot) {
-      throw new BusinessError(`Slot ${slotId} does not exist!`);
+      throw new errors.InactiveSlotError(slotId);
     }
 
     const shop = slot.section.shop;
@@ -34,15 +34,11 @@ export class TimeSlotReserve {
     const endedAt = new Date(data.endedAt || defaultEndedAt || "");
 
     if (!shop.isOpen(startedAt, endedAt)) {
-      throw new BusinessError(
-        `Shop is not open between "${startedAt.toISOString()}" - "${endedAt.toISOString()}"!`
-      );
+      throw new errors.ClosedShopError(startedAt, endedAt);
     }
 
     if (await this.hasIntersection(slot, shop, { startedAt, endedAt })) {
-      throw new BusinessError(
-        `Time slot "${startedAt.toISOString()}" - "${endedAt.toISOString()}" is not available!`
-      );
+      throw new errors.UnavailableTimeSlotError(startedAt, endedAt);
     }
 
     return TimeSlot.query()

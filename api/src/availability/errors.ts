@@ -35,3 +35,15 @@ export class DurationGreaterThanShopOpenHoursError extends BusinessError {
 export class UnsupportedCapacityForShopError extends BusinessError {
   message = "The capacity should be less than shop slots capacity. Use a smaller capacity!";
 }
+
+export class UnavailableTimeSlotError extends BusinessError {
+  constructor(startedAt: Date, endedAt: Date) {
+    super(`Time slot "${startedAt.toISOString()}" - "${endedAt.toISOString()}" is not available!`);
+  }
+}
+
+export class NotFoundCustomerError extends BusinessError {
+  constructor(customerId: string) {
+    super(`Customer ${customerId} does not exist!`);
+  }
+}

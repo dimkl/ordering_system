@@ -1,8 +1,8 @@
 {
   "$id": "/schemas/product.create",
   "$async": true,
-  "http_method": "POST",
-  "http_path": "/products",
+  "x-http-method": "POST",
+  "x-http-path": "/products",
   "title": "Product",
   "description": "Product schema",
   "type": "object",
@@ -28,7 +28,9 @@
       "maxLength": 100
     },
     "category_id": {
-      "$ref": "defs#/definitions/uid"
+      "type": "string",
+      "minLength": 30,
+      "maxLength": 30
     }
   },
   "required": ["title", "sku"],

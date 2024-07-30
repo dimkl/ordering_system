@@ -1,8 +1,8 @@
 {
   "$id": "/schemas/variation.create",
   "$async": true,
-  "http_method": "POST",
-  "http_path": "/variations",
+  "x-http-method": "POST",
+  "x-http-path": "/variations",
   "title": "Variation",
   "description": "Variation schema",
   "type": "object",
@@ -28,12 +28,16 @@
       "maxLength": 100
     },
     "variant_id": {
-      "$ref": "defs#/definitions/uid"
+      "type": "string",
+      "minLength": 30,
+      "maxLength": 30
     },
     "ingredients": {
       "type": "array",
       "items": {
-        "$ref": "defs#/definitions/uid"
+        "type": "string",
+        "minLength": 30,
+        "maxLength": 30
       },
       "minItems": 1
     }

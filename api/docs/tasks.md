@@ -6,7 +6,7 @@
 
 ## Refactoring
 
-- [ ] Convert JsonSchema to OpenAPI
+- [~] Convert JsonSchema to OpenAPI
 - [ ] Add commitlint as pre-commit hook [ref](https://github.com/conventional-changelog/commitlint)
 - [ ] Add pre-commit hook to lint code
 - [ ] Investigate using turbo repo or an alternative to automate commands and deps

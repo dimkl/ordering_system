@@ -1,0 +1,8 @@
+extends:
+  - recommended
+
+plugins:
+  - "./redocly-plugin.js"
+
+decorators:
+  custom-props/schema-drop-custom-props: on

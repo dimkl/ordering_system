@@ -1,17 +1,21 @@
 {
   "$id": "/schemas/order.create",
   "$async": true,
-  "http_method": "POST",
-  "http_path": "/orders",
+  "x-http-method": "POST",
+  "x-http-path": "/orders",
   "title": "Order",
   "description": "Order create schema",
   "type": "object",
   "properties": {
     "customer_id": {
-      "$ref": "defs#/definitions/uid"
+      "type": "string",
+      "minLength": 30,
+      "maxLength": 30
     },
     "time_slot_id": {
-      "$ref": "defs#/definitions/uid"
+      "type": "string",
+      "minLength": 30,
+      "maxLength": 30
     }
   },
   "required": ["customer_id", "time_slot_id"],

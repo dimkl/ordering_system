@@ -1,14 +1,16 @@
 {
   "$id": "/schemas/orderItem.create",
   "$async": true,
-  "http_method": "POST",
-  "http_path": "/order_items",
+  "x-http-method": "POST",
+  "x-http-path": "/order_items",
   "title": "OrderItem",
   "description": "OrderItem create schema",
   "type": "object",
   "properties": {
     "order_id": {
-      "$ref": "defs#/definitions/uid"
+      "type": "string",
+      "minLength": 30,
+      "maxLength": 30
     },
     "quantity": {
       "type": "integer",
@@ -16,7 +18,9 @@
       "default": 1
     },
     "product_id": {
-      "$ref": "defs#/definitions/uid"
+      "type": "string",
+      "minLength": 30,
+      "maxLength": 30
     }
   },
   "required": ["order_id", "product_id"],

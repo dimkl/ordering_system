@@ -1,8 +1,8 @@
 {
   "$id": "/schemas/customer.create",
   "$async": true,
-  "http_method": "POST",
-  "http_path": "/customers",
+  "x-http-method": "POST",
+  "x-http-path": "/customers",
   "title": "Customer",
   "description": "Customer create schema",
   "type": "object",
@@ -29,11 +29,6 @@
       "maxLength": 255
     }
   },
-  "required": [
-    "first_name",
-    "last_name",
-    "email",
-    "password"
-  ],
+  "required": ["first_name", "last_name", "email", "password"],
   "additionalProperties": false
 }

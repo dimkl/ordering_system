@@ -1,8 +1,8 @@
 {
   "$id": "/schemas/timeSlot.reserve",
   "$async": true,
-  "http_method": "POST",
-  "http_path": "/time_slots/reserve",
+  "x-http-method": "POST",
+  "x-http-path": "/time_slots/reserve",
   "title": "TimeSlot",
   "description": "TimeSlot reserve schema",
   "type": "object",
@@ -16,10 +16,14 @@
       "format": "date-time"
     },
     "customer_id": {
-      "$ref": "defs#/definitions/uid"
+      "type": "string",
+      "minLength": 30,
+      "maxLength": 30
     },
     "slot_id": {
-      "$ref": "defs#/definitions/uid"
+      "type": "string",
+      "minLength": 30,
+      "maxLength": 30
     }
   },
   "required": ["started_at", "customer_id", "slot_id"],

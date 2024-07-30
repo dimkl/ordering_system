@@ -1,15 +1,17 @@
 {
   "$id": "/schemas/category.create",
   "$async": true,
-  "http_method": "POST",
-  "http_path": "/categories",
+  "x-http-method": "POST",
+  "x-http-path": "/categories",
   "title": "category",
   "description": "category schema",
   "type": "object",
   "properties": {
     "id": {
       "readOnly": true,
-      "$ref": "defs#/definitions/uid"
+      "type": "string",
+      "minLength": 30,
+      "maxLength": 30
     },
     "title": {
       "type": "string",

@@ -48,7 +48,7 @@ exports[`POST /slots throws validation error for not existing section_id 1`] = `
     "params": {
       "limit": 30,
     },
-    "schemaPath": "defs#/definitions/uid/minLength",
+    "schemaPath": "#/properties/section_id/minLength",
   },
 ]
 `;
@@ -62,7 +62,7 @@ exports[`POST /slots throws validation error for not existing user_id 1`] = `
     "params": {
       "limit": 30,
     },
-    "schemaPath": "defs#/definitions/uid/minLength",
+    "schemaPath": "#/properties/user_id/minLength",
   },
 ]
 `;

@@ -42,7 +42,7 @@ exports[`POST /orders throws validation error for not existing customer_id 1`] =
     "params": {
       "limit": 30,
     },
-    "schemaPath": "defs#/definitions/uid/minLength",
+    "schemaPath": "#/properties/customer_id/minLength",
   },
 ]
 `;
@@ -56,7 +56,7 @@ exports[`POST /orders throws validation error for not existing time_slot_id 1`] 
     "params": {
       "limit": 30,
     },
-    "schemaPath": "defs#/definitions/uid/maxLength",
+    "schemaPath": "#/properties/time_slot_id/maxLength",
   },
 ]
 `;

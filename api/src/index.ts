@@ -1,12 +1,9 @@
-import { DiscoveryApiFactory } from "@dimkl/ajv-discovery-api";
-
 // Keep setupModels as the 1st import since the env variables from the .env
 // files are loaded in this.
 import setupModels from "./shared/setupModels";
 import { isTestingEnv } from "./shared/helpers";
 import { errorHandler } from "./shared/middlewares/errorHandler";
 import { cors } from "./shared/middlewares/cors";
-import definitionsSchema from "./shared/schemas/definitions.json";
 
 import Koa from "koa";
 import logger from "koa-logger";
@@ -15,10 +12,6 @@ import bodyParser from "koa-bodyparser";
 
 import { router } from "./router";
 import { clerkMiddleware } from "@dimkl/clerk-koa";
-
-// Add some shared schema defintions
-const discoveryApi = DiscoveryApiFactory.getInstance();
-discoveryApi.registerSchema(definitionsSchema);
 
 const app = new Koa();
 

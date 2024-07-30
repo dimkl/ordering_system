@@ -1,17 +1,21 @@
 {
   "$id": "/schemas/slot.create",
   "$async": true,
-  "http_method": "POST",
-  "http_path": "/slots",
+  "x-http-method": "POST",
+  "x-http-path": "/slots",
   "title": "Slot",
   "description": "Slot schema",
   "type": "object",
   "properties": {
     "section_id": {
-      "$ref": "defs#/definitions/uid"
+      "type": "string",
+      "minLength": 30,
+      "maxLength": 30
     },
     "user_id": {
-      "$ref": "defs#/definitions/uid"
+      "type": "string",
+      "minLength": 30,
+      "maxLength": 30
     },
     "sku": {
       "type": "string",

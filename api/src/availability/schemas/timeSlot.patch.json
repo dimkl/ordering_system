@@ -1,8 +1,8 @@
 {
   "$id": "/schemas/timeSlot.patch",
   "$async": true,
-  "http_method": "PATCH",
-  "http_path": "/time_slots/:id",
+  "x-http-method": "PATCH",
+  "x-http-path": "/time_slots/:id",
   "title": "TimeSlot",
   "description": "TimeSlot schema",
   "type": "object",
@@ -16,10 +16,14 @@
       "format": "date-time"
     },
     "customer_id": {
-      "$ref": "defs#/definitions/uid"
+      "type": "string",
+      "minLength": 30,
+      "maxLength": 30
     },
     "slot_id": {
-      "$ref": "defs#/definitions/uid"
+      "type": "string",
+      "minLength": 30,
+      "maxLength": 30
     }
   },
   "additionalProperties": false

@@ -1,8 +1,8 @@
 {
   "$id": "/schemas/orderItem.patch",
   "$async": true,
-  "http_method": "PATCH",
-  "http_path": "/order_items/:id",
+  "x-http-method": "PATCH",
+  "x-http-path": "/order_items/:id",
   "title": "OrderItem",
   "description": "OrderItem patch schema",
   "type": "object",

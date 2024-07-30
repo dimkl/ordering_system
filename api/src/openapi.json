@@ -37,6 +37,15 @@
     },
     "/time_slots/{shopId}/available": {
       "$ref": "./availability/openapi/timeSlots.available.json"
+    },
+    "/shops": {
+      "$ref": "./shops/openapi/shops.json"
+    },
+    "/shops/{shopId}": {
+      "$ref": "./shops/openapi/shop.json"
+    },
+    "/shops/{shopId}/menu": {
+      "$ref": "./shops/openapi/shop.menu.json"
     }
   },
   "components": {

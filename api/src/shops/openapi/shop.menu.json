@@ -1,0 +1,27 @@
+{
+  "get": {
+    "summary": "Retrieve Shop Menu",
+    "operationId": "shopMenu",
+    "parameters": {
+      "$ref": "./parameters/shopId.json"
+    },
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "../schemas/productAvailability.json"
+              }
+            }
+          }
+        }
+      },
+      "422": {
+        "$ref": "../../shared/openapi/errors/422.json"
+      }
+    }
+  }
+}

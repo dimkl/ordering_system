@@ -1,0 +1,13 @@
+[
+  {
+    "name": "shopId",
+    "in": "path",
+    "required": true,
+    "description": "The id of the shop",
+    "schema": {
+      "type": "string",
+      "minLength": 30,
+      "maxLength": 30
+    }
+  }
+]

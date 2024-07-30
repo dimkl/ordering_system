@@ -1,0 +1,24 @@
+{
+  "get": {
+    "summary": "Retrieve Shop",
+    "operationId": "shopRead",
+    "parameters": {
+      "$ref": "./parameters/shopId.json"
+    },
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../schemas/shop.json"
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Found"
+      }
+    }
+  }
+}

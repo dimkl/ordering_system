@@ -7,7 +7,7 @@ import { loadSlot } from "./helpers/loadSlot";
 import { loadShop } from "./helpers/loadShop";
 
 import * as timeSlotListController from "./controllers/time_slots/list";
-import * as timeSloReserveController from "./controllers/time_slots/reserve";
+import * as timeSloCreateController from "./controllers/time_slots/create";
 import * as timeSlotUpdateController from "./controllers/time_slots/update";
 import * as timeSlotReleaseController from "./controllers/time_slots/release";
 import * as timeSlotAvailableController from "./controllers/time_slots/available";
@@ -29,18 +29,18 @@ router.get(
     scopes: ["urn:time_slots:r"]
   })
 );
+router.post(
+  "/time_slots",
+  ControllerFactory.create({
+    ...timeSloCreateController,
+    scopes: ["urn:time_slots:c"]
+  })
+);
 router.get(
   "/time_slots/:time_slot_id",
   ControllerFactory.create({
     ...timeSlotListController,
     scopes: ["urn:time_slots:r"]
-  })
-);
-router.post(
-  "/time_slots/reserve",
-  ControllerFactory.create({
-    ...timeSloReserveController,
-    scopes: ["urn:time_slots:c"]
   })
 );
 router.patch(
@@ -51,7 +51,7 @@ router.patch(
   })
 );
 router.delete(
-  "/time_slots/release/:time_slot_id",
+  "/time_slots/:time_slot_id",
   ControllerFactory.create({
     ...timeSlotReleaseController,
     scopes: ["urn:time_slots:d"]

@@ -1,10 +1,10 @@
 {
-  "$id": "/schemas/timeSlot.reserve",
+  "$id": "/schemas/timeSlot.create",
   "$async": true,
   "x-http-method": "POST",
-  "x-http-path": "/time_slots/reserve",
+  "x-http-path": "/time_slots",
   "title": "TimeSlot",
-  "description": "TimeSlot reserve schema",
+  "description": "TimeSlot create schema",
   "type": "object",
   "properties": {
     "started_at": {

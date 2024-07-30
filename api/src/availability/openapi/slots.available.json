@@ -1,0 +1,48 @@
+{
+  "get": {
+    "summary": "Retrieve Available Slots",
+    "operationId": "slotAvailable",
+    "parameters": [
+      {
+        "name": "shopId",
+        "in": "path",
+        "required": true,
+        "description": "The id of the shop to retrieve",
+        "schema": {
+          "type": "string",
+          "minLength": 30,
+          "maxLength": 30
+        }
+      },
+      {
+        "name": "slotId",
+        "in": "path",
+        "required": false,
+        "description": "The id of the slot to retrieve",
+        "schema": {
+          "type": "string",
+          "minLength": 30,
+          "maxLength": 30
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "../schemas/slot.json"
+              }
+            }
+          }
+        }
+      },
+      "422": {
+        "description": "Unprocessable Content"
+      }
+    }
+  }
+}

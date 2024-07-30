@@ -1,6 +1,6 @@
 import type { Context } from "koa";
 
-import schema from "../../schemas/timeSlot.reserve.json";
+import schema from "../../schemas/timeSlot.create.json";
 import { TimeSlotReserve } from "../../services/timeSlotReserve";
 import type { TimeSlotReserveParams } from "../../services/timeSlotReserve";
 

@@ -1,0 +1,21 @@
+{
+  "post": {
+    "summary": "Create Slot",
+    "operationId": "slotCreate",
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../schemas/slot.create.json"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad Request"
+      }
+    }
+  }
+}

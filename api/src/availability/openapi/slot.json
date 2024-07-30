@@ -1,0 +1,61 @@
+{
+  "patch": {
+    "summary": "Update Slot",
+    "operationId": "slotUpdate",
+    "parameters": {
+      "$ref": "./parameters/slotId.json"
+    },
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../schemas/slot.patch.json"
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Found"
+      }
+    }
+  },
+  "get": {
+    "summary": "Retrieve Slot",
+    "operationId": "slotRead",
+    "parameters": {
+      "$ref": "./parameters/slotId.json"
+    },
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../schemas/slot.json"
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Found"
+      }
+    }
+  },
+  "delete": {
+    "summary": "Release Slot",
+    "operationId": "slotRelease",
+    "parameters": {
+      "$ref": "./parameters/slotId.json"
+    },
+    "responses": {
+      "204": {
+        "description": "No Content"
+      },
+      "404": {
+        "description": "Not Found"
+      }
+    }
+  }
+}

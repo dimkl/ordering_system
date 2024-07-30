@@ -21,25 +21,22 @@
   ],
   "paths": {
     "/slots": {
-      "post": {
-        "summary": "Create Slot",
-        "operationId": "slot.create",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "./availability/schemas/slot.create.json"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request"
-          }
-        }
-      }
+      "$ref": "./availability/openapi/slots.json"
+    },
+    "/slots/{slotId}": {
+      "$ref": "./availability/openapi/slot.json"
+    },
+    "/slots/{shopId}/available/{slotId}": {
+      "$ref": "./availability/openapi/slots.available.json"
+    },
+    "/time_slots": {
+      "$ref": "./availability/openapi/timeSlots.json"
+    },
+    "/time_slots/{timeSlotId}": {
+      "$ref": "./availability/openapi/timeSlot.json"
+    },
+    "/time_slots/{shopId}/available": {
+      "$ref": "./availability/openapi/timeSlots.available.json"
     }
   },
   "components": {

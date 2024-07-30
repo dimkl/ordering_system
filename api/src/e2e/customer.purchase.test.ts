@@ -34,7 +34,7 @@ describe("Customer purchase flow", () => {
 
     // 2. reserve time_slot
     response = await request
-      .post(`/${apiVersion}/time_slots/reserve`)
+      .post(`/${apiVersion}/time_slots`)
       .send({
         customer_id: customerId,
         slot_id: slot.id,

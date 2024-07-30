@@ -1,0 +1,61 @@
+{
+  "patch": {
+    "summary": "Update TimeSlot",
+    "operationId": "timeSlotUpdate",
+    "parameters": {
+      "$ref": "./parameters/timeSlotId.json"
+    },
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../schemas/timeSlot.patch.json"
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Found"
+      }
+    }
+  },
+  "get": {
+    "summary": "Retrieve TimeSlot",
+    "operationId": "timeSlotRead",
+    "parameters": {
+      "$ref": "./parameters/timeSlotId.json"
+    },
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../schemas/timeSlot.json"
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Found"
+      }
+    }
+  },
+  "delete": {
+    "summary": "Release TimeSlot",
+    "operationId": "timeSlotRelease",
+    "parameters": {
+      "$ref": "./parameters/timeSlotId.json"
+    },
+    "responses": {
+      "204": {
+        "description": "No Content"
+      },
+      "404": {
+        "description": "Not Found"
+      }
+    }
+  }
+}

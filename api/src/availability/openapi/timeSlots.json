@@ -1,0 +1,24 @@
+{
+  "post": {
+    "summary": "Create TimeSlot",
+    "operationId": "timeSlotCreate",
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../schemas/timeSlot.create.json"
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad Request"
+      },
+      "422": {
+        "description": "Unprocessable Content"
+      }
+    }
+  }
+}

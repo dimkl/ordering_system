@@ -30,7 +30,7 @@
         }
       },
       "422": {
-        "description": "Unprocessable Content"
+        "$ref": "../../shared/openapi/errors/422.json"
       }
     }
   }

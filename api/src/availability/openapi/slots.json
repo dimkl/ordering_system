@@ -14,7 +14,7 @@
         }
       },
       "400": {
-        "description": "Bad Request"
+        "$ref": "../../shared/openapi/errors/400.json"
       }
     }
   }

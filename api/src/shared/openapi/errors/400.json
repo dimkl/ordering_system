@@ -1,0 +1,29 @@
+{
+  "description": "Bad Request",
+  "content": {
+    "application/json": {
+      "schema": {
+        "type": "array",
+        "items": {
+          "properties": {
+            "instancePath": {
+              "type": "string"
+            },
+            "keyword": {
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
+            },
+            "params": {
+              "type": "object"
+            },
+            "schemaPath": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -14,10 +14,10 @@
         }
       },
       "400": {
-        "description": "Bad Request"
+        "$ref": "../../shared/openapi/errors/400.json"
       },
       "422": {
-        "description": "Unprocessable Content"
+        "$ref": "../../shared/openapi/errors/422.json"
       }
     }
   }

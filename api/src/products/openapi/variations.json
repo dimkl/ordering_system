@@ -1,14 +1,14 @@
 {
   "post": {
-    "summary": "Create TimeSlot(s)",
-    "operationId": "timeSlotCreate",
+    "summary": "Create Variation(s)",
+    "operationId": "variationCreate",
     "responses": {
       "200": {
         "description": "OK",
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "../schemas/timeSlot.create.json"
+              "$ref": "../schemas/product.json"
             }
           }
         }

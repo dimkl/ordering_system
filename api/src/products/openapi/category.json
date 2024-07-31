@@ -1,0 +1,24 @@
+{
+  "get": {
+    "summary": "Retrieve Category",
+    "operationId": "categoryRead",
+    "parameters": {
+      "$ref": "./parameters/categoryId.json"
+    },
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../schemas/category.json"
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Found"
+      }
+    }
+  }
+}

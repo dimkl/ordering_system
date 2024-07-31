@@ -1,0 +1,24 @@
+{
+  "get": {
+    "summary": "Retrieve Ingredient",
+    "operationId": "ingredientRead",
+    "parameters": {
+      "$ref": "./parameters/ingredientId.json"
+    },
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../schemas/ingredient.json"
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Found"
+      }
+    }
+  }
+}

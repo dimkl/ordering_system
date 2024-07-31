@@ -7,9 +7,15 @@
 ## Refactoring
 
 - [~] Convert JsonSchema to OpenAPI
+  - [ ] users
+  - [ ] customers
+  - [ ] orders
+  - [ ] health
+  - [ ] Group endpoints based per resource
 - [ ] Add commitlint as pre-commit hook [ref](https://github.com/conventional-changelog/commitlint)
 - [ ] Add pre-commit hook to lint code
 - [ ] Investigate using turbo repo or an alternative to automate commands and deps
+- [ ] Drop customers endpoints as it's not used anywhere
 
 ## Production deployment
 

@@ -46,6 +46,30 @@
     },
     "/shops/{shopId}/menu": {
       "$ref": "./shops/openapi/shop.menu.json"
+    },
+    "/products": {
+      "$ref": "./products/openapi/products.json"
+    },
+    "/products/ingredients": {
+      "$ref": "./products/openapi/productsIngredients.json"
+    },
+    "/products/{productId}": {
+      "$ref": "./products/openapi/product.json"
+    },
+    "/variations": {
+      "$ref": "./products/openapi/variations.json"
+    },
+    "/ingredients": {
+      "$ref": "./products/openapi/ingredients.json"
+    },
+    "/ingredients/{ingredientId}": {
+      "$ref": "./products/openapi/ingredient.json"
+    },
+    "/categories": {
+      "$ref": "./products/openapi/categories.json"
+    },
+    "/categories/{categoryId}": {
+      "$ref": "./products/openapi/category.json"
     }
   },
   "components": {

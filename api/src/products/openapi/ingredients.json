@@ -1,0 +1,46 @@
+{
+  "get": {
+    "summary": "Retrieve Ingredients",
+    "operationId": "ingredientsRead",
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "../schemas/ingredient.json"
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Found"
+      }
+    }
+  },
+  "post": {
+    "summary": "Create Ingredient(s)",
+    "operationId": "ingredientCreate",
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../schemas/ingredient.json"
+            }
+          }
+        }
+      },
+      "400": {
+        "$ref": "../../shared/openapi/errors/400.json"
+      },
+      "422": {
+        "$ref": "../../shared/openapi/errors/422.json"
+      }
+    }
+  }
+}

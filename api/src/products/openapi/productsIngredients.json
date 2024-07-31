@@ -1,20 +1,20 @@
 {
   "post": {
-    "summary": "Create TimeSlot(s)",
-    "operationId": "timeSlotCreate",
+    "summary": "Add Product Ingredient(s)",
+    "operationId": "addProductIngredient",
     "responses": {
       "200": {
         "description": "OK",
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "../schemas/timeSlot.create.json"
+              "type": "array",
+              "items": {
+                "$ref": "../schemas/productIngredient.json"
+              }
             }
           }
         }
-      },
-      "400": {
-        "$ref": "../../shared/openapi/errors/400.json"
       },
       "422": {
         "$ref": "../../shared/openapi/errors/422.json"

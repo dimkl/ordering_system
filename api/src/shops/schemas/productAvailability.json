@@ -21,8 +21,8 @@
     },
     "quantity": {
       "type": "integer",
-      "inclusiveMinimum": 0,
-      "default": 0
+      "exclusiveMinimum": 0,
+      "default": 1
     },
     "product_id": {
       "type": "string",

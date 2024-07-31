@@ -1,0 +1,46 @@
+{
+  "get": {
+    "summary": "Retrieve Categories",
+    "operationId": "categoriesRead",
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "../schemas/category.json"
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Found"
+      }
+    }
+  },
+  "post": {
+    "summary": "Create Category",
+    "operationId": "categoryCreate",
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../schemas/category.json"
+            }
+          }
+        }
+      },
+      "400": {
+        "$ref": "../../shared/openapi/errors/400.json"
+      },
+      "422": {
+        "$ref": "../../shared/openapi/errors/422.json"
+      }
+    }
+  }
+}

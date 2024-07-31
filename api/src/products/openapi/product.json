@@ -1,0 +1,24 @@
+{
+  "get": {
+    "summary": "Retrieve Product",
+    "operationId": "productRead",
+    "parameters": {
+      "$ref": "./parameters/productId.json"
+    },
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../schemas/product.json"
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Not Found"
+      }
+    }
+  }
+}

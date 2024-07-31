@@ -1,0 +1,13 @@
+[
+  {
+    "name": "ingredientId",
+    "in": "path",
+    "required": true,
+    "description": "The id of the ingredient",
+    "schema": {
+      "type": "string",
+      "minLength": 30,
+      "maxLength": 30
+    }
+  }
+]

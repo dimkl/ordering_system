@@ -1,0 +1,13 @@
+[
+  {
+    "name": "categoryId",
+    "in": "path",
+    "required": true,
+    "description": "The id of the category",
+    "schema": {
+      "type": "string",
+      "minLength": 30,
+      "maxLength": 30
+    }
+  }
+]

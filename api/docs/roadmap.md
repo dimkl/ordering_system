@@ -10,7 +10,7 @@
 
 ## V0 - Waiter Persona
 
-- [ ] View shop menu as Guest
+- [x] View shop menu as Guest
     - [ ] Support product with images
 - [ ] Create order with products from shop menu as Guest
 - [ ] Update/Add product in order

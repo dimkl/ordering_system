@@ -1,6 +1,5 @@
 # Roadmap
 
-
 ## V1 - Waiter Persona
 
 - [ ] Support pricing per order and order_items
@@ -11,11 +10,11 @@
 ## V0 - Waiter Persona
 
 - [x] View shop menu as Guest
-    - [ ] Support product with images
+  - [ ] Support product with images
 - [x] Create order with products from shop menu as Guest
 - [x] Update/Add product in order
-- [ ] Update quantity of products in order
-- [ ] Update / Add ingredients in products of order
+- [x] Update quantity of products in order
+- [x] Update / Add ingredients in products of order
 - [ ] Preselected product variations
 - [ ] Preselected ingredients for product variations
 - [ ] Support comments in order and order items

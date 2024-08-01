@@ -17,7 +17,7 @@ const handler = async (ctx: Context) => {
   const productSnapshot = await service.process(orderItem, ingredients);
 
   if (orderItem) {
-    const newQuantity = Number(data.quantity || 0) + orderItem.quantity;
+    const newQuantity = Number(data.quantity || 1) + orderItem.quantity;
     await orderItem.$query().patch({ quantity: newQuantity, product_snapshot: productSnapshot });
   } else {
     await OrderItem.query().insert({ ...data, product_snapshot: productSnapshot });

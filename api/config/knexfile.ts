@@ -1,5 +1,10 @@
 import dotenvFlow from "dotenv-flow";
-dotenvFlow.config();
+
+if (process.env.NODE_ENV === "development") {
+  dotenvFlow.config({ path: __dirname + "/../../" });
+} else {
+  dotenvFlow.config();
+}
 
 const base = {
   client: "pg",

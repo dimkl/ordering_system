@@ -5,7 +5,7 @@ const config: Config = {
   //   "^(\\.{1,2}/.*)\\.js$": "$1"
   // },
   transform: {
-    "^.+\\.(ts|tsx)$": "ts-jest"
+    "^.+\\.(ts|tsx)$": ["ts-jest", { tsconfig: "tsconfig.test.json", diagnostics: false }]
   },
   clearMocks: true,
   verbose: true,

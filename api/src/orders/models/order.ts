@@ -86,7 +86,7 @@ export class Order extends BaseModel {
       .modifiers({
         selectOrderItem(builder) {
           builder
-            .select("id", "state", "quantity", "created_at", "updated_at")
+            .select("id", "state", "quantity", "created_at", "updated_at", "comments")
             .orderBy("id", "asc");
         },
         selectProduct(builder) {

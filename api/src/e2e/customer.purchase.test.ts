@@ -50,18 +50,19 @@ describe("Customer purchase flow", () => {
     // 3. create order with order items
     response = await request
       .post(`/${apiVersion}/orders`)
-      .send({ customer_id: customer.id, time_slot_id: timeSlotId, comments: "Comment" })
+      .send({ customer_id: customer.id, time_slot_id: timeSlotId, comments: "Comments" })
       .set("Accept", "application/json");
     expect(response.status).toBe(200);
     expect(response.body.state).toBe("draft");
-    expect(response.body.comments).toBe("Comment");
+    expect(response.body.comments).toBe("Comments");
     const orderId = response.body.id;
 
     response = await request
       .post(`/${apiVersion}/order_items`)
-      .send({ order_id: orderId, product_id: product1.id })
+      .send({ order_id: orderId, product_id: product1.id, comments: "Comments" })
       .set("Accept", "application/json");
     expect(response.status).toBe(200);
+    expect(response.body.order_items[0].comments).toBe("Comments");
 
     response = await request
       .post(`/${apiVersion}/order_items`)

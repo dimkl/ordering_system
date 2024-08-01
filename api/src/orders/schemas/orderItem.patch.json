@@ -11,6 +11,9 @@
       "type": "integer",
       "exclusiveMinimum": 0,
       "default": 1
+    },
+    "comments": {
+      "type": "string"
     }
   },
   "additionalProperties": false

@@ -30,6 +30,9 @@
         "maxLength": 31
       },
       "minItems": 1
+    },
+    "comments": {
+      "type": "string"
     }
   },
   "required": ["order_id", "product_id"],

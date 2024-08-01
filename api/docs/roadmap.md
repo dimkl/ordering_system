@@ -17,4 +17,4 @@
 - [x] Update / Add ingredients in products of order
 - [ ] Preselected product variations
 - [ ] Preselected ingredients for product variations
-- [ ] Support comments in order and order items
+- [x] Support comments in order and order items

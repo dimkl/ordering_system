@@ -58,6 +58,7 @@ export interface OrderItem {
   quantity: number;
   product_id: string;
   state: "draft" | "placed" | "prepared" | "delivered" | "canceled";
+  comments: string;
   product_snapshot:
     | {
         product: {

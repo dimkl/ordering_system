@@ -40,6 +40,9 @@
     },
     "product_snapshot": {
       "type": "object"
+    },
+    "comments": {
+      "type": "string"
     }
   },
   "required": ["order_id", "product_id"],

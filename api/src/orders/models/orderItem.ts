@@ -17,6 +17,10 @@ export class OrderItem extends BaseModel {
     return schema;
   }
 
+  static get jsonAttributes() {
+    return ["product_snapshot"];
+  }
+
   static get public_columns() {
     return Object.keys(schema.properties);
   }
@@ -54,4 +58,18 @@ export interface OrderItem {
   quantity: number;
   product_id: string;
   state: "draft" | "placed" | "prepared" | "delivered" | "canceled";
+  product_snapshot:
+    | {
+        product: {
+          id: string;
+          title: string;
+          description: string;
+          qr: string;
+        };
+        ingredients: {
+          id: string;
+          title: string;
+        }[];
+      }
+    | undefined;
 }

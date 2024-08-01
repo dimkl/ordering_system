@@ -1,5 +1,6 @@
 {
   "get": {
+    "tags": ["Shops"],
     "summary": "Retrieve Shops",
     "operationId": "shopsRead",
     "responses": {

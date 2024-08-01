@@ -1,5 +1,6 @@
 {
   "get": {
+    "tags": ["TimeSlots"],
     "summary": "Retrieve Available TimeSlots",
     "operationId": "timeSlotAvailable",
     "parameters": [

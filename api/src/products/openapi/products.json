@@ -1,5 +1,6 @@
 {
   "get": {
+    "tags": ["Products"],
     "summary": "Retrieve Products",
     "operationId": "productsRead",
     "responses": {
@@ -22,6 +23,7 @@
     }
   },
   "post": {
+    "tags": ["Products"],
     "summary": "Create Product(s)",
     "operationId": "productCreate",
     "responses": {

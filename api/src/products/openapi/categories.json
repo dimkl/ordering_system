@@ -1,5 +1,6 @@
 {
   "get": {
+    "tags": ["Categories"],
     "summary": "Retrieve Categories",
     "operationId": "categoriesRead",
     "responses": {
@@ -22,6 +23,7 @@
     }
   },
   "post": {
+    "tags": ["Categories"],
     "summary": "Create Category",
     "operationId": "categoryCreate",
     "responses": {

@@ -1,5 +1,6 @@
 {
   "get": {
+    "tags": ["Products"],
     "summary": "Retrieve Product",
     "operationId": "productRead",
     "parameters": {

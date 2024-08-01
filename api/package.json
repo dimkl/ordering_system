@@ -62,7 +62,7 @@
   },
   "devDependencies": {
     "@flydotio/dockerfile": "^0.5.8",
-    "@redocly/cli": "^1.18.1",
+    "@redocly/cli": "^1.19.0",
     "@types/ajv": "^1.0.0",
     "@types/bcrypt": "^5.0.0",
     "@types/jest": "^29.5.1",

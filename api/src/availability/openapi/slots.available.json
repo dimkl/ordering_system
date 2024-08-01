@@ -1,5 +1,6 @@
 {
   "get": {
+    "tags": ["Slots"],
     "summary": "Retrieve Available Slots",
     "operationId": "slotAvailable",
     "parameters": [

@@ -1,5 +1,6 @@
 {
   "patch": {
+    "tags": ["Slots"],
     "summary": "Update Slot",
     "operationId": "slotUpdate",
     "parameters": {
@@ -22,6 +23,7 @@
     }
   },
   "get": {
+    "tags": ["Slots"],
     "summary": "Retrieve Slot",
     "operationId": "slotRead",
     "parameters": {
@@ -44,6 +46,7 @@
     }
   },
   "delete": {
+    "tags": ["Slots"],
     "summary": "Release Slot",
     "operationId": "slotRelease",
     "parameters": {

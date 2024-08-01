@@ -1,5 +1,6 @@
 {
   "get": {
+    "tags": ["Ingredients"],
     "summary": "Retrieve Ingredient",
     "operationId": "ingredientRead",
     "parameters": {

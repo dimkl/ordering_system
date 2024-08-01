@@ -1,5 +1,6 @@
 {
   "get": {
+    "tags": ["Ingredients"],
     "summary": "Retrieve Ingredients",
     "operationId": "ingredientsRead",
     "responses": {
@@ -22,6 +23,7 @@
     }
   },
   "post": {
+    "tags": ["Ingredients"],
     "summary": "Create Ingredient(s)",
     "operationId": "ingredientCreate",
     "responses": {

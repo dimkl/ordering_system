@@ -1,5 +1,6 @@
 {
   "patch": {
+    "tags": ["TimeSlots"],
     "summary": "Update TimeSlot",
     "operationId": "timeSlotUpdate",
     "parameters": {
@@ -22,6 +23,7 @@
     }
   },
   "get": {
+    "tags": ["TimeSlots"],
     "summary": "Retrieve TimeSlot",
     "operationId": "timeSlotRead",
     "parameters": {
@@ -44,6 +46,7 @@
     }
   },
   "delete": {
+    "tags": ["TimeSlots"],
     "summary": "Release TimeSlot",
     "operationId": "timeSlotRelease",
     "parameters": {

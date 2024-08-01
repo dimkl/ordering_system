@@ -86,5 +86,16 @@
       }
     }
   },
+  "tags": [
+    { "name": "Slots" },
+    { "name": "TimeSlots" },
+    { "name": "Orders" },
+    { "name": "OrderItems" },
+    { "name": "Orders" },
+    { "name": "Products" },
+    { "name": "Ingredients" },
+    { "name": "Categories" },
+    { "name": "Shops" }
+  ],
   "security": [{ "bearerAuth": [] }, { "cookieAuth": [] }]
 }

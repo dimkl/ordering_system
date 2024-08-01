@@ -1,5 +1,6 @@
 {
   "post": {
+    "tags": ["Products"],
     "summary": "Create Variation(s)",
     "operationId": "variationCreate",
     "responses": {

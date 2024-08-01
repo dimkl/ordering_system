@@ -1,19 +1,19 @@
 import Router from "koa-router";
 
-import { ControllerFactory } from "../shared/controllerFactory";
+import { createController } from "../shared/controller";
 
 import { loadOrderItem } from "./helpers/loadOrderItem";
 import { loadOrder } from "./helpers/loadOrder";
 
-import * as listController from "./controllers/list";
-import * as createController from "./controllers/create";
-import * as updateController from "./controllers/update";
-import * as deleteController from "./controllers/delete";
-import * as transitionController from "./controllers/transition";
-import * as addOrderItemController from "./controllers/addOrderItem";
-import * as removeOrderItemController from "./controllers/removeOrderItem";
-import * as updateOrderItemController from "./controllers/updateOrderItem";
-import * as transitionOrderItemController from "./controllers/transitionOrderItem";
+import * as listControllerParams from "./controllers/list";
+import * as createControllerParams from "./controllers/create";
+import * as updateControllerParams from "./controllers/update";
+import * as deleteControllerParams from "./controllers/delete";
+import * as transitionControllerParams from "./controllers/transition";
+import * as addOrderItemControllerParams from "./controllers/addOrderItem";
+import * as removeOrderItemControllerParams from "./controllers/removeOrderItem";
+import * as updateOrderItemControllerParams from "./controllers/updateOrderItem";
+import * as transitionOrderItemControllerParams from "./controllers/transitionOrderItem";
 
 export const router = new Router();
 
@@ -21,66 +21,66 @@ router.param("order_id", loadOrder).param("order_item_id", loadOrderItem);
 
 router.get(
   "/orders",
-  ControllerFactory.create({
-    ...listController,
+  createController({
+    ...listControllerParams,
     scopes: ["urn:orders:r"]
   })
 );
 router.get(
   "/orders/:order_id",
-  ControllerFactory.create({
-    ...listController,
+  createController({
+    ...listControllerParams,
     scopes: ["urn:orders:r"]
   })
 );
-router.post("/orders", ControllerFactory.create(createController));
+router.post("/orders", createController(createControllerParams));
 router.patch(
   "/orders/:order_id",
-  ControllerFactory.create({
-    ...updateController,
+  createController({
+    ...updateControllerParams,
     scopes: ["urn:orders:u"]
   })
 );
 router.delete(
   "/orders/:order_id",
-  ControllerFactory.create({
-    ...deleteController,
+  createController({
+    ...deleteControllerParams,
     scopes: ["urn:orders:d"]
   })
 );
 router.post(
   "/orders/:order_id/:action",
-  ControllerFactory.create({
-    ...transitionController,
+  createController({
+    ...transitionControllerParams,
     scopes: ["urn:orders:t"]
   })
 );
 
 router.post(
   "/order_items",
-  ControllerFactory.create({
-    ...addOrderItemController,
+  createController({
+    ...addOrderItemControllerParams,
     scopes: ["urn:order_items:c"]
   })
 );
 router.post(
   "/order_items/:order_item_id/:action",
-  ControllerFactory.create({
-    ...transitionOrderItemController,
+  createController({
+    ...transitionOrderItemControllerParams,
     scopes: ["urn:order_items:t"]
   })
 );
 router.delete(
   "/order_items/:order_item_id",
-  ControllerFactory.create({
-    ...removeOrderItemController,
+  createController({
+    ...removeOrderItemControllerParams,
     scopes: ["urn:order_items:d"]
   })
 );
 router.patch(
   "/order_items/:order_item_id",
-  ControllerFactory.create({
-    ...updateOrderItemController,
+  createController({
+    ...updateOrderItemControllerParams,
     scopes: ["urn:order_items:u"]
   })
 );

@@ -1,7 +1,7 @@
 import type { Context } from "koa";
 import Router from "koa-router";
 
-import { ControllerFactory } from "../shared/controllerFactory";
+import { createController } from "../shared/controller";
 
 export const router = new Router();
 
@@ -16,4 +16,4 @@ export const handler = async (ctx: Context) => {
   }
 };
 
-router.get("/health", ControllerFactory.create({ handler }));
+router.get("/health", createController({ handler }));

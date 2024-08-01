@@ -1,11 +1,11 @@
 import Router from "koa-router";
 
-import { ControllerFactory } from "../shared/controllerFactory";
+import { createController } from "../shared/controller";
 
-import * as listController from "./controllers/list";
-import * as createController from "./controllers/create";
-import * as updateController from "./controllers/update";
-import * as deleteController from "./controllers/delete";
+import * as listControllerParams from "./controllers/list";
+import * as createControllerParams from "./controllers/create";
+import * as updateControllerParams from "./controllers/update";
+import * as deleteControllerParams from "./controllers/delete";
 
 import { loadCustomer } from "./helpers/loadCustomer";
 
@@ -16,21 +16,21 @@ router.param("customer_id", loadCustomer);
 
 router.get(
   "/customers",
-  ControllerFactory.create({ ...listController, scopes: ["urn:customers:r"] })
+  createController({ ...listControllerParams, scopes: ["urn:customers:r"] })
 );
 router.get(
   "/customers/:customer_id",
-  ControllerFactory.create({ ...listController, scopes: ["urn:customers:r"] })
+  createController({ ...listControllerParams, scopes: ["urn:customers:r"] })
 );
 router.post(
   "/customers",
-  ControllerFactory.create({ ...createController, scopes: ["urn:customers:c"] })
+  createController({ ...createControllerParams, scopes: ["urn:customers:c"] })
 );
 router.patch(
   "/customers/:customer_id",
-  ControllerFactory.create({ ...updateController, scopes: ["urn:customers:u"] })
+  createController({ ...updateControllerParams, scopes: ["urn:customers:u"] })
 );
 router.delete(
   "/customers/:customer_id",
-  ControllerFactory.create({ ...deleteController, scopes: ["urn:customers:d"] })
+  createController({ ...deleteControllerParams, scopes: ["urn:customers:d"] })
 );

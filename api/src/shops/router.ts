@@ -1,9 +1,9 @@
 import Router from "koa-router";
 
-import { ControllerFactory } from "../shared/controllerFactory";
+import { createController } from "../shared/controller";
 
-import * as menuController from "./controllers/menu";
-import * as listController from "./controllers/list";
+import * as menuControllerParams from "./controllers/menu";
+import * as listControllerParams from "./controllers/list";
 
 import { loadShop } from "./helpers/loadShop";
 
@@ -11,6 +11,6 @@ export const router = new Router();
 
 router.param("shop_id", loadShop);
 
-router.get("/shops/:shop_id/menu", ControllerFactory.create(menuController));
-router.get("/shops", ControllerFactory.create(listController));
-router.get("/shops/:shop_id", ControllerFactory.create(listController));
+router.get("/shops/:shop_id/menu", createController(menuControllerParams));
+router.get("/shops", createController(listControllerParams));
+router.get("/shops/:shop_id", createController(listControllerParams));

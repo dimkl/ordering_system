@@ -1,18 +1,18 @@
 import Router from "koa-router";
 
-import { ControllerFactory } from "../shared/controllerFactory";
+import { createController } from "../shared/controller";
 
-import * as productListController from "./controllers/products/list";
-import * as productCreateController from "./controllers/products/create";
-import * as productAddIngredientController from "./controllers/products/addIngredient";
+import * as productListControllerParams from "./controllers/products/list";
+import * as productCreateControllerParams from "./controllers/products/create";
+import * as productAddIngredientControllerParams from "./controllers/products/addIngredient";
 
-import * as ingredientListController from "./controllers/ingredients/list";
-import * as ingredientCreateController from "./controllers/ingredients/create";
+import * as ingredientListControllerParams from "./controllers/ingredients/list";
+import * as ingredientCreateControllerParams from "./controllers/ingredients/create";
 
-import * as categoryListController from "./controllers/categories/list";
-import * as categoryCreateController from "./controllers/categories/create";
+import * as categoryListControllerParams from "./controllers/categories/list";
+import * as categoryCreateControllerParams from "./controllers/categories/create";
 
-import * as variationCreateController from "./controllers/variations/create";
+import * as variationCreateControllerParams from "./controllers/variations/create";
 
 import { loadProduct } from "./helpers/loadProduct";
 import { loadIngredient } from "./helpers/loadIngredient";
@@ -28,82 +28,82 @@ router
 
 router.post(
   "/products/ingredients",
-  ControllerFactory.create({
-    ...productAddIngredientController,
+  createController({
+    ...productAddIngredientControllerParams,
     scopes: ["urn:products:c"]
   })
 );
 
 router.get(
   "/products",
-  ControllerFactory.create({
-    ...productListController,
+  createController({
+    ...productListControllerParams,
     scopes: ["urn:products:r"]
   })
 );
 router.get(
   "/products/:product_id",
-  ControllerFactory.create({
-    ...productListController,
+  createController({
+    ...productListControllerParams,
     scopes: ["urn:products:r"]
   })
 );
 router.post(
   "/products",
-  ControllerFactory.create({
-    ...productCreateController,
+  createController({
+    ...productCreateControllerParams,
     scopes: ["urn:products:c"]
   })
 );
 
 router.post(
   "/variations",
-  ControllerFactory.create({
-    ...variationCreateController,
+  createController({
+    ...variationCreateControllerParams,
     scopes: ["urn:products:c"]
   })
 );
 
 router.get(
   "/ingredients",
-  ControllerFactory.create({
-    ...ingredientListController,
+  createController({
+    ...ingredientListControllerParams,
     scopes: ["urn:ingredients:r"]
   })
 );
 router.get(
   "/ingredients/:ingredient_id",
-  ControllerFactory.create({
-    ...ingredientListController,
+  createController({
+    ...ingredientListControllerParams,
     scopes: ["urn:ingredients:r"]
   })
 );
 router.post(
   "/ingredients",
-  ControllerFactory.create({
-    ...ingredientCreateController,
+  createController({
+    ...ingredientCreateControllerParams,
     scopes: ["urn:ingredients:c"]
   })
 );
 
 router.get(
   "/categories",
-  ControllerFactory.create({
-    ...categoryListController,
+  createController({
+    ...categoryListControllerParams,
     scopes: ["urn:categories:r"]
   })
 );
 router.get(
   "/categories/:category_id",
-  ControllerFactory.create({
-    ...categoryListController,
+  createController({
+    ...categoryListControllerParams,
     scopes: ["urn:categories:r"]
   })
 );
 router.post(
   "/categories",
-  ControllerFactory.create({
-    ...categoryCreateController,
+  createController({
+    ...categoryCreateControllerParams,
     scopes: ["urn:categories:c"]
   })
 );

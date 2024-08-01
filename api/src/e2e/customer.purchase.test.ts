@@ -15,8 +15,14 @@ describe("Customer purchase flow", () => {
   it("completes process", async () => {
     const customer = await DataFactory.createCustomer();
     const { section, user, ...slot } = await DataFactory.createSlot();
-    await DataFactory.createProductAvailability({}, {}, section.shop, user);
-    await DataFactory.createProductAvailability({}, {}, section.shop, user);
+
+    const { product: p1 } = await DataFactory.createProductAvailability({}, {}, section.shop, user);
+    await DataFactory.createProductIngredient({}, p1);
+    await DataFactory.createProductIngredient({}, p1);
+
+    const { product: p2 } = await DataFactory.createProductAvailability({}, {}, section.shop, user);
+    await DataFactory.createProductIngredient({}, p2);
+    await DataFactory.createProductIngredient({}, p2);
 
     let response;
 
@@ -59,6 +65,18 @@ describe("Customer purchase flow", () => {
     response = await request
       .post(`/${apiVersion}/order_items`)
       .send({ order_id: orderId, product_id: product2.id })
+      .set("Accept", "application/json");
+    expect(response.status).toBe(200);
+
+    // create custom variation of product in orderItem
+    const ingredientsDiff = ["+" + product1.ingredients[0].id, "-" + product2.ingredients[0].id];
+    response = await request
+      .post(`/${apiVersion}/order_items`)
+      .send({
+        order_id: orderId,
+        product_id: product2.id,
+        ingredients: ingredientsDiff
+      })
       .set("Accept", "application/json");
     expect(response.status).toBe(200);
     const orderItems = response.body.order_items;

@@ -21,6 +21,15 @@
       "type": "string",
       "minLength": 30,
       "maxLength": 30
+    },
+    "ingredients": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 30,
+        "maxLength": 31
+      },
+      "minItems": 1
     }
   },
   "required": ["order_id", "product_id"],

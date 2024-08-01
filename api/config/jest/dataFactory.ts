@@ -45,7 +45,7 @@ export class DataFactory {
         title: "Product",
         sku: "product-code-1",
         description: "Product description",
-        id: "prd+" + ulid(),
+        id: "prd_" + ulid(),
         ...options
       });
 

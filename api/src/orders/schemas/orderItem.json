@@ -37,6 +37,9 @@
     "state": {
       "$ref": "#/definitions/state",
       "default": "draft"
+    },
+    "product_snapshot": {
+      "type": "object"
     }
   },
   "required": ["order_id", "product_id"],

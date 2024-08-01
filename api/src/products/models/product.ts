@@ -75,6 +75,15 @@ export class Product extends BaseModel {
       .withGraphFetched("[ingredients(publicColumns), variations.ingredients(publicColumns)]")
       .findById(productId);
   }
+
+  toSnapshot() {
+    return {
+      id: this.id,
+      title: this.title,
+      description: this.description,
+      qr: this.qr
+    };
+  }
 }
 
 export interface Product {

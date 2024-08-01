@@ -19,6 +19,13 @@ export class Ingredient extends BaseModel {
   get idPrefix() {
     return "ing";
   }
+
+  toSnapshot() {
+    return {
+      id: this.id,
+      title: this.title
+    };
+  }
 }
 
 type SuitableForDiet =

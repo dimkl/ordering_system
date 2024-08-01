@@ -27,9 +27,9 @@ export class Shop extends BaseModel {
       ...super.modifiers,
       availableProducts(query) {
         query
-          .join("product_availability", "product_availability.shop_id", "=", "shops.id")
           .withGraphJoined("products")
-          .where("product_availability.quantity", ">", 0);
+          .withGraphJoined("products.ingredients")
+          .where("quantity", ">", 0);
       }
     };
   }

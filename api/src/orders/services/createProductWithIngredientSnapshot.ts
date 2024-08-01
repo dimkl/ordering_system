@@ -12,19 +12,19 @@ export class CreateProductWithIngredientSnapshot {
 
   async process(
     orderItem: OrderItem | undefined,
-    ingredirentsDiff: string[]
+    ingredirentsDiff: string[] = []
   ): Promise<ProductWithIngredientSnapshot | undefined> {
-    // @ts-expect-error ingredients are prefetched but the type is not correct
-    const { ingredients, ...product } = await Product.findWithIngredients(this.#productId);
-    if (!product) return;
+    const productWithIngredients = await Product.findWithIngredients(this.#productId);
+    if (!productWithIngredients) return;
 
-    const ingredientsSnapshot = (ingredients || []).map((i) => {
+    // @ts-expect-error ingredients are prefetched but the type is not correct
+    const ingredientsSnapshot = (productWithIngredients.ingredients || []).map((i) => {
       return { id: i.id, title: i.title };
     });
 
     const result = {
-      product,
-      ingredients: orderItem ? orderItem.product_snapshot : ingredientsSnapshot
+      product: productWithIngredients.toSnapshot(),
+      ingredients: orderItem?.product_snapshot?.ingredients || ingredientsSnapshot
     };
 
     if (ingredirentsDiff.length == 0) return result;
@@ -40,12 +40,15 @@ export class CreateProductWithIngredientSnapshot {
         result.ingredients = result.ingredients.filter((i) => i.id !== ingId);
         return;
       }
+
       if (result.ingredients.find((i) => i.id === ingId)) {
         return;
       }
 
       const ingredient = variationIngredients.find((i) => i.id === ingId);
-      result.ingredients.push(ingredient);
+      if (ingredient) {
+        result.ingredients.push(ingredient.toSnapshot());
+      }
     });
 
     return result;

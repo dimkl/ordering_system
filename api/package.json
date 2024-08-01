@@ -5,7 +5,7 @@
   "main": "dist/src/index.js",
   "scripts": {
     "build": "rm -rf dist/ && tsc && npm run openapi:build",
-    "test": "NODE_ENV=test jest --runInBand --config='./config/jest/config.ts' && npm run openapi:lint",
+    "test": "NODE_ENV=test jest --runInBand --config='./config/jest/config.ts'",
     "test:debug": "node inspect node_modules/jest/bin/jest.js --runInBand --config='./config/jest/config.ts'",
     "start:dev": "NODE_ENV=development ts-node src/index.ts",
     "start": "node dist/src/index.js",

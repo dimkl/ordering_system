@@ -7,5 +7,5 @@ export const handler = async (ctx: Context, next: Next) => {
     ctx.body = ctx.product;
     return next();
   }
-  ctx.body = await Product.query().modify(["publicColumns", "joinVariations"]);
+  ctx.body = await Product.query().modify(["publicColumns", "variations"]);
 };

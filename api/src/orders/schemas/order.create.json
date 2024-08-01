@@ -29,6 +29,9 @@
       "type": "string",
       "minLength": 30,
       "maxLength": 30
+    },
+    "comments": {
+      "type": "string"
     }
   },
   "oneOf": [

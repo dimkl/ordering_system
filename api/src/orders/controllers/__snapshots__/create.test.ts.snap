@@ -2,6 +2,7 @@
 
 exports[`POST /orders creates and returns a order 1`] = `
 {
+  "comments": null,
   "created_at": Any<String>,
   "customer_id": Any<String>,
   "id": Any<String>,
@@ -13,6 +14,7 @@ exports[`POST /orders creates and returns a order 1`] = `
 
 exports[`POST /orders creates and returns bulk orders 1`] = `
 {
+  "comments": null,
   "created_at": Any<String>,
   "customer_id": Any<String>,
   "id": Any<String>,
@@ -24,6 +26,7 @@ exports[`POST /orders creates and returns bulk orders 1`] = `
 
 exports[`POST /orders creates and returns bulk orders 2`] = `
 {
+  "comments": null,
   "created_at": Any<String>,
   "customer_id": Any<String>,
   "id": Any<String>,

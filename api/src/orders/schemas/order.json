@@ -32,11 +32,12 @@
       "type": "string",
       "minLength": 30,
       "maxLength": 30
+    },
+    "comments": {
+      "type": "string"
     }
   },
-  "required": [
-    "time_slot_id"
-  ],
+  "required": ["time_slot_id"],
   "definitions": {
     "state": {
       "enum": [

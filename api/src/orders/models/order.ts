@@ -102,6 +102,7 @@ export interface Order {
   updated_at: Date;
   customer_id: string;
   time_slot_id: string;
+  comments: string;
   state:
     | "draft"
     | "placed"

@@ -13,7 +13,7 @@
 - [x] View shop menu as Guest
     - [ ] Support product with images
 - [x] Create order with products from shop menu as Guest
-- [ ] Update/Add product in order
+- [x] Update/Add product in order
 - [ ] Update quantity of products in order
 - [ ] Update / Add ingredients in products of order
 - [ ] Preselected product variations

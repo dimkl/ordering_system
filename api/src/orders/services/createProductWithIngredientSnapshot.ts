@@ -51,6 +51,9 @@ export class CreateProductWithIngredientSnapshot {
       }
     });
 
+    // sort ingredients using the sortable ids (can be used for checksum)
+    result.ingredients = result.ingredients.sort((i) => i.id);
+
     return result;
   }
 }

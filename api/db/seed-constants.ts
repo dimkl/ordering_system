@@ -1,65 +1,65 @@
 import { ulid } from "ulid";
 
 export const customerIds = {
-  First: ulid(),
-  Second: ulid()
+  First: "cus_" + ulid(),
+  Second: "cus_" + ulid()
 };
 
 export const userIds = {
-  First: ulid(),
-  Second: ulid()
+  First: "usr_" + ulid(),
+  Second: "usr_" + ulid()
 };
 
 export const categoriIds = {
-  Starters: ulid(),
-  Breakfast: ulid(),
-  Main: ulid(),
-  Dessert: ulid(),
-  Beverage: ulid()
+  Starters: "cat_" + ulid(),
+  Breakfast: "cat_" + ulid(),
+  Main: "cat_" + ulid(),
+  Dessert: "cat_" + ulid(),
+  Beverage: "cat_" + ulid()
 };
 
 export const productIds = {
-  Product1: ulid(),
-  Variant1: ulid(),
-  Variant2: ulid()
+  Product1: "prd_" + ulid(),
+  Variant1: "prd_" + ulid(),
+  Variant2: "prd_" + ulid()
 };
 
 export const shopIds = {
-  Shop1: ulid()
+  Shop1: "shp_" + ulid()
 };
 
 export const sectionIds = {
-  Section1: ulid()
+  Section1: "sec_" + ulid()
 };
 
 export const slotIds = {
-  Table1: ulid()
+  Table1: "slt_" + ulid()
 };
 
 export const timeSlotIds = {
-  TimeSlot1: ulid()
+  TimeSlot1: "tms_" + ulid()
 };
 
 export const orderIds = {
-  Draft: ulid()
+  Draft: "ord_" + ulid()
 };
 
 export const orderItemIds = {
-  Item1: ulid()
+  Item1: "ort_" + ulid()
 };
 
 export const ingredientIds = {
-  Ingredient1: ulid()
+  Ingredient1: "ing_" + ulid()
 };
 
 export const holidayIds = {
-  NewYear: ulid()
+  NewYear: "hol_" + ulid()
 };
 
 export const productAvailabilityIds = {
-  Product1Shop1: ulid()
+  Product1Shop1: "pra_" + ulid()
 };
 
 export const productIngredientIds = {
-  Product1Ingredient1: ulid()
+  Product1Ingredient1: "pri_" + ulid()
 };

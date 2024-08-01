@@ -26,7 +26,8 @@ export class Product extends BaseModel {
           to: "ingredients.id",
           through: {
             from: "product_ingredients.product_id",
-            to: "product_ingredients.ingredient_id"
+            to: "product_ingredients.ingredient_id",
+            extra: ["selection_type"]
           }
         }
       },
@@ -58,6 +59,11 @@ export class Product extends BaseModel {
       ...super.modifiers,
       variations(query) {
         query.withGraphJoined("variations").where("products.variant_id", "is", null);
+      },
+      excludeExtraIngredients(query) {
+        query
+          .withGraphJoined("ingredients(publicColumns)")
+          .whereIn("selection_type", ["primary", "primary_extra"]);
       }
     };
   }
@@ -65,7 +71,7 @@ export class Product extends BaseModel {
   static findWithIngredients(productId) {
     return this.query()
       .modify("publicColumns")
-      .withGraphFetched("ingredients(publicColumns)")
+      .withGraphJoined("ingredients(publicColumns)")
       .findById(productId);
   }
 

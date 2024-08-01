@@ -31,4 +31,8 @@ export interface ProductIngredient {
   updated_at: Date;
   ingredient_id: string;
   product_id: string;
+  // Used to identify if the ingredient is allowed to be as extra / both extra & primary / primary
+  selection_type: SelectionType;
 }
+
+type SelectionType = "primary" | "extra" | "primary_extra";

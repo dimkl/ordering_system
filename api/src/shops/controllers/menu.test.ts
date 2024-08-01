@@ -20,6 +20,7 @@ describe("GET /shops/:shop_id/menu", () => {
       product: product1
     } = await DataFactory.createProductAvailability();
     const { product: product2 } = await DataFactory.createProductAvailability({}, {}, shop, user);
+    const { ingredient } = await DataFactory.createProductIngredient({}, product1);
 
     const response = await request
       .get(`/${apiVersion}/shops/${shop.id}/menu`)
@@ -43,14 +44,27 @@ describe("GET /shops/:shop_id/menu", () => {
           id: product1.id,
           qr: null,
           sku: product1.sku,
-          title: product1.title
+          title: product1.title,
+          ingredients: expect.arrayContaining([
+            expect.objectContaining({
+              allergen: false,
+              created_at: expect.any(String),
+              description: "Ingredient description",
+              id: ingredient.id,
+              selection_type: "primary",
+              suitable_for_diet: "all",
+              title: ingredient.title,
+              updated_at: expect.any(String)
+            })
+          ])
         }),
         expect.objectContaining({
           description: product2.description,
           id: product2.id,
           qr: null,
           sku: product2.sku,
-          title: product2.title
+          title: product2.title,
+          ingredients: []
         })
       ])
     });

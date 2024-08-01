@@ -18,7 +18,9 @@ describe("Customer purchase flow", () => {
 
     const { product: p1 } = await DataFactory.createProductAvailability({}, {}, section.shop, user);
     await DataFactory.createProductIngredient({}, p1);
-    await DataFactory.createProductIngredient({}, p1);
+    await DataFactory.createProductIngredient({ selection_type: "primary_extra" }, p1);
+    // Should be ignored from menu product.ingredients
+    await DataFactory.createProductIngredient({ selection_type: "extra" }, p1);
 
     const { product: p2 } = await DataFactory.createProductAvailability({}, {}, section.shop, user);
     await DataFactory.createProductIngredient({}, p2);
@@ -45,6 +47,12 @@ describe("Customer purchase flow", () => {
 
     expect(response.status).toBe(200);
     expect(response.body.products.length).toBe(2);
+    expect(response.body.products[0].ingredients.length).toBe(2);
+    expect(response.body.products[1].ingredients.length).toBe(2);
+    expect(response.body.products[0].ingredients.map((i) => i.selection_type).sort()).toEqual([
+      "primary",
+      "primary_extra"
+    ]);
     const [product1, product2] = response.body.products;
 
     // 3. create order with order items

@@ -27,8 +27,8 @@ export class Shop extends BaseModel {
       ...super.modifiers,
       availableProducts(query) {
         query
-          .withGraphJoined("products")
           .withGraphJoined("products.ingredients")
+          .whereRaw("selection_type is null or selection_type in ('primary','primary_extra')")
           .where("quantity", ">", 0);
       }
     };

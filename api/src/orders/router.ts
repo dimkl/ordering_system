@@ -33,13 +33,7 @@ router.get(
     scopes: ["urn:orders:r"]
   })
 );
-router.post(
-  "/orders",
-  ControllerFactory.create({
-    ...createController,
-    scopes: ["urn:orders:c"]
-  })
-);
+router.post("/orders", ControllerFactory.create(createController));
 router.patch(
   "/orders/:order_id",
   ControllerFactory.create({

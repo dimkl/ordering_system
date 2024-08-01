@@ -13,9 +13,9 @@ export type TimeSlotReserveParams = {
 };
 export class TimeSlotReserve {
   static async process({ customerId, slotId, ...data }: TimeSlotReserveParams) {
-    const customer = (await Customer.query().findById(customerId)) as Customer;
-    if (!customer) {
-      throw new errors.NotFoundCustomerError(customerId);
+    let customer;
+    if (customerId) {
+      customer = (await Customer.query().findById(customerId)) as Customer;
     }
 
     const slot = (await Slot.query()
@@ -45,9 +45,10 @@ export class TimeSlotReserve {
       .modify("publicInsertColumns")
       .insert({
         ...snakeCaseKeys(data),
-        customer_id: customer.id,
+        customer_id: customer?.id,
         slot_id: slot.id
-      });
+      })
+      .first();
   }
 
   // https://stackoverflow.com/questions/143552/comparing-date-ranges

@@ -40,6 +40,9 @@
       "maxLength": 30
     }
   },
-  "required": ["started_at", "customer_id", "slot_id"],
+  "required": [
+    "started_at",
+    "slot_id"
+  ],
   "additionalProperties": false
 }

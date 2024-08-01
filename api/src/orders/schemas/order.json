@@ -34,7 +34,9 @@
       "maxLength": 30
     }
   },
-  "required": ["customer_id", "time_slot_id"],
+  "required": [
+    "time_slot_id"
+  ],
   "definitions": {
     "state": {
       "enum": [

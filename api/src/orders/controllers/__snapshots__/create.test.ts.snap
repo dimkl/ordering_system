@@ -66,11 +66,20 @@ exports[`POST /orders throws validation error for required properties 1`] = `
   {
     "instancePath": "",
     "keyword": "required",
-    "message": "must have required property 'customer_id'",
+    "message": "must have required property 'slot_id'",
     "params": {
-      "missingProperty": "customer_id",
+      "missingProperty": "slot_id",
     },
-    "schemaPath": "#/required",
+    "schemaPath": "#/oneOf/0/required",
+  },
+  {
+    "instancePath": "",
+    "keyword": "required",
+    "message": "must have required property 'started_at'",
+    "params": {
+      "missingProperty": "started_at",
+    },
+    "schemaPath": "#/oneOf/0/required",
   },
   {
     "instancePath": "",
@@ -79,7 +88,16 @@ exports[`POST /orders throws validation error for required properties 1`] = `
     "params": {
       "missingProperty": "time_slot_id",
     },
-    "schemaPath": "#/required",
+    "schemaPath": "#/oneOf/1/required",
+  },
+  {
+    "instancePath": "",
+    "keyword": "oneOf",
+    "message": "must match exactly one schema in oneOf",
+    "params": {
+      "passingSchemas": null,
+    },
+    "schemaPath": "#/oneOf",
   },
 ]
 `;

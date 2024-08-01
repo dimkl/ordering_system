@@ -16,8 +16,28 @@
       "type": "string",
       "minLength": 30,
       "maxLength": 30
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "ended_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "slot_id": {
+      "type": "string",
+      "minLength": 30,
+      "maxLength": 30
     }
   },
-  "required": ["customer_id", "time_slot_id"],
+  "oneOf": [
+    {
+      "required": ["slot_id", "started_at"]
+    },
+    {
+      "required": ["time_slot_id"]
+    }
+  ],
   "additionalProperties": false
 }

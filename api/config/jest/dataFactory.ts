@@ -29,7 +29,7 @@ export class DataFactory {
     const ingredients = await knex("ingredients")
       .returning("*")
       .insert<Ingredient[]>({
-        title: "Ingredient",
+        title: "Ingredient " + ulid(),
         description: "Ingredient description",
         id: "ing_" + ulid(),
         ...options

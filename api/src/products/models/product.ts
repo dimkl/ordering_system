@@ -58,7 +58,10 @@ export class Product extends BaseModel {
     return {
       ...super.modifiers,
       variations(query) {
-        query.withGraphJoined("variations").where("products.variant_id", "is", null);
+        query
+          .withGraphJoined("variations")
+          .where("products.variant_id", "is", null)
+          .orderBy("products.id");
       },
       excludeExtraIngredients(query) {
         query

@@ -28,8 +28,17 @@ export class Shop extends BaseModel {
       availableProducts(query) {
         query
           .withGraphJoined("products.ingredients")
-          .whereRaw("selection_type is null or selection_type in ('primary','primary_extra')")
-          .where("quantity", ">", 0);
+          .withGraphJoined("products(variations).variations.ingredients")
+          // TODO(dimkl): Refactor to use aliases or something maintanable. The currennt table names were retrieved by checking the query produced
+          .whereRaw(
+            "\"products:ingredients_join\".selection_type is null or \"products:ingredients_join\".selection_type in ('primary','primary_extra')"
+          )
+          // TODO(dimkl): Refactor to use aliases or something maintanable. The currennt table names were retrieved by checking the query produced
+          .whereRaw(
+            "\"products:variations:ingredients_join\".selection_type is null or \"products:variations:ingredients_join\".selection_type in ('primary','primary_extra')"
+          )
+          .where("quantity", ">", 0)
+          .orderBy("products.id");
       }
     };
   }

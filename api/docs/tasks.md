@@ -15,6 +15,15 @@
 - [ ] Add pre-commit hook to lint code
 - [ ] Investigate using turbo repo or an alternative to automate commands and deps
 - [ ] Drop customers endpoints as it's not used anywhere
+- [ ] Improve performance of shop menu by caching the response
+  - attempt#1 cache the whole shop depending on the updated_at column of shop / products / variations
+  - attempt#2 event sustem for resource updates that trigger cache updates in a background job (has delay in update propagation). events examples:
+    - shop:update
+    - ingredient:update
+    - product:update
+  - reduce the response payload (and the cached payload) by dropping un-necessary info eg
+    - ingredient.[created_at|updated_at]
+    -
 
 ## Production deployment
 

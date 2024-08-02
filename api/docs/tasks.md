@@ -23,7 +23,6 @@
     - product:update
   - reduce the response payload (and the cached payload) by dropping un-necessary info eg
     - ingredient.[created_at|updated_at]
-    -
 
 ## Production deployment
 

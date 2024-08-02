@@ -30,6 +30,9 @@ COPY --link . .
 # Build application
 RUN npm run build
 
+# Generate OpenAPI preview url for /openapi route
+RUN npm run openapi:build:html
+
 # Remove development dependencies
 RUN npm prune --omit=dev
 

@@ -18,8 +18,9 @@
     "db:seed:new": "knex seed:make --client pg --knexfile ./config/knexfile.ts",
     "setup": "npm run build && npm run db:migrate && npm run db:seed",
     "watch": "nodemon src/index.js",
-    "openapi:lint": "npm run openapi:build && redocly lint dist/openapi.json",
     "openapi:build": "redocly bundle --config=./redocly.yaml -o dist/openapi.json src/openapi.json",
+    "openapi:build:html": "npm run openapi:build && redocly build-docs dist/openapi.json -o dist/preview.html",
+    "openapi:lint": "npm run openapi:build && redocly lint dist/openapi.json",
     "openapi:preview": "npm run openapi:build && redocly build-docs dist/openapi.json -o dist/preview.html && open dist/preview.html"
   },
   "repository": {

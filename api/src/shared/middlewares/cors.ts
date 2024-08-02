@@ -1,9 +1,9 @@
 export const cors = (origins: string[]) => {
   return (ctx, next) => {
     const origin = ctx.headers["origin"] || "";
-    if (!origins.includes(origin)) {
-      return;
-    }
+    // if (!origins.includes(origin)) {
+    //   return;
+    // }
 
     const headers = ctx.response.headers;
     headers["Acess-Control-Allow-Origin"] = origin;

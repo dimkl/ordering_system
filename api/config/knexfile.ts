@@ -1,7 +1,7 @@
 import dotenvFlow from "dotenv-flow";
 
 if (process.env.NODE_ENV === "development") {
-  dotenvFlow.config({ path: __dirname + "/../../" });
+  dotenvFlow.config({ path: __dirname + "/.." });
 } else {
   dotenvFlow.config();
 }

@@ -19,7 +19,7 @@
     "resolveJsonModule": true,
 
     /* Type Checking */
-    "strict": true /* Enable all strict type-checking options. */,
+    "strict": true /* Enable all strict type-checking options. */
   },
   "include": ["src/**/*.ts", "config/**/*.ts", "db/**/*.ts", "global.d.ts"]
 }

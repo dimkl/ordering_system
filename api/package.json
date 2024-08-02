@@ -7,7 +7,7 @@
     "build": "rm -rf dist/ && tsc",
     "test": "NODE_ENV=test jest --runInBand --config='./config/jest/config.ts'",
     "test:debug": "node inspect node_modules/jest/bin/jest.js --runInBand --config='./config/jest/config.ts'",
-    "start:dev": "NODE_ENV=development ts-node src/index.ts",
+    "start:dev": "npm run openapi:build:html && NODE_ENV=development ts-node src/index.ts",
     "start": "node dist/src/index.js",
     "debug": "node inspect src/index.js",
     "db:migrate": "knex migrate:latest --knexfile ./dist/config/knexfile.js",
@@ -19,9 +19,9 @@
     "setup": "npm run build && npm run db:migrate && npm run db:seed",
     "watch": "nodemon src/index.js",
     "openapi:build": "redocly bundle --config=./redocly.yaml -o dist/openapi.json src/openapi.json",
-    "openapi:build:html": "npm run openapi:build && redocly build-docs dist/openapi.json -o preview.html",
+    "openapi:build:html": "npm run openapi:build && redocly build-docs dist/openapi.json -o dist/preview.html",
     "openapi:lint": "npm run openapi:build && redocly lint dist/openapi.json",
-    "openapi:preview": "npm run openapi:build && redocly build-docs dist/openapi.json -o preview.html && open preview.html"
+    "openapi:preview": "npm run openapi:build && redocly build-docs dist/openapi.json -o dist/preview.html"
   },
   "repository": {
     "type": "git",

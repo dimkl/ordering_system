@@ -13,8 +13,9 @@ router.get("/discovery", (ctx: Context) => {
   ctx.body = { schemas: discoveryApi.getSchemas() };
 });
 
+// I used module level variable to cache the file content and avoid reading it in every request
 // TODO(dimkl): expose it from redocly or using koa-static instead of reading the file
-const openAPIPreviewHtml = readFileSync(__dirname + "/../../preview.html").toString();
+const openAPIPreviewHtml = readFileSync(process.env.OPENAPI_PREVIEW_FILE_PATH || "").toString();
 
 router.get("/openapi", (ctx: Context) => {
   ctx.type = "text/html";

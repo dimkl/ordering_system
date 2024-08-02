@@ -52,3 +52,4 @@ jobs:
           CLERK_PUBLISHABLE_KEY: ${{ secrets.CLERK_PUBLISHABLE_KEY }}
           CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}
           MOCK_AUTH_REQUEST_SCOPES: "*"
+          OPENAPI_PREVIEW_FILE_PATH: "./src/preview.html"

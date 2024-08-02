@@ -108,4 +108,8 @@ export interface Product {
   // Original product ID that product variations depend
   variant_id: string;
   category_id: string;
+
+  // Used for stock functionality and menu
+  shop_id: string;
+  quantity: number;
 }

@@ -3,7 +3,7 @@ import type { Product, Ingredient, ProductIngredient } from "../../src/products/
 import type { Order, OrderItem } from "../../src/orders/models";
 import type { User } from "../../src/users/models/user";
 import type { Slot, TimeSlot } from "../../src/availability/models";
-import type { Shop, Section, ProductAvailability, Holiday } from "../../src/shops/models";
+import type { Shop, Section, Holiday } from "../../src/shops/models";
 
 import { ulid } from "ulid";
 
@@ -38,7 +38,15 @@ export class DataFactory {
     return ingredients[0];
   }
 
-  static async createProduct(options?: Partial<Product>) {
+  static async createProduct(
+    options?: Partial<Product>,
+    shop?: Partial<Shop>,
+    user?: Partial<User>
+  ) {
+    if (!shop?.id) {
+      shop = await this.createShop(shop);
+    }
+
     const products = await knex("products")
       .returning("*")
       .insert<Product[]>({
@@ -46,10 +54,12 @@ export class DataFactory {
         sku: "product-code-1",
         description: "Product description",
         id: "prd_" + ulid(),
+        quantity: 2,
+        shop_id: shop.id,
         ...options
       });
 
-    return products[0];
+    return { ...products[0], shop, user };
   }
 
   static async createOrder(
@@ -95,7 +105,9 @@ export class DataFactory {
     }
 
     if (!product?.id) {
-      product = await this.createProduct(product);
+      const user = order?.timeSlot?.slot?.user;
+      const shop = order?.timeSlot?.slot?.section?.shop;
+      product = await this.createProduct(product, shop, user);
     }
 
     const order_items = await knex("order_items")
@@ -131,15 +143,11 @@ export class DataFactory {
     return users[0];
   }
 
-  static async createShop(options?: Partial<Shop>, user?: Partial<User>) {
-    if (!user?.id) {
-      user = await this.createUser(user);
-    }
-
+  static async createShop(options?: Partial<Shop>) {
     const shops = await knex("shops")
       .returning("*")
       .insert<Shop[]>({
-        manager_id: user.id,
+        manager_id: null,
         name: "Shop",
         id: "shp_" + ulid(),
         opening_time: "15:00",
@@ -148,7 +156,7 @@ export class DataFactory {
         ...options
       });
 
-    return { ...shops[0], user } as Shop;
+    return { ...shops[0] } as Shop;
   }
 
   static async createSection(
@@ -161,7 +169,7 @@ export class DataFactory {
     }
 
     if (!shop?.id) {
-      shop = await this.createShop(shop, user);
+      shop = await this.createShop(shop);
     }
 
     const sections = await knex("sections")
@@ -236,13 +244,9 @@ export class DataFactory {
     return { ...time_slots[0], slot, customer } as TimeSlot;
   }
 
-  static async createHoliday(
-    options?: Partial<Holiday>,
-    shop?: Partial<Shop>,
-    user?: Partial<User>
-  ) {
+  static async createHoliday(options?: Partial<Holiday>, shop?: Partial<Shop>) {
     if (!shop?.id) {
-      shop = await this.createShop(shop, user);
+      shop = await this.createShop(shop);
     }
 
     const newYear = `${new Date().getUTCFullYear()}/12/31`;
@@ -255,31 +259,6 @@ export class DataFactory {
     });
 
     return { ...holidays[0], shop };
-  }
-
-  static async createProductAvailability(
-    options?: Partial<ProductAvailability>,
-    product?: Partial<Product>,
-    shop?: Partial<Shop>,
-    user?: Partial<User>
-  ) {
-    if (!shop?.id) {
-      shop = await this.createShop(shop, user);
-    }
-
-    if (!product?.id) {
-      product = await this.createProduct(product);
-    }
-
-    const productAvailability = await knex("product_availability").insert<ProductAvailability[]>({
-      shop_id: shop.id,
-      product_id: product.id,
-      quantity: 2,
-      id: "pra_" + ulid(),
-      ...options
-    });
-
-    return { ...productAvailability[0], shop, product };
   }
 
   static async createProductIngredient(

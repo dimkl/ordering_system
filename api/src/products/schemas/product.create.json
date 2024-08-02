@@ -31,6 +31,16 @@
       "type": "string",
       "minLength": 30,
       "maxLength": 30
+    },
+    "shop_id": {
+      "type": "string",
+      "minLength": 30,
+      "maxLength": 30
+    },
+    "quantity": {
+      "type": "integer",
+      "exclusiveMinimum": 0,
+      "default": 1
     }
   },
   "required": ["title", "sku"],

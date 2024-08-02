@@ -11,7 +11,7 @@ import setupModels from "../../../shared/setupModels";
 describe("POST /products/ingredients", () => {
   let knex: Knex;
   beforeAll(() => (knex = setupModels()));
-  beforeEach(() => knex.raw("truncate products, ingredients cascade;"));
+  beforeEach(() => knex.raw("truncate users, products, ingredients cascade;"));
   afterAll(() => knex.destroy());
 
   it("create product ingredient", async () => {

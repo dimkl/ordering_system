@@ -12,7 +12,7 @@ import setupModels from "../../../shared/setupModels";
 describe("POST /variations", () => {
   let knex: Knex;
   beforeAll(() => (knex = setupModels()));
-  beforeEach(() => knex.raw("truncate products, ingredients cascade;"));
+  beforeEach(() => knex.raw("truncate users, products, ingredients cascade;"));
   afterAll(() => knex.destroy());
 
   it("create product variation", async () => {
@@ -86,15 +86,18 @@ describe("POST /variations", () => {
 
   it("throws 422 when variant is an existing variation", async () => {
     const { ingredient, product } = await DataFactory.createProductIngredient();
-    const variation = await DataFactory.createProduct({
-      variant_id: product.id,
-      sku: "product-code-1-1"
-    });
+    const variation = await DataFactory.createProduct(
+      {
+        variant_id: product.id,
+        sku: "product-code-1-1"
+      },
+      product.shop,
+      product.user
+    );
     const ingredient2 = await DataFactory.createIngredient({
       title: "Ingredient 2"
     });
     await DataFactory.createProductIngredient({}, product, ingredient2);
-
     const response = await request
       .post(`/${apiVersion}/variations`)
       .send({

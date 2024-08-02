@@ -37,7 +37,7 @@ export class Shop extends BaseModel {
           .whereRaw(
             "\"products:variations:ingredients_join\".selection_type is null or \"products:variations:ingredients_join\".selection_type in ('primary','primary_extra')"
           )
-          .where("quantity", ">", 0)
+          .whereRaw('"products".quantity > 0')
           .orderBy("products.id");
       }
     };
@@ -46,15 +46,11 @@ export class Shop extends BaseModel {
   static get relationMappings() {
     return {
       products: {
-        relation: BaseModel.ManyToManyRelation,
+        relation: BaseModel.HasManyRelation,
         modelClass: __dirname + "/../../products/models/product",
         join: {
           from: "shops.id",
-          through: {
-            from: "product_availability.shop_id",
-            to: "product_availability.product_id"
-          },
-          to: "products.id"
+          to: "products.shop_id"
         }
       }
     };

@@ -16,13 +16,13 @@ describe("Customer purchase flow", () => {
     const customer = await DataFactory.createCustomer();
     const { section, user, ...slot } = await DataFactory.createSlot();
 
-    const { product: p1 } = await DataFactory.createProductAvailability({}, {}, section.shop, user);
+    const p1 = await DataFactory.createProduct({}, section.shop, user);
     await DataFactory.createProductIngredient({}, p1);
     await DataFactory.createProductIngredient({ selection_type: "primary_extra" }, p1);
     // Should be ignored from menu product.ingredients
     await DataFactory.createProductIngredient({ selection_type: "extra" }, p1);
 
-    const { product: p2 } = await DataFactory.createProductAvailability({}, {}, section.shop, user);
+    const p2 = await DataFactory.createProduct({}, section.shop, user);
     await DataFactory.createProductIngredient({}, p2);
     await DataFactory.createProductIngredient({}, p2);
 

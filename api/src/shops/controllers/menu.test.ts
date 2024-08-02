@@ -17,10 +17,11 @@ describe("GET /shops/:shop_id/menu", () => {
   it("returns shop menu with all products and their ingredients", async () => {
     const {
       shop: { user, ...shop },
-      product: product1
-    } = await DataFactory.createProductAvailability();
-    const { product: product2 } = await DataFactory.createProductAvailability({}, {}, shop, user);
+      ...product1
+    } = await DataFactory.createProduct();
+    const product2 = await DataFactory.createProduct({}, shop, user);
     const { ingredient } = await DataFactory.createProductIngredient({}, product1);
+
     // Should be ignored from the response
     await DataFactory.createProductIngredient({ selection_type: "extra" }, product1);
 
@@ -77,18 +78,13 @@ describe("GET /shops/:shop_id/menu", () => {
   it("returns shop menu with all products and their variations", async () => {
     const {
       shop: { user, ...shop },
-      product: product1
-    } = await DataFactory.createProductAvailability();
-    const { product: product2 } = await DataFactory.createProductAvailability({}, {}, shop, user);
+      ...product1
+    } = await DataFactory.createProduct();
+    const product2 = await DataFactory.createProduct({}, shop, user);
     const { ingredient } = await DataFactory.createProductIngredient({}, product1);
 
     // create 2 variations of 1st product
-    const { product: variation1 } = await DataFactory.createProductAvailability(
-      {},
-      { variant_id: product1.id },
-      shop,
-      user
-    );
+    const variation1 = await DataFactory.createProduct({ variant_id: product1.id }, shop, user);
     const { ingredient: variationIngredient } = await DataFactory.createProductIngredient(
       {},
       variation1
@@ -96,12 +92,7 @@ describe("GET /shops/:shop_id/menu", () => {
     // Should be ignored from the response
     await DataFactory.createProductIngredient({ selection_type: "extra" }, variation1);
 
-    const { product: variation2 } = await DataFactory.createProductAvailability(
-      {},
-      { variant_id: product1.id },
-      shop,
-      user
-    );
+    const variation2 = await DataFactory.createProduct({ variant_id: product1.id }, shop, user);
 
     const response = await request
       .get(`/${apiVersion}/shops/${shop.id}/menu`)

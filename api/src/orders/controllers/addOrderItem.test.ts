@@ -15,8 +15,13 @@ describe("POST /order_items", () => {
   afterAll(() => knex.destroy());
 
   it("creates and returns an order item", async () => {
-    const order = await DataFactory.createOrder();
-    const product = await DataFactory.createProduct();
+    const {
+      timeSlot: {
+        slot: { section }
+      },
+      ...order
+    } = await DataFactory.createOrder();
+    const product = await DataFactory.createProduct({}, section.shop, section.user);
 
     const response = await request
       .post(`/${apiVersion}/order_items`)
@@ -59,8 +64,13 @@ describe("POST /order_items", () => {
   });
 
   it("omits additional properties", async () => {
-    const order = await DataFactory.createOrder();
-    const product = await DataFactory.createProduct();
+    const {
+      timeSlot: {
+        slot: { section }
+      },
+      ...order
+    } = await DataFactory.createOrder();
+    const product = await DataFactory.createProduct({}, section.shop, section.user);
 
     const response = await request
       .post(`/${apiVersion}/order_items`)
@@ -100,8 +110,13 @@ describe("POST /order_items", () => {
 
   describe("when existing order_item exists", () => {
     it("updates quantity of existing order_item based on product_id", async () => {
-      const order = await DataFactory.createOrder();
-      const product = await DataFactory.createProduct();
+      const {
+        timeSlot: {
+          slot: { section }
+        },
+        ...order
+      } = await DataFactory.createOrder();
+      const product = await DataFactory.createProduct({}, section.shop, section.user);
       await DataFactory.createOrderItem({ quantity: 1 }, { id: order.id }, { id: product.id });
 
       const response = await request

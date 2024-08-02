@@ -56,10 +56,6 @@ export const holidayIds = {
   NewYear: "hol_" + ulid()
 };
 
-export const productAvailabilityIds = {
-  Product1Shop1: "pra_" + ulid()
-};
-
 export const productIngredientIds = {
   Product1Ingredient1: "pri_" + ulid()
 };

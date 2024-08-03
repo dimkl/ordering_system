@@ -17,11 +17,6 @@
       "minLength": 1,
       "maxLength": 255
     },
-    "qr": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 255
-    },
     "sku": {
       "type": "string",
       "minLength": 1,

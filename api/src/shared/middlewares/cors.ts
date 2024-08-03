@@ -1,6 +1,13 @@
+import { debug } from "debug";
+
+const debugLog = debug("api:error");
+
 export const cors = (origins: string[]) => {
   return (ctx, next) => {
     const origin = ctx.headers["origin"] || "";
+
+    debugLog("cors: allowed %v vs current%v", origins, origin);
+
     if (!origins.includes(origin)) {
       return;
     }

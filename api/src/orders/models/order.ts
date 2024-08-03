@@ -90,7 +90,7 @@ export class Order extends BaseModel {
             .orderBy("id", "asc");
         },
         selectProduct(builder) {
-          builder.select("id", "title", "description", "qr").orderBy("id", "asc");
+          builder.select("id", "title", "description").orderBy("id", "asc");
         }
       })
       .findById(orderId);

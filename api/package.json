@@ -19,7 +19,7 @@
     "db:seed:dev": "DOTENV_FLOW_PATH='/..' knex seed:run --knexfile ./config/knexfile.ts",
     "db:seed:new": "knex seed:make --client pg --knexfile ./config/knexfile.ts",
     "setup": "npm run build && npm run db:migrate && npm run db:seed",
-    "watch": "nodemon src/index.js",
+    "watch": "nodemon",
     "openapi:build": "redocly bundle --config=./redocly.yaml -o dist/openapi.json src/openapi.json",
     "openapi:build:html": "npm run openapi:build && redocly build-docs dist/openapi.json -o dist/preview.html",
     "openapi:lint": "npm run openapi:build && redocly lint dist/openapi.json",
@@ -42,8 +42,8 @@
   "homepage": "https://github.com/dimkl/ordering_system#readme",
   "dependencies": {
     "@dimkl/ajv-discovery-api": "^1.0.0",
-    "@dimkl/ajv-discovery-sdk": "^1.0.0",
     "@dimkl/clerk-koa": "^0.1.2",
+    "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",
     "bcrypt": "^5.0.1",
     "debug": "^4.3.4",

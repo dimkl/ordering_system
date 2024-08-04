@@ -32,7 +32,8 @@
   },
   "workspaces": [
     "api",
-    "client",
+    "waiter-app",
+    "user-app",
     "admin"
   ]
 }

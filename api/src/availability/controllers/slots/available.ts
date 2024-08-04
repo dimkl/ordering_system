@@ -2,6 +2,7 @@ import type { Context, Next } from "koa";
 
 import { Slot } from "../../models";
 import { BusinessError } from "../../../shared/errors";
+import { SlotSerilizer } from "../../serializers/slot";
 
 type SlotFilters = {
   capacity?: number;
@@ -9,6 +10,8 @@ type SlotFilters = {
   started_at?: string;
   ended_at?: string;
 };
+
+const serializer = new SlotSerilizer();
 
 export const handler = async (ctx: Context, next: Next) => {
   const filters = ctx.query as SlotFilters;
@@ -18,7 +21,7 @@ export const handler = async (ctx: Context, next: Next) => {
       throw new BusinessError(`Slot ${ctx.slot.id} is not available!`);
     }
 
-    ctx.body = ctx.slot;
+    ctx.body = (await serializer.serialize([ctx.slot]))[0];
     return next();
   }
 
@@ -39,5 +42,5 @@ export const handler = async (ctx: Context, next: Next) => {
     slotsQs = slotsQs.where("capacity", ">=", Number(filters.capacity));
   }
 
-  ctx.body = await slotsQs;
+  ctx.body = await serializer.serialize(await slotsQs);
 };

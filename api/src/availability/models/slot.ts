@@ -65,7 +65,7 @@ export class Slot extends BaseModel {
   }
 }
 
-export interface Slot {
+export interface SlotProperties {
   id: string;
   created_at: Date;
   updated_at: Date;
@@ -78,3 +78,5 @@ export interface Slot {
   user: User;
   section: Section;
 }
+
+export interface Slot extends SlotProperties {}

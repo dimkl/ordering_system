@@ -13,7 +13,6 @@
 
 - [ ] Support pricing per order and order_items
 - [ ] Add extra quantity of existing ingredient in order_item
-- [ ] Support price per extra ingredient in order_item
 - [ ] Add separate price for order
 
 ### V0
@@ -27,4 +26,5 @@
 - [x] Preselected product variations
 - [~] Preselected ingredients for product variations
 - [x] Support comments in order and order items
-- [ ] Introduce product shortcodes for easier selection
+- [ ] Support product shortcodes for easier selection
+- [ ] Support product and extra product ingredient prices

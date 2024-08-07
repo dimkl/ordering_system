@@ -7,7 +7,7 @@ describe("Shop", () => {
     describe("and shop opening_time is not defined", () => {
       it("returns undefined", () => {
         const shop = Shop.fromJson({
-          manager_id: 1,
+          manager_id: "usr_" + ulid(),
           name: "Shop",
           id: "shp_" + ulid(),
           opening_days: [6]
@@ -21,7 +21,7 @@ describe("Shop", () => {
     describe("when shop is not open on that date", () => {
       it("returns undefined", () => {
         const shop = Shop.fromJson({
-          manager_id: 1,
+          manager_id: "usr_" + ulid(),
           name: "Shop",
           id: "shp_" + ulid(),
           opening_time: "08:00:00Z",
@@ -37,7 +37,7 @@ describe("Shop", () => {
     describe("when shop is generally closed", () => {
       it("returns undefined", () => {
         const shop = Shop.fromJson({
-          manager_id: 1,
+          manager_id: "usr_" + ulid(),
           name: "Shop",
           id: "shp_" + ulid(),
           opening_time: "08:00:00Z"
@@ -52,7 +52,7 @@ describe("Shop", () => {
     describe("when shop is open", () => {
       it("returns opening_time as date", () => {
         const shop = Shop.fromJson({
-          manager_id: 1,
+          manager_id: "usr_" + ulid(),
           name: "Shop",
           id: "shp_" + ulid(),
           opening_time: "08:00:00Z",
@@ -69,7 +69,7 @@ describe("Shop", () => {
     describe("and shop closing_time is not defined", () => {
       it("returns undefined", () => {
         const shop = Shop.fromJson({
-          manager_id: 1,
+          manager_id: "usr_" + ulid(),
           name: "Shop",
           id: "shp_" + ulid(),
           opening_days: [6]
@@ -83,7 +83,7 @@ describe("Shop", () => {
     describe("when shop is not open on that date", () => {
       it("returns undefined", () => {
         const shop = Shop.fromJson({
-          manager_id: 1,
+          manager_id: "usr_" + ulid(),
           name: "Shop",
           id: "shp_" + ulid(),
           closing_time: "00:00:00Z",
@@ -99,7 +99,7 @@ describe("Shop", () => {
     describe("when shop is generally closed", () => {
       it("returns undefined", () => {
         const shop = Shop.fromJson({
-          manager_id: 1,
+          manager_id: "usr_" + ulid(),
           name: "Shop",
           id: "shp_" + ulid(),
           closing_time: "00:00:00Z"
@@ -114,7 +114,7 @@ describe("Shop", () => {
     describe("when shop is open", () => {
       it("returns closing_time as date", () => {
         const shop = Shop.fromJson({
-          manager_id: 1,
+          manager_id: "usr_" + ulid(),
           name: "Shop",
           id: "shp_" + ulid(),
           closing_time: "22:00:00Z",
@@ -128,7 +128,7 @@ describe("Shop", () => {
       describe("and closing_time is in early morning (< opening_time)", () => {
         it("returns closing_time as date in next day", () => {
           const shop = Shop.fromJson({
-            manager_id: 1,
+            manager_id: "usr_" + ulid(),
             name: "Shop",
             id: "shp_" + ulid(),
             opening_time: "08:00:00Z",
@@ -143,7 +143,7 @@ describe("Shop", () => {
         describe("and closing_time is the same as opening_time", () => {
           it("returns closing_time as date in next day (24h shops)", () => {
             const shop = Shop.fromJson({
-              manager_id: 1,
+              manager_id: "usr_" + ulid(),
               name: "Shop",
               id: "shp_" + ulid(),
               opening_time: "08:00:00Z",
@@ -163,7 +163,7 @@ describe("Shop", () => {
     describe("when endDate is before than startDate", () => {
       it("returns false", () => {
         const shop = Shop.fromJson({
-          manager_id: 1,
+          manager_id: "usr_" + ulid(),
           name: "Shop",
           id: "shp_" + ulid(),
           opening_time: "08:00:00Z",
@@ -180,7 +180,7 @@ describe("Shop", () => {
     describe("when endDate is empty and closingDate is before than startDate", () => {
       it("returns false", () => {
         const shop = Shop.fromJson({
-          manager_id: 1,
+          manager_id: "usr_" + ulid(),
           name: "Shop",
           id: "shp_" + ulid(),
           opening_time: "08:00:00Z",
@@ -196,7 +196,7 @@ describe("Shop", () => {
     describe("when shop.openingDate is undefined", () => {
       it("returns false", () => {
         const shop = Shop.fromJson({
-          manager_id: 1,
+          manager_id: "usr_" + ulid(),
           name: "Shop",
           id: "shp_" + ulid()
         });
@@ -212,7 +212,7 @@ describe("Shop", () => {
     describe("when shop.closingDate is undefined", () => {
       it("returns false", () => {
         const shop = Shop.fromJson({
-          manager_id: 1,
+          manager_id: "usr_" + ulid(),
           name: "Shop",
           opening_time: "08:00:00Z",
           opening_days: [6]
@@ -229,7 +229,7 @@ describe("Shop", () => {
     describe("when startDate is before opening_time", () => {
       it("returns false", () => {
         const shop = Shop.fromJson({
-          manager_id: 1,
+          manager_id: "usr_" + ulid(),
           name: "Shop",
           opening_time: "19:00:00Z",
           closing_time: "22:00:00Z",
@@ -246,7 +246,7 @@ describe("Shop", () => {
     describe("when startDate is before closing_time", () => {
       it("returns false", () => {
         const shop = Shop.fromJson({
-          manager_id: 1,
+          manager_id: "usr_" + ulid(),
           name: "Shop",
           opening_time: "19:00:00Z",
           closing_time: "22:00:00Z",
@@ -263,7 +263,7 @@ describe("Shop", () => {
     describe("when endDate is before opening_time", () => {
       it("returns false", () => {
         const shop = Shop.fromJson({
-          manager_id: 1,
+          manager_id: "usr_" + ulid(),
           name: "Shop",
           opening_time: "19:00:00Z",
           closing_time: "22:00:00Z",
@@ -280,7 +280,7 @@ describe("Shop", () => {
     describe("when endDate is after closing_time", () => {
       it("returns false", () => {
         const shop = Shop.fromJson({
-          manager_id: 1,
+          manager_id: "usr_" + ulid(),
           name: "Shop",
           opening_time: "19:00:00Z",
           closing_time: "22:00:00Z",
@@ -297,7 +297,7 @@ describe("Shop", () => {
     describe("when startDate and endDate is between opening_time and closing_time", () => {
       it("returns true", () => {
         const shop = Shop.fromJson({
-          manager_id: 1,
+          manager_id: "usr_" + ulid(),
           name: "Shop",
           opening_time: "19:00:00Z",
           closing_time: "22:00:00Z",
@@ -314,7 +314,7 @@ describe("Shop", () => {
     describe("when startDate and endDate is for opening_time and closing_time", () => {
       it("returns true", () => {
         const shop = Shop.fromJson({
-          manager_id: 1,
+          manager_id: "usr_" + ulid(),
           name: "Shop",
           opening_time: "19:00:00Z",
           closing_time: "22:00:00Z",

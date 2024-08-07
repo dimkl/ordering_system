@@ -146,7 +146,7 @@ export interface Shop {
   opening_time: string;
   closing_time: string;
   opening_days: number[];
-  manager_id: number;
+  manager_id: string;
 
   user?: User;
 }

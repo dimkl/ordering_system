@@ -36,8 +36,7 @@ describe("PATCH /order_items/:order_item_id", () => {
           product: {
             title: "Product",
             id: orderItem.product_id,
-            description: "Product description",
-            qr: null
+            description: "Product description"
           },
           quantity: 10,
           state: "draft"

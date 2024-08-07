@@ -30,7 +30,8 @@ describe("GET /slots/:shop_id/available/:slot_id?", () => {
       section_id: expect.any(String),
       user_id: expect.any(String),
       created_at: expect.any(String),
-      updated_at: expect.any(String)
+      updated_at: expect.any(String),
+      qr: expect.any(String)
     });
   });
 
@@ -59,7 +60,8 @@ describe("GET /slots/:shop_id/available/:slot_id?", () => {
       section_id: expect.any(String),
       user_id: expect.any(String),
       created_at: expect.any(String),
-      updated_at: expect.any(String)
+      updated_at: expect.any(String),
+      qr: expect.any(String)
     });
   });
 
@@ -239,14 +241,16 @@ describe("GET /slots/:shop_id/available/:slot_id?", () => {
       section_id: expect.any(String),
       user_id: expect.any(String),
       created_at: expect.any(String),
-      updated_at: expect.any(String)
+      updated_at: expect.any(String),
+      qr: expect.any(String)
     });
     expect(response.body[1]).toMatchSnapshot({
       id: expect.any(String),
       section_id: expect.any(String),
       user_id: expect.any(String),
       created_at: expect.any(String),
-      updated_at: expect.any(String)
+      updated_at: expect.any(String),
+      qr: expect.any(String)
     });
   });
 });

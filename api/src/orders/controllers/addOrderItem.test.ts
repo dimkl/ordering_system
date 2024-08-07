@@ -42,8 +42,7 @@ describe("POST /order_items", () => {
           product: {
             title: "Product",
             id: product.id,
-            description: "Product description",
-            qr: null
+            description: "Product description"
           },
           quantity: 1,
           state: "draft"
@@ -138,8 +137,7 @@ describe("POST /order_items", () => {
             product: {
               title: "Product",
               id: product.id,
-              description: "Product description",
-              qr: null
+              description: "Product description"
             },
             quantity: 3,
             state: "draft"

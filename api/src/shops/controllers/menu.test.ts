@@ -47,7 +47,6 @@ describe("GET /shops/:shop_id/menu", () => {
         expect.objectContaining({
           description: product1.description,
           id: product1.id,
-          qr: null,
           sku: product1.sku,
           title: product1.title,
           ingredients: expect.arrayContaining([
@@ -66,7 +65,6 @@ describe("GET /shops/:shop_id/menu", () => {
         expect.objectContaining({
           description: product2.description,
           id: product2.id,
-          qr: null,
           sku: product2.sku,
           title: product2.title,
           ingredients: []
@@ -115,14 +113,12 @@ describe("GET /shops/:shop_id/menu", () => {
       expect.objectContaining({
         description: product1.description,
         id: product1.id,
-        qr: null,
         sku: product1.sku,
         title: product1.title,
         variations: expect.arrayContaining([
           expect.objectContaining({
             description: variation1.description,
             id: variation1.id,
-            qr: null,
             sku: variation1.sku,
             title: variation1.title,
             variant_id: product1.id,
@@ -142,7 +138,6 @@ describe("GET /shops/:shop_id/menu", () => {
           expect.objectContaining({
             description: variation2.description,
             id: variation2.id,
-            qr: null,
             sku: variation2.sku,
             title: variation2.title,
             variant_id: product1.id,
@@ -167,7 +162,6 @@ describe("GET /shops/:shop_id/menu", () => {
       expect.objectContaining({
         description: product2.description,
         id: product2.id,
-        qr: null,
         sku: product2.sku,
         title: product2.title,
         ingredients: [],

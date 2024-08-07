@@ -14,6 +14,13 @@
 - [ ] Support pricing per order and order_items
 - [ ] Add extra quantity of existing ingredient in order_item
 - [ ] Add separate price for order
+- [ ] Support product shortcodes for easier selection
+
+### V0.1
+
+- [ ] Admin UI to create
+  - [ ] Shops
+  - [ ] Products with ingredients
 
 ### V0
 
@@ -26,5 +33,6 @@
 - [x] Preselected product variations
 - [~] Preselected ingredients for product variations
 - [x] Support comments in order and order items
-- [ ] Support product shortcodes for easier selection
 - [ ] Support product and extra product ingredient prices
+- [ ] Support un-official receipt [template](https://www.aade.gr/sites/default/files/inline-images/b_not_apodixi.jpg)
+- [ ] Support sending un-official receipt to thermal printer

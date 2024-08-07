@@ -43,14 +43,17 @@
     "opening_days": {
       "type": "array",
       "items": {
-        "type": "number"
+        "type": "number",
+        "minimum": 0,
+        "maximum": 6
       }
     },
     "manager_id": {
-      "type": "integer",
-      "exclusiveMinimum": 0
+      "type": "string",
+      "minLength": 30,
+      "maxLength": 30
     }
   },
-  "required": ["name", "manager_id"],
+  "required": ["name"],
   "additionalProperties": false
 }

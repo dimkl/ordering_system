@@ -15,8 +15,8 @@ describe("POST /products/ingredients", () => {
   afterAll(() => knex.destroy());
 
   it("create product ingredient", async () => {
-    const ingredient = await DataFactory.createIngredient();
     const product = await DataFactory.createProduct();
+    const ingredient = await DataFactory.createIngredient({ shop_id: product.shop_id });
 
     const response = await request
       .post(`/${apiVersion}/products/ingredients`)
@@ -73,8 +73,8 @@ describe("POST /products/ingredients", () => {
   });
 
   it("omits additional properties", async () => {
-    const ingredient = await DataFactory.createIngredient();
     const product = await DataFactory.createProduct();
+    const ingredient = await DataFactory.createIngredient({ shop_id: product.shop_id });
 
     const response = await request
       .post(`/${apiVersion}/products/ingredients`)

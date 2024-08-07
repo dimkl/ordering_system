@@ -52,4 +52,5 @@ export interface Ingredient {
   updated_at: Date;
   allergen: boolean;
   suitable_for_diet: SuitableForDiet;
+  shop_id: string;
 }

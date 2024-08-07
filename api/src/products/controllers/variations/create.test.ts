@@ -18,6 +18,7 @@ describe("POST /variations", () => {
   it("create product variation", async () => {
     const { ingredient, product } = await DataFactory.createProductIngredient();
     const ingredient2 = await DataFactory.createIngredient({
+      shop_id: product.shop_id,
       title: "Ingredient 2"
     });
     await DataFactory.createProductIngredient({}, product, ingredient2);
@@ -95,6 +96,7 @@ describe("POST /variations", () => {
       product.user
     );
     const ingredient2 = await DataFactory.createIngredient({
+      shop_id: product.shop_id,
       title: "Ingredient 2"
     });
     await DataFactory.createProductIngredient({}, product, ingredient2);

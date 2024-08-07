@@ -25,13 +25,18 @@ export class DataFactory {
     return customers[0];
   }
 
-  static async createIngredient(options?: Partial<Ingredient>) {
+  static async createIngredient(options?: Partial<Ingredient>, shop?: Partial<Shop>) {
+    if (!options?.shop_id && !shop?.id) {
+      shop = await this.createShop(shop);
+    }
+
     const ingredients = await knex("ingredients")
       .returning("*")
       .insert<Ingredient[]>({
         title: "Ingredient " + ulid(),
         description: "Ingredient description",
         id: "ing_" + ulid(),
+        shop_id: options?.shop_id || shop?.id,
         ...options
       });
 
@@ -43,7 +48,7 @@ export class DataFactory {
     shop?: Partial<Shop>,
     user?: Partial<User>
   ) {
-    if (!shop?.id) {
+    if (!options?.shop_id && !shop?.id) {
       shop = await this.createShop(shop);
     }
 
@@ -55,7 +60,7 @@ export class DataFactory {
         description: "Product description",
         id: "prd_" + ulid(),
         quantity: 2,
-        shop_id: shop.id,
+        shop_id: options?.shop_id || shop?.id,
         ...options
       });
 
@@ -271,7 +276,7 @@ export class DataFactory {
     }
 
     if (!ingredient?.id) {
-      ingredient = await this.createIngredient(ingredient);
+      ingredient = await this.createIngredient({ shop_id: product.shop_id, ...ingredient });
     }
 
     const productIngredient = await knex("product_ingredients").insert<ProductIngredient[]>({

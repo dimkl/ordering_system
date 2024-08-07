@@ -35,9 +35,5 @@
     "waiter-app",
     "user-app",
     "admin"
-  ],
-  "dependencies": {
-    "@clerk/clerk-react": "^5.3.3",
-    "react-router-dom": "^6.26.0"
-  }
+  ]
 }

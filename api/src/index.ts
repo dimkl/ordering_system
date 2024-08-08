@@ -15,15 +15,16 @@ import { clerkMiddleware } from "@dimkl/clerk-koa";
 
 const app = new Koa();
 
-app.use(cors([process.env.CORS_ALLOWED_ORIGINS || ""]));
-
 // middlewares
 app.use(json());
 if (!isTestingEnv()) {
   app.use(logger());
 }
 app.use(bodyParser());
+
 // my middlewares
+app.use(cors([process.env.CORS_ALLOWED_ORIGINS || ""]));
+
 app.use(errorHandler());
 app.use(clerkMiddleware());
 

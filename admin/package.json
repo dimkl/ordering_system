@@ -1,0 +1,46 @@
+{
+  "name": "admin",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@chakra-ui/react": "^2.8.2",
+    "@clerk/clerk-react": "^5.3.3",
+    "@emotion/react": "^11.13.0",
+    "@emotion/styled": "^11.13.0",
+    "@rjsf/chakra-ui": "^5.19.4",
+    "@rjsf/core": "^5.19.4",
+    "@types/node": "^20",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "framer-motion": "^11.3.23",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-refresh": "^0.11.0",
+    "react-router-dom": "^6.26.0",
+    "react-scripts": "5.0.1",
+    "typescript": "*"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

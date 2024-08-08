@@ -33,6 +33,7 @@
   "workspaces": [
     "api",
     "waiter-app",
-    "user-app"
+    "user-app",
+    "admin"
   ]
 }

@@ -1,0 +1,43 @@
+{
+  "$id": "/schemas/product",
+  "$async": true,
+  "type": "object",
+  "title": "Product",
+  "description": "Product schema",
+  "properties": {
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255,
+      "default": ""
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255,
+      "default": ""
+    },
+    "sku": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "category_id": {
+      "type": "string",
+      "minLength": 30,
+      "maxLength": 30
+    },
+    "shop_id": {
+      "type": "string",
+      "minLength": 30,
+      "maxLength": 30
+    },
+    "quantity": {
+      "type": "integer",
+      "exclusiveMinimum": 0,
+      "default": 1
+    }
+  },
+  "required": ["title", "sku"],
+  "additionalProperties": false
+}

@@ -1,0 +1,26 @@
+{
+  "$id": "/schemas/shop",
+  "$async": true,
+  "title": "Shop",
+  "description": "Shop schema",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "opening_time": {
+      "type": "string",
+      "format": "time",
+      "default": "08:00"
+    },
+    "closing_time": {
+      "type": "string",
+      "format": "time",
+      "default": "00:00"
+    }
+  },
+  "required": ["name"],
+  "additionalProperties": false
+}

@@ -22,11 +22,14 @@ export function errorHandler() {
       } else if (err instanceof BusinessError) {
         ctx.status = 422;
         ctx.body = { message: err.message };
+        errorDebug("Business %o", err.message);
       } else if (err instanceof RequestError) {
         ctx.status = 400;
         ctx.body = err.message;
+        errorDebug("RequestError %o", err.message);
       } else if (err instanceof NotFoundError || err instanceof ForeignKeyViolationError) {
         ctx.status = 404;
+        errorDebug("NotFound %o", err);
       } else {
         ctx.status = 500;
         errorDebug("Error %o", err);

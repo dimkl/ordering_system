@@ -23,6 +23,10 @@
     - product:update
   - reduce the response payload (and the cached payload) by dropping un-necessary info eg
     - ingredient.[created_at|updated_at]
+- [ ] Drop productAvailability
+- [ ] Add validation in product creation that shop_id used is owned by the same onwer of the shop
+- [ ] Introduce shop owners and filter shops shown in the admin by shop owner
+- [ ] Introduce shop filter for products tab
 
 ## Production deployment
 

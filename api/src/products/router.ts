@@ -1,6 +1,6 @@
 import Router from "koa-router";
 
-import { createController } from "../shared/controller";
+import { createAuthController } from "../shared/controller";
 
 import * as productListControllerParams from "./controllers/products/list";
 import * as productCreateControllerParams from "./controllers/products/create";
@@ -26,84 +26,18 @@ router
   .param("ingredient_id", loadIngredient)
   .param("category_id", loadCategory);
 
-router.post(
-  "/products/ingredients",
-  createController({
-    ...productAddIngredientControllerParams,
-    scopes: ["urn:products:c"]
-  })
-);
+router.post("/products/ingredients", createAuthController(productAddIngredientControllerParams));
 
-router.get(
-  "/products",
-  createController({
-    ...productListControllerParams,
-    scopes: ["urn:products:r"]
-  })
-);
-router.get(
-  "/products/:product_id",
-  createController({
-    ...productListControllerParams,
-    scopes: ["urn:products:r"]
-  })
-);
-router.post(
-  "/products",
-  createController({
-    ...productCreateControllerParams,
-    scopes: ["urn:products:c"]
-  })
-);
+router.get("/products", createAuthController(productListControllerParams));
+router.get("/products/:product_id", createAuthController(productListControllerParams));
+router.post("/products", createAuthController(productCreateControllerParams));
 
-router.post(
-  "/variations",
-  createController({
-    ...variationCreateControllerParams,
-    scopes: ["urn:products:c"]
-  })
-);
+router.post("/variations", createAuthController(variationCreateControllerParams));
 
-router.get(
-  "/ingredients",
-  createController({
-    ...ingredientListControllerParams,
-    scopes: ["urn:ingredients:r"]
-  })
-);
-router.get(
-  "/ingredients/:ingredient_id",
-  createController({
-    ...ingredientListControllerParams,
-    scopes: ["urn:ingredients:r"]
-  })
-);
-router.post(
-  "/ingredients",
-  createController({
-    ...ingredientCreateControllerParams,
-    scopes: ["urn:ingredients:c"]
-  })
-);
+router.get("/ingredients", createAuthController(ingredientListControllerParams));
+router.get("/ingredients/:ingredient_id", createAuthController(ingredientListControllerParams));
+router.post("/ingredients", createAuthController(ingredientCreateControllerParams));
 
-router.get(
-  "/categories",
-  createController({
-    ...categoryListControllerParams,
-    scopes: ["urn:categories:r"]
-  })
-);
-router.get(
-  "/categories/:category_id",
-  createController({
-    ...categoryListControllerParams,
-    scopes: ["urn:categories:r"]
-  })
-);
-router.post(
-  "/categories",
-  createController({
-    ...categoryCreateControllerParams,
-    scopes: ["urn:categories:c"]
-  })
-);
+router.get("/categories", createAuthController(categoryListControllerParams));
+router.get("/categories/:category_id", createAuthController(categoryListControllerParams));
+router.post("/categories", createAuthController(categoryCreateControllerParams));

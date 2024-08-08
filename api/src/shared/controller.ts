@@ -41,12 +41,29 @@ function validateMiddleware(schema: AnySchema) {
   };
 }
 
-export function createController({ handler, schema, scopes = [] }: createControllerParams) {
+export function createController({ handler, schema }: createControllerParams) {
   const middlewares: Middleware[] = [];
 
-  if (scopes.length > 0) {
-    middlewares.push(createAuthorize(scopes));
+  if (schema) {
+    middlewares.push(validateMiddleware(schema));
   }
+  if (handler) {
+    middlewares.push(handler);
+  }
+
+  return compose(middlewares);
+}
+
+type createAuthControllerParams = {
+  handler: Middleware;
+  schema?: AnySchema;
+  scopes?: string[];
+};
+export function createAuthController({ handler, schema, scopes = [] }: createAuthControllerParams) {
+  const middlewares: Middleware[] = [];
+
+  middlewares.push(createAuthorize(scopes));
+
   if (schema) {
     middlewares.push(validateMiddleware(schema));
   }

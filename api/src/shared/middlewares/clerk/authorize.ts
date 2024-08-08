@@ -25,6 +25,11 @@ export const authorize = (requiredScopes: string[] = []): Middleware => {
       if (!getAuth(ctx).sessionId) {
         throw new AuthorizationError("user is signedOut!");
       }
+
+      if (!requiredScopes.length) {
+        return next();
+      }
+
       const scopes = ctx.auth.sessionClaims?.scopes;
 
       const requiredGroupedResources = groupByResource(requiredScopes);

@@ -5,38 +5,18 @@
   "description": "Shop schema",
   "type": "object",
   "properties": {
-    "id": {
-      "readOnly": true,
-      "type": "string",
-      "minLength": 30,
-      "maxLength": 30
-    },
-    "created_at": {
-      "readOnly": true,
-      "type": "string"
-    },
-    "updated_at": {
-      "readOnly": true,
-      "type": "string"
-    },
     "name": {
       "type": "string",
       "minLength": 1,
       "maxLength": 100
     },
-    "lat": {
-      "type": "number",
-      "format": "float"
-    },
-    "lng": {
-      "type": "number",
-      "format": "float"
-    },
     "opening_time": {
-      "type": "string"
+      "type": "string",
+      "format": "time"
     },
     "closing_time": {
-      "type": "string"
+      "type": "string",
+      "format": "time"
     },
     "opening_days": {
       "type": "array",
@@ -52,6 +32,6 @@
       "maxLength": 30
     }
   },
-  "required": ["name"],
+  "required": ["name", "opening_time", "closing_time"],
   "additionalProperties": false
 }

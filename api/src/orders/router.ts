@@ -1,6 +1,6 @@
 import Router from "koa-router";
 
-import { createController } from "../shared/controller";
+import { createAuthController } from "../shared/controller";
 
 import { loadOrderItem } from "./helpers/loadOrderItem";
 import { loadOrder } from "./helpers/loadOrder";
@@ -19,68 +19,17 @@ export const router = new Router();
 
 router.param("order_id", loadOrder).param("order_item_id", loadOrderItem);
 
-router.get(
-  "/orders",
-  createController({
-    ...listControllerParams,
-    scopes: ["urn:orders:r"]
-  })
-);
-router.get(
-  "/orders/:order_id",
-  createController({
-    ...listControllerParams,
-    scopes: ["urn:orders:r"]
-  })
-);
-router.post("/orders", createController(createControllerParams));
-router.patch(
-  "/orders/:order_id",
-  createController({
-    ...updateControllerParams,
-    scopes: ["urn:orders:u"]
-  })
-);
-router.delete(
-  "/orders/:order_id",
-  createController({
-    ...deleteControllerParams,
-    scopes: ["urn:orders:d"]
-  })
-);
-router.post(
-  "/orders/:order_id/:action",
-  createController({
-    ...transitionControllerParams,
-    scopes: ["urn:orders:t"]
-  })
-);
+router.get("/orders", createAuthController(listControllerParams));
+router.get("/orders/:order_id", createAuthController(listControllerParams));
+router.post("/orders", createAuthController(createControllerParams));
+router.patch("/orders/:order_id", createAuthController(updateControllerParams));
+router.delete("/orders/:order_id", createAuthController(deleteControllerParams));
+router.post("/orders/:order_id/:action", createAuthController(transitionControllerParams));
 
-router.post(
-  "/order_items",
-  createController({
-    ...addOrderItemControllerParams,
-    scopes: ["urn:order_items:c"]
-  })
-);
+router.post("/order_items", createAuthController(addOrderItemControllerParams));
 router.post(
   "/order_items/:order_item_id/:action",
-  createController({
-    ...transitionOrderItemControllerParams,
-    scopes: ["urn:order_items:t"]
-  })
+  createAuthController(transitionOrderItemControllerParams)
 );
-router.delete(
-  "/order_items/:order_item_id",
-  createController({
-    ...removeOrderItemControllerParams,
-    scopes: ["urn:order_items:d"]
-  })
-);
-router.patch(
-  "/order_items/:order_item_id",
-  createController({
-    ...updateOrderItemControllerParams,
-    scopes: ["urn:order_items:u"]
-  })
-);
+router.delete("/order_items/:order_item_id", createAuthController(removeOrderItemControllerParams));
+router.patch("/order_items/:order_item_id", createAuthController(updateOrderItemControllerParams));

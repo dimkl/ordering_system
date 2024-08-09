@@ -1,6 +1,6 @@
 import Router from "koa-router";
 
-import { createController } from "../shared/controller";
+import { createController, createAuthController } from "../shared/controller";
 
 import { loadTimeSlot } from "./helpers/loadTimeSlot";
 import { loadSlot } from "./helpers/loadSlot";
@@ -22,82 +22,16 @@ export const router = new Router();
 // setup params
 router.param("time_slot_id", loadTimeSlot).param("slot_id", loadSlot).param("shop_id", loadShop);
 
-router.get(
-  "/time_slots",
-  createController({
-    ...timeSlotListControllerParams,
-    scopes: ["urn:time_slots:r"]
-  })
-);
-router.post(
-  "/time_slots",
-  createController({
-    ...timeSloCreateControllerParams,
-    scopes: ["urn:time_slots:c"]
-  })
-);
-router.get(
-  "/time_slots/:time_slot_id",
-  createController({
-    ...timeSlotListControllerParams,
-    scopes: ["urn:time_slots:r"]
-  })
-);
-router.patch(
-  "/time_slots/:time_slot_id",
-  createController({
-    ...timeSlotUpdateControllerParams,
-    scopes: ["urn:time_slots:u"]
-  })
-);
-router.delete(
-  "/time_slots/:time_slot_id",
-  createController({
-    ...timeSlotReleaseControllerParams,
-    scopes: ["urn:time_slots:d"]
-  })
-);
-router.get(
-  "/time_slots/:shop_id/available",
-  createController({
-    ...timeSlotAvailableControllerParams,
-    scopes: ["urn:time_slots:r"]
-  })
-);
+router.get("/time_slots", createAuthController(timeSlotListControllerParams));
+router.post("/time_slots", createAuthController(timeSloCreateControllerParams));
+router.get("/time_slots/:time_slot_id", createAuthController(timeSlotListControllerParams));
+router.patch("/time_slots/:time_slot_id", createAuthController(timeSlotUpdateControllerParams));
+router.delete("/time_slots/:time_slot_id", createAuthController(timeSlotReleaseControllerParams));
+router.get("/time_slots/:shop_id/available", createController(timeSlotAvailableControllerParams));
 
-router.post(
-  "/slots",
-  createController({
-    ...slotCreateControllerParams,
-    scopes: ["urn:slots:c"]
-  })
-);
-router.patch(
-  "/slots/:slot_id",
-  createController({
-    ...slotUpdateControllerParams,
-    scopes: ["urn:slots:u"]
-  })
-);
-router.delete(
-  "/slots/:slot_id",
-  createController({
-    ...slotDeleteControllerParams,
-    scopes: ["urn:slots:d"]
-  })
-);
+router.post("/slots", createAuthController(slotCreateControllerParams));
+router.patch("/slots/:slot_id", createAuthController(slotUpdateControllerParams));
+router.delete("/slots/:slot_id", createAuthController(slotDeleteControllerParams));
 
-router.get(
-  "/slots/:shop_id/available",
-  createController({
-    ...slotAvailableControllerParams,
-    scopes: ["urn:slots:r"]
-  })
-);
-router.get(
-  "/slots/:shop_id/available/:slot_id",
-  createController({
-    ...slotAvailableControllerParams,
-    scopes: ["urn:slots:r"]
-  })
-);
+router.get("/slots/:shop_id/available", createController(slotAvailableControllerParams));
+router.get("/slots/:shop_id/available/:slot_id", createController(slotAvailableControllerParams));

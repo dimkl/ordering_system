@@ -46,7 +46,8 @@ export const authorize = (requiredScopes: string[] = []): Middleware => {
       if (isWildcardAuthorized || isWildcardPerResourceAuthorized || isAuthorized) return next();
 
       throw new AuthorizationError(`JWT is missing required scopes "${requiredScopes.join(",")}"!`);
-    } catch (err) {
+    } catch (err: unknown) {
+      ctx.body = { message: (err as Error).message };
       ctx.status = 401;
     }
   }

@@ -1,8 +1,10 @@
-import { Table, Thead, Tbody, Tr, Th, Td, TableContainer } from "@chakra-ui/react";
+import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, useDisclosure } from "@chakra-ui/react";
 
 import { useAuth } from "@clerk/clerk-react";
 
 import { useEffect, useState } from "react";
+
+import { ShopMenuModal } from "./ShopMenuModal";
 
 const listShops = async (token: string) => {
   return (
@@ -13,10 +15,26 @@ const listShops = async (token: string) => {
   ).json();
 };
 
+const getShopMenu = async (shopId: string) => {
+  return (
+    await fetch(`http://localhost:3001/2024-08-08/shops/${shopId}/menu`, {
+      mode: "cors"
+    })
+  ).json();
+};
 export function ShopList() {
   const { getToken } = useAuth();
 
   const [shops, setShops] = useState<any[]>([]);
+  const [shop, setShop] = useState<any>(null);
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  async function openMenu(shopId: string) {
+    const shop = await getShopMenu(shopId);
+    setShop(shop);
+    onOpen();
+  }
 
   useEffect(() => {
     void getToken()
@@ -35,6 +53,7 @@ export function ShopList() {
             <Th>Closing time</Th>
             <Th>Manager ID</Th>
             <Th>CreatedAt</Th>
+            <Th>Menu</Th>
           </Tr>
         </Thead>
         <Tbody>
@@ -47,11 +66,15 @@ export function ShopList() {
                 <Td>{shop.closing_time}</Td>
                 <Td>{shop.manager_id}</Td>
                 <Td>{shop.createdAt}</Td>
+                <Td cursor="pointer" onClick={() => openMenu(shop.id)}>
+                  📋
+                </Td>
               </Tr>
             );
           })}
         </Tbody>
       </Table>
+      <ShopMenuModal shop={shop} isOpen={isOpen} onClose={onClose} />
     </TableContainer>
   );
 }

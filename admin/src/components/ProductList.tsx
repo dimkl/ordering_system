@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 const listProducts = async (token: string) => {
   return (
-    await fetch("http://localhost:3001/2024-08-08/products", {
+    await fetch("http://localhost:3001/2024-08-08/products?include=ingredients", {
       mode: "cors",
       headers: { Authorization: token }
     })

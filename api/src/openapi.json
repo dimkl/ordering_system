@@ -87,15 +87,15 @@
     }
   },
   "tags": [
-    { "name": "Slots" },
-    { "name": "TimeSlots" },
-    { "name": "Orders" },
-    { "name": "OrderItems" },
-    { "name": "Orders" },
-    { "name": "Products" },
-    { "name": "Ingredients" },
-    { "name": "Categories" },
-    { "name": "Shops" }
+    { "name": "Slots", "description": "Slots Description" },
+    { "name": "TimeSlots", "description": "TimeSlots Description" },
+    { "name": "Orders", "description": "Orders Description" },
+    { "name": "OrderItems", "description": "OrderItems Description" },
+    { "name": "Orders", "description": "Orders Description" },
+    { "name": "Products", "description": "Products Description" },
+    { "name": "Ingredients", "description": "Ingredients Description" },
+    { "name": "Categories", "description": "Categories Description" },
+    { "name": "Shops", "description": "Shops Description" }
   ],
   "security": [{ "bearerAuth": [] }, { "cookieAuth": [] }]
 }

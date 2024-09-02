@@ -23,7 +23,7 @@ if (!isTestingEnv()) {
 app.use(bodyParser());
 
 // my middlewares
-app.use(cors([process.env.CORS_ALLOWED_ORIGINS || ""]));
+app.use(cors((process.env.CORS_ALLOWED_ORIGINS || "").split(",")));
 
 app.use(errorHandler());
 app.use(clerkMiddleware());

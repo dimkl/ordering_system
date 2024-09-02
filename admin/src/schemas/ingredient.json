@@ -1,0 +1,48 @@
+{
+  "$id": "/schemas/ingredient",
+  "$async": true,
+  "title": "Ingredient",
+  "description": "Ingredient schema",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255,
+      "default": ""
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255,
+      "default": ""
+    },
+    "allergen": {
+      "type": "boolean",
+      "default": false
+    },
+    "suitable_for_diet": {
+      "enum": [
+        "all",
+        "diabetic",
+        "gluten_free",
+        "halal",
+        "hindu",
+        "kosher",
+        "low_calorie",
+        "low_fat",
+        "low_lactose",
+        "low_salt",
+        "vegan",
+        "vegetarian"
+      ]
+    },
+    "shop_id": {
+      "type": "string",
+      "minLength": 30,
+      "maxLength": 30
+    }
+  },
+  "required": ["title", "shop_id"],
+  "additionalProperties": false
+}

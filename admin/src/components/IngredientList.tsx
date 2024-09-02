@@ -3,23 +3,23 @@ import { useAuth } from "@clerk/clerk-react";
 
 import { useEffect, useState } from "react";
 
-const listProducts = async (token: string) => {
+const listIngredients = async (token: string) => {
   return (
-    await fetch("http://localhost:3001/2024-08-08/products", {
+    await fetch("http://localhost:3001/2024-08-08/ingredients", {
       mode: "cors",
       headers: { Authorization: token }
     })
   ).json();
 };
 
-export function ProductList() {
+export function IngredientList() {
   const { getToken } = useAuth();
-  const [products, setProducts] = useState<any[]>([]);
+  const [ingredients, setIngredients] = useState<any[]>([]);
 
   useEffect(() => {
     void getToken()
-      .then((token) => listProducts(token || ""))
-      .then(setProducts);
+      .then((token) => listIngredients(token || ""))
+      .then(setIngredients);
   }, [getToken]);
 
   return (
@@ -31,20 +31,20 @@ export function ProductList() {
             <Th>Title</Th>
             <Th>Description</Th>
             <Th>ShopID</Th>
-            <Th>SKU</Th>
+            <Th>Suitable For Diet</Th>
             <Th>CreatedAt</Th>
           </Tr>
         </Thead>
         <Tbody>
-          {products.map((product) => {
+          {ingredients.map((ingredient) => {
             return (
               <Tr>
-                <Td>{product.id}</Td>
-                <Td>{product.title}</Td>
-                <Td>{product.description}</Td>
-                <Td>{product.shop_id}</Td>
-                <Td>{product.sku}</Td>
-                <Td>{product.created_at}</Td>
+                <Td>{ingredient.id}</Td>
+                <Td>{ingredient.title}</Td>
+                <Td>{ingredient.description}</Td>
+                <Td>{ingredient.shop_id}</Td>
+                <Td>{ingredient.suitable_for_diet}</Td>
+                <Td>{ingredient.created_at}</Td>
               </Tr>
             );
           })}

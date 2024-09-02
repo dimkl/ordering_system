@@ -22,7 +22,7 @@ export function ShopList() {
     void getToken()
       .then((token) => listShops(token || ""))
       .then(setShops);
-  }, []);
+  }, [getToken]);
 
   return (
     <TableContainer>

@@ -1,4 +1,4 @@
-import { Box, Spacer, Flex, HStack, useColorModeValue } from "@chakra-ui/react";
+import { Box, Flex, HStack, useColorModeValue } from "@chakra-ui/react";
 
 import { SignedIn, SignedOut, UserButton, SignInButton } from "@clerk/clerk-react";
 
@@ -8,6 +8,9 @@ import { ProductForm } from "./components/ProductForm";
 import { ShopForm } from "./components/ShopForm";
 import { ShopList } from "./components/ShopList";
 import { ProductList } from "./components/ProductList";
+import { ProductIngredientForm } from "./components/ProductIngredientForm";
+import { IngredientForm } from "./components/IngredientForm";
+import { IngredientList } from "./components/IngredientList";
 
 export function Layout() {
   return (
@@ -18,6 +21,7 @@ export function Layout() {
             <NavLink text="🛒" link="/" />
             <NavLink text="Shops" link="/shops" />
             <NavLink text="Products" link="/products" />
+            <NavLink text="Ingredients" link="/ingredients" />
           </HStack>
           <Flex alignItems={"center"}>
             <SignedIn>
@@ -32,20 +36,18 @@ export function Layout() {
       <Box p={4}>
         <BrowserRouter>
           <Routes>
+            <Route path="/ingredients" element={<IngredientList />}></Route>
             <Route path="/products" element={<ProductList />}></Route>
             <Route path="/shops" element={<ShopList />}></Route>
             <Route
               path="/"
               element={
-                <Flex alignItems={"left"}>
-                  <Box flex="2">
-                    <ProductForm />
-                  </Box>
-                  <Spacer flex="0.5" />
-                  <Box flex="2">
-                    <ShopForm />
-                  </Box>
-                </Flex>
+                <>
+                  <IngredientForm />
+                  <ProductForm />
+                  <ShopForm />
+                  <ProductIngredientForm />
+                </>
               }
             ></Route>
           </Routes>

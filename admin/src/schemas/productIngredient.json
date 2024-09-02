@@ -1,0 +1,52 @@
+{
+  "$id": "/schemas/productIngredient.create",
+  "$async": true,
+  "title": "ProductIngredient",
+  "description": "ProductIngredient schema",
+  "type": "object",
+  "properties": {
+    "ingredient_id": {
+      "type": "string",
+      "minLength": 30,
+      "maxLength": 30
+    },
+    "product_id": {
+      "type": "string",
+      "minLength": 30,
+      "maxLength": 30
+    },
+    "selection_type": {
+      "type": "string",
+      "default": "primary",
+      "enum": ["primary", "extra", "primary_extra"]
+    },
+    "shop_id": {
+      "type": "string",
+      "minLength": 30,
+      "maxLength": 30
+    },
+    "ingredients": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "allergen": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  },
+  "required": ["product_id"],
+  "additionalProperties": false
+}

@@ -16,8 +16,34 @@
       "type": "string",
       "minLength": 30,
       "maxLength": 30
+    },
+    "shop_id": {
+      "type": "string",
+      "minLength": 30,
+      "maxLength": 30
+    },
+    "ingredients": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "allergen": {
+            "type": "boolean"
+          }
+        }
+      }
     }
   },
-  "required": ["ingredient_id", "product_id"],
+  "required": ["product_id"],
   "additionalProperties": false
 }

@@ -26,7 +26,7 @@ RUN npm install --include=dev
 # Copy application code
 COPY --link . .
 
-ENV REACT_APP_API_BASE_URL='https://admin.make-order.online'
+ENV REACT_APP_API_BASE_URL='https://make-order.online'
 ENV REACT_APP_CLERK_PUBLISHABLE_KEY='pk_live_Y2xlcmsubWFrZS1vcmRlci5vbmxpbmUk'
 
 # Build application

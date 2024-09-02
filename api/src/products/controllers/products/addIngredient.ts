@@ -8,7 +8,7 @@ const handler = async (ctx: Context) => {
   const { ingredients, shop_id, ...data } = ctx.request.validatedData;
 
   let prdIngr = [data];
-  if (ingredients.length) {
+  if (ingredients?.length) {
     // TODO: validate that shop id exists in request
 
     ingredients.forEach((ingr) => {

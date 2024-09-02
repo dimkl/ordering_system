@@ -7,7 +7,7 @@ export const cors = (origins: string[]) => {
   return (ctx: Context, next) => {
     const origin = ctx.headers["origin"] || "";
 
-    debugLog("cors: allowed %o vs current %o", origins, origin);
+    debugLog("cors: Allowed %o vs current %o", origins, origin);
 
     if (!origins.includes(origin)) {
       return;

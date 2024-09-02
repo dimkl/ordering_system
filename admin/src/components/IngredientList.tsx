@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 const listIngredients = async (token: string) => {
   return (
-    await fetch("http://localhost:3001/2024-08-08/ingredients", {
+    await fetch(`${process.env.REACT_APP_API_BASE_URL}/2024-08-08/ingredients`, {
       mode: "cors",
       headers: { Authorization: token }
     })
@@ -38,7 +38,7 @@ export function IngredientList() {
         <Tbody>
           {ingredients.map((ingredient) => {
             return (
-              <Tr>
+              <Tr key={ingredient.id}>
                 <Td>{ingredient.id}</Td>
                 <Td>{ingredient.title}</Td>
                 <Td>{ingredient.description}</Td>

@@ -8,7 +8,7 @@ import { ShopMenuModal } from "./ShopMenuModal";
 
 const listShops = async (token: string) => {
   return (
-    await fetch("http://localhost:3001/2024-08-08/shops", {
+    await fetch(`${process.env.REACT_APP_API_BASE_URL}/2024-08-08/shops`, {
       mode: "cors",
       headers: { Authorization: token }
     })
@@ -59,7 +59,7 @@ export function ShopList() {
         <Tbody>
           {shops.map((shop) => {
             return (
-              <Tr>
+              <Tr key={shop.id}>
                 <Td>{shop.id}</Td>
                 <Td>{shop.name}</Td>
                 <Td>{shop.opening_time}</Td>

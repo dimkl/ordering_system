@@ -7,7 +7,7 @@ import { useAuth } from "@clerk/clerk-react";
 import * as productIngredientSchema from "../schemas/productIngredient.json";
 
 const createProductIngredient = (token: string, data: unknown) => {
-  fetch("http://localhost:3001/2024-08-08/products/ingredients", {
+  fetch(`${process.env.REACT_APP_API_BASE_URL}/2024-08-08/products/ingredients`, {
     mode: "cors",
     method: "POST",
     headers: {

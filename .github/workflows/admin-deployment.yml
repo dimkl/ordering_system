@@ -2,6 +2,8 @@ name: Deploy Admin
 on:
   push:
     branches: [production]
+    paths:
+      - "admin/**"
 jobs:
   deploy-admin:
     runs-on: ubuntu-latest

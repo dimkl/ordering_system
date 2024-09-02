@@ -21,28 +21,5 @@
         "description": "Not Found"
       }
     }
-  },
-  "post": {
-    "tags": ["Shops"],
-    "summary": "Create Shop",
-    "operationId": "shopCreate",
-    "responses": {
-      "200": {
-        "description": "OK",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "../schemas/shop.json"
-            }
-          }
-        }
-      },
-      "400": {
-        "$ref": "../../shared/openapi/errors/400.json"
-      },
-      "422": {
-        "$ref": "../../shared/openapi/errors/422.json"
-      }
-    }
   }
 }

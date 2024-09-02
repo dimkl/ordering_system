@@ -32,14 +32,9 @@
     "selection_type": {
       "type": "string",
       "default": "primary",
-      "$ref": "#/definitions/selection_type"
-    }
-  },
-  "required": ["ingredient_id", "product_id"],
-  "definitions": {
-    "selection_type": {
       "enum": ["primary", "extra", "primary_extra"]
     }
   },
+  "required": ["ingredient_id", "product_id"],
   "additionalProperties": false
 }

@@ -22,17 +22,6 @@
       "default": false
     },
     "suitable_for_diet": {
-      "$ref": "#/definitions/suitable_for_diet"
-    },
-    "shop_id": {
-      "type": "string",
-      "minLength": 30,
-      "maxLength": 30
-    }
-  },
-  "required": ["title", "shop_id"],
-  "definitions": {
-    "suitable_for_diet": {
       "enum": [
         "all",
         "diabetic",
@@ -47,7 +36,13 @@
         "vegan",
         "vegetarian"
       ]
+    },
+    "shop_id": {
+      "type": "string",
+      "minLength": 30,
+      "maxLength": 30
     }
   },
+  "required": ["title", "shop_id"],
   "additionalProperties": false
 }

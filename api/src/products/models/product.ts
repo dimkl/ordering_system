@@ -57,6 +57,9 @@ export class Product extends BaseModel {
   static get modifiers() {
     return {
       ...super.modifiers,
+      ingredients(query) {
+        query.withGraphJoined("ingredients(publicColumns)");
+      },
       variations(query) {
         query
           .withGraphJoined("variations")
@@ -72,10 +75,7 @@ export class Product extends BaseModel {
   }
 
   static findWithIngredients(productId) {
-    return this.query()
-      .modify("publicColumns")
-      .withGraphJoined("ingredients(publicColumns)")
-      .findById(productId);
+    return this.query().modify("ingredients").findById(productId);
   }
 
   static findVariationsWithIngredients(productId) {

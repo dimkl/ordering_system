@@ -1,6 +1,7 @@
 import Router from "koa-router";
 
 import { createAuthController } from "../shared/controller";
+import { included } from "../shared/middlewares/included";
 
 import * as productListControllerParams from "./controllers/products/list";
 import * as productCreateControllerParams from "./controllers/products/create";
@@ -19,6 +20,8 @@ import { loadIngredient } from "./helpers/loadIngredient";
 import { loadCategory } from "./helpers/loadCategory";
 
 export const router = new Router();
+
+router.use(included(["ingredients"]));
 
 // setup params
 router

@@ -25,7 +25,7 @@ export function errorHandler() {
         errorDebug("Business %o", err.message);
       } else if (err instanceof RequestError) {
         ctx.status = 400;
-        ctx.body = err.message;
+        ctx.body = { message: err.message };
         errorDebug("RequestError %o", err.message);
       } else if (err instanceof NotFoundError || err instanceof ForeignKeyViolationError) {
         ctx.status = 404;

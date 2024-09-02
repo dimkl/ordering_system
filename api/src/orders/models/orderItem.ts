@@ -65,7 +65,6 @@ export interface OrderItem {
           id: string;
           title: string;
           description: string;
-          qr: string;
         };
         ingredients: {
           id: string;

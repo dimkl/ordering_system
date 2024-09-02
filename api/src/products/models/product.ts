@@ -89,8 +89,7 @@ export class Product extends BaseModel {
     return {
       id: this.id,
       title: this.title,
-      description: this.description,
-      qr: this.qr
+      description: this.description
     };
   }
 }
@@ -99,7 +98,6 @@ export interface Product {
   id: string;
   title: string;
   description: string;
-  qr: string;
   // Tracks the price, product details, manufacturer, and point-of-sale.
   // Used in generated barcodes.
   sku: string;

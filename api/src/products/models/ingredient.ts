@@ -46,7 +46,6 @@ export interface Ingredient {
   id: string;
   title: string;
   description: string;
-  qr: string;
   sku: string;
   created_at: Date;
   updated_at: Date;

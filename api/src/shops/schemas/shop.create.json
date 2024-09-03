@@ -1,8 +1,8 @@
 {
-  "$id": "/schemas/shop",
+  "$id": "/schemas/shop.create",
   "$async": true,
   "title": "Shop",
-  "description": "Shop schema",
+  "description": "Shop create schema",
   "type": "object",
   "properties": {
     "name": {

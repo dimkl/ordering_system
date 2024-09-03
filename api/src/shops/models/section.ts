@@ -27,6 +27,14 @@ export class Section extends BaseModel {
           from: "sections.shop_id",
           to: "shops.id"
         }
+      },
+      slots: {
+        relation: BaseModel.HasManyRelation,
+        modelClass: __dirname + "/../../availability/models/slot",
+        join: {
+          from: "sections.id",
+          to: "slots.section_id"
+        }
       }
     };
   }

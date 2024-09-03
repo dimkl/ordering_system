@@ -39,6 +39,9 @@ export class Shop extends BaseModel {
           )
           .whereRaw('"products".quantity > 0')
           .orderBy("products.id");
+      },
+      slots(query) {
+        query.withGraphJoined("sections.slots");
       }
     };
   }
@@ -51,6 +54,14 @@ export class Shop extends BaseModel {
         join: {
           from: "shops.id",
           to: "products.shop_id"
+        }
+      },
+      sections: {
+        relation: BaseModel.HasManyRelation,
+        modelClass: __dirname + "/section",
+        join: {
+          from: "shops.id",
+          to: "sections.shop_id"
         }
       }
     };

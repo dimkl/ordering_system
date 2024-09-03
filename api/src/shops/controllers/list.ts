@@ -7,5 +7,7 @@ export const handler = async (ctx: Context, next: Next) => {
     ctx.body = ctx.shop;
     return next();
   }
-  ctx.body = await Shop.query().modify("publicColumns");
+  ctx.body = await Shop.query().modify(["publicColumns", ...ctx.state.included]);
 };
+
+export const includedResources = ["slots"];

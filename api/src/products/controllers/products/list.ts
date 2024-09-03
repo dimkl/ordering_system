@@ -10,3 +10,5 @@ export const handler = async (ctx: Context, next: Next) => {
 
   ctx.body = await Product.query().modify(["publicColumns", "variations", ...ctx.state.included]);
 };
+
+export const includedResources = ["ingredients"];

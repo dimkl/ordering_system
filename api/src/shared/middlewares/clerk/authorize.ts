@@ -1,11 +1,8 @@
 import type { Context, Next, Middleware } from "koa";
 import { getAuth, requireAuth } from "@dimkl/clerk-koa";
 import compose from "koa-compose";
-import { debug } from "debug";
 
 import { AuthorizationError } from "../../errors";
-
-const debugLog = debug("api:clerk:authorize");
 
 const groupByResource = (scopes: string[]) => {
   return scopes.reduce((group: Record<string, string>, scope: string) => {
@@ -19,9 +16,7 @@ const groupByResource = (scopes: string[]) => {
 };
 
 export const authorize = (requiredScopes: string[] = []): Middleware => {
-  debugLog("`clerk` authorization selected!");
   async function authorize(ctx: Context, next: Next) {
-    debugLog("begin authorization: %o", getAuth(ctx));
     try {
       if (!getAuth(ctx)) {
         throw new AuthorizationError("authorization is not loaded!");
@@ -52,7 +47,6 @@ export const authorize = (requiredScopes: string[] = []): Middleware => {
 
       throw new AuthorizationError(`JWT is missing required scopes "${requiredScopes.join(",")}"!`);
     } catch (err: unknown) {
-      debugLog("AuthorizationError: %o", err);
       ctx.body = { message: (err as Error).message };
       ctx.status = 401;
     }

@@ -1,6 +1,6 @@
-import { Box, Flex, HStack, useColorModeValue } from "@chakra-ui/react";
+import { Box, Flex, HStack, useColorModeValue, Center } from "@chakra-ui/react";
 
-import { SignedIn, SignedOut, UserButton, SignInButton } from "@clerk/clerk-react";
+import { SignedIn, SignedOut, UserButton, SignIn } from "@clerk/clerk-react";
 
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import { NavLink } from "./components/NavLink";
@@ -15,44 +15,46 @@ import { IngredientList } from "./components/IngredientList";
 export function Layout() {
   return (
     <>
-      <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
-        <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-          <HStack spacing={8} alignItems={"center"}>
-            <NavLink text="🛒" link="/" />
-            <NavLink text="Shops" link="/shops" />
-            <NavLink text="Products" link="/products" />
-            <NavLink text="Ingredients" link="/ingredients" />
-          </HStack>
-          <Flex alignItems={"center"}>
-            <SignedIn>
+      <SignedIn>
+        <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
+          <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
+            <HStack spacing={8} alignItems={"center"}>
+              <NavLink text="🛒" link="/" />
+              <NavLink text="Shops" link="/shops" />
+              <NavLink text="Products" link="/products" />
+              <NavLink text="Ingredients" link="/ingredients" />
+            </HStack>
+            <Flex alignItems={"center"}>
               <UserButton />
-            </SignedIn>
-            <SignedOut>
-              <SignInButton />
-            </SignedOut>
+            </Flex>
           </Flex>
-        </Flex>
-      </Box>
-      <Box p={4}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/ingredients" element={<IngredientList />}></Route>
-            <Route path="/products" element={<ProductList />}></Route>
-            <Route path="/shops" element={<ShopList />}></Route>
-            <Route
-              path="/"
-              element={
-                <>
-                  <IngredientForm />
-                  <ProductForm />
-                  <ShopForm />
-                  <ProductIngredientForm />
-                </>
-              }
-            ></Route>
-          </Routes>
-        </BrowserRouter>
-      </Box>
+        </Box>
+        <Box p={4}>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/ingredients" element={<IngredientList />}></Route>
+              <Route path="/products" element={<ProductList />}></Route>
+              <Route path="/shops" element={<ShopList />}></Route>
+              <Route
+                path="/"
+                element={
+                  <>
+                    <IngredientForm />
+                    <ProductForm />
+                    <ShopForm />
+                    <ProductIngredientForm />
+                  </>
+                }
+              ></Route>
+            </Routes>
+          </BrowserRouter>
+        </Box>
+      </SignedIn>
+      <SignedOut>
+        <Center p={4}>
+          <SignIn />
+        </Center>
+      </SignedOut>
     </>
   );
 }

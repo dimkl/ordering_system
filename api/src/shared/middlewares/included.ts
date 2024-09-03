@@ -22,14 +22,13 @@ export const included = (relations: string[]) => {
     const selectedResources = supportedRelations.filter((v) =>
       requestedResources.find((rv) => rv === v)
     );
+    debugLog({ include: ctx.query.include, selectedResources, supportedRelations });
 
     if (requestedResources.length && !selectedResources.length) {
       throw new RequestError(
         "Provided resource is not supported! Update the `include` query param with the correct value(s)."
       );
     }
-
-    debugLog({ include: ctx.query.include, selectedResources });
 
     ctx.state.included = selectedResources;
 

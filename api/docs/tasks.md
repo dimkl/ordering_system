@@ -26,14 +26,19 @@
 - [ ] Drop productAvailability
 - [ ] Add validation in product creation that shop_id used is owned by the same onwer of the shop
 - [ ] Introduce shop owners and filter shops shown in the admin by shop owner
-- [ ] Introduce shop filter for products tab
+- [ ] Introduce shop filter for products tab in Admin
 
-## Production deployment
+## Fixes
 
-- [x] Buy domain
-- [x] Find deployment platform
-- [x] Create GH action to deploy to production
-- [x] Create Clerk production application
+### API issues
+
+- set security as optional for endpoints implemented with `createController` handlers
+
+### DB issues
+
+- alter `sections.sku` with `sections.shop_id` to be unique
+- alter `sections.name` with `sections.shop_id` to be unique
+- alter `slots.section_id` to be `not null`
 
 ## Flow
 

@@ -1,8 +1,11 @@
 import type { Context, Next, Middleware } from "koa";
-
-import { AuthorizationError } from "../../errors";
 import { getAuth, requireAuth } from "@dimkl/clerk-koa";
 import compose from "koa-compose";
+import { debug } from "debug";
+
+import { AuthorizationError } from "../../errors";
+
+const debugLog = debug("api:clerk:authorize");
 
 const groupByResource = (scopes: string[]) => {
   return scopes.reduce((group: Record<string, string>, scope: string) => {
@@ -47,6 +50,7 @@ export const authorize = (requiredScopes: string[] = []): Middleware => {
 
       throw new AuthorizationError(`JWT is missing required scopes "${requiredScopes.join(",")}"!`);
     } catch (err: unknown) {
+      debugLog("AuthorizationError: %o", err);
       ctx.body = { message: (err as Error).message };
       ctx.status = 401;
     }

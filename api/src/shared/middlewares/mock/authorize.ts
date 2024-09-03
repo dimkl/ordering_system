@@ -1,6 +1,9 @@
 import type { Context, Next, Middleware } from "koa";
+import { debug } from "debug";
 
 import { AuthorizationError } from "../../errors";
+
+const debugLog = debug("api:mock:authorize");
 
 const groupByResource = (scopes: string[]) => {
   return scopes.reduce((group: Record<string, string>, scope: string) => {
@@ -33,6 +36,7 @@ export const authorize = (requiredScopes: string[] = []): Middleware => {
 
       throw new AuthorizationError(`JWT is missing required scopes "${requiredScopes.join(",")}"!`);
     } catch (err) {
+      debugLog("AuthorizationError: %o", err);
       ctx.status = 401;
     }
   };

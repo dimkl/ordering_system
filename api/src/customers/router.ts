@@ -1,6 +1,6 @@
 import Router from "koa-router";
 
-import { createController } from "../shared/controller";
+import { createAuthController } from "../shared/controller";
 
 import * as listControllerParams from "./controllers/list";
 import * as createControllerParams from "./controllers/create";
@@ -16,21 +16,21 @@ router.param("customer_id", loadCustomer);
 
 router.get(
   "/customers",
-  createController({ ...listControllerParams, scopes: ["urn:customers:r"] })
+  createAuthController({ ...listControllerParams, scopes: ["urn:customers:r"] })
 );
 router.get(
   "/customers/:customer_id",
-  createController({ ...listControllerParams, scopes: ["urn:customers:r"] })
+  createAuthController({ ...listControllerParams, scopes: ["urn:customers:r"] })
 );
 router.post(
   "/customers",
-  createController({ ...createControllerParams, scopes: ["urn:customers:c"] })
+  createAuthController({ ...createControllerParams, scopes: ["urn:customers:c"] })
 );
 router.patch(
   "/customers/:customer_id",
-  createController({ ...updateControllerParams, scopes: ["urn:customers:u"] })
+  createAuthController({ ...updateControllerParams, scopes: ["urn:customers:u"] })
 );
 router.delete(
   "/customers/:customer_id",
-  createController({ ...deleteControllerParams, scopes: ["urn:customers:d"] })
+  createAuthController({ ...deleteControllerParams, scopes: ["urn:customers:d"] })
 );

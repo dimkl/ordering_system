@@ -4,7 +4,7 @@
 
 ### V0
 
-- [ ] Support per slot QR code
+- [x] Support per slot QR code
 - [x] Create order with products from shop menu as Guest
 
 ## Waiter Persona
@@ -18,9 +18,10 @@
 
 ### V0.1
 
-- [ ] Admin UI to create
-  - [ ] Shops
-  - [ ] Products with ingredients
+- [~] Admin UI to create
+  - [x] Shops
+  - [x] Sections & Slots
+  - [x] Products with ingredients
 
 ### V0
 

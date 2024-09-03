@@ -54,9 +54,19 @@ export function Layout() {
                         <SlotForm />
                       </Box>
                     </Flex>
-                    <IngredientForm />
-                    <ProductForm />
-                    <ProductIngredientForm />
+                    <Flex>
+                      <Box flex={1}>
+                        <IngredientForm />
+                      </Box>
+                      <Spacer flex={0.1} />
+                      <Box flex={1}>
+                        <ProductForm />
+                      </Box>
+                      <Spacer flex={0.1} />
+                      <Box flex={1}>
+                        <ProductIngredientForm />
+                      </Box>
+                    </Flex>
                   </>
                 }
               ></Route>

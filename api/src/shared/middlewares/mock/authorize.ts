@@ -17,7 +17,9 @@ const groupByResource = (scopes: string[]) => {
 };
 
 export const authorize = (requiredScopes: string[] = []): Middleware => {
+  debugLog("`mock` authorization selected!");
   return async function authorize(ctx: Context, next: Next) {
+    debugLog("begin authorization: %o", process.env.MOCK_AUTH_REQUEST_SCOPES);
     try {
       const scopes = process.env.MOCK_AUTH_REQUEST_SCOPES || "";
 

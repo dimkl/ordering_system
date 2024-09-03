@@ -19,7 +19,9 @@ const groupByResource = (scopes: string[]) => {
 };
 
 export const authorize = (requiredScopes: string[] = []): Middleware => {
+  debugLog("`clerk` authorization selected!");
   async function authorize(ctx: Context, next: Next) {
+    debugLog("begin authorization: %o", getAuth(ctx));
     try {
       if (!getAuth(ctx)) {
         throw new AuthorizationError("authorization is not loaded!");

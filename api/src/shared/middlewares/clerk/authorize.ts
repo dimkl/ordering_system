@@ -58,5 +58,5 @@ export const authorize = (requiredScopes: string[] = []): Middleware => {
     }
   }
 
-  return compose([requireAuth(), authorize]) as Middleware;
+  return compose([requireAuth, authorize]) as Middleware;
 };

@@ -5,13 +5,14 @@ import compose from "koa-compose";
 import { DiscoveryApiFactory } from "@dimkl/ajv-discovery-api";
 
 import { createAuthorize } from "./middlewares/authorize";
+import { included } from "./middlewares/included";
 
 const discoveryApi = DiscoveryApiFactory.getInstance();
 
 type createControllerParams = {
   handler: Middleware;
   schema?: AnySchema;
-  scopes?: string[];
+  includedResources?: string[];
 };
 
 function validateMiddleware(schema: AnySchema) {
@@ -41,12 +42,16 @@ function validateMiddleware(schema: AnySchema) {
   };
 }
 
-export function createController({ handler, schema }: createControllerParams) {
+export function createController({ handler, schema, includedResources }: createControllerParams) {
   const middlewares: Middleware[] = [];
 
   if (schema) {
     middlewares.push(validateMiddleware(schema));
   }
+  if (includedResources) {
+    middlewares.push(included(includedResources));
+  }
+  // Handler should be the last added middleware
   if (handler) {
     middlewares.push(handler);
   }
@@ -54,12 +59,15 @@ export function createController({ handler, schema }: createControllerParams) {
   return compose(middlewares);
 }
 
-type createAuthControllerParams = {
-  handler: Middleware;
-  schema?: AnySchema;
+type createAuthControllerParams = createControllerParams & {
   scopes?: string[];
 };
-export function createAuthController({ handler, schema, scopes = [] }: createAuthControllerParams) {
+export function createAuthController({
+  handler,
+  schema,
+  scopes = [],
+  includedResources
+}: createAuthControllerParams) {
   const middlewares: Middleware[] = [];
 
   middlewares.push(createAuthorize(scopes));
@@ -67,6 +75,10 @@ export function createAuthController({ handler, schema, scopes = [] }: createAut
   if (schema) {
     middlewares.push(validateMiddleware(schema));
   }
+  if (includedResources) {
+    middlewares.push(included(includedResources));
+  }
+  // Handler should be the last added middleware
   if (handler) {
     middlewares.push(handler);
   }

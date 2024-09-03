@@ -1,28 +1,14 @@
 {
-  "$id": "/schemas/section",
+  "$id": "/schemas/section.create",
   "$async": true,
   "title": "Section",
-  "description": "Section schema",
+  "description": "Section create schema",
   "type": "object",
   "properties": {
-    "id": {
-      "readOnly": true,
-      "type": "string",
-      "minLength": 30,
-      "maxLength": 30
-    },
     "name": {
       "type": "string",
       "minLength": 1,
       "maxLength": 100
-    },
-    "created_at": {
-      "readOnly": true,
-      "type": "string"
-    },
-    "updated_at": {
-      "readOnly": true,
-      "type": "string"
     },
     "sku": {
       "type": "string",

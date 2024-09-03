@@ -47,6 +47,9 @@
     "/shops/{shopId}/menu": {
       "$ref": "./shops/openapi/shop.menu.json"
     },
+    "/sections": {
+      "$ref": "./shops/openapi/sections.json"
+    },
     "/products": {
       "$ref": "./products/openapi/products.json"
     },
@@ -95,7 +98,8 @@
     { "name": "Products", "description": "Products Description" },
     { "name": "Ingredients", "description": "Ingredients Description" },
     { "name": "Categories", "description": "Categories Description" },
-    { "name": "Shops", "description": "Shops Description" }
+    { "name": "Shops", "description": "Shops Description" },
+    { "name": "Sections", "description": "Sections Description" }
   ],
   "security": [{ "bearerAuth": [] }, { "cookieAuth": [] }]
 }

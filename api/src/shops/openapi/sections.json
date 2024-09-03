@@ -1,0 +1,25 @@
+{
+  "post": {
+    "tags": ["Sections"],
+    "summary": "Create Section",
+    "operationId": "sectionCreate",
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../schemas/section.json"
+            }
+          }
+        }
+      },
+      "400": {
+        "$ref": "../../shared/openapi/errors/400.json"
+      },
+      "422": {
+        "$ref": "../../shared/openapi/errors/422.json"
+      }
+    }
+  }
+}

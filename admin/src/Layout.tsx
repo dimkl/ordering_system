@@ -4,13 +4,13 @@ import { SignedIn, SignedOut, UserButton, SignIn } from "@clerk/clerk-react";
 
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import { NavLink } from "./components/NavLink";
-import { ProductForm } from "./components/ProductForm";
-import { ShopForm } from "./components/ShopForm";
-import { ShopList } from "./components/ShopList";
-import { ProductList } from "./components/ProductList";
-import { ProductIngredientForm } from "./components/ProductIngredientForm";
-import { IngredientForm } from "./components/IngredientForm";
-import { IngredientList } from "./components/IngredientList";
+import { ProductForm } from "./components/products/ProductForm";
+import { ShopForm } from "./components/shops/ShopForm";
+import { ShopList } from "./components/shops/ShopList";
+import { ProductList } from "./components/products/ProductList";
+import { ProductIngredientForm } from "./components/products/ProductIngredientForm";
+import { IngredientForm } from "./components/products/IngredientForm";
+import { IngredientList } from "./components/products/IngredientList";
 
 export function Layout() {
   return (

@@ -4,10 +4,10 @@ import validator from "@rjsf/validator-ajv8";
 
 import { useAuth } from "@clerk/clerk-react";
 
-import * as productIngredientSchema from "../schemas/productIngredient.json";
+import * as productSchema from "../../schemas/product.json";
 
-const createProductIngredient = (token: string, data: unknown) => {
-  fetch(`${process.env.REACT_APP_API_BASE_URL}/2024-08-08/products/ingredients`, {
+const createProduct = (token: string, data: unknown) => {
+  fetch(`${process.env.REACT_APP_API_BASE_URL}/2024-08-08/products`, {
     mode: "cors",
     method: "POST",
     headers: {
@@ -18,18 +18,12 @@ const createProductIngredient = (token: string, data: unknown) => {
   }).catch(console.error);
 };
 
-export function ProductIngredientForm() {
+export function ProductForm() {
   const { getToken } = useAuth();
 
   // @ts-expect-error incorrect type - will try to fix this later
   const onSubmit = async ({ formData }: unknown) =>
-    createProductIngredient((await getToken()) || "", formData);
+    createProduct((await getToken()) || "", formData);
 
-  return (
-    <Form
-      schema={productIngredientSchema as RJSFSchema}
-      validator={validator}
-      onSubmit={onSubmit}
-    />
-  );
+  return <Form schema={productSchema as RJSFSchema} validator={validator} onSubmit={onSubmit} />;
 }

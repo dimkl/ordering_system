@@ -1,16 +1,18 @@
-import { Box, Flex, HStack, useColorModeValue, Center } from "@chakra-ui/react";
+import { Box, Center, Flex, HStack, Spacer, useColorModeValue } from "@chakra-ui/react";
 
-import { SignedIn, SignedOut, UserButton, SignIn } from "@clerk/clerk-react";
+import { SignedIn, SignedOut, SignIn, UserButton } from "@clerk/clerk-react";
 
-import { Route, Routes, BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { NavLink } from "./components/NavLink";
-import { ProductForm } from "./components/products/ProductForm";
-import { ShopForm } from "./components/shops/ShopForm";
-import { ShopList } from "./components/shops/ShopList";
-import { ProductList } from "./components/products/ProductList";
-import { ProductIngredientForm } from "./components/products/ProductIngredientForm";
 import { IngredientForm } from "./components/products/IngredientForm";
 import { IngredientList } from "./components/products/IngredientList";
+import { ProductForm } from "./components/products/ProductForm";
+import { ProductIngredientForm } from "./components/products/ProductIngredientForm";
+import { ProductList } from "./components/products/ProductList";
+import { SectionForm } from "./components/shops/SectionForm";
+import { ShopForm } from "./components/shops/ShopForm";
+import { ShopList } from "./components/shops/ShopList";
+import { SlotForm } from "./components/shops/SlotForm";
 
 export function Layout() {
   return (
@@ -39,9 +41,21 @@ export function Layout() {
                 path="/"
                 element={
                   <>
+                    <Flex>
+                      <Box flex={1}>
+                        <ShopForm />
+                      </Box>
+                      <Spacer flex={0.1} />
+                      <Box flex={1}>
+                        <SectionForm />
+                      </Box>
+                      <Spacer flex={0.1} />
+                      <Box flex={1}>
+                        <SlotForm />
+                      </Box>
+                    </Flex>
                     <IngredientForm />
                     <ProductForm />
-                    <ShopForm />
                     <ProductIngredientForm />
                   </>
                 }

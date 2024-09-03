@@ -8,7 +8,7 @@ import { ShopMenuModal } from "./ShopMenuModal";
 
 const listShops = async (token: string) => {
   return (
-    await fetch(`${process.env.REACT_APP_API_BASE_URL}/2024-08-08/shops`, {
+    await fetch(`${process.env.REACT_APP_API_BASE_URL}/2024-08-08/shops?include=slots`, {
       mode: "cors",
       headers: { Authorization: token }
     })

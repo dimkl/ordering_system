@@ -1,0 +1,31 @@
+{
+  "$id": "/schemas/section",
+  "$async": true,
+  "title": "Section",
+  "description": "Section schema",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "sku": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "shop_id": {
+      "type": "string",
+      "minLength": 30,
+      "maxLength": 30
+    },
+    "user_id": {
+      "type": "string",
+      "minLength": 30,
+      "maxLength": 30
+    }
+  },
+  "required": ["name", "sku", "shop_id"],
+  "additionalProperties": false
+}
